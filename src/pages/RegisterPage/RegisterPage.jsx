@@ -7,6 +7,5 @@ const RegisterPage = () => {
       <RegisterForm />
     </AuthSection>
   );
-};
 
 export default RegisterPage;

@@ -1,5 +1,8 @@
-@import "../node_modules/modern-normalize/modern-normalize.css";
+// @import "../node_modules/modern-normalize/modern-normalize.css";
 
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
 *,
 *::before,
 *::after {
@@ -9,7 +12,7 @@
 body {
   font-family: "Manrope", sans-serif;
   letter-spacing: 0.04em;
-  background-color: #7f7f7f;
+  background-color: #FDF7F2;
   color: #111111;
 }
 
@@ -33,3 +36,5 @@ img {
   width: 100%;
   height: auto;
 }
+
+`;
