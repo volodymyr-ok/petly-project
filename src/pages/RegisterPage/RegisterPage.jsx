@@ -1,7 +1,11 @@
-import React from "react";
+import { AuthSection } from "../../components/AuthForms/Forms.styled";
+import { RegisterForm } from "../../components/AuthForms/RegisterForm/RegisterForm";
 
 const RegisterPage = () => {
-  return <div>RegisterPage</div>;
-};
+  return (
+    <AuthSection>
+      <RegisterForm />
+    </AuthSection>
+  );
 
 export default RegisterPage;
