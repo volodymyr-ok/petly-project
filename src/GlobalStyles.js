@@ -16,6 +16,7 @@ body {
   color: #111111;
   margin: 0;
   padding: 0;
+  min-width: 320px;
 }
 
 h1,
