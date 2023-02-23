@@ -1,4 +1,5 @@
 import { Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import {
   Input,
@@ -12,6 +13,7 @@ import {
 } from "../Forms.styled";
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";
+import { emailRegexp } from "../RegisterForm/RegisterForm";
 
 export const FormError = ({ name }) => {
   return (
@@ -21,6 +23,17 @@ export const FormError = ({ name }) => {
     />
   );
 };
+
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .matches(emailRegexp, "Please enter valid email")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(7, "Minimum password length is 7 characters")
+    .max(32)
+    .matches(/^[A-Za-z0-9]*$/, "Password can only contain letters and numbers")
+    .required("Password is required"),
+});
 
 export const LoginForm = () => {
   const initialValues = {
@@ -32,7 +45,10 @@ export const LoginForm = () => {
     <Container>
       <Wrapper>
         <TitleAuth>Login</TitleAuth>
-        <Formik initialValues={initialValues}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+        >
           {() => (
             <FormCustom>
               <Label>
