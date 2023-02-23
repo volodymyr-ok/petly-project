@@ -1,6 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PrivateApi, PublicApi, token } from "../../http/http";
 
+export const registerUser = createAsyncThunk(
+  "auth/register",
+  async (credentials, thunkAPI) => {
+    try {
+      const res = await axios.post("/users/register", credentials);
+      token.set(res.data.accessToken);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, thunkAPI) => {

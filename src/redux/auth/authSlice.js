@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser, loginUser, logoutUser } from "./auth-operations";
-import { Notify } from "notiflix";
+import {
+  getUser,
+  loginUser,
+  logoutUser,
+  registerUser,
+} from "./auth-operations";
+// import { Notify } from "notiflix";
+import { toast } from "react-toastify";
 import { token } from "../../http/http";
 
 const authInitialState = {
@@ -53,17 +59,34 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
+      .addCase(registerUser.pending, handlePending)
+      .addCase(registerUser.rejected, (state, action) => {
+        state.isLoading = false;
+        toast.error("Success");
+        // Notify.failure(`Fail`);
+        state.error = action.payload;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload.userData;
+        state.token = action.payload.accessToken;
+        toast.success(`Welcome, ${state.user.email}`);
+        // Notify.success(`Welcome, ${state.user.email}`);
+        state.isAuth = true;
+      })
+
       .addCase(loginUser.pending, handlePending)
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        Notify.failure(`Wrong email or password`);
+        toast.error(`Wrong email or password`);
+        // Notify.failure(`Wrong email or password`);
         state.error = action.payload;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.userData;
         state.token = action.payload.accessToken;
-        Notify.success(`Welcome back, ${state.user.email}`);
+        toast.success(`Welcome back, ${state.user.email}`);
         state.isAuth = true;
       })
 
@@ -83,7 +106,7 @@ const authSlice = createSlice({
       .addCase(logoutUser.pending, handlePending)
       .addCase(logoutUser.rejected, handleRejected)
       .addCase(logoutUser.fulfilled, (state) => {
-        Notify.success(`See ya, ${state.user.email}`);
+        toast.success(`See ya, ${state.user.email}`);
         state.user = authInitialState.user;
         state.token = null;
         state.isAuth = false;
