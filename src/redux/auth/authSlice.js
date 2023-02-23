@@ -5,17 +5,26 @@ import { token } from "../../http/http";
 
 const authInitialState = {
   user: {
-    email: "",
     id: "",
-    transactions: [
+    data: {
+      email: "",
+      name: "",
+      city: "",
+      phone: "",
+      birthday: "",
+    },
+    pets: [
       {
-        description: "Transaction's description",
-        category: "Продукты",
-        amount: 0,
-        date: "2020-12-31",
-        _id: "507f1f77bcf86cd799439013",
+        id: "",
+        name: "",
+        birthday: "",
+        breed: "",
+        image: "",
+        comments: "",
       },
     ],
+    notices: [""],
+    favorites: [""],
   },
   token: null,
   isAuth: false,
