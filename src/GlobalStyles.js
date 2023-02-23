@@ -14,6 +14,8 @@ body {
   letter-spacing: 0.04em;
   background-color: #FDF7F2;
   color: #111111;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
