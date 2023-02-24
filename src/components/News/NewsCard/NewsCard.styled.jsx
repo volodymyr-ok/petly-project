@@ -6,6 +6,7 @@ import { PageTitle } from "../../Title/Title.styled";
 export const Item = styled.li`
   width: 280px;
   height: 300px;
+  cursor: default;
 
   ${device.tablet} {
     width: calc((100% - 32px) / 2);
