@@ -11,7 +11,7 @@ import UserPage from "./pages/UserPage/UserPage";
 
 export default function App() {
   return (
-    <BrowserRouter basename="petly-project-app.netlify.app">
+    <BrowserRouter basename="https://petly-project-app.netlify.app/">
       <>
         <GlobalStyle />
         <Routes>
