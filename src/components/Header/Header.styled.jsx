@@ -4,27 +4,10 @@ import { device } from "../../utils/mixin";
 
 export const Container = styled.div`
   padding: 16px 25px 16px 20px;
+  display: flex;
   /* position: fixed;
   width: 100%;
   z-index: 1; */
-`;
-
-export const NavBar = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const LogoLink = styled(NavLink)`
-  display: block;
-  margin-right: auto;
-  width: 100%;
-  cursor: pointer;
-`;
-
-export const LogoImage = styled.img`
-  width: 82px;
-  height: 42px;
 `;
 
 export const BurgerBtn = styled.button`

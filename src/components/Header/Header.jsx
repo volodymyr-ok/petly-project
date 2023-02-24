@@ -1,29 +1,16 @@
 import React from "react";
-import {
-  BurgerBtn,
-  BurgerImage,
-  Container,
-  LogoImage,
-  LogoLink,
-  NavBar,
-} from "./Header.styled";
-import logo from "../../assets/svg/logo.svg";
-import burgerBtn from "../../assets/svg/burger-menu-btn.svg";
+import {Container} from "./Header.styled";
+
+import Logo from "./Logo/Logo";
+import Navigation from "./Navigation/Navigation";
 
 const Header = () => {
-  return (
-    <Container>
-      <NavBar>
-        <LogoLink>
-          <LogoImage src={logo} alt="Petly logo" />
-        </LogoLink>
-
-        <BurgerBtn type="button">
-          <BurgerImage src={burgerBtn} alt="burger button" />
-        </BurgerBtn>
-      </NavBar>
-    </Container>
-  );
+    return (
+        <Container>
+            <Logo/>
+            <Navigation/>
+        </Container>
+    );
 };
 
 export default Header;
