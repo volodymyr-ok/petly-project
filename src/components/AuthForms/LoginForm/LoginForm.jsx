@@ -14,6 +14,7 @@ import {
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";
 import { emailRegexp } from "../RegisterForm/RegisterForm";
+import { useDispatch } from "react-redux";
 
 export const FormError = ({ name }) => {
   return (
@@ -36,6 +37,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginForm = () => {
+ const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",

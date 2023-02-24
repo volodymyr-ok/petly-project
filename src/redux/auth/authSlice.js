@@ -58,7 +58,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
       .addCase(registerUser.pending, handlePending)
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -67,9 +66,10 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
+        console.log('action', action);
         state.isLoading = false;
-        state.user = action.payload.userData;
-        state.token = action.payload.accessToken;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         toast.success(`Welcome, ${state.user.email}`);
         // Notify.success(`Welcome, ${state.user.email}`);
         state.isAuth = true;
