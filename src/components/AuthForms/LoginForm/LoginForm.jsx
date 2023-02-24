@@ -14,6 +14,8 @@ import {
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";
 import { emailRegexp } from "../RegisterForm/RegisterForm";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../redux/auth/auth-operations";
 
 export const FormError = ({ name }) => {
   return (
@@ -36,6 +38,8 @@ const validationSchema = Yup.object().shape({
 });
 
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",
@@ -48,6 +52,14 @@ export const LoginForm = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
+          onSubmit={(values, actions) => {
+            const { email, password } = values;
+            console.log("login", values);
+            const data = { email, password };
+            dispatch(loginUser(data));
+
+            actions.resetForm();
+          }}
         >
           {() => (
             <FormCustom>
@@ -56,7 +68,7 @@ export const LoginForm = () => {
                 <FormError name="email" />
               </Label>
               <Label>
-                <Input name="password" type="text" placeholder="Password" />
+                <Input name="password" type="password" placeholder="Password" />
                 <FormError name="password" />
               </Label>
               <LoginBtn text={"Login"} />

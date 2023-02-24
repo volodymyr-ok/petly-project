@@ -6,4 +6,5 @@ export const colors = {
   black: '#000000',
   accentOrange: '#F59256',
   darkOrange: '#FF6101',
+  markList: "rgba(255, 255, 255, 0.6);"
 };

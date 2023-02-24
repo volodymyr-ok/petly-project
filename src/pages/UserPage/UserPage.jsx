@@ -1,7 +1,16 @@
-import React from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/auth-selectors";
 
 const UserPage = () => {
-  return <div>UserPage</div>;
+  const user = useSelector(selectUser);
+
+  console.log("user", user);
+
+  return (
+    <>
+      <div>UserPage</div>
+    </>
+  );
 };
 
 export default UserPage;

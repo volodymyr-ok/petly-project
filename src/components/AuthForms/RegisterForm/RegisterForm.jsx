@@ -13,6 +13,10 @@ import {
 } from "../Forms.styled";
 import { StepOne } from "./StepOne/StepOne";
 import { StepTwo } from "./StepTwo/StepTwo";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../../redux/auth/auth-operations";
+// import { useNavigate } from "react-router-dom";
+// import { selectIsAuth } from "../../../redux/auth/auth-selectors";
 
 export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
 export const nameRegexp = /^[a-zA-Z]{2,20}$/;
@@ -21,16 +25,14 @@ export const emailRegexp =
   /^[^-._]{1}[A-Za-z0-9._-]{1,}@[^-._]{1}[A-Za-z0-9.-]{0,}\.[A-Za-z]{2,4}$/;
 
 export const RegisterForm = () => {
-  const [finalValues, setFinalValues] = React.useState({});
-
-  console.log(finalValues);
+  const dispatch = useDispatch();
 
   const initialValues = {
     email: "",
     password: "",
     confirmPassword: "",
     name: "",
-    address: "",
+    city: "",
     phone: "",
   };
 
@@ -41,8 +43,11 @@ export const RegisterForm = () => {
         validateOnNext
         activeStepIndex={0}
         onSubmit={(values, actions) => {
+          const { email, password, name, city, phone } = values;
           console.log("subn", values);
-          setFinalValues(values);
+          const data = { email, password, name, city, phone };
+          dispatch(registerUser(data));
+
           actions.resetForm();
         }}
         steps={[
@@ -70,7 +75,7 @@ export const RegisterForm = () => {
             component: StepTwo,
             validationSchema: Yup.object().shape({
               name: Yup.string().required("First name is required"),
-              address: Yup.string().required("Address is required"),
+              city: Yup.string().required("Address is required"),
               phone: Yup.string()
                 .matches(
                   phoneRegexp,
