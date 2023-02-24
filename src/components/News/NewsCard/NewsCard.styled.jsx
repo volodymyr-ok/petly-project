@@ -8,11 +8,11 @@ export const Item = styled.li`
   height: 300px;
 
   ${device.tablet} {
-    width: 336px;
+    width: calc((100% - 32px) / 2);
     height: 276px;
   }
   ${device.desktop} {
-    width: 395px;
+    width: calc((100% - 68px) / 3);
     height: 254px;
   }
 
@@ -39,13 +39,15 @@ export const Item = styled.li`
 `;
 
 export const CardTitle = styled(PageTitle)`
-  margin-top: 0;
-  margin-bottom: 16px;
+  margin-top: 4px;
   text-align: start;
+
+  ${device.tablet} {
+    font-size: 24px;
+  }
 `;
 
 export const Text = styled.p`
-  margin-bottom: 20px;
   font-size: 16px;
   line-height: 1.37;
 
@@ -55,6 +57,11 @@ export const Text = styled.p`
 export const NewsBox = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
+
+  ${device.tablet} {
+    margin-top: 40px;
+  }
 `;
 
 export const Data = styled.p`
