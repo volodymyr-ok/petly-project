@@ -2,6 +2,7 @@
   "name": "petly-project",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://petly-project-app.netlify.app/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
@@ -27,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy -p"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +51,9 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.32.2"
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^4.3.8",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.8.4"
   }
 }

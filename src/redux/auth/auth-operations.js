@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import { PrivateApi, PublicApi, token } from "../../http/http";
 
 export const registerUser = createAsyncThunk(

@@ -23,6 +23,8 @@ export const emailRegexp =
 export const RegisterForm = () => {
   const [finalValues, setFinalValues] = React.useState({});
 
+  console.log(finalValues);
+
   const initialValues = {
     email: "",
     password: "",
