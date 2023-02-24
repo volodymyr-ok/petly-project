@@ -7,7 +7,7 @@ export const NewsCard = ({ news }) => {
       <Item key="key">
         <CardTitle>Lorem ipsum dolor</CardTitle>
         <Text>
-          {/* {text.length >= 150 ? text.slice(0, 150) : text} */}
+          {/* {text.length > 230 ? text.slice(0, 230)+'...' : text} */}
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex eveniet vero ullam ipsum officiis nihil ducimus
           voluptas quisquam. Iste adipisci velit nemo aliquam corrupti laboriosam exercitationem inventore delectus
           nihil sed. Voluptas accusamus aperiam eaque
