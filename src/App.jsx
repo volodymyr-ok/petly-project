@@ -9,7 +9,7 @@ import OurFriendsPage from "./pages/OurFriendsPage/OurFriendsPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import UserPage from "./pages/UserPage/UserPage";
 
-export default function App() {
+const App = () => {
   return (
     <BrowserRouter>
       <>
@@ -23,10 +23,12 @@ export default function App() {
             <Route path="/news" element={<NewsPage />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/notices" element={<NoticesPage />} />
+            {/* <Route path="*" element={<div>404</div>} /> */}
           </Route>
-          {/* <Route path="*" element={<div>404</div>} /> */}
         </Routes>
       </>
     </BrowserRouter>
   );
-}
+};
+
+export default App;
