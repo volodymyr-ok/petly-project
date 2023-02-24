@@ -7,7 +7,7 @@ import {
 } from "./auth-operations";
 // import { Notify } from "notiflix";
 import { toast } from "react-toastify";
-import { token } from "../../http/http";
+// import { token } from "../../http/http";
 
 const authInitialState = {
   user: {
