@@ -1,9 +1,9 @@
 import axios from "axios";
 export const PublicApi = axios.create({
-  baseURL: "https://petly-backend",
+  baseURL: "https://petly-2v85.onrender.com/api/",
 });
 export const PrivateApi = axios.create({
-  baseURL: "https://petly-backend",
+  baseURL: "https://petly-2v85.onrender.com/api/",
 });
 
 export const token = {
