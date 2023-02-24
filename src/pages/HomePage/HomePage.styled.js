@@ -31,6 +31,7 @@ export const Title = styled.h1`
 export const HomeSection = styled.section`
   padding-top: 60px;
   min-height: 543px;
+  /* height: calc(100vh - 74px); */
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: url(${portraitM}), url(${BgM});

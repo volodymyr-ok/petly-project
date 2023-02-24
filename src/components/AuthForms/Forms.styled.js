@@ -35,13 +35,13 @@ export const AuthSection = styled(SectionTag)`
   } */
   @media screen and (min-width: 768px) {
     padding-top: 168px;
-    padding-bottom: 250px;
+    /* padding-bottom: 250px; */
     background-image: url(${bgLoginTab});
     min-height: calc(100vh - 75px);
   }
   @media screen and (min-width: 1280px) {
     padding-top: 80px;
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
     background-image: url(${bgLoginDesc});
   }
 `;
