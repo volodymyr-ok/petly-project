@@ -8,4 +8,5 @@ export const Button = ({ children, type = 'button' }) => {
 Button.propTypes = {
   children: PropTypes.any,
   type: PropTypes.string,
+ 
 };
