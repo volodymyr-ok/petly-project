@@ -23,8 +23,8 @@ const UserPage = () => {
       <Button onClick={handleOpenModal}>OPEN Modal</Button>
 
       {isOpen && (
+        // add some modalComponent you need
         <Modal onClose={handleOpenModal}>
-          //add some modalComponent you need
           <div>Hello I'm a modal wrapper</div>
         </Modal>
       )}
