@@ -1,5 +1,3 @@
-// @import "../node_modules/modern-normalize/modern-normalize.css";
-
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`

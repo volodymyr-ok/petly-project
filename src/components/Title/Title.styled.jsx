@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { colors } from 'utils/colors';
-import { device } from 'utils/mixin';
+import styled from "styled-components";
+import { colors } from "../../utils/colors";
+import { device } from "../../utils/mixin";
 
 export const PageTitle = styled.h2`
   margin-top: 42px;
