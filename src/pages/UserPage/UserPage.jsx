@@ -1,33 +1,14 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Button } from "../../components/LoginBtn/LoginBtn.styled";
-import { Modal } from "../../components/Modal/Modal";
-import { logoutUser } from "../../redux/auth/auth-operations";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/auth-selectors";
 
 const UserPage = () => {
-  const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+  const user = useSelector(selectUser);
 
-  const handleOpenModal = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const logoutHandler = () => {
-    dispatch(logoutUser());
-  };
+  console.log("user", user);
 
   return (
     <>
       <div>UserPage</div>
-      <Button onClick={logoutHandler}>Logout</Button>
-      <Button onClick={handleOpenModal}>OPEN Modal</Button>
-
-      {isOpen && (
-        // add some modalComponent you need
-        <Modal onClose={handleOpenModal}>
-          <div>Hello I'm a modal wrapper</div>
-        </Modal>
-      )}
     </>
   );
 };
