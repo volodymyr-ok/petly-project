@@ -19,14 +19,17 @@ const authConfig = {
   whitelist: ["token"],
 };
 
-const persistedAuthReducer = persistReducer(authConfig, authReducer);
+// const persistedAuthReducer = persistReducer(authConfig, authReducer);
 
-const rootReducer = combineReducers({
-  auth: persistedAuthReducer,
-});
+// const rootReducer = combineReducers({
+//   auth: persistedAuthReducer,
+// });
 
 export const store = configureStore({
-  reducer: rootReducer,
+  // reducer: rootReducer,
+  reducer: {
+    auth: persistReducer(authConfig, authReducer),
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
