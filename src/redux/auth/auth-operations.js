@@ -2,12 +2,19 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PrivateApi, PublicApi, token } from "../../http/http";
 
+const authApi = axios.create({
+  baseURL: 'https://petly-2v85.onrender.com/api/',
+});
+
+
 export const registerUser = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/users/register", credentials);
-      token.set(res.data.accessToken);
+      // const res = await axios.post("/users/register", credentials);
+      const res = await PublicApi.post("/users/register", credentials);
+      console.log('resAPI', res);
+      token.set(res.data.token);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -19,7 +26,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, thunkAPI) => {
     try {
-      const res = await PublicApi.post("/auth/login", {
+      const res = await PublicApi.post("/users/login", {
         email: email,
         password: password,
       });
@@ -35,7 +42,7 @@ export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, thunkAPI) => {
     try {
-      const res = await PrivateApi.post("/auth/logout");
+      const res = await PrivateApi.post("/users/logout");
       token.unset();
       return res.data;
     } catch (error) {
@@ -44,7 +51,7 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk("auth/getUser", async (_, thunkAPI) => {
+export const getUser = createAsyncThunk("users/getUser", async (_, thunkAPI) => {
   const { auth } = thunkAPI.getState();
 
   const persistedToken = auth.token;
