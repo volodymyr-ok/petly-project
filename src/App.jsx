@@ -11,7 +11,7 @@ import UserPage from "./pages/UserPage/UserPage";
 
 export default function App() {
   return (
-    <BrowserRouter basename="petly-project-app">
+    <BrowserRouter basename="petly-project">
       <>
         <GlobalStyle />
         <Routes>
