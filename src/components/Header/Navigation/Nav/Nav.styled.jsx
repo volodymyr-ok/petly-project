@@ -2,9 +2,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { device } from "../../../../utils/mixin";
 import {colors} from "../../../../utils/colors"
+import logo from "../../../../assets/svg/accoun-logo.svg";
 
 export const NavMain = styled.nav`
   display: none;
+  margin-right: auto;
   
   ${device.desktop} {
     display: flex;
@@ -14,7 +16,6 @@ export const NavMain = styled.nav`
 `;
 
 export const NavMobile = styled.nav`
- 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,10 +26,46 @@ export const NavMobile = styled.nav`
 `;
 
 export const NavItem = styled(NavLink)`
-  display: block;
-  width: 100%;
-  margin-right: auto;
-  cursor: pointer;
+  color: ${colors.black};
+  font-size: 20px;
+  text-decoration: none;
+  margin-right: 80px;
+
+  &:hover,
+  &:focus {
+    color: ${colors.accentOrange};
+    text-decoration: underline;
+  }
+
+  &:active {
+    color: ${colors.darkOrange};
+`;
+
+
+
+export const NavUserItem = styled(NavLink)`
+  display: flex;
+  color: ${colors.white};
+  padding: 10px 28px;
+  border-radius: 40px;
+  font-size: 16px;
+  text-decoration: none;
+  background: ${colors.accentOrange};
+  
+  &::before{
+    content: ${props => props.open ? "url(${logo}" : ""};
+    margin-right: 15px;
+    width: 23px;
+    height: 23px;
+  };
+  
+  &:hover,
+  &:focus {
+    background: ${colors.darkOrange};
+  }
+
+  &:active {
+      // color: ${colors.darkOrange};
 `;
 
 export const BurgerMenu = styled.div`

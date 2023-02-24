@@ -1,14 +1,12 @@
 import React from 'react';
-import {BurgerBtn, BurgerImage} from "../../Header.styled";
-import burgerBtn from "../../../../assets/svg/burger-menu-btn.svg";
-import {NavItem, NavMain} from "../Nav/Nav.styled";
+import {Nav, NavAuthItem} from "./AuthNav.styled";
 
 const AuthNav = () => {
     return (
-        <NavMain>
-            <NavItem to="./register">Register</NavItem>
-            <NavItem to="./login">Login</NavItem>
-        </NavMain>
+        <Nav>
+            <NavAuthItem to="./login" color>Login</NavAuthItem>
+            <NavAuthItem to="./register" >Register</NavAuthItem>
+        </Nav>
     );
 };
 

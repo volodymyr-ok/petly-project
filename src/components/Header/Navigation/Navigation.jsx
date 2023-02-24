@@ -5,11 +5,12 @@ import AuthNav from "./AuthNav/AuthNav";
 
 
 const Navigation = () => {
+    const isAuth = false
+
     return (
         <>
             <Nav/>
-            <UserNav/>
-            <AuthNav/>
+            {isAuth ? <UserNav/> : <AuthNav/>}
         </>
     );
 };

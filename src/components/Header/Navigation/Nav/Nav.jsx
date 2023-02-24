@@ -16,21 +16,21 @@ const Nav = () => {
                 <NavItem to="./notices">Find pet</NavItem>
                 <NavItem to="./friends">Our friends</NavItem>
             </NavMain>
-                <BurgerIcon onClick={updateMenu} open={checked}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </BurgerIcon>
-            <BurgerMenu open={checked}>
-                <Logo/>
-                <NavMobile>
-                    <NavItem to="./news">News</NavItem>
-                    <NavItem to="./notices">Find pet</NavItem>
-                    <NavItem to="./friends">Our friends</NavItem>
-                </NavMobile>
-                <UserNav/>
-                <AuthNav/>
-            </BurgerMenu>
+            {/*<BurgerIcon onClick={updateMenu} open={checked}>*/}
+            {/*    <span></span>*/}
+            {/*    <span></span>*/}
+            {/*    <span></span>*/}
+            {/*</BurgerIcon>*/}
+            {/*<BurgerMenu open={checked}>*/}
+            {/*    <Logo/>*/}
+            {/*    <NavMobile>*/}
+            {/*        <NavItem to="./news">News</NavItem>*/}
+            {/*        <NavItem to="./notices">Find pet</NavItem>*/}
+            {/*        <NavItem to="./friends">Our friends</NavItem>*/}
+            {/*    </NavMobile>*/}
+            {/*    <UserNav/>*/}
+            {/*    <AuthNav/>*/}
+            {/*</BurgerMenu>*/}
         </>
     );
 };
