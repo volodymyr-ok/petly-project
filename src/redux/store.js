@@ -1,17 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
-// import { useDispatch, useSelector } from "react-redux";
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
+import { newsReducer } from "./news/newsSlice";
 
 const authConfig = {
   key: "auth",
@@ -19,17 +10,15 @@ const authConfig = {
   whitelist: ["token"],
 };
 
-// const persistedAuthReducer = persistReducer(authConfig, authReducer);
+const persistedAuthReducer = persistReducer(authConfig, authReducer);
 
-// const rootReducer = combineReducers({
-//   auth: persistedAuthReducer,
-// });
+const rootReducer = combineReducers({
+  auth: persistedAuthReducer,
+  news: newsReducer,
+});
 
 export const store = configureStore({
-  // reducer: rootReducer,
-  reducer: {
-    auth: persistReducer(authConfig, authReducer),
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
