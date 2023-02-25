@@ -28,7 +28,13 @@ export const StepTwo = ({
         <FormError name={NAME_INPUT_CITY} />
       </Label>
       <Label>
-        <Input name="phone" placeholder="Mobile phone" maxLength="13" />
+        <Input
+          name="phone"
+          type="tel"
+          data-tel-input
+          placeholder="Mobile phone"
+          maxLength="13"
+        />
         <FormError name="phone" />
       </Label>
     </>
