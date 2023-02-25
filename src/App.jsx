@@ -15,6 +15,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import UserPage from "./pages/UserPage/UserPage";
 import { getUser } from "./redux/auth/auth-operations";
 import { selectIsLoading } from "./redux/auth/auth-selectors";
+import NotFound from "./components/NotFound/NotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const App = () => {
           <Route path="/user" element={<UserPage />} />
           <Route path="/notices" element={<NoticesPage />} />
           {/* <Route path="*" element={<div>404</div>} /> */}
+          <Route path="/*" element={<NotFound />} />
         </Route>
       </Routes>
     </>
