@@ -10,7 +10,15 @@ export const NavMain = styled.nav`
   
   ${device.desktop} {
     display: flex;
-    justify-content: space-between;
+    //justify-content: space-between;
+    //align-items: center;
+  }
+`;
+
+export const NavUl = styled.ul`
+  
+  ${device.desktop} {
+    display: flex;
     align-items: center;
   }
 `;

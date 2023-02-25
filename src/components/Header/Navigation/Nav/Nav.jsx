@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile} from "./Nav.styled";
+import {BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile, NavUl} from "./Nav.styled";
 import Logo from "../../Logo/Logo";
 import UserNav from "../UserNav/UserNav";
 import AuthNav from "../AuthNav/AuthNav";
@@ -9,28 +9,46 @@ const Nav = () => {
     const updateMenu = () => {
         setChecked(!checked)
     }
+
+    const isAuth = false
     return (
         <>
             <NavMain>
-                <NavItem to="./news">News</NavItem>
-                <NavItem to="./notices">Find pet</NavItem>
-                <NavItem to="./friends">Our friends</NavItem>
+                <NavUl>
+                    <li>
+                        <NavItem to="./news" onClick={updateMenu}>News</NavItem>
+                    </li>
+                    <li>
+                        <NavItem to="./notices" onClick={updateMenu}>Find pet</NavItem>
+                    </li>
+                    <li>
+                        <NavItem to="./friends" onClick={updateMenu}>Our friends</NavItem>
+                    </li>
+                </NavUl>
             </NavMain>
-            {/*<BurgerIcon onClick={updateMenu} open={checked}>*/}
-            {/*    <span></span>*/}
-            {/*    <span></span>*/}
-            {/*    <span></span>*/}
-            {/*</BurgerIcon>*/}
-            {/*<BurgerMenu open={checked}>*/}
-            {/*    <Logo/>*/}
-            {/*    <NavMobile>*/}
-            {/*        <NavItem to="./news">News</NavItem>*/}
-            {/*        <NavItem to="./notices">Find pet</NavItem>*/}
-            {/*        <NavItem to="./friends">Our friends</NavItem>*/}
-            {/*    </NavMobile>*/}
-            {/*    <UserNav/>*/}
-            {/*    <AuthNav/>*/}
-            {/*</BurgerMenu>*/}
+            <BurgerIcon onClick={updateMenu} open={checked}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </BurgerIcon>
+
+            <BurgerMenu open={checked}>
+                <Logo/>
+                {isAuth ? <UserNav/> : <AuthNav/>}
+                <NavMobile>
+                    <NavUl>
+                        <li>
+                            <NavItem to="./news" onClick={updateMenu}>News</NavItem>
+                        </li>
+                        <li>
+                            <NavItem to="./notices" onClick={updateMenu}>Find pet</NavItem>
+                        </li>
+                        <li>
+                            <NavItem to="./friends" onClick={updateMenu}>Our friends</NavItem>
+                        </li>
+                    </NavUl>
+                </NavMobile>
+            </BurgerMenu>
         </>
     );
 };
