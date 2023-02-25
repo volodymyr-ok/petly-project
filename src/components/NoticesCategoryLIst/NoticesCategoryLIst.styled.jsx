@@ -18,100 +18,6 @@ export const List = styled.ul`
       align-items: unset;
     }
 `
-export const Item = styled.li`
-    position: relative;
-    background-color: ${colors.white};
-    box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-    border-radius: 0px 0px 20px 20px;
-    width: 280px;
-    display: flex;
-    flex-direction: column;
-    ${device.tablet}{
-      width: 336px;
-    }
-    ${device.desktop}{
-      width: 288px;
-    }
-`
-export const ItemCategory = styled.p`
-    position: absolute;
-    top: 20px;
-    font-family: 'Inter';
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.25;
-    letter-spacing: 0.04em;
-    color: ${colors.primaryText};
-    background-color: ${colors.markList};
-    padding: 6px 20px 7px;
-    width: 158px;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
-    backdrop-filter: blur(2px);
-`
-export const BtnAdd = styled(StyledButton)`
-    padding: 0%;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background-color: ${colors.markList};
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    fill: ${colors.white};
-    stroke: ${colors.accentOrange};
-    stroke-width: 1px;
-    stroke-dasharray: 2,2;
-    stroke-linejoin: round;
-`
-export const Image = styled.img`
-    ${device.tablet}{
-      width: 100%;
-      /* height: 288px; */
-    }
-`
-export const Info = styled.div`
-    padding: 20px 12px 16px 12px;
-    ${device.tablet}{
-      padding: 20px 20px 12px 20px ;
-    }
-`
-export const Title = styled.h2`
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 1.35;
-      letter-spacing: -0.01em;
-      margin: 0 0 20px 0;
-`
-export const InfoList = styled.table`
-      margin-bottom: 20px;
-`
-export const InfoItem = styled.td`
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 1.37;
-      &.name{
-        min-width: 90px;
-      }
-`
-
-export const InfoAction = styled.div`
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 0;
-      ${device.tablet}{
-        padding: 0 24px;
-      }
-      ${device.desktop}{
-        padding: 0%;
-      }
-  
-`
 
 export const BtnReadMore = styled(StyledButton)`
     font-size: 16px;
@@ -139,18 +45,47 @@ export const BtnRemove = styled(StyledButton)`
     padding-top: 6px;
     padding-bottom: 6px;
 `
+// export const BtnAddSticky = styled(StyledButton)`
+//     position: fixed;
+//     padding: 0;
+//     right: 5%;
+//     top: 85%;
+//     width: 80px;
+//     height: 80px;
+//     border-radius: 50%;
+//     border: none;
+//     background-color: ${colors.accentOrange};
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     stroke: ${colors.white};
+//     font-size: 12px;
+//     line-height: 1.33;
+//     color: ${colors.white};
+//     z-index: 1;
+//     gap: 5px;
+//     @media screen and (min-width: 460px) {
+      
+//     }
+//     ${device.tablet} {
+//       display: none;
+//     }
+
+
+// `
 export const BtnAddSticky = styled(StyledButton)`
-    position: sticky;
+    position: fixed;
     padding: 0;
-    left: 100%;
+    left: 77%;
     top: 85%;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 120px;
+    height: 30px;
     border: none;
     background-color: ${colors.accentOrange};
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    transform: rotate(-90deg);
     justify-content: center;
     align-items: center;
     stroke: ${colors.white};
@@ -158,13 +93,22 @@ export const BtnAddSticky = styled(StyledButton)`
     line-height: 1.33;
     color: ${colors.white};
     z-index: 1;
-    gap: 5px;
+    gap: 15px;
+    @media screen and (min-width: 460px) {
+          border-radius: 50%;
+          width: 80px;
+          height: 80px;
+          flex-direction: column;
+          gap: 5px;
+          transform: rotate(0);
+    }
     ${device.tablet} {
       display: none;
     }
 
-`
-export const SpaceBox = styled.div`
-  height: 8px;
 
 `
+// export const SpaceBox = styled.div`
+//   height: 8px;
+
+// `
