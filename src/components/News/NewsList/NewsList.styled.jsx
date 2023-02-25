@@ -13,7 +13,6 @@ export const ListNews = styled.ul`
     row-gap: 60px;
   }
   ${device.desktop} {
-    column-gap: 34px;
-    row-gap: 60px;
+    column-gap: 36px;
   }
 `;
