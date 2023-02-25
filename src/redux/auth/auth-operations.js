@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import axios from "axios";
+import axios from "axios";
 import { PrivateApi, PublicApi, token } from "../../http/http";
 
 // const authApi = axios.create({

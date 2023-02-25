@@ -1,12 +1,16 @@
 import React from "react";
+import { PetsData } from "../../components/PetsData/PetsData";
 import MyInformationCard from "./MyInformationCard/MyInformationCard";
 import { ContainerUserPage } from "./UserPage.styled";
 
 const UserPage = () => {
   return (
-    <ContainerUserPage>
-      <MyInformationCard />
-    </ContainerUserPage>
+    <>
+      <ContainerUserPage>
+        <MyInformationCard />
+        <PetsData />
+      </ContainerUserPage>
+    </>
   );
 };
 
