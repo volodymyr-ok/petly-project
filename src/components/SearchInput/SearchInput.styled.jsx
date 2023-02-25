@@ -49,8 +49,8 @@ export const Input = styled.input`
     }
   }
 
-  :focus {
-    border: 1px solid rgba(245, 146, 86, 0.5);
+  :focus-visible {
+    outline: 1px solid rgba(245, 146, 86, 0.5);
   }
 `;
 

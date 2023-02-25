@@ -5,16 +5,14 @@ import { PageTitle } from "../../Title/Title.styled";
 
 export const Item = styled.li`
   width: 280px;
-  height: 300px;
+  height: auto;
   cursor: default;
 
   ${device.tablet} {
     width: calc((100% - 32px) / 2);
-    height: 276px;
   }
   ${device.desktop} {
-    width: calc((100% - 68px) / 3);
-    height: 254px;
+    width: calc((100% - 72px) / 3);
   }
 
   ::before {
