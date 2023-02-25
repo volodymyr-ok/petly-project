@@ -5,6 +5,10 @@ export const LogoImage = styled.img`
   margin-right: auto;
   margin-top: 5px;
   
+  ${device.tablet} {
+  height: 48px;
+    width: 94px;
+  } 
   ${device.desktop} {
     margin-right: 80px;
   }

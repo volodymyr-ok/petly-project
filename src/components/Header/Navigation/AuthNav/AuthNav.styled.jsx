@@ -7,13 +7,16 @@ export const Nav = styled.nav`
 
   ${device.tablet} {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    margin-right: 25px;
+  }
+  ${device.desktop} {
+    display: flex;
+    margin-left: auto;
+    margin-right: 0;
   }
 `;
 
 export const NavAuthItem = styled(NavLink)`
-  display: flex;
   color: ${props => props.color ? `${colors.white}` : `${colors.black}`};
   padding: 6px 28px;
   border-radius: 40px;
@@ -21,7 +24,7 @@ export const NavAuthItem = styled(NavLink)`
   text-decoration: none;
   background: ${props => props.color ? `${colors.accentOrange}` : ``};
   border: 2px solid ${colors.accentOrange};
-  margin-right: 30px;
+  margin-right: 15px;
   
   ${device.tablet} {
     font-size: 20px;
@@ -34,13 +37,12 @@ export const NavAuthItem = styled(NavLink)`
 
 &:hover,
 &:focus {
-    // color: ${colors.accentOrange};
   background: ${props => props.color ? `${colors.darkOrange}` : ``};
   border: 2px solid ${colors.darkOrange};
 }
 
 &:active {
-  color: ${colors.darkOrange};
+  color: ${props => props.color ? `${colors.white}` : `${colors.darkOrange}`};
 
 `;
 

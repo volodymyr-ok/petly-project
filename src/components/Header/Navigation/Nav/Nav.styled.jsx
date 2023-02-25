@@ -10,8 +10,6 @@ export const NavMain = styled.nav`
   
   ${device.desktop} {
     display: flex;
-    //justify-content: space-between;
-    //align-items: center;
   }
 `;
 
@@ -27,7 +25,7 @@ export const NavMobile = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   ${device.desktop} {
     display: none;
   }
@@ -61,7 +59,7 @@ export const NavUserItem = styled(NavLink)`
   background: ${colors.accentOrange};
   
   &::before{
-    content: ${props => props.open ? "url(${logo}" : ""};
+    content: ${props => props.open ? `url(${logo})` : ""};
     margin-right: 15px;
     width: 23px;
     height: 23px;
@@ -106,13 +104,7 @@ export const BurgerIcon = styled.div`
   position: relative;
   z-index: 10;
   cursor: pointer;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
   transition: .5s ease-in-out;
 
   ${device.desktop} {
@@ -128,40 +120,20 @@ export const BurgerIcon = styled.div`
     border-radius: 7px;
     opacity: 1;
     left: 5px;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
     transition: .25s ease-in-out;
   }
 
 
   & span:nth-child(1) {
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
     transform-origin: left center;
-
-    -webkit-transform: ${props => props.open && "rotate(45deg)"} ;
-    -moz-transform: ${props => props.open && "rotate(45deg)"};
-    -o-transform: ${props => props.open && "rotate(45deg)"};
     transform: ${props => props.open && "rotate(45deg)"};
     top: ${props => props.open ? "9px" : "10px"};
     left: ${props => props.open && "9px"};
   }
 
   & span:nth-child(3) {
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
     transform-origin: left center;
-    
-    -webkit-transform: ${props => props.open && "rotate(-45deg)"} ;
-    -moz-transform: ${props => props.open && "rotate(-45deg)"};
-    -o-transform: ${props => props.open && "rotate(-45deg)"};
     transform: ${props => props.open && "rotate(-45deg)"};
     top: ${props => props.open ? "30px" : "28px"};
     left: ${props => props.open && "9px"};
@@ -169,9 +141,6 @@ export const BurgerIcon = styled.div`
 
   & span:nth-child(2) {
     top: 19px;
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
     transform-origin: left center;
     width: ${props => props.open && "0"};
     opacity: ${props => props.open && "0"};

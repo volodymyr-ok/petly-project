@@ -16,13 +16,13 @@ const Nav = () => {
             <NavMain>
                 <NavUl>
                     <li>
-                        <NavItem to="./news" onClick={updateMenu}>News</NavItem>
+                        <NavItem to="./news">News</NavItem>
                     </li>
                     <li>
-                        <NavItem to="./notices" onClick={updateMenu}>Find pet</NavItem>
+                        <NavItem to="./notices">Find pet</NavItem>
                     </li>
                     <li>
-                        <NavItem to="./friends" onClick={updateMenu}>Our friends</NavItem>
+                        <NavItem to="./friends">Our friends</NavItem>
                     </li>
                 </NavUl>
             </NavMain>

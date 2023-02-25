@@ -4,7 +4,7 @@ import {Nav, NavAuthItem} from "./AuthNav.styled";
 const AuthNav = () => {
     return (
         <Nav>
-            <NavAuthItem to="./login" color>Login</NavAuthItem>
+            <NavAuthItem to="./login" color='color'>Login</NavAuthItem>
             <NavAuthItem to="./register" >Register</NavAuthItem>
         </Nav>
     );
