@@ -1,11 +1,18 @@
 import React from 'react';
 import {Nav, NavAuthItem} from "./AuthNav.styled";
+import {NavAuthUl} from "../Nav/Nav.styled";
 
-const AuthNav = () => {
+const AuthNav = ({type}) => {
     return (
-        <Nav>
-            <NavAuthItem to="./login" color='color'>Login</NavAuthItem>
-            <NavAuthItem to="./register" >Register</NavAuthItem>
+        <Nav type={type}>
+            <NavAuthUl>
+                <li>
+                    <NavAuthItem to="./login" color='color'>Login</NavAuthItem>
+                </li>
+                <li>
+                    <NavAuthItem to="./register" >Registration</NavAuthItem>
+                </li>
+            </NavAuthUl>
         </Nav>
     );
 };

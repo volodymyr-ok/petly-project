@@ -7,25 +7,51 @@ import logo from "../../../../assets/svg/accoun-logo.svg";
 export const NavMain = styled.nav`
   display: none;
   margin-right: auto;
-  
+
   ${device.desktop} {
     display: flex;
   }
 `;
 
 export const NavUl = styled.ul`
-  
-  ${device.desktop} {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+${device.tablet} {
+  gap: 60px;
+}
+
+${device.desktop} {
     display: flex;
+    flex-direction: row;
     align-items: center;
   }
 `;
 
+export const NavAuthUl = styled.ul`
+  display: flex;
+  gap: 12px;
+`;
+
+export const BurgerContainer = styled.div`
+  margin-top: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const NavMobile = styled.nav`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  margin-top: 61px;
 
+  ${device.tablet} {
+    margin-top: 0;
+  } 
+  
   ${device.desktop} {
     display: none;
   }
@@ -33,9 +59,18 @@ export const NavMobile = styled.nav`
 
 export const NavItem = styled(NavLink)`
   color: ${colors.black};
-  font-size: 20px;
+  font-size: 32px;
   text-decoration: none;
-  margin-right: 80px;
+  margin-right: 0;
+
+  ${device.tablet} {
+    font-size: 48px;
+  }
+
+  ${device.desktop} {
+    margin-right: 80px;
+    font-size: 20px;
+  }
 
   &:hover,
   &:focus {
@@ -50,13 +85,22 @@ export const NavItem = styled(NavLink)`
 
 
 export const NavUserItem = styled(NavLink)`
-  display: flex;
+  display: ${props => props.type ? `none` : "flex"};
   color: ${colors.white};
   padding: 10px 28px;
   border-radius: 40px;
   font-size: 16px;
   text-decoration: none;
   background: ${colors.accentOrange};
+
+  ${device.tablet} {
+    display: ${props => props.type ? `flex` : "none"};
+    margin-right: 14px;
+  }
+
+  ${device.desktop} {
+    margin-right: 0;
+  }
   
   &::before{
     content: ${props => props.open ? `url(${logo})` : ""};
@@ -83,13 +127,12 @@ export const BurgerMenu = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  
-
   background: ${colors.white};
-
   transition: all 400ms var(--timing-function);
   transform: translate(0) scale (1);
   z-index: 1;
+
+ 
 
   &.is-hidden {
     transform: translate(50%, -60%);

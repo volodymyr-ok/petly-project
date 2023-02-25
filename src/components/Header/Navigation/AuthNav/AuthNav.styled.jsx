@@ -3,11 +3,11 @@ import {device} from "../../../../utils/mixin";
 import {NavLink} from "react-router-dom";
 import {colors} from "../../../../utils/colors";
 export const Nav = styled.nav`
-  display: none;
+  display: ${props => props.type ? `none` : "flex"};
 
   ${device.tablet} {
-    display: flex;
-    margin-right: 25px;
+    display: ${props => props.type ? `flex` : "none"};
+    margin-right: 14px;
   }
   ${device.desktop} {
     display: flex;
@@ -24,12 +24,12 @@ export const NavAuthItem = styled(NavLink)`
   text-decoration: none;
   background: ${props => props.color ? `${colors.accentOrange}` : ``};
   border: 2px solid ${colors.accentOrange};
-  margin-right: 15px;
-  
-  ${device.tablet} {
-    font-size: 20px;
-  }
+  margin-right: 12px;
 
+  ${device.desktop} {
+    margin-right: 20px;
+  }
+  
   &:nth-last-child(1) {
     margin-right: 0;
   }

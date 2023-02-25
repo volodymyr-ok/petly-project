@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile, NavUl} from "./Nav.styled";
+import {BurgerContainer, BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile, NavUl} from "./Nav.styled";
 import Logo from "../../Logo/Logo";
 import UserNav from "../UserNav/UserNav";
 import AuthNav from "../AuthNav/AuthNav";
+import {useSelector} from "react-redux";
+import {selectIsAuth} from "../../../../redux/auth/auth-selectors";
 
 const Nav = () => {
     const [checked, setChecked] = useState(false)
@@ -10,7 +12,7 @@ const Nav = () => {
         setChecked(!checked)
     }
 
-    const isAuth = false
+    const isAuth = useSelector(selectIsAuth)
     return (
         <>
             <NavMain>
@@ -34,6 +36,7 @@ const Nav = () => {
 
             <BurgerMenu open={checked}>
                 <Logo/>
+                <BurgerContainer>
                 {isAuth ? <UserNav/> : <AuthNav/>}
                 <NavMobile>
                     <NavUl>
@@ -48,6 +51,7 @@ const Nav = () => {
                         </li>
                     </NavUl>
                 </NavMobile>
+                </BurgerContainer>
             </BurgerMenu>
         </>
     );
