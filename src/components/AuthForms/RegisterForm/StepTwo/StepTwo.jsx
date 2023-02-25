@@ -9,13 +9,13 @@ export const StepTwo = ({
   values: { city },
 }) => {
   const NAME_INPUT_CITY = "city";
-  const handleChange = (evt) => {
-    setFieldTouched(NAME_INPUT_CITY);
+  // const handleChange = (evt) => {
+  //   setFieldTouched(NAME_INPUT_CITY);
 
-    setFieldError(NAME_INPUT_CITY, true);
+  //   setFieldError(NAME_INPUT_CITY, true);
 
-    setFieldValue(NAME_INPUT_CITY, evt.label);
-  };
+  //   setFieldValue(NAME_INPUT_CITY, evt.label);
+  // };
 
   return (
     <>
@@ -24,7 +24,7 @@ export const StepTwo = ({
         <FormError name="name" />
       </Label>
       <Label>
-        <Input name="address" placeholder="City, region" />
+        <Input name="city" placeholder="City, region" />
         <FormError name={NAME_INPUT_CITY} />
       </Label>
       <Label>

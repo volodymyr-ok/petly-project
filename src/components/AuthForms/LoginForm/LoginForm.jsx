@@ -1,4 +1,5 @@
 import { Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 import {
   Input,
@@ -12,6 +13,9 @@ import {
 } from "../Forms.styled";
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";
+import { emailRegexp } from "../RegisterForm/RegisterForm";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../redux/auth/auth-operations";
 
 export const FormError = ({ name }) => {
   return (
@@ -22,7 +26,20 @@ export const FormError = ({ name }) => {
   );
 };
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .matches(emailRegexp, "Please enter valid email")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(7, "Minimum password length is 7 characters")
+    .max(32)
+    .matches(/^[A-Za-z0-9]*$/, "Password can only contain letters and numbers")
+    .required("Password is required"),
+});
+
 export const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const initialValues = {
     email: "",
     password: "",
@@ -32,7 +49,18 @@ export const LoginForm = () => {
     <Container>
       <Wrapper>
         <TitleAuth>Login</TitleAuth>
-        <Formik initialValues={initialValues}>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(values, actions) => {
+            const { email, password } = values;
+            console.log("login", values);
+            const data = { email, password };
+            dispatch(loginUser(data));
+
+            actions.resetForm();
+          }}
+        >
           {() => (
             <FormCustom>
               <Label>
@@ -40,7 +68,7 @@ export const LoginForm = () => {
                 <FormError name="email" />
               </Label>
               <Label>
-                <Input name="password" type="text" placeholder="Password" />
+                <Input name="password" type="password" placeholder="Password" />
                 <FormError name="password" />
               </Label>
               <LoginBtn text={"Login"} />

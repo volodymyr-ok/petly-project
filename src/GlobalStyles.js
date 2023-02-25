@@ -1,5 +1,3 @@
-// @import "../node_modules/modern-normalize/modern-normalize.css";
-
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
@@ -39,5 +37,19 @@ img {
   width: 100%;
   height: auto;
 }
+
+input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    -webkit-text-fill-color: #52555f;
+    transition: background-color 5000s ease-in-out 0s;
+  }
 
 `;

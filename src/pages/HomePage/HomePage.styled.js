@@ -31,6 +31,7 @@ export const Title = styled.h1`
 export const HomeSection = styled.section`
   padding-top: 60px;
   min-height: 543px;
+  /* height: calc(100vh - 74px); */
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: url(${portraitM}), url(${BgM});
@@ -53,7 +54,7 @@ export const HomeSection = styled.section`
   }
   @media screen and (min-width: 1280px) {
     padding-top: 92px;
-    padding-bottom: 408px;
+    /* padding-bottom: 408px; */
     min-height: calc(100vh - 64px);
     background-image: url(${portraitD}), url(${BgD}), url(${Union});
     background-size: 590px 640px, 100vw calc(100vw * 0.375), 92px 89px;
