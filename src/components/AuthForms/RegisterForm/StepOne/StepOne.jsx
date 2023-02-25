@@ -10,7 +10,6 @@ export const StepOne = () => {
       </Label>
       <Label>
         <Input name="password" type="password" placeholder="Password" />
-
         <FormError name="password" />
       </Label>
       <Label>
