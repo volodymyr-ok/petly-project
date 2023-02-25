@@ -1,4 +1,5 @@
 import { Input, Label } from "../../Forms.styled";
+import { InputPassword } from "../../InputPassword";
 import { FormError } from "../../LoginForm/LoginForm";
 
 export const StepOne = () => {
@@ -9,7 +10,7 @@ export const StepOne = () => {
         <FormError name="email" />
       </Label>
       <Label>
-        <Input name="password" type="password" placeholder="Password" />
+        <InputPassword />
         <FormError name="password" />
       </Label>
       <Label>
