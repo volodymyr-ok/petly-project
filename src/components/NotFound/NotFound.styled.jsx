@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { device } from "../../utils/mixin";
 import { colors } from "../../utils/colors";
+import DogImg from "../../img/NotFound/dog.png";
+import DogImgRetina from "../../img/NotFound/dog.webp";
 
 export const NotFoundWrapper = styled.div`
   width: 100%;
@@ -56,9 +58,19 @@ export const NotFoundText = styled.p`
 
 export const ImgBox = styled.div`
   margin: 0 auto;
-  max-width: 200px;
+  width: 200px;
+  height: 160px;
+  background-repeat: no-repeat;
+  background-image: url(${DogImg});
+  background-position: center bottom;
+  background-size: contain;
+
+  ${device.retina} {
+    background-image: url(${DogImgRetina});
+  }
   ${device.tablet} {
-    max-width: 400px;
+    width: 400px;
+    height: 300px;
   }
   img {
     width: 100%;

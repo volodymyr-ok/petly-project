@@ -7,7 +7,6 @@ import {
   ImgBox,
 } from "./NotFound.styled";
 import { NavLink } from "react-router-dom";
-import DogImg from "../../img/NotFound/dog.png";
 
 const NotFound = () => {
   return (
@@ -17,9 +16,7 @@ const NotFound = () => {
       <NotFoundText>
         To return to the <NavLink to="/">homepage</NavLink>
       </NotFoundText>
-      <ImgBox>
-        <img src={DogImg} alt="dog" />
-      </ImgBox>
+      <ImgBox>{/* <img src={DogImg} alt="dog" /> */}</ImgBox>
     </NotFoundWrapper>
   );
 };
