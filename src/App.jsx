@@ -58,6 +58,7 @@ const App = () => {
             }
           />
 
+          <Route path="/news" element={<NewsPage />} />
           <Route path="/friends" element={<OurFriendsPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/notices" element={<NoticesPage />} />
