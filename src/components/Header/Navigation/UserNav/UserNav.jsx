@@ -1,12 +1,12 @@
-import React from "react";
-import { NavItem, NavMain } from "../Nav/Nav.styled";
+import React from 'react';
+import {NavUserItem} from "../Nav/Nav.styled";
 
-const UserNav = () => {
-  return (
-    <NavMain>
-      <NavItem to="./user">User</NavItem>
-    </NavMain>
-  );
+const UserNav = ({type}) => {
+    return (
+        <nav>
+            <NavUserItem to="./user" open type={type}>Account</NavUserItem>
+        </nav>
+    );
 };
 
 export default UserNav;

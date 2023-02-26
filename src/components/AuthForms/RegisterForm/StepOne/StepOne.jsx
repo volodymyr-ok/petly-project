@@ -9,14 +9,13 @@ export const StepOne = () => {
         <FormError name="email" />
       </Label>
       <Label>
-        <Input name="password" type="text" placeholder="Password" />
-
+        <Input name="password" type="password" placeholder="Password" />
         <FormError name="password" />
       </Label>
       <Label>
         <Input
           name="confirmPassword"
-          type="text"
+          type="password"
           placeholder="Confirm password"
         />
 

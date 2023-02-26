@@ -3,22 +3,24 @@ import { CardTitle, Text, Data, NewsBox, ReadMore, Item } from "./NewsCard.style
 export const NewsCard = ({ news }) => {
   return (
     <>
-      {/* {news.map((item) => ())} */}
-      <Item key="key">
-        <CardTitle>Lorem ipsum dolor</CardTitle>
-        <Text>
-          {/* {text.length >= 150 ? text.slice(0, 150) : text} */}
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ex eveniet vero ullam ipsum officiis nihil ducimus
-          voluptas quisquam. Iste adipisci velit nemo aliquam corrupti laboriosam exercitationem inventore delectus
-          nihil sed. Voluptas accusamus aperiam eaque
-        </Text>
-        <NewsBox>
-          <Data>00/00/00</Data>
-          <ReadMore href="/" target="_blank">
-            Read more
-          </ReadMore>
-        </NewsBox>
-      </Item>
+      {news?.map(({ _id, title, description, date, url }) => (
+        <Item key={_id}>
+          <div style={{ height: "66px", overflow: "hidden", marginBottom: "16px" }}>
+            <CardTitle>{title}</CardTitle>
+          </div>
+          <div style={{ height: "136px", overflow: "hidden" }}>
+            <Text>{description}</Text>
+          </div>
+          <NewsBox>
+            <Data>{date?.split("-").reverse().join("/")}</Data>
+            <ReadMore href={url} target="_blank">
+              Read more
+            </ReadMore>
+          </NewsBox>
+        </Item>
+      ))}
     </>
   );
 };
+
+// description.length > 212 ? description.slice(0, 212) + "..." : description;

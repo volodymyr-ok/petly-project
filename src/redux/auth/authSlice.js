@@ -7,7 +7,7 @@ import {
 } from "./auth-operations";
 // import { Notify } from "notiflix";
 import { toast } from "react-toastify";
-import { token } from "../../http/http";
+// import { token } from "../../http/http";
 
 const authInitialState = {
   user: {
@@ -50,12 +50,6 @@ const handleRejected = (state, action) => {
 const authSlice = createSlice({
   name: "auth",
   initialState: authInitialState,
-  reducers: {
-    addToken(state, action) {
-      state.token = action.payload.accessToken;
-      token.set(action.payload.accessToken);
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, handlePending)
@@ -66,7 +60,7 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log('action', action);
+        console.log("action", action);
         state.isLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
@@ -84,8 +78,9 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload.userData;
-        state.token = action.payload.accessToken;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        console.log("oginUser act", action);
         toast.success(`Welcome back, ${state.user.email}`);
         state.isAuth = true;
       })
@@ -122,5 +117,4 @@ const authSlice = createSlice({
   },
 });
 
-export const { addToken } = authSlice.actions;
 export const authReducer = authSlice.reducer;

@@ -35,7 +35,6 @@ ol {
 img {
   display: block;
   width: 100%;
-  height: auto;
 }
 
 input:-webkit-autofill,

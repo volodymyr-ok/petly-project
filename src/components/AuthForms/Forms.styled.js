@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
+import { colors } from "../../utils/colors";
 
 import bgLoginDesc from "../../img/bgLoginDesc.png";
 import bgLoginTab from "../../img/bgLoginTab.png";
@@ -97,6 +98,9 @@ export const FormCustom = styled(Form)`
   flex-direction: column;
   gap: 16px;
 `;
+export const FormSearch = styled(FormCustom)`
+  position: relative;
+`;
 
 export const Input = styled(Field)`
   width: 100%;
@@ -111,6 +115,7 @@ export const Input = styled(Field)`
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   outline: none;
+
   @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 25px;
@@ -135,6 +140,10 @@ export const Input = styled(Field)`
     border-color: "#f59256";
   }
 `;
+export const SearchInput = styled(Input)`
+  border: none;
+  background-color: ${colors.white};
+`;
 
 export const Paragraph = styled.p`
   margin-top: 40px;
@@ -156,7 +165,7 @@ export const FormLink = styled(Link)`
   line-height: 16px;
   letter-spacing: 0.04em;
   text-decoration-line: underline;
-  color: #3091eb;
+  color: ${colors.blue};
   &:visited {
     color: rgba(85, 26, 139);
   }
