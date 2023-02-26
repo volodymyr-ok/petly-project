@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { CardTitle, Text, Data, NewsBox, ReadMore, Item } from "./NewsCard.styled";
 
 export const NewsCard = ({ news }) => {
@@ -23,4 +24,6 @@ export const NewsCard = ({ news }) => {
   );
 };
 
-// description.length > 212 ? description.slice(0, 212) + "..." : description;
+NewsCard.propTypes = {
+  news: PropTypes.array,
+};
