@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { device } from "../../../utils/mixin";
 
 export const ListNews = styled.ul`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
