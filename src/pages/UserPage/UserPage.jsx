@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/auth-selectors";
+import MyInformationCard from "./MyInformationCard/MyInformationCard";
+import { ContainerUserPage } from "./UserPage.styled";
 
 const UserPage = () => {
   const user = useSelector(selectUser);
@@ -7,9 +9,9 @@ const UserPage = () => {
   console.log("user", user);
 
   return (
-    <>
-      <div>UserPage</div>
-    </>
+    <ContainerUserPage>
+      <MyInformationCard />
+    </ContainerUserPage>
   );
 };
 
