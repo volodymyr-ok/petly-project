@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Input, IconBox } from "./Forms.styled";
+import { RxEyeClosed } from "react-icons/rx";
+import { RxEyeOpen } from "react-icons/rx";
 
 export const InputPasswordConfirm = () => {
   const [hidePassword, setHidePassword] = useState("hide");
@@ -23,7 +25,13 @@ export const InputPasswordConfirm = () => {
         placeholder="Confirm password"
         id="password"
       />
-      <IconBox type={hidePassword} onClick={onShowPassword} />
+      <IconBox>
+        {hidePassword === "hide" ? (
+          <RxEyeClosed onClick={onShowPassword} />
+        ) : (
+          <RxEyeOpen onClick={onShowPassword} />
+        )}
+      </IconBox>
     </>
   );
 };

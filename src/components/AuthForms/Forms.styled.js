@@ -2,14 +2,15 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
 import { colors } from "../../utils/colors";
+import { device } from "../../utils/mixin";
 
 import bgLoginDesc from "../../img/bgLoginDesc.png";
 import bgLoginTab from "../../img/bgLoginTab.png";
 import bgLoginMob from "../../img/bgLoginMob.png";
 
 import { SectionTag } from "../Section/Section.styled";
-import showEye from "../../assets/svg/eye-show.svg";
-import hideEye from "../../assets/svg/eye-hide.svg";
+// import showEye from "../../assets/svg/eye-show.svg";
+// import hideEye from "../../assets/svg/eye-hide.svg";
 
 export const Icon = styled.span`
   position: absolute;
@@ -37,14 +38,12 @@ export const AuthSection = styled(SectionTag)`
     height: 100vh;
   } */
   @media screen and (min-width: 768px) {
-    padding-top: 168px;
-    /* padding-bottom: 250px; */
+    padding-top: 100px;
     background-image: url(${bgLoginTab});
     min-height: calc(100vh - 75px);
   }
   @media screen and (min-width: 1280px) {
     padding-top: 80px;
-    /* padding-bottom: 100px; */
     background-image: url(${bgLoginDesc});
   }
 `;
@@ -59,23 +58,113 @@ export const ErrorText = styled.p`
   color: red;
 `;
 
+export const Text = styled.p`
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+  ${device.tablet} {
+    font-size: 16px;
+  }
+`;
+
 export const Label = styled.label`
+  height: 54px;
+  display: flex;
+  align-items: center;
   position: relative;
+
+  .PhoneInput {
+    background: #fdf7f2;
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    padding: 14px 10px 13px 32px;
+    width: 100%;
+    height: 100%;
+
+    :focus-visible {
+      border: 1px solid rgba(245, 146, 86, 0.5);
+    }
+  }
+
+  .PhoneInputInput {
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    padding-left: 10px;
+    border-left: 1px solid rgba(245, 146, 86, 0.5);
+
+    :focus-visible {
+      outline: none;
+    }
+
+    ::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      letter-spacing: 0.04em;
+      color: rgba(17, 17, 17, 0.6);
+      @media screen and (min-width: 768px) {
+        font-size: 18px;
+        line-height: 25px;
+      }
+    }
+  }
+`;
+
+export const LoginGoogle = styled.a`
+  color: ${colors.black};
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 28px;
+  border-radius: 40px;
+  font-size: 14px;
+  text-decoration: none;
+  border: 2px solid ${colors.accentOrange};
+  margin: 0 auto;
+  max-width: 300px;
+  transition: color 300ms linear, background-color 300ms linear;
+  :hover,
+  :focus {
+    background-color: ${colors.accentOrange};
+    color: ${colors.white};
+  }
+  @media (min-width: 768px) {
+    padding: 10px 48px;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    margin-right: 5px;
+    position: relative;
+    z-index: 1;
+  }
 `;
 
 export const IconBox = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   position: absolute;
-  right: 8px;
+  right: 14px;
   top: 50%;
   z-index: 2;
+  color: ${colors.inputPriText};
   transform: translateY(-50%);
-  background-repeat: no-repeat;
-  background-size: 28px 26px;
-  background-position: center;
-  background-image: ${(props) =>
-    props.type === "hide" ? `url(${hideEye})` : `url(${showEye})`};
+  ${device.tablet} {
+    right: 32px;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  :hover {
+    color: ${colors.accentOrange};
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -164,7 +253,7 @@ export const SearchInput = styled(Input)`
 `;
 
 export const Paragraph = styled.p`
-  margin-top: 40px;
+  margin-top: 30px;
   text-align: center;
   & span {
     font-family: "Manrope";
