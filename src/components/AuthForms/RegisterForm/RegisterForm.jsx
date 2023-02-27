@@ -15,8 +15,6 @@ import { StepOne } from "./StepOne/StepOne";
 import { StepTwo } from "./StepTwo/StepTwo";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../redux/auth/auth-operations";
-// import { useNavigate } from "react-router-dom";
-// import { selectIsAuth } from "../../../redux/auth/auth-selectors";
 
 export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
 export const nameRegexp = /^[a-zA-Z]{2,20}$/;

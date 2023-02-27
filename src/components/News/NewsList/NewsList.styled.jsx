@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { device } from "../../../utils/mixin";
 
 export const ListNews = styled.ul`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,7 +14,6 @@ export const ListNews = styled.ul`
     row-gap: 60px;
   }
   ${device.desktop} {
-    column-gap: 34px;
-    row-gap: 60px;
+    column-gap: 36px;
   }
 `;

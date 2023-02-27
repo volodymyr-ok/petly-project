@@ -1,35 +1,55 @@
 import React, {useState} from 'react';
-import {BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile} from "./Nav.styled";
-import Logo from "../../Logo/Logo";
+import {BurgerContainer, BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile, NavUl} from "./Nav.styled";
 import UserNav from "../UserNav/UserNav";
 import AuthNav from "../AuthNav/AuthNav";
+import {useSelector} from "react-redux";
+import {selectIsAuth} from "../../../../redux/auth/auth-selectors";
 
 const Nav = () => {
     const [checked, setChecked] = useState(false)
     const updateMenu = () => {
         setChecked(!checked)
     }
+
+    const isAuth = useSelector(selectIsAuth)
     return (
         <>
             <NavMain>
-                <NavItem to="./news">News</NavItem>
-                <NavItem to="./notices">Find pet</NavItem>
-                <NavItem to="./friends">Our friends</NavItem>
+                <NavUl>
+                    <li>
+                        <NavItem to="./news">News</NavItem>
+                    </li>
+                    <li>
+                        <NavItem to="./notices">Find pet</NavItem>
+                    </li>
+                    <li>
+                        <NavItem to="./friends">Our friends</NavItem>
+                    </li>
+                </NavUl>
             </NavMain>
-                <BurgerIcon onClick={updateMenu} open={checked}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </BurgerIcon>
+            <BurgerIcon onClick={updateMenu} open={checked}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </BurgerIcon>
+
             <BurgerMenu open={checked}>
-                <Logo/>
+                <BurgerContainer>
+                {isAuth ? <UserNav updateMenu={updateMenu}/> : <AuthNav updateMenu={updateMenu}/>}
                 <NavMobile>
-                    <NavItem to="./news">News</NavItem>
-                    <NavItem to="./notices">Find pet</NavItem>
-                    <NavItem to="./friends">Our friends</NavItem>
+                    <NavUl>
+                        <li>
+                            <NavItem to="./news" onClick={updateMenu}>News</NavItem>
+                        </li>
+                        <li>
+                            <NavItem to="./notices" onClick={updateMenu}>Find pet</NavItem>
+                        </li>
+                        <li>
+                            <NavItem to="./friends" onClick={updateMenu}>Our friends</NavItem>
+                        </li>
+                    </NavUl>
                 </NavMobile>
-                <UserNav/>
-                <AuthNav/>
+                </BurgerContainer>
             </BurgerMenu>
         </>
     );

@@ -1,38 +1,90 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { device } from "../../../../utils/mixin";
-import {colors} from "../../../../utils/colors"
+import { colors } from "../../../../utils/colors";
 
 export const NavMain = styled.nav`
   display: none;
-  
+  margin-right: auto;
+
   ${device.desktop} {
     display: flex;
-    justify-content: space-between;
+  }
+`;
+
+export const NavUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+
+  ${device.tablet} {
+    gap: 60px;
+  }
+
+  ${device.desktop} {
+    display: flex;
+    flex-direction: row;
     align-items: center;
   }
 `;
 
-export const NavMobile = styled.nav`
- 
+export const BurgerContainer = styled.div`
+  margin-top: 104px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  
+
+  ${device.tablet} {
+    margin-top: 160px;
+  }
+`;
+
+export const NavMobile = styled.nav`
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+
+  ${device.tablet} {
+    margin-top: 0;
+  }
+
   ${device.desktop} {
     display: none;
   }
 `;
 
 export const NavItem = styled(NavLink)`
-  display: block;
-  width: 100%;
-  margin-right: auto;
-  cursor: pointer;
+  color: ${colors.black};
+  font-size: 32px;
+  text-decoration: none;
+  margin-right: 0;
+
+  ${device.tablet} {
+    font-size: 48px;
+  }
+
+  ${device.desktop} {
+    margin-right: 80px;
+    font-size: 20px;
+  }
+
+  &:hover,
+  &:focus {
+    color: ${colors.accentOrange};
+    text-decoration: underline;
+  }
+
+  &.active {
+    color: ${colors.accentOrange};
+    text-decoration: underline;
+  }
 `;
 
+
+
 export const BurgerMenu = styled.div`
-  display: ${props => props.open ? "block" : "none"};
+  display: ${(props) => (props.open ? "block" : "none")};
   padding: 20px;
   position: absolute;
   top: 0;
@@ -40,13 +92,10 @@ export const BurgerMenu = styled.div`
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  
-
   background: ${colors.white};
-
   transition: all 400ms var(--timing-function);
   transform: translate(0) scale (1);
-  z-index: 1;
+  z-index: 2;
 
   &.is-hidden {
     transform: translate(50%, -60%);
@@ -61,14 +110,8 @@ export const BurgerIcon = styled.div`
   position: relative;
   z-index: 10;
   cursor: pointer;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: .5s ease-in-out;
-  -moz-transition: .5s ease-in-out;
-  -o-transition: .5s ease-in-out;
-  transition: .5s ease-in-out;
+  transition: 0.5s ease-in-out;
 
   ${device.desktop} {
     display: none;
@@ -83,52 +126,28 @@ export const BurgerIcon = styled.div`
     border-radius: 7px;
     opacity: 1;
     left: 5px;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
     transform: rotate(0deg);
-    -webkit-transition: .25s ease-in-out;
-    -moz-transition: .25s ease-in-out;
-    -o-transition: .25s ease-in-out;
-    transition: .25s ease-in-out;
+    transition: 0.25s ease-in-out;
   }
 
-
   & span:nth-child(1) {
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
     transform-origin: left center;
-
-    -webkit-transform: ${props => props.open && "rotate(45deg)"} ;
-    -moz-transform: ${props => props.open && "rotate(45deg)"};
-    -o-transform: ${props => props.open && "rotate(45deg)"};
-    transform: ${props => props.open && "rotate(45deg)"};
-    top: ${props => props.open ? "9px" : "10px"};
-    left: ${props => props.open && "9px"};
+    transform: ${(props) => props.open && "rotate(45deg)"};
+    top: ${(props) => (props.open ? "9px" : "10px")};
+    left: ${(props) => props.open && "9px"};
   }
 
   & span:nth-child(3) {
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
     transform-origin: left center;
-    
-    -webkit-transform: ${props => props.open && "rotate(-45deg)"} ;
-    -moz-transform: ${props => props.open && "rotate(-45deg)"};
-    -o-transform: ${props => props.open && "rotate(-45deg)"};
-    transform: ${props => props.open && "rotate(-45deg)"};
-    top: ${props => props.open ? "30px" : "28px"};
-    left: ${props => props.open && "9px"};
+    transform: ${(props) => props.open && "rotate(-45deg)"};
+    top: ${(props) => (props.open ? "30px" : "28px")};
+    left: ${(props) => props.open && "9px"};
   }
 
   & span:nth-child(2) {
     top: 19px;
-    -webkit-transform-origin: left center;
-    -moz-transform-origin: left center;
-    -o-transform-origin: left center;
     transform-origin: left center;
-    width: ${props => props.open && "0"};
-    opacity: ${props => props.open && "0"};
+    width: ${(props) => props.open && "0"};
+    opacity: ${(props) => props.open && "0"};
   }
 `;

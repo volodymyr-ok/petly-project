@@ -1,13 +1,20 @@
-import React from "react";
-import { NavItem, NavMain } from "../Nav/Nav.styled";
+import React from 'react';
+import {Nav, NavAuthItem, NavAuthUl} from "./AuthNav.styled";
 
-const AuthNav = () => {
-  return (
-    <NavMain>
-      <NavItem to="./register">Register</NavItem>
-      <NavItem to="./login">Login</NavItem>
-    </NavMain>
-  );
+const AuthNav = ({type, updateMenu}) => {
+
+    return (
+        <Nav type={type}>
+            <NavAuthUl>
+                <li>
+                    <NavAuthItem to="./login" color='color' onClick={updateMenu}>Login</NavAuthItem>
+                </li>
+                <li>
+                    <NavAuthItem to="./register" onClick={updateMenu}>Registration</NavAuthItem>
+                </li>
+            </NavAuthUl>
+        </Nav>
+    );
 };
 
 export default AuthNav;

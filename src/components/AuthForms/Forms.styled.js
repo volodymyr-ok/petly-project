@@ -1,13 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
-import { colors } from '../../utils/colors';
+import { colors } from "../../utils/colors";
 
 import bgLoginDesc from "../../img/bgLoginDesc.png";
 import bgLoginTab from "../../img/bgLoginTab.png";
 import bgLoginMob from "../../img/bgLoginMob.png";
 
 import { SectionTag } from "../Section/Section.styled";
+import showEye from "../../assets/svg/eye-show.svg";
+import hideEye from "../../assets/svg/eye-hide.svg";
 
 export const Icon = styled.span`
   position: absolute;
@@ -61,6 +63,21 @@ export const Label = styled.label`
   position: relative;
 `;
 
+export const IconBox = styled.div`
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-size: 28px 26px;
+  background-position: center;
+  background-image: ${(props) =>
+    props.type === "hide" ? `url(${hideEye})` : `url(${showEye})`};
+`;
+
 export const Wrapper = styled.div`
   @media screen and (min-width: 768px) {
     width: 608px;
@@ -99,7 +116,7 @@ export const FormCustom = styled(Form)`
   gap: 16px;
 `;
 export const FormSearch = styled(FormCustom)`
-    position: relative;
+  position: relative;
 `;
 
 export const Input = styled(Field)`
@@ -115,7 +132,8 @@ export const Input = styled(Field)`
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 40px;
   outline: none;
- 
+  position: relative;
+
   @media screen and (min-width: 768px) {
     font-size: 18px;
     line-height: 25px;
@@ -143,7 +161,7 @@ export const Input = styled(Field)`
 export const SearchInput = styled(Input)`
   border: none;
   background-color: ${colors.white};
-`
+`;
 
 export const Paragraph = styled.p`
   margin-top: 40px;
@@ -165,7 +183,7 @@ export const FormLink = styled(Link)`
   line-height: 16px;
   letter-spacing: 0.04em;
   text-decoration-line: underline;
-  color: #3091eb;
+  color: ${colors.blue};
   &:visited {
     color: rgba(85, 26, 139);
   }

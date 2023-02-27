@@ -10,12 +10,14 @@ import {
   FormCustom,
   Label,
   ErrorText,
+  // IconBox,
 } from "../Forms.styled";
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";
 import { emailRegexp } from "../RegisterForm/RegisterForm";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/auth/auth-operations";
+import { InputPassword } from "../InputPassword";
 
 export const FormError = ({ name }) => {
   return (
@@ -68,7 +70,7 @@ export const LoginForm = () => {
                 <FormError name="email" />
               </Label>
               <Label>
-                <Input name="password" type="password" placeholder="Password" />
+                <InputPassword />
                 <FormError name="password" />
               </Label>
               <LoginBtn text={"Login"} />
