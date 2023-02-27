@@ -80,7 +80,7 @@ export const RegisterForm = () => {
                 .min(7, "Address shoud conain city and regions")
                 .matches(
                   /^[A-Za-z]{2,},\s[A-Za-z]{2,}$/,
-                  "Address shoud conain city and regions"
+                  "The address must contain the city, regions: 'Kiev, Kiev'"
                 )
                 .required("Address is required"),
               phone: Yup.string()
