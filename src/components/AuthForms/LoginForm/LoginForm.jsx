@@ -10,12 +10,8 @@ import {
   FormCustom,
   Label,
   ErrorText,
-<<<<<<< HEAD
   Text,
   LoginGoogle,
-=======
-  // IconBox,
->>>>>>> main
 } from "../Forms.styled";
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";

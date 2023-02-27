@@ -14,6 +14,7 @@ import BgD from "../../img/HomePage/BgD.png";
 import BgD2x from "../../img/HomePage/BgD@2x.png";
 import Union from "../../img/HomePage/Union.png";
 import Union2x from "../../img/HomePage/Union@2x.png";
+import { device } from "../../utils/mixin";
 
 export const Title = styled.h1`
   max-width: 283px;
@@ -45,29 +46,24 @@ export const HomeSection = styled.section`
     (min-resolution: 2dppx) {
     background-image: url(${portraitM2x}), url(${BgM2x});
   }
-  @media screen and (min-width: 768px) {
+  ${device.tablet} {
     /* min-height: 1108px; */
     padding-top: 88px;
+    min-height: calc(100vh - 80px);
     background-image: url(${portraitT}), url(${BgT});
     /* background-size: 645px 715px, 100vw 1033px; */
     background-size: 645px 715px, 100vw calc(100vh - 116px);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
+    ${device.retina} {
       background-image: url(${portraitT2x}), url(${BgT2x});
     }
   }
-  @media screen and (min-width: 1280px) {
+  ${device.desktop} {
     padding-top: 92px;
-    /* padding-bottom: 408px; */
-    /* min-height: calc(100vh - 64px); */
     background-image: url(${portraitD}), url(${BgD}), url(${Union});
     background-size: 590px 640px, 100vw calc(100vw * 0.375), 92px 89px;
     background-position-x: calc(50% + 330px), center, calc(50% + 118px);
     background-position-y: bottom, bottom, calc(50% - 204px);
-    @media (min-device-pixel-ratio: 2),
-      (min-resolution: 192dpi),
-      (min-resolution: 2dppx) {
+    ${device.retina} {
       background-image: url(${portraitD2x}), url(${BgD2x}), url(${Union2x});
     }
   }

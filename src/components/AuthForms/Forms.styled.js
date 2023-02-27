@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
 import { colors } from "../../utils/colors";
@@ -9,9 +9,6 @@ import bgLoginTab from "../../img/bgLoginTab.png";
 import bgLoginMob from "../../img/bgLoginMob.png";
 
 import { SectionTag } from "../Section/Section.styled";
-import showEye from "../../assets/svg/eye-show.svg";
-import hideEye from "../../assets/svg/eye-hide.svg";
-import { device } from "../../utils/mixin";
 
 export const Icon = styled.span`
   position: absolute;
@@ -104,20 +101,25 @@ export const LoginGoogle = styled.a`
 `;
 
 export const IconBox = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 22px;
+  height: 22px;
   position: absolute;
   right: 14px;
   top: 50%;
   z-index: 2;
+  color: ${colors.inputPriText};
   transform: translateY(-50%);
-  background-repeat: no-repeat;
-  background-size: 28px 26px;
-  background-position: center;
-  background-image: ${(props) =>
-    props.type === "hide" ? `url(${hideEye})` : `url(${showEye})`};
   ${device.tablet} {
     right: 32px;
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  :hover {
+    color: ${colors.accentOrange};
   }
 `;
 
