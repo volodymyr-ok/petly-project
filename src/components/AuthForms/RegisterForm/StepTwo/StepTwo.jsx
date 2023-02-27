@@ -1,9 +1,13 @@
-import { Input, Label, RegionInput } from "../../Forms.styled";
+import {
+  Input,
+  Label,
+  // RegionInput
+} from "../../Forms.styled";
 import { FormError } from "../../LoginForm/LoginForm";
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
-import { useState } from "react";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+// import PhoneInput from "react-phone-number-input";
+// import { useState } from "react";
+// import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 export const StepTwo = ({
   setFieldTouched,
@@ -19,10 +23,10 @@ export const StepTwo = ({
 
   //   setFieldValue(NAME_INPUT_CITY, evt.label);
   // };
-  const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState("");
-  const [region, setRegion] = useState("");
-  console.log(country);
+  // const [phone, setPhone] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [region, setRegion] = useState("");
+  // console.log(country);
   return (
     <>
       <Label>

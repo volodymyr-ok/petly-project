@@ -1,4 +1,4 @@
-import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
+// import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
 import { BtnPencil } from "./BtnProfileForm/BtnProfileForm.styled";
 import { BoxInput, NameInput } from "./FormProfile.styled";
 import { ReactComponent as Pencil } from "../../../../assets/svg/pencil.svg";

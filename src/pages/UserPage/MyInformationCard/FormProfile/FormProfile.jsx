@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
-import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
-import { BoxInput, Form, NameInput } from "./FormProfile.styled";
-import MaskedInput from "react-text-mask";
+import {
+  // useEffect,
+  useState,
+} from "react";
+// import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
+import {
+  // BoxInput,
+  Form,
+  // NameInput
+} from "./FormProfile.styled";
+// import MaskedInput from "react-text-mask";
 import { InputItem } from "./InputItem";
 import { PrivateApi } from "../../../../http/http";
 
@@ -10,6 +17,8 @@ export const FormProfile = ({ user }) => {
   const [nameActivePancil, setNameActivePancil] = useState("");
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log(isError, isLoading);
 
   const inputsList = [
     {
