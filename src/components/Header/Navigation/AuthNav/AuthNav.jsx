@@ -1,6 +1,5 @@
 import React from 'react';
-import {Nav, NavAuthItem} from "./AuthNav.styled";
-import {NavAuthUl} from "../Nav/Nav.styled";
+import {Nav, NavAuthItem, NavAuthUl} from "./AuthNav.styled";
 
 const AuthNav = ({type, updateMenu}) => {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavUserItem} from "../Nav/Nav.styled";
+import {NavUserItem} from "./UserNav.styled";
 
 const UserNav = ({type, updateMenu}) => {
     return (
