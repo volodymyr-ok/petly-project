@@ -21,6 +21,10 @@ export const BoxInput = styled.div`
     padding: 4px 4px 4px 18px;
     font-size: 12px;
     line-height: 1.33;
+    background-color: #fdf7f2;
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    outline: none;
     ${device.tablet} {
       width: 216px;
       font-size: 18px;

@@ -9,7 +9,25 @@ export const FormProfile = ({ user }) => {
   const [birthday, setBirthday] = useState(user?.birthday);
   const [phone, setPhone] = useState(user?.phone);
   const [city, setCity] = useState(user?.city);
-  const [disableInput, setDisabelInput] = useState(true);
+  const [disableInput, setDisabelInput] = useState({
+    name: true,
+    email: true,
+    birthday: true,
+    phone: true,
+    city: true,
+  });
+
+  const disableTrue = {
+    name: true,
+    email: true,
+    birthday: true,
+    phone: true,
+    city: true,
+  };
+
+  const onInputClose = () => {
+    setDisabelInput({ ...disableTrue });
+  };
 
   return (
     <Form>
@@ -18,13 +36,16 @@ export const FormProfile = ({ user }) => {
         <input
           type="text"
           value={name}
+          onBlur={onInputClose}
           onChange={(e) => setName(e.target.value)}
-          disabled={disableInput}
+          disabled={disableInput.name}
         />
         <BtnProfileForm
           onClick={setDisabelInput}
           disableInput={disableInput}
-          name={name}
+          disableTrue={disableTrue}
+          activeImg={disableInput.name}
+          name="name"
         />
       </BoxInput>
       <BoxInput>
@@ -32,13 +53,16 @@ export const FormProfile = ({ user }) => {
         <input
           type="email"
           value={email}
+          onBlur={onInputClose}
           onChange={(e) => setEmail(e.target.value)}
-          disabled={disableInput}
+          disabled={disableInput.email}
         />
         <BtnProfileForm
           onClick={setDisabelInput}
           disableInput={disableInput}
-          name={email}
+          disableTrue={disableTrue}
+          activeImg={disableInput.email}
+          name="email"
         />
       </BoxInput>
       <BoxInput>
@@ -46,10 +70,17 @@ export const FormProfile = ({ user }) => {
         <MaskedInput
           mask={[/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/]}
           value={birthday}
-          disabled={disableInput}
+          disabled={disableInput.birthday}
+          onBlur={onInputClose}
           onChange={(e) => setBirthday(e.target.value)}
         />
-        <BtnProfileForm />
+        <BtnProfileForm
+          onClick={setDisabelInput}
+          disableInput={disableInput}
+          disableTrue={disableTrue}
+          activeImg={disableInput.birthday}
+          name="birthday"
+        />
       </BoxInput>
       <BoxInput>
         <NameInput>Phone:</NameInput>
@@ -73,21 +104,35 @@ export const FormProfile = ({ user }) => {
             /\d/,
           ]}
           value={phone}
-          disabled={disableInput}
+          disabled={disableInput.phone}
+          onBlur={onInputClose}
           onChange={(e) => setPhone(e.target.value)}
         />
-        <BtnProfileForm />
+        <BtnProfileForm
+          onClick={setDisabelInput}
+          disableInput={disableInput}
+          disableTrue={disableTrue}
+          activeImg={disableInput.phone}
+          name="phone"
+        />
       </BoxInput>
       <BoxInput>
         <NameInput>City:</NameInput>
         <input
           type="Text"
           value={city}
+          onBlur={onInputClose}
           onChange={(e) => setCity(e.target.value)}
-          disabled={disableInput}
+          disabled={disableInput.city}
         />
 
-        <BtnProfileForm />
+        <BtnProfileForm
+          onClick={setDisabelInput}
+          disableInput={disableInput}
+          disableTrue={disableTrue}
+          activeImg={disableInput.city}
+          name="city"
+        />
       </BoxInput>
     </Form>
   );
