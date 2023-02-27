@@ -5,8 +5,9 @@ import { device } from "../../utils/mixin";
 export const TimeWrap = styled.div`
   position: absolute;
   top: 35px;
-  width: 120px;
-  height: 176px;
+  padding: 12px;
+  width: 145px;
+  height: 160px;
   background: ${colors.white};
   border: 1px solid ${colors.accentOrange};
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
@@ -21,8 +22,25 @@ export const TimeWrap = styled.div`
   ${device.tablet} {
     top: 42px;
   }
+`;
 
-  ${device.desktop} {
-    /* max-width: 199px; */
-  }
+export const TimeList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: "Manrope";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+  color: ${colors.black};
+`;
+
+export const TimeItem = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const TimeDay = styled.span`
+  width: 20px;
 `;

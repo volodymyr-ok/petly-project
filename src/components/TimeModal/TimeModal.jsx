@@ -1,11 +1,30 @@
 import React from "react";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
-import { TimeWrap } from "./TimeModal.styled";
-import { nanoid } from "nanoid";
+import { TimeWrap, TimeList, TimeItem, TimeDay } from "./TimeModal.styled";
 
 export const TimeModal = ({ workDays, onClick }) => {
-  console.log(workDays);
+  const day = (index) => {
+    switch (index) {
+      case 0:
+        return "MN";
+      case 1:
+        return "TU";
+      case 2:
+        return "WE";
+      case 3:
+        return "TH";
+      case 4:
+        return "FR";
+      case 5:
+        return "SA";
+      case 6:
+        return "SU";
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", handleEscapeKey);
 
@@ -27,31 +46,33 @@ export const TimeModal = ({ workDays, onClick }) => {
     return;
   }
 
-  const timeId = nanoid();
-
   return (
-    <div onClick={handleBackdropClose}>
-      <TimeWrap>
-        <ul>
-          {workDays.map(({ isOpen, from, to }) => (
-            <li key={timeId}>
-              {!isOpen && <p>Closed</p>}
-              {isOpen && (
-                <>
-                  <span>
-                    {from} - {to}
-                  </span>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      </TimeWrap>
-    </div>
+    <TimeWrap>
+      <TimeList>
+        {workDays.map(({ isOpen, from, to }, index) => (
+          <TimeItem key={index} onClick={handleBackdropClose}>
+            {!isOpen && (
+              <>
+                <TimeDay>{day(index)}</TimeDay>
+                <p>Closed</p>
+              </>
+            )}
+            {isOpen && (
+              <>
+                <TimeDay>{day(index)}</TimeDay>
+                <span>
+                  {from} - {to}
+                </span>
+              </>
+            )}
+          </TimeItem>
+        ))}
+      </TimeList>
+    </TimeWrap>
   );
 };
 
 TimeModal.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   workDays: PropTypes.array,
 };

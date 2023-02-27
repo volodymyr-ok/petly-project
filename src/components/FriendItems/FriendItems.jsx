@@ -50,15 +50,15 @@ export const FriendsItems = ({
           {workDays && (
             <InfoWrap onClick={toggleModal}>
               <p>Time:</p>
-              <p>9:00-17:00</p>
+              <p>???</p>
               {showModal && <TimeModal workDays={workDays} />}
             </InfoWrap>
           )}
           {!workDays && (
-            <>
+            <div>
               <p>Time:</p>
               <p>-----------------</p>
-            </>
+            </div>
           )}
           {address && (
             <InfoWrap
@@ -71,10 +71,10 @@ export const FriendsItems = ({
             </InfoWrap>
           )}
           {!address && (
-            <>
+            <div>
               <p>Adress:</p>
               <p>-----------------</p>
-            </>
+            </div>
           )}
           {email && (
             <InfoWrap href={"mailto:" + email}>
@@ -83,10 +83,10 @@ export const FriendsItems = ({
             </InfoWrap>
           )}
           {!email && (
-            <>
+            <div>
               <p>Email:</p>
               <p>-----------------</p>
-            </>
+            </div>
           )}
           {phone && (
             <InfoWrap href={"tel:" + phone}>
@@ -95,10 +95,10 @@ export const FriendsItems = ({
             </InfoWrap>
           )}
           {!phone && (
-            <>
+            <div>
               <p>Phone:</p>
               <p>-----------------</p>
-            </>
+            </div>
           )}
         </Wrap>
       </DescrWrap>
