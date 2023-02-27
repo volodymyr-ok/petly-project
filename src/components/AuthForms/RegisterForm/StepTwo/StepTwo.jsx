@@ -30,33 +30,38 @@ export const StepTwo = ({
         <FormError name="name" />
       </Label>
       <Label>
-        <RegionInput>
-          <CountryDropdown
-            blacklist={["RU"]}
-            value={country}
-            defaultOptionLabel={"Country"}
-            onChange={(val) => setCountry(val)}
-          />
-          <RegionDropdown
-            defaultOptionLabel={"Region"}
-            blankOptionLabel="Select country first"
-            disableWhenEmpty={true}
-            country={country}
-            value={region}
-            onChange={(val) => setRegion(val)}
-          />
-        </RegionInput>
-        {/*<Input name="city" placeholder="City, region" />*/}
+        {/* <RegionInput>
+                    <CountryDropdown
+                        blacklist={['RU']}
+                        value={country}
+                        defaultOptionLabel={'Country'}
+                        onChange={(val) => setCountry(val)}/>
+                    <RegionDropdown
+                        defaultOptionLabel={'Region'}
+                        blankOptionLabel="Select country first"
+                        disableWhenEmpty={true}
+                        country={country}
+                        value={region}
+                        onChange={(val) => setRegion(val)}/>
+                </RegionInput> */}
+        <Input name="city" placeholder="City, region" />
         <FormError name={NAME_INPUT_CITY} />
       </Label>
       <Label>
-        <PhoneInput
+        {/* <PhoneInput
           placeholder="Mobile phone"
           value={phone}
           onChange={(val) => setPhone(val)}
           name="phone"
           type="tel"
           data-tel-input
+          maxLength="13"
+        /> */}
+        <Input
+          name="phone"
+          type="tel"
+          data-tel-input
+          placeholder="Mobile phone"
           maxLength="13"
         />
         <FormError name="phone" />

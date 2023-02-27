@@ -7,7 +7,7 @@ export const InputPasswordConfirm = () => {
   const [hidePassword, setHidePassword] = useState("hide");
 
   function onShowPassword() {
-    let input = document.getElementById("password");
+    let input = document.getElementById("confirmPassword");
     if (input.type === "password") {
       setHidePassword("show");
       input.type = "text";
@@ -23,7 +23,7 @@ export const InputPasswordConfirm = () => {
         name="confirmPassword"
         type="password"
         placeholder="Confirm password"
-        id="password"
+        id="confirmPassword"
       />
       <IconBox>
         {hidePassword === "hide" ? (

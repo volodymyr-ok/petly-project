@@ -18,6 +18,8 @@ export const BtnProfileForm = ({
     e.preventDefault();
 
     setNameActivePancil(e.currentTarget.name);
+    console.log("e.currentTarget.nam", e.currentTarget.name);
+
     switch (e.currentTarget.name) {
       case "name":
         onClick({
