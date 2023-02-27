@@ -76,7 +76,13 @@ export const RegisterForm = () => {
             component: StepTwo,
             validationSchema: Yup.object().shape({
               name: Yup.string().required("First name is required"),
-              city: Yup.string().required("Address is required"),
+              city: Yup.string()
+                .min(7, "Address shoud conain city and regions")
+                .matches(
+                  /^[A-Za-z]{2,},\s[A-Za-z]{2,}$/,
+                  "Address shoud conain city and regions"
+                )
+                .required("Address is required"),
               phone: Yup.string()
                 .matches(
                   phoneRegexp,
