@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
+import { TimeModal } from "../TimeModal/TimeModal";
 import {
   FriendsItem,
   FriendsTitle,
@@ -7,7 +9,7 @@ import {
   InfoWrap,
   Wrap,
   DescrWrap,
-  InfoDescr,
+  Descr,
 } from "./FriendItems.styled";
 import petPartner from "../../img/petPartner.png";
 
@@ -19,7 +21,14 @@ export const FriendsItems = ({
   address,
   email,
   phone,
+  workDays,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  function toggleModal() {
+    setShowModal(!showModal);
+  }
+
   return (
     <FriendsItem>
       <FriendsTitle
@@ -38,35 +47,72 @@ export const FriendsItems = ({
           <FriendsLogo src={imageUrl} alt={title} width="110" height="78" />
         )}
         <Wrap>
-          <InfoWrap>
-            <InfoDescr>Time:</InfoDescr>
-            <InfoDescr>'time'</InfoDescr>
-          </InfoWrap>
-          <InfoWrap
-            href={addressUrl}
-            target="_blank"
-            rel="noopener noreferrer nofollow"
-          >
-            <InfoDescr>Adress:</InfoDescr>
-            {!address && <p>-----------------</p>}
-            {address && <InfoDescr>{address}</InfoDescr>}
-          </InfoWrap>
-          <InfoWrap href={email}>
-            <InfoDescr>Email:</InfoDescr>
-            {!email && <p>-----------------</p>}
-            {email && <InfoDescr>{email}</InfoDescr>}
-          </InfoWrap>
-          <InfoWrap href={"tel:" + phone}>
-            <InfoDescr>Phone:</InfoDescr>
-            {!phone && <p>-----------------</p>}
-            {phone && <InfoDescr>{phone}</InfoDescr>}
-          </InfoWrap>
+          {workDays && (
+            <InfoWrap onClick={toggleModal}>
+              <p>Time:</p>
+              <p>9:00-17:00</p>
+              {showModal && <TimeModal workDays={workDays} />}
+            </InfoWrap>
+          )}
+          {!workDays && (
+            <>
+              <p>Time:</p>
+              <p>-----------------</p>
+            </>
+          )}
+          {address && (
+            <InfoWrap
+              href={addressUrl}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+            >
+              <p>Adress:</p>
+              <Descr title={address}>{address}</Descr>
+            </InfoWrap>
+          )}
+          {!address && (
+            <>
+              <p>Adress:</p>
+              <p>-----------------</p>
+            </>
+          )}
+          {email && (
+            <InfoWrap href={"mailto:" + email}>
+              <p>Email:</p>
+              <Descr title={email}>{email}</Descr>
+            </InfoWrap>
+          )}
+          {!email && (
+            <>
+              <p>Email:</p>
+              <p>-----------------</p>
+            </>
+          )}
+          {phone && (
+            <InfoWrap href={"tel:" + phone}>
+              <p>Phone:</p>
+              <Descr title={phone}>{phone}</Descr>
+            </InfoWrap>
+          )}
+          {!phone && (
+            <>
+              <p>Phone:</p>
+              <p>-----------------</p>
+            </>
+          )}
         </Wrap>
       </DescrWrap>
     </FriendsItem>
   );
 };
 
-// FriendsItem.propTypes = {
-//   children: PropTypes.string,
-// };
+FriendsItem.propTypes = {
+  title: PropTypes.string,
+  url: PropTypes.string,
+  addressUrl: PropTypes.string,
+  imageUrl: PropTypes.string,
+  address: PropTypes.string,
+  email: PropTypes.string,
+  phone: PropTypes.string,
+  workDays: PropTypes.array,
+};
