@@ -52,7 +52,7 @@ export const ErrorText = styled.p`
   position: absolute;
   bottom: -15px;
   left: 32px;
-  margin: 0px;
+  margin: 0;
   font-size: 10px;
   line-height: calc(1.5);
   color: red;
@@ -64,6 +64,39 @@ export const Text = styled.p`
   margin-top: 20px;
   ${device.tablet} {
     font-size: 16px;
+  }
+`;
+
+export const RegionInput = styled.div`
+  background: #fdf7f2;
+  border: 1px solid rgba(245, 146, 86, 0.5);
+  border-radius: 40px;
+  padding: 14px 10px 13px 32px;
+  width: 100%;
+  height: 100%;
+  
+  
+  
+  select {
+    width: 48%;
+    border: none;
+    outline: none;
+    color: ${colors.inputPriText};
+    background-color: transparent;
+    font-size: 14px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 18px;
+      line-height: 25px;
+    }
+
+    :focus-visible {
+      outline: none;
+    }
+  }
+
+  :focus-visible {
+    border: 1px solid rgba(245, 146, 86, 0.5);
   }
 `;
 
@@ -185,7 +218,6 @@ export const Wrapper = styled.div`
 
 export const TitleAuth = styled.h2`
   text-align: center;
-  font-family: "Manrope";
   font-weight: 700;
   font-size: 24px;
   line-height: 33px;
@@ -244,7 +276,7 @@ export const Input = styled(Field)`
   /* border-color: #f59256; */
   /* &:hover, */
   &:focus {
-    border-color: "#f59256";
+    border-color: ${colors.accentOrange};
   }
 `;
 export const SearchInput = styled(Input)`
@@ -256,8 +288,7 @@ export const Paragraph = styled.p`
   margin-top: 30px;
   text-align: center;
   & span {
-    font-family: "Manrope";
-    font-weight: 400;
+   
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.04em;
@@ -266,8 +297,6 @@ export const Paragraph = styled.p`
 `;
 
 export const FormLink = styled(Link)`
-  font-family: "Manrope";
-  font-weight: 400;
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0.04em;
