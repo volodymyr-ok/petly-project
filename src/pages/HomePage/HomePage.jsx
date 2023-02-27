@@ -13,8 +13,8 @@ const HomePage = () => {
 
   useEffect(() => {
     if (tokenParam) {
-      dispatch(loginGoogle(tokenParam));
-      navigate("/");
+      dispatch(loginGoogle({ tokenParam }));
+      navigate("/user");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tokenParam]);
