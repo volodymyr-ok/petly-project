@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 
 export const FriendsList = styled.ul`
@@ -7,10 +6,16 @@ export const FriendsList = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+
+  margin-bottom: 100px;
   ${device.tablet} {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     gap: 32px;
+  }
+
+  &:last-child {
+    justify-content: flex-start;
   }
 `;
