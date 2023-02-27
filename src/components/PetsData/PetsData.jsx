@@ -5,6 +5,7 @@ import { PetsList } from "../PetsList/PetsList";
 import { BoxMessage, Message } from "../PetsData/PetsData.styled";
 
 export const PetsData = ({ pets }) => {
+  console.log("PetsData", pets);
   return (
     <>
       <BoxMessage>

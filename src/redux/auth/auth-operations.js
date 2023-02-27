@@ -37,6 +37,7 @@ export const logoutUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await PrivateApi.post("/api/users/logout");
+      console.log("ogoutUser OPER", res.data);
       token.unset();
       return res.data;
     } catch (error) {
@@ -68,14 +69,15 @@ export const loginGoogle = createAsyncThunk(
   "auth/loginGoogle",
   async ({ tokenParam }, thunkAPI) => {
     try {
-      // const res = await PublicApi.get("/auth/google", {
-      //   headers: {
-      //     accept: "*/*",
-      //   },
-      // });
+      const res = await PrivateApi.get("/api/users/current", {
+        headers: {
+          accept: "*/*",
+          Authorization: `Bearer ${tokenParam}`,
+        },
+      });
       token.set(tokenParam);
-      getUser();
-      // return res.data;
+      res.data.token = tokenParam;
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

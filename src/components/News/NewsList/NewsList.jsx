@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoading, selectNews } from "../../../redux/news/news-selectors";
+import {
+  selectIsLoading,
+  selectNews,
+} from "../../../redux/news/news-selectors";
 import { getNews, getNewsBySearch } from "../../../redux/news/news-operations";
 import { Section } from "../../Section/Section";
 import { NewsCard } from "../NewsCard/NewsCard";
@@ -25,7 +28,9 @@ export const NewsList = () => {
     <>
       <SearchInput onSubmit={onSubmit} />
       <Section>
-        <ListNews>{isLoading ? <PawsLoader /> : <NewsCard news={news} />}</ListNews>
+        <ListNews>
+          {isLoading ? <PawsLoader /> : <NewsCard news={news} />}
+        </ListNews>
       </Section>
     </>
   );
