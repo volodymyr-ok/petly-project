@@ -12,7 +12,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-  padding: 9px 10px 6px 12px;
+  padding: 9px 10px 9px 12px;
 
   min-width: 280px;
   height: 40px;
@@ -20,14 +20,21 @@ export const Input = styled.input`
   border-radius: 20px;
   border: none;
 
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.35;
+  color: #535353;
+
   ${device.tablet} {
-    padding: 9px 12px 6px 20px;
+    padding: 9px 12px 9px 20px;
     min-width: 608px;
     height: 44px;
     border-radius: 40px;
+
+    font-size: 20px;
   }
   ${device.desktop} {
-    padding: 10px 12px 7px 20px;
+    padding: 10px 12px 10px 20px;
     border-radius: 20px;
   }
 
