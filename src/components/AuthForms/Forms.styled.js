@@ -9,6 +9,8 @@ import bgLoginTab from "../../img/bgLoginTab.png";
 import bgLoginMob from "../../img/bgLoginMob.png";
 
 import { SectionTag } from "../Section/Section.styled";
+// import showEye from "../../assets/svg/eye-show.svg";
+// import hideEye from "../../assets/svg/eye-hide.svg";
 
 export const Icon = styled.span`
   position: absolute;
@@ -66,8 +68,50 @@ export const Text = styled.p`
 `;
 
 export const Label = styled.label`
+  height: 54px;
+  display: flex;
+  align-items: center;
   position: relative;
+
+  .PhoneInput {
+    background: #fdf7f2;
+    border: 1px solid rgba(245, 146, 86, 0.5);
+    border-radius: 40px;
+    padding: 14px 10px 13px 32px;
+    width: 100%;
+    height: 100%;
+
+    :focus-visible {
+      border: 1px solid rgba(245, 146, 86, 0.5);
+    }
+  }
+
+  .PhoneInputInput {
+    border: none;
+    outline: none;
+    background-color: transparent;
+
+    padding-left: 10px;
+    border-left: 1px solid rgba(245, 146, 86, 0.5);
+
+    :focus-visible {
+      outline: none;
+    }
+
+    ::placeholder {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      letter-spacing: 0.04em;
+      color: rgba(17, 17, 17, 0.6);
+      @media screen and (min-width: 768px) {
+        font-size: 18px;
+        line-height: 25px;
+      }
+    }
+  }
 `;
+
 export const LoginGoogle = styled.a`
   color: ${colors.black};
   display: flex;

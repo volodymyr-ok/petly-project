@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Title, HomeSection } from "../HomePage/HomePage.styled";
 import { Container } from "./../../components/Container/Container";
-import { token } from "../../http/http";
 import { useDispatch } from "react-redux";
 import { loginGoogle } from "../../redux/auth/auth-operations";
 
@@ -14,11 +13,11 @@ const HomePage = () => {
 
   useEffect(() => {
     if (tokenParam) {
-      dispatch(loginGoogle(token));
+      dispatch(loginGoogle(tokenParam));
       navigate("/");
     }
-    console.log("params", token);
-  }, [token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tokenParam]);
 
   return (
     <>
