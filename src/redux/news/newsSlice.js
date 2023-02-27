@@ -3,16 +3,19 @@ import { getNews, getNewsBySearch } from "./news-operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.error = null;
 };
 
 const handleFulfilled = (state, action) => {
   state.items = action.payload;
   state.isLoading = false;
+  state.error = null;
 };
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  state.item = [];
 };
 
 const newsSlice = createSlice({
