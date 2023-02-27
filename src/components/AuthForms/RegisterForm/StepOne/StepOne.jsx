@@ -1,5 +1,6 @@
 import { Input, Label } from "../../Forms.styled";
 import { InputPassword } from "../../InputPassword";
+import { InputPasswordConfirm } from "../../InputPasswordConfirm";
 import { FormError } from "../../LoginForm/LoginForm";
 
 export const StepOne = () => {
@@ -14,11 +15,12 @@ export const StepOne = () => {
         <FormError name="password" />
       </Label>
       <Label>
-        <Input
+        <InputPasswordConfirm />
+        {/* <Input
           name="confirmPassword"
           type="password"
           placeholder="Confirm password"
-        />
+        /> */}
 
         <FormError name="confirmPassword" />
       </Label>

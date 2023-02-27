@@ -25,7 +25,6 @@ export const loginUser = createAsyncThunk(
         password: password,
       });
       token.set(res.data.token);
-      console.log("resAPI", res);
       toast.success(`Welcome back`);
       return res.data;
     } catch (error) {
