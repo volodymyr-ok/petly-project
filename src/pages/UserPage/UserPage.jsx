@@ -1,17 +1,21 @@
-import { useSelector } from "react-redux";
-import { selectUser } from "../../redux/auth/auth-selectors";
+import React from "react";
+import { PetsData } from "../../components/PetsData/PetsData";
 import MyInformationCard from "./MyInformationCard/MyInformationCard";
 import { ContainerUserPage } from "./UserPage.styled";
+import { useSelector } from "react-redux";
+import { selectUsername } from "./../../redux/auth/auth-selectors";
 
 const UserPage = () => {
-  const user = useSelector(selectUser);
-
+  const user = useSelector(selectUsername);
   console.log("user", user);
 
   return (
-    <ContainerUserPage>
-      <MyInformationCard />
-    </ContainerUserPage>
+    <>
+      <ContainerUserPage>
+        <MyInformationCard />
+        <PetsData />
+      </ContainerUserPage>
+    </>
   );
 };
 

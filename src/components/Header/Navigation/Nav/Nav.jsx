@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {BurgerContainer, BurgerIcon, BurgerMenu, NavItem, NavMain, NavMobile, NavUl} from "./Nav.styled";
-import Logo from "../../Logo/Logo";
 import UserNav from "../UserNav/UserNav";
 import AuthNav from "../AuthNav/AuthNav";
 import {useSelector} from "react-redux";
@@ -35,9 +34,8 @@ const Nav = () => {
             </BurgerIcon>
 
             <BurgerMenu open={checked}>
-                <Logo/>
                 <BurgerContainer>
-                {isAuth ? <UserNav/> : <AuthNav/>}
+                {isAuth ? <UserNav updateMenu={updateMenu}/> : <AuthNav updateMenu={updateMenu}/>}
                 <NavMobile>
                     <NavUl>
                         <li>
