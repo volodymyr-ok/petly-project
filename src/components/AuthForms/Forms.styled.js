@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
 import { colors } from "../../utils/colors";
+import { device } from "../../utils/mixin";
 
 import bgLoginDesc from "../../img/bgLoginDesc.png";
 import bgLoginTab from "../../img/bgLoginTab.png";
@@ -67,7 +68,7 @@ export const IconBox = styled.div`
   width: 30px;
   height: 30px;
   position: absolute;
-  right: 8px;
+  right: 14px;
   top: 50%;
   z-index: 2;
   transform: translateY(-50%);
@@ -76,6 +77,9 @@ export const IconBox = styled.div`
   background-position: center;
   background-image: ${(props) =>
     props.type === "hide" ? `url(${hideEye})` : `url(${showEye})`};
+  ${device.tablet} {
+    right: 32px;
+  }
 `;
 
 export const Wrapper = styled.div`
