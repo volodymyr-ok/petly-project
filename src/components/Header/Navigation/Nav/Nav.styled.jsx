@@ -36,16 +36,20 @@ export const NavAuthUl = styled.ul`
 `;
 
 export const BurgerContainer = styled.div`
-  margin-top: 54px;
+  margin-top: 104px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  ${device.tablet} {
+    margin-top: 160px;
+  }
 `;
 
 export const NavMobile = styled.nav`
   display: flex;
   align-items: center;
-  margin-top: 61px;
+  margin-top: 60px;
 
   ${device.tablet} {
     margin-top: 0;
@@ -85,7 +89,7 @@ export const NavItem = styled(NavLink)`
 export const NavUserItem = styled(NavLink)`
   display: ${(props) => (props.type ? `none` : "flex")};
   color: ${colors.white};
-  padding: 10px 28px;
+  padding: 10px 37px;
   border-radius: 40px;
   font-size: 16px;
   text-decoration: none;
@@ -94,6 +98,7 @@ export const NavUserItem = styled(NavLink)`
   ${device.tablet} {
     display: ${(props) => (props.type ? `flex` : "none")};
     margin-right: 14px;
+    padding: 10px 28px;
   }
 
   ${device.desktop} {
@@ -129,7 +134,7 @@ export const BurgerMenu = styled.div`
   background: ${colors.white};
   transition: all 400ms var(--timing-function);
   transform: translate(0) scale (1);
-  z-index: 1;
+  z-index: 2;
 
   &.is-hidden {
     transform: translate(50%, -60%);

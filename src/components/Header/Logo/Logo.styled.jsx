@@ -4,6 +4,7 @@ export const LogoImage = styled.img`
   width: 82px;
   margin-right: auto;
   margin-top: 5px;
+  z-index: 10;
   
   ${device.tablet} {
   height: 48px;
