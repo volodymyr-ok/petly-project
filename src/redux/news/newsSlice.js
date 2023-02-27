@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNews } from "./news-operations";
+import { getNews, getNewsBySearch } from "./news-operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
+};
+
+const handleFulfilled = (state, action) => {
+  state.items = action.payload;
+  state.isLoading = false;
 };
 
 const handleRejected = (state, action) => {
@@ -18,15 +23,13 @@ const newsSlice = createSlice({
     error: null,
   },
   extraReducers: (builder) => {
-    builder.addCase(getNews.pending, (state) => {
-      handlePending(state);
-    });
-    builder.addCase(getNews.fulfilled, (state, action) => {
-      state.items = action.payload;
-    });
-    builder.addCase(getNews.rejected, (state, action) => {
-      handleRejected(state, action);
-    });
+    builder.addCase(getNews.pending, handlePending);
+    builder.addCase(getNews.fulfilled, handleFulfilled);
+    builder.addCase(getNews.rejected, handleRejected);
+
+    builder.addCase(getNewsBySearch.pending, handlePending);
+    builder.addCase(getNewsBySearch.fulfilled, handleFulfilled);
+    builder.addCase(getNewsBySearch.rejected, handleRejected);
   },
 });
 

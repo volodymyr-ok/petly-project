@@ -2,7 +2,7 @@ import Pencil from "../../../../../assets/svg/pencil.svg";
 import BlackPencil from "../../../../../assets/svg/black-pencil.svg";
 import { BtnPencil } from "./BtnProfileForm.styled";
 import ok from "../../../../../assets/svg/btn-ok.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const BtnProfileForm = ({
   onClick,
@@ -12,6 +12,7 @@ export const BtnProfileForm = ({
   activeImg,
 }) => {
   const [nameActivePancil, setNameActivePancil] = useState("");
+  console.log(nameActivePancil);
   const [colorPencil, setColorPencil] = useState(Pencil);
   const handleInput = (e) => {
     e.preventDefault();

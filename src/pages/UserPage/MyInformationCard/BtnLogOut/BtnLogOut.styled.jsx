@@ -28,9 +28,14 @@ export const Btn = styled.button`
     order: 1;
     margin-top: 24px;
   }
+
   img {
     margin-right: 4px;
     width: 20px;
     height: 20px;
+  }
+
+  &:hover {
+    color: ${colors.accentOrange};
   }
 `;

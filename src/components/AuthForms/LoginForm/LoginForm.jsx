@@ -10,12 +10,16 @@ import {
   FormCustom,
   Label,
   ErrorText,
+  Text,
+  LoginGoogle,
 } from "../Forms.styled";
 import { LoginBtn } from "../../LoginBtn/LoginBtn";
 import { Container } from "../../Container/Container";
 import { emailRegexp } from "../RegisterForm/RegisterForm";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/auth/auth-operations";
+import { InputPassword } from "../InputPassword";
+import { ReactComponent as GoogleIcon } from "../../../assets/svg/google.svg";
 
 export const FormError = ({ name }) => {
   return (
@@ -68,10 +72,19 @@ export const LoginForm = () => {
                 <FormError name="email" />
               </Label>
               <Label>
-                <Input name="password" type="password" placeholder="Password" />
+                <InputPassword />
                 <FormError name="password" />
               </Label>
               <LoginBtn text={"Login"} />
+              <Text> You can log in with your Google Account:</Text>
+              <LoginGoogle
+                target="_blank"
+                aria-label="goggle"
+                rel="noopener noreferrer nofollow"
+                href={`https://petly-2v85.onrender.com/api/users/google`}
+              >
+                <GoogleIcon /> Google
+              </LoginGoogle>
             </FormCustom>
           )}
         </Formik>

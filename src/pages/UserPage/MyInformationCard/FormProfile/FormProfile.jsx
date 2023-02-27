@@ -3,12 +3,12 @@ import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
 import { BoxInput, Form, NameInput } from "./FormProfile.styled";
 import MaskedInput from "react-text-mask";
 
-export const FormProfile = () => {
-  const [name, setName] = useState("Anna");
-  const [email, setEmail] = useState("anna00@gmail.com");
-  const [birthday, setBirthday] = useState("2018-01-01");
-  const [phone, setPhone] = useState("+380000000000");
-  const [city, setCity] = useState("Kyiv");
+export const FormProfile = ({ user }) => {
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [birthday, setBirthday] = useState(user?.birthday);
+  const [phone, setPhone] = useState(user?.phone);
+  const [city, setCity] = useState(user?.city);
   const [disableInput, setDisabelInput] = useState({
     name: true,
     email: true,
