@@ -81,8 +81,6 @@ export const NavItem = styled(NavLink)`
   }
 `;
 
-
-
 export const BurgerMenu = styled.div`
   display: ${(props) => (props.open ? "block" : "none")};
   padding: 20px;
@@ -95,7 +93,7 @@ export const BurgerMenu = styled.div`
   background: ${colors.white};
   transition: all 400ms var(--timing-function);
   transform: translate(0) scale (1);
-  z-index: 2;
+  z-index: 5;
 
   &.is-hidden {
     transform: translate(50%, -60%);
