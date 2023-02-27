@@ -9,8 +9,6 @@ import bgLoginTab from "../../img/bgLoginTab.png";
 import bgLoginMob from "../../img/bgLoginMob.png";
 
 import { SectionTag } from "../Section/Section.styled";
-// import showEye from "../../assets/svg/eye-show.svg";
-// import hideEye from "../../assets/svg/eye-hide.svg";
 
 export const Icon = styled.span`
   position: absolute;
