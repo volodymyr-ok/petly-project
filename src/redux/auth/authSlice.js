@@ -5,7 +5,7 @@ import {
   logoutUser,
   registerUser,
   loginGoogle,
-  getUserProfile,
+  // getUserProfile,
 } from "./auth-operations";
 import { Notify } from "notiflix";
 

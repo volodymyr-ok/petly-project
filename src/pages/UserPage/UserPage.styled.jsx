@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../utils/colors";
+// import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 
 export const ContainerUserPage = styled.div`

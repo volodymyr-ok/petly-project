@@ -1,6 +1,6 @@
 import { CardMyInformation, ImgBox, CardBox } from "./MyInformationCard.styled";
 import { TitleProfile } from "../TitleProfile/TitleProfile";
-import IconPlus from "../img/avatar.png";
+// import IconPlus from "../img/avatar.png";
 import { BtnEditPhoto } from "./BtnEditPhoto/BtnEditPhoto";
 import { FormProfile } from "./FormProfile/FormProfile";
 import { BtnLogOut } from "./BtnLogOut/BtnLogOut";

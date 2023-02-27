@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Title, HomeSection } from "../HomePage/HomePage.styled";
 import { Container } from "./../../components/Container/Container";
 import { useDispatch } from "react-redux";
-import { getUserProfile, loginGoogle } from "../../redux/auth/auth-operations";
+import { loginGoogle } from "../../redux/auth/auth-operations";
 
 const HomePage = () => {
   const [searchParams] = useSearchParams();

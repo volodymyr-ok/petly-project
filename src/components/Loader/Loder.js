@@ -1,5 +1,8 @@
 import React from "react";
-import { LoaderBody, LoaderWrapper } from "./Loader.styled";
+import {
+  // LoaderBody,
+  LoaderWrapper,
+} from "./Loader.styled";
 import { PawContainer } from "./PawsLoader/PawsLoader.styled";
 import paw from "../../assets/svg/paw-icon.svg";
 
