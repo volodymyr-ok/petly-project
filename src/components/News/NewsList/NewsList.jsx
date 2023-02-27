@@ -1,20 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectIsLoading,
-  selectNews,
-} from "../../../redux/news/news-selectors";
+import { selectError, selectIsLoading, selectNews } from "../../../redux/news/news-selectors";
 import { getNews, getNewsBySearch } from "../../../redux/news/news-operations";
 import { Section } from "../../Section/Section";
 import { NewsCard } from "../NewsCard/NewsCard";
 import { SearchInput } from "../../SearchInput/SearchInput";
 import { PawsLoader } from "../../Loader/PawsLoader/PawsLoader";
 import { ListNews } from "./NewsList.styled";
+import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 
 export const NewsList = () => {
   const dispatch = useDispatch();
   const news = useSelector(selectNews);
   const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(getNews());
@@ -28,11 +27,8 @@ export const NewsList = () => {
     <>
       <SearchInput onSubmit={onSubmit} />
       <Section>
-        <ListNews>
-          {isLoading ? <PawsLoader /> : <NewsCard news={news} />}
-        </ListNews>
+        <ListNews>{isLoading ? <PawsLoader /> : error ? <ResultNotFound /> : <NewsCard news={news} />}</ListNews>
       </Section>
     </>
   );
 };
-// news.length === 0 ? <h2>Sorry, we didn't found this news</h2> :
