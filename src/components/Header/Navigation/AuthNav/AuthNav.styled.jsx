@@ -16,6 +16,11 @@ export const Nav = styled.nav`
   }
 `;
 
+export const NavAuthUl = styled.ul`
+  display: flex;
+  gap: 12px;
+`;
+
 export const NavAuthItem = styled(NavLink)`
   color: ${(props) => (props.color ? `${colors.white}` : `${colors.black}`)};
   padding: 6px 28px;
@@ -44,8 +49,9 @@ export const NavAuthItem = styled(NavLink)`
     border: 2px solid ${colors.darkOrange};
   }
 
-  &:active {
-    color: ${(props) =>
-      props.color ? `${colors.white}` : `${colors.darkOrange}`};
+  &.active {
+    background: ${(props) => (props.color ? `${colors.darkOrange}` : ``)};
+    border: 2px solid ${colors.darkOrange};
+    
   }
 `;

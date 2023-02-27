@@ -6,7 +6,6 @@ export const registerUser = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      // const res = await axios.post("/users/register", credentials);
       const res = await PublicApi.post("/api/users/register", credentials);
       token.set(res.data.token);
       return res.data;
@@ -25,7 +24,6 @@ export const loginUser = createAsyncThunk(
         password: password,
       });
       token.set(res.data.token);
-      console.log("resAPI", res);
       toast.success(`Welcome back`);
       return res.data;
     } catch (error) {
@@ -51,9 +49,6 @@ export const getUser = createAsyncThunk(
   "users/getUser",
   async (_, thunkAPI) => {
     const { auth } = thunkAPI.getState();
-
-    console.log("getUser", auth);
-
     const persistedToken = auth.token;
     const persistedIsAuth = auth.isAuth;
     if (persistedToken === null || persistedIsAuth) {
@@ -69,20 +64,20 @@ export const getUser = createAsyncThunk(
   }
 );
 
-// export const loginGoogle = createAsyncThunk(
-//   "auth/loginGoogle",
-//   async (_, thunkAPI) => {
-//     try {
-//       const res = await PublicApi.get("/auth/google", {
-//         headers: {
-//           accept: "*/*",
-//         },
-//       });
-//       token.set(res.data.accessToken);
-//       getUser();
-//       return res.data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const loginGoogle = createAsyncThunk(
+  "auth/loginGoogle",
+  async ({ tokenParam }, thunkAPI) => {
+    try {
+      // const res = await PublicApi.get("/auth/google", {
+      //   headers: {
+      //     accept: "*/*",
+      //   },
+      // });
+      token.set(tokenParam);
+      getUser();
+      // return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

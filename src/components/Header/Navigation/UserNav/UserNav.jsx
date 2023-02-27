@@ -1,10 +1,10 @@
 import React from 'react';
-import {NavUserItem} from "../Nav/Nav.styled";
+import {NavUserItem} from "./UserNav.styled";
 
-const UserNav = ({type}) => {
+const UserNav = ({type, updateMenu}) => {
     return (
         <nav>
-            <NavUserItem to="./user" open type={type}>Account</NavUserItem>
+            <NavUserItem to="./user" open type={type} onClick={updateMenu}>Account</NavUserItem>
         </nav>
     );
 };

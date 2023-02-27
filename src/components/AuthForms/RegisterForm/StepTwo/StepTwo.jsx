@@ -35,9 +35,20 @@ export const StepTwo = ({
           placeholder="Mobile phone"
           value={value}
           onChange={setValue}
+          name="phone"
+          type="tel"
+          data-tel-input
+          maxLength="13"
         />
 
         {/* <Input name="phone" placeholder="Mobile phone" maxLength="13" /> */}
+        {/* <Input
+          name="phone"
+          type="tel"
+          data-tel-input
+          placeholder="Mobile phone"
+          maxLength="13"
+        /> */}
         <FormError name="phone" />
       </Label>
     </>
