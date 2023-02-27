@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { CardTitle, Text, Data, NewsBox, ReadMore, Item } from "./NewsCard.styled";
 
 export const NewsCard = ({ news }) => {
@@ -5,7 +6,7 @@ export const NewsCard = ({ news }) => {
     <>
       {news?.map(({ _id, title, description, date, url }) => (
         <Item key={_id}>
-          <div style={{ height: "66px", overflow: "hidden", marginBottom: "16px" }}>
+          <div style={{ height: "70px", overflow: "hidden", marginBottom: "16px" }}>
             <CardTitle>{title}</CardTitle>
           </div>
           <div style={{ height: "136px", overflow: "hidden" }}>
@@ -23,4 +24,6 @@ export const NewsCard = ({ news }) => {
   );
 };
 
-// description.length > 212 ? description.slice(0, 212) + "..." : description;
+NewsCard.propTypes = {
+  news: PropTypes.array,
+};

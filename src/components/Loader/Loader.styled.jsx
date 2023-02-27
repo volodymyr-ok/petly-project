@@ -1,4 +1,5 @@
 import styled from "styled-components";
+// import { colors } from "../../utils/colors";
 
 export const LoaderWrapper = styled.div`
   position: fixed;
@@ -8,9 +9,14 @@ export const LoaderWrapper = styled.div`
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: rgba(192, 192, 192, 0.8);
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(7px);
   z-index: 1200;
   display: ${(props) => (props.disable === true ? "flex" : "none")};
+
+  & > div {
+    top: 43%;
+  }
 `;
 export const LoaderBody = styled.div`
   position: absolute;

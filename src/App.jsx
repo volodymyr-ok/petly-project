@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { Loader } from "./components/Loader/Lader";
+import { Loader } from "./components/Loader/Loder";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import SharedLayout from "./components/SharedLayout/SharedLayout";

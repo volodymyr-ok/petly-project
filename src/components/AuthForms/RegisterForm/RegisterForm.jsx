@@ -7,7 +7,9 @@ import { Container } from "../../Container/Container";
 import {
   FormCustom,
   FormLink,
+  LoginGoogle,
   Paragraph,
+  Text,
   TitleAuth,
   Wrapper,
 } from "../Forms.styled";
@@ -15,8 +17,7 @@ import { StepOne } from "./StepOne/StepOne";
 import { StepTwo } from "./StepTwo/StepTwo";
 import { useDispatch } from "react-redux";
 import { registerUser } from "../../../redux/auth/auth-operations";
-// import { useNavigate } from "react-router-dom";
-// import { selectIsAuth } from "../../../redux/auth/auth-selectors";
+import { ReactComponent as GoogleIcon } from "../../../assets/svg/google.svg";
 
 export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
 export const nameRegexp = /^[a-zA-Z]{2,20}$/;
@@ -75,7 +76,13 @@ export const RegisterForm = () => {
             component: StepTwo,
             validationSchema: Yup.object().shape({
               name: Yup.string().required("First name is required"),
-              city: Yup.string().required("Address is required"),
+              city: Yup.string()
+                .min(7, "Address shoud conain city and regions")
+                .matches(
+                  /^[A-Za-z]{2,},\s[A-Za-z]{2,}$/,
+                  "The address must contain the city, regions: 'Kiev, Kiev'"
+                )
+                .required("Address is required"),
               phone: Yup.string()
                 .matches(
                   phoneRegexp,
@@ -103,7 +110,18 @@ export const RegisterForm = () => {
                     </BackBtn>
                   </>
                 )}
+
+                <Text> You can registration with your Google Account:</Text>
+                <LoginGoogle
+                  target="_blank"
+                  aria-label="goggle"
+                  rel="noopener noreferrer nofollow"
+                  href={`https://petly-2v85.onrender.com/api/users/google`}
+                >
+                  <GoogleIcon /> Google
+                </LoginGoogle>
               </FormCustom>
+
               <Paragraph>
                 <span>Already have an account? </span>
                 <FormLink to="/login">Login</FormLink>
