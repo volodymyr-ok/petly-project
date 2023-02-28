@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { PetsData } from "../../components/PetsData/PetsData";
+import { PetsData } from "./PetsData/PetsData";
 import MyInformationCard from "./MyInformationCard/MyInformationCard";
-import { ContainerUserPage, ErrorText } from "./UserPage.styled";
+import { ContainerUserPage, ErrorText, BoxCards } from "./UserPage.styled";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
 // import axios from "axios";
 import { PrivateApi } from "../../http/http";
@@ -39,10 +39,10 @@ const UserPage = () => {
     <>
       <ContainerUserPage>
         {!isLoading ? (
-          <>
+          <BoxCards>
             <MyInformationCard user={user} />
             <PetsData pets={pets} />
-          </>
+          </BoxCards>
         ) : (
           <PawsLoader />
         )}

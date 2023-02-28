@@ -4,7 +4,11 @@ import { device } from "../../../utils/mixin";
 
 export const CardBox = styled.div`
   margin: 0 auto;
-  width: 280px;
+  min-width: 280px;
+  width: 100%;
+  ${device.mobile} {
+    width: 440px;
+  }
   ${device.tablet} {
     margin: 0;
     width: 736px;
@@ -44,9 +48,9 @@ export const ImgBox = styled.span`
   max-height: 233px;
   border-radius: 50%;
   overflow: hidden;
-  transition: transform 300ms linear;
   filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
   box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.11);
+  transition: transform 300ms linear;
 
   ${device.tablet} {
     order: 2;
