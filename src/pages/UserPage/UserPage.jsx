@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { PetsData } from "../../components/PetsData/PetsData";
-import MyInformationCard from "./MyInformationCard/MyInformationCard";
+import MyInformationCard from "../../components/MyInformationCard/MyInformationCard";
 import { ContainerUserPage, ErrorText } from "./UserPage.styled";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
 // import axios from "axios";

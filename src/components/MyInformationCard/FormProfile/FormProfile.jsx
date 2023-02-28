@@ -1,16 +1,7 @@
-import {
-  // useEffect,
-  useState,
-} from "react";
-// import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
-import {
-  // BoxInput,
-  Form,
-  // NameInput
-} from "./FormProfile.styled";
-// import MaskedInput from "react-text-mask";
+import { useState } from "react";
+import { Form } from "./FormProfile.styled";
 import { InputItem } from "./InputItem";
-import { PrivateApi } from "../../../../http/http";
+import { PrivateApi } from "../../../http/http";
 
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
@@ -82,20 +73,6 @@ export const FormProfile = ({ user }) => {
     return data;
   };
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   FetchUserData()
-  //     .then((data) => {
-  //       setUser(data.data?.user);
-  //       setPets(data.data?.pets);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       setIsError(error);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
-
   const onInputClose = () => {
     console.log("onBlu");
     setNameActivePancil("");
@@ -108,6 +85,17 @@ export const FormProfile = ({ user }) => {
 
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
+    console.log("send1", dataSend, nameActivePancil);
+
+    if (nameActivePancil === "") {
+      setNameActivePancil(nameBtn);
+      console.log("send2", dataSend, nameActivePancil);
+    }
+
+    if (nameActivePancil === nameBtn && Object.keys(dataSend).length === 0) {
+      console.log("send3", dataSend, nameActivePancil);
+      setNameActivePancil("");
+    }
 
     if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
       console.log("send", dataSend);
@@ -122,7 +110,7 @@ export const FormProfile = ({ user }) => {
         });
       setNameActivePancil("");
     }
-    setNameActivePancil(nameBtn);
+    if (nameActivePancil !== nameBtn) setNameActivePancil(nameBtn);
   };
 
   return (
@@ -138,7 +126,7 @@ export const FormProfile = ({ user }) => {
           disable={nameActivePancil !== name || nameActivePancil === ""}
           onClickPencil={(e) => handleInput(e, name)}
           onChange={(data) => handleChange(data)}
-          onBlur={onInputClose}
+          // onBlur={onInputClose}
         />
       ))}
     </Form>
