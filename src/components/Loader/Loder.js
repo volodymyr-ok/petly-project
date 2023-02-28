@@ -7,7 +7,6 @@ import { PawContainer } from "./PawsLoader/PawsLoader.styled";
 import paw from "../../assets/svg/paw-icon.svg";
 
 export const Loader = ({ isLoading }) => {
-  console.log("isLoadin", isLoading);
   return (
     <>
       <LoaderWrapper disable={isLoading}>
