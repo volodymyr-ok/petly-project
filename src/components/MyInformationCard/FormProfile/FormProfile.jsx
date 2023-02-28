@@ -9,6 +9,8 @@ export const FormProfile = ({ user }) => {
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log("Temporary log (can be deleted) ===>", isError, isLoading);
+
   const inputsList = [
     {
       value: user?.name,
