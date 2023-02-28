@@ -6,11 +6,11 @@ import {
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import { NoticeItem } from "../NoticeItem/NoticeItem";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
 const svgAdd = SvgMarkup(21.3,21.3,"addTo")
 
 export const NoticesCategoryList = ({notices, onRemove, onReadMore, user, isLogined}) => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const handlerModalAddPet=(e)=>{
         if(!isLogined){
             console.log("pls login first")
