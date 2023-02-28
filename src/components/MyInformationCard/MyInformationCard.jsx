@@ -16,6 +16,8 @@ const MyInformationCard = ({ user }) => {
   const [file, setFile] = useState(null);
   const avatar = useSelector(selectAvatar);
 
+  console.log("Temporary log (can be deleted) ===>",  file)
+  
   useEffect(() => {
     if (avatar) {
       setAvatarURL(avatar);
