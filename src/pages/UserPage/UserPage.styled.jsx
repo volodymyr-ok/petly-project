@@ -21,3 +21,11 @@ export const ErrorText = styled.div`
   color: red;
   padding: 20px 20px 80px 20px;
 `;
+
+export const BoxCards = styled.div`
+  display: flex;
+  flex-direction: column;
+  ${device.desktop} {
+    flex-direction: row;
+  }
+`;
