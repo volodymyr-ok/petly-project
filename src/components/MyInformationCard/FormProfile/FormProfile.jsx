@@ -108,14 +108,15 @@ export const FormProfile = ({ user }) => {
 
   return (
     <Form>
-      {inputsList.map(({ type, value, name, mask, title }) => (
+      {inputsList.map(({ type, value, name, mask, title }, index) => (
         <InputItem
+          key={`${title}-${index}`}
           type={type}
           value={value}
           name={name}
           mask={mask}
           title={title}
-          dark={nameActivePancil !== ""}
+          dark={nameActivePancil !== "" ? "dark" : "ok"}
           disable={nameActivePancil !== name || nameActivePancil === ""}
           onClickPencil={(e) => handleInput(e, name)}
           onChange={(data) => handleChange(data)}

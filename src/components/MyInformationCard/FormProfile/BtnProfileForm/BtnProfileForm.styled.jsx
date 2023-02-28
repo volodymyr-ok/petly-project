@@ -33,7 +33,8 @@ export const BtnPencil = styled.button`
   } */
 
   svg {
-    fill: ${(p) => (p.dark ? colors.primaryText : colors.accentOrange)};
+    fill: ${(p) =>
+      p.dark === "dark" ? colors.primaryText : colors.accentOrange};
     opacity: 0.6;
     width: 20px;
     height: 20px;
