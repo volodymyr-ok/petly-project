@@ -23,7 +23,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUser());
-    console.log("dispatch(getU");
   }, [dispatch]);
 
   return (

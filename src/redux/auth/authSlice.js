@@ -54,6 +54,7 @@ const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, handlePending)
       .addCase(registerUser.rejected, (state, action) => {
+        console.log("fail", action, action.payload);
         state.isLoading = false;
         Notify.failure(`Fail`);
         state.error = action.payload;

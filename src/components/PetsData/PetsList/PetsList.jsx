@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 // import { useDispatch } from "react-redux";
 
-import { DeletePetBtn } from "../../../../components/DeletePetBtn/DeletePetBtn";
+import { DeletePetBtn } from "../../DeletePetBtn/DeletePetBtn";
 import {
   WrapperPicDiv,
   Box,
@@ -10,7 +10,7 @@ import {
   InfoPet,
   BoxPetsList,
 } from "./PetsList.styled";
-import { WarningMessage } from "../../../../components/WarningMessage/WarningMessage";
+import { WarningMessage } from "../../WarningMessage/WarningMessage";
 
 export const PetsList = () => {
   // const dispatch = useDispatch();
