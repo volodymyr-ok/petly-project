@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PetsData } from "../../components/PetsData/PetsData";
 import MyInformationCard from "../../components/MyInformationCard/MyInformationCard";
-import { ContainerUserPage, ErrorText } from "./UserPage.styled";
+import { BoxCards, ContainerUserPage, ErrorText } from "./UserPage.styled";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
 // import axios from "axios";
 import { PrivateApi } from "../../http/http";
@@ -11,7 +11,7 @@ const UserPage = () => {
   const [pets, setPets] = useState([]);
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  console.log("user", user, pets);
+  // console.log("user", user, pets);
 
   const FetchUserData = async () => {
     const data = await PrivateApi.get(
@@ -39,10 +39,10 @@ const UserPage = () => {
     <>
       <ContainerUserPage>
         {!isLoading ? (
-          <>
+          <BoxCards>
             <MyInformationCard user={user} />
             <PetsData pets={pets} />
-          </>
+          </BoxCards>
         ) : (
           <PawsLoader />
         )}

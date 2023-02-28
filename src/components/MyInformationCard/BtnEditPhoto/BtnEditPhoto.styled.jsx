@@ -11,9 +11,7 @@ export const Btn = styled.button`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  line-height: 1.83;
-  letter-spacing: 0.04em;
+
   background-color: ${colors.white};
   overflow: hidden;
   border: none;
@@ -29,6 +27,11 @@ export const Btn = styled.button`
     position: absolute;
     top: 232px;
     left: 309px;
+  }
+  span {
+    font-size: 12px;
+    line-height: 1.83;
+    letter-spacing: 0.04em;
   }
   img {
     margin-right: 4px;

@@ -17,7 +17,9 @@ export const BoxInput = styled.div`
   align-items: center;
   gap: 8px;
   input {
-    width: 156px;
+    width: calc(100% - 75px);
+    min-width: 156px;
+    max-width: 270px;
     padding: 4px 4px 4px 18px;
     font-size: 12px;
     line-height: 1.33;
