@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../../utils/mixin";
+import { SectionTag } from "../../Section/Section.styled";
 
 export const ListNews = styled.ul`
   position: relative;
@@ -15,5 +16,17 @@ export const ListNews = styled.ul`
   }
   ${device.desktop} {
     column-gap: 36px;
+  }
+`;
+
+export const Section = styled(SectionTag)`
+  padding: 40px 0px 100px 0px;
+
+  ${device.tablet} {
+    padding: 60px 0 100px 0;
+  }
+
+  ${device.desktop} {
+    padding: 60px 0 200px 0;
   }
 `;
