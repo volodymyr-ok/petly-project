@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
-import Logout from "../../../../assets/svg/logout.svg";
-import { logoutUser } from "../../../../redux/auth/auth-operations";
+import Logout from "../../../assets/svg/logout.svg";
+import { logoutUser } from "../../../redux/auth/auth-operations";
 import { Btn } from "./BtnLogOut.styled";
 
 export const BtnLogOut = () => {

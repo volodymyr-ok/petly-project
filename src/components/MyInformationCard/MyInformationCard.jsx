@@ -6,7 +6,7 @@ import { FormProfile } from "./FormProfile/FormProfile";
 import { BtnLogOut } from "./BtnLogOut/BtnLogOut";
 
 const MyInformationCard = ({ user }) => {
-  console.log(" MyInformatio", user);
+  // console.log(" MyInformatio", user);
   return (
     <CardBox>
       <TitleProfile>My information:</TitleProfile>

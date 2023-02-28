@@ -1,24 +1,13 @@
-import {
-  // useEffect,
-  useState,
-} from "react";
-// import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
-import {
-  // BoxInput,
-  Form,
-  // NameInput
-} from "./FormProfile.styled";
-// import MaskedInput from "react-text-mask";
+import { useState } from "react";
+import { Form } from "./FormProfile.styled";
 import { InputItem } from "./InputItem";
-import { PrivateApi } from "../../../../http/http";
+import { PrivateApi } from "../../../http/http";
 
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
   const [nameActivePancil, setNameActivePancil] = useState("");
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-
-  console.log(isError, isLoading);
 
   const inputsList = [
     {
@@ -82,24 +71,10 @@ export const FormProfile = ({ user }) => {
     return data;
   };
 
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   FetchUserData()
-  //     .then((data) => {
-  //       setUser(data.data?.user);
-  //       setPets(data.data?.pets);
-  //       setIsLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       setIsError(error);
-  //       setIsLoading(false);
-  //     });
-  // }, []);
-
-  const onInputClose = () => {
-    console.log("onBlu");
-    setNameActivePancil("");
-  };
+  // const onInputClose = () => {
+  //   console.log("onBlu");
+  //   setNameActivePancil("");
+  // };
   const handleChange = ([key, val]) => {
     setDataSend((prevState) => {
       return { ...prevState, [key]: val };
@@ -109,11 +84,17 @@ export const FormProfile = ({ user }) => {
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
 
+    if (nameActivePancil === "") {
+      setNameActivePancil(nameBtn);
+    }
+
+    if (nameActivePancil === nameBtn && Object.keys(dataSend).length === 0) {
+      setNameActivePancil("");
+    }
+
     if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
-      console.log("send", dataSend);
       updateUserData(dataSend)
         .then((data) => {
-          console.log(data);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -122,23 +103,24 @@ export const FormProfile = ({ user }) => {
         });
       setNameActivePancil("");
     }
-    setNameActivePancil(nameBtn);
+    if (nameActivePancil !== nameBtn) setNameActivePancil(nameBtn);
   };
 
   return (
     <Form>
-      {inputsList.map(({ type, value, name, mask, title }) => (
+      {inputsList.map(({ type, value, name, mask, title }, index) => (
         <InputItem
+          key={`${title}-${index}`}
           type={type}
           value={value}
           name={name}
           mask={mask}
           title={title}
-          dark={nameActivePancil !== ""}
+          dark={nameActivePancil !== "" ? "dark" : "ok"}
           disable={nameActivePancil !== name || nameActivePancil === ""}
           onClickPencil={(e) => handleInput(e, name)}
           onChange={(data) => handleChange(data)}
-          onBlur={onInputClose}
+          // onBlur={onInputClose}
         />
       ))}
     </Form>

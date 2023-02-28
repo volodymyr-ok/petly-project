@@ -1,18 +1,20 @@
 import PropTypes from "prop-types";
 
-import { PetsList } from "../PetsList/PetsList";
+import { PetsList } from "./PetsList/PetsList";
 
-import { BoxMessage, Message } from "../PetsData/PetsData.styled";
+import { BoxMessage, Message, ContainerPetsDate } from "./PetsData.styled";
+import { BtnAddPet } from "./BtnAddPet/BtnAddPet";
 
-export const PetsData = ({ pets = [] }) => {
+export const PetsData = ({ pets }) => {
   return (
-    <>
+    <ContainerPetsDate>
       <BoxMessage>
-        <Message>Please, add your pet</Message>
+        <Message>My pets:</Message>
+        <BtnAddPet />
       </BoxMessage>
 
       <PetsList pets={pets} />
-    </>
+    </ContainerPetsDate>
   );
 };
 

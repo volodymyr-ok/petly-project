@@ -1,4 +1,4 @@
-import EditPhoto from "../../../../assets/svg/edit-photo.svg";
+import EditPhoto from "../../../assets/svg/edit-photo.svg";
 import { Btn } from "./BtnEditPhoto.styled";
 
 export const BtnEditPhoto = () => {

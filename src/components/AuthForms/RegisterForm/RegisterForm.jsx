@@ -77,7 +77,7 @@ export const RegisterForm = () => {
             validationSchema: Yup.object().shape({
               name: Yup.string().required("First name is required"),
               city: Yup.string()
-                .min(7, "Address shoud conain city and regions")
+                .min(5, "The address must contain the city, regions")
                 .matches(
                   /^[A-Za-z]{2,},\s[A-Za-z]{2,}$/,
                   "The address must contain the city, regions: 'Kiev, Kiev'"

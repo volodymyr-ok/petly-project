@@ -10,6 +10,7 @@ export const registerUser = createAsyncThunk(
       token.set(res.data.token);
       return res.data;
     } catch (error) {
+      console.log("error", error);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
