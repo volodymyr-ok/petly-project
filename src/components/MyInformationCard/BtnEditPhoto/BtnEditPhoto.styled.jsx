@@ -15,6 +15,8 @@ export const Btn = styled.button`
   background-color: ${colors.white};
   overflow: hidden;
   border: none;
+  transition: color 200ms linear;
+
   ${device.tablet} {
     order: 4;
     margin-top: 8px;
@@ -38,5 +40,9 @@ export const Btn = styled.button`
     margin-bottom: 2px;
     width: 20px;
     height: 20px;
+  }
+
+  :hover {
+    color: ${colors.accentOrange};
   }
 `;
