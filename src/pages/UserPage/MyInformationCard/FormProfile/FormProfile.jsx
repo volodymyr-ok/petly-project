@@ -1,139 +1,146 @@
-import { useState } from "react";
-import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
-import { BoxInput, Form, NameInput } from "./FormProfile.styled";
-import MaskedInput from "react-text-mask";
+import {
+  // useEffect,
+  useState,
+} from "react";
+// import { BtnProfileForm } from "./BtnProfileForm/BtnProfileForm";
+import {
+  // BoxInput,
+  Form,
+  // NameInput
+} from "./FormProfile.styled";
+// import MaskedInput from "react-text-mask";
+import { InputItem } from "./InputItem";
+import { PrivateApi } from "../../../../http/http";
 
 export const FormProfile = ({ user }) => {
-  const [name, setName] = useState(user?.name);
-  const [email, setEmail] = useState(user?.email);
-  const [birthday, setBirthday] = useState(user?.birthday);
-  const [phone, setPhone] = useState(user?.phone);
-  const [city, setCity] = useState(user?.city);
-  const [disableInput, setDisabelInput] = useState({
-    name: true,
-    email: true,
-    birthday: true,
-    phone: true,
-    city: true,
-  });
+  const [dataSend, setDataSend] = useState({});
+  const [nameActivePancil, setNameActivePancil] = useState("");
+  const [isError, setIsError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  const disableTrue = {
-    name: true,
-    email: true,
-    birthday: true,
-    phone: true,
-    city: true,
+  console.log(isError, isLoading);
+
+  const inputsList = [
+    {
+      value: user?.name,
+      name: "name",
+      type: "text",
+      mask: null,
+      title: "Name",
+    },
+    {
+      value: user?.email,
+      name: "email",
+      type: "text",
+      mask: null,
+      title: "Email",
+    },
+    {
+      value: user?.birthday,
+      name: "birthday",
+      type: "text",
+      mask: [/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/],
+      title: "Birthday",
+    },
+    {
+      value: user?.phone,
+      name: "phone",
+      type: "text",
+      mask: [
+        "+",
+        /[3]/,
+        /[8]/,
+        /[0]/,
+        " ",
+        /\d/,
+        /\d/,
+        " ",
+        /\d/,
+        /\d/,
+        /\d/,
+        " ",
+        /\d/,
+        /\d/,
+        /\d/,
+        /\d/,
+      ],
+      title: "Phone",
+    },
+
+    {
+      value: user?.city,
+      name: "city",
+      type: "text",
+      mask: null,
+      title: "City",
+    },
+  ];
+
+  const updateUserData = async (dataSend) => {
+    const data = await PrivateApi.patch("api/users", dataSend);
+
+    return data;
   };
 
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   FetchUserData()
+  //     .then((data) => {
+  //       setUser(data.data?.user);
+  //       setPets(data.data?.pets);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       setIsError(error);
+  //       setIsLoading(false);
+  //     });
+  // }, []);
+
   const onInputClose = () => {
-    setDisabelInput({ ...disableTrue });
+    console.log("onBlu");
+    setNameActivePancil("");
+  };
+  const handleChange = ([key, val]) => {
+    setDataSend((prevState) => {
+      return { ...prevState, [key]: val };
+    });
+  };
+
+  const handleInput = (e, nameBtn) => {
+    e.preventDefault();
+
+    if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
+      console.log("send", dataSend);
+      updateUserData(dataSend)
+        .then((data) => {
+          console.log(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsError(error);
+          setIsLoading(false);
+        });
+      setNameActivePancil("");
+    }
+    setNameActivePancil(nameBtn);
   };
 
   return (
     <Form>
-      <BoxInput>
-        <NameInput>Name:</NameInput>
-        <input
-          type="text"
-          value={name}
+      {inputsList.map(({ type, value, name, mask, title }) => (
+        <InputItem
+          type={type}
+          value={value}
+          name={name}
+          mask={mask}
+          title={title}
+          dark={nameActivePancil !== ""}
+          disable={nameActivePancil !== name || nameActivePancil === ""}
+          onClickPencil={(e) => handleInput(e, name)}
+          onChange={(data) => handleChange(data)}
           onBlur={onInputClose}
-          onChange={(e) => setName(e.target.value)}
-          disabled={disableInput.name}
         />
-        <BtnProfileForm
-          onClick={setDisabelInput}
-          disableInput={disableInput}
-          disableTrue={disableTrue}
-          activeImg={disableInput.name}
-          name="name"
-        />
-      </BoxInput>
-      <BoxInput>
-        <NameInput>Email:</NameInput>
-        <input
-          type="email"
-          value={email}
-          onBlur={onInputClose}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={disableInput.email}
-        />
-        <BtnProfileForm
-          onClick={setDisabelInput}
-          disableInput={disableInput}
-          disableTrue={disableTrue}
-          activeImg={disableInput.email}
-          name="email"
-        />
-      </BoxInput>
-      <BoxInput>
-        <NameInput>Birthday:</NameInput>
-        <MaskedInput
-          mask={[/\d/, /\d/, ".", /\d/, /\d/, ".", /\d/, /\d/, /\d/, /\d/]}
-          value={birthday}
-          disabled={disableInput.birthday}
-          onBlur={onInputClose}
-          onChange={(e) => setBirthday(e.target.value)}
-        />
-        <BtnProfileForm
-          onClick={setDisabelInput}
-          disableInput={disableInput}
-          disableTrue={disableTrue}
-          activeImg={disableInput.birthday}
-          name="birthday"
-        />
-      </BoxInput>
-      <BoxInput>
-        <NameInput>Phone:</NameInput>
-        <MaskedInput
-          mask={[
-            "+",
-            /[3]/,
-            /[8]/,
-            /[0]/,
-            " ",
-            /\d/,
-            /\d/,
-            " ",
-            /\d/,
-            /\d/,
-            /\d/,
-            " ",
-            /\d/,
-            /\d/,
-            /\d/,
-            /\d/,
-          ]}
-          value={phone}
-          disabled={disableInput.phone}
-          onBlur={onInputClose}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <BtnProfileForm
-          onClick={setDisabelInput}
-          disableInput={disableInput}
-          disableTrue={disableTrue}
-          activeImg={disableInput.phone}
-          name="phone"
-        />
-      </BoxInput>
-      <BoxInput>
-        <NameInput>City:</NameInput>
-        <input
-          type="Text"
-          value={city}
-          onBlur={onInputClose}
-          onChange={(e) => setCity(e.target.value)}
-          disabled={disableInput.city}
-        />
-
-        <BtnProfileForm
-          onClick={setDisabelInput}
-          disableInput={disableInput}
-          disableTrue={disableTrue}
-          activeImg={disableInput.city}
-          name="city"
-        />
-      </BoxInput>
+      ))}
     </Form>
   );
 };
