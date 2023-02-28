@@ -33,6 +33,7 @@ width: 158px;
 border-bottom-right-radius: 20px;
 border-top-right-radius: 20px;
 backdrop-filter: blur(2px);
+font-family: 'Manrope';
 `
 export const BtnAdd = styled(StyledButton)`
 padding: 0%;
@@ -52,15 +53,18 @@ stroke: ${colors.accentOrange};
 stroke-width: 1px;
 stroke-dasharray: 2,2;
 stroke-linejoin: round;
+&.edit{
+  fill: ${colors.accentOrange};
+}
 `
 export const Image = styled.img`
 object-fit: cover;
 ${device.tablet}{
- /* // width: 100%; */
 }
 `
 export const Info = styled.div`
 padding: 20px 12px 16px 12px;
+flex-grow: 1;
 ${device.tablet}{
   padding: 20px 20px 12px 20px ;
 }
@@ -88,6 +92,8 @@ export const InfoAction = styled.div`
   flex-direction: column;
   gap: 12px;
   padding: 0;
+  min-height: 88px;
+  justify-content: center;
   ${device.tablet}{
     padding: 0 24px;
   }
@@ -123,7 +129,3 @@ padding-top: 6px;
 padding-bottom: 6px;
 `
 
-export const SpaceBox = styled.div`
-height: 8px;
-
-`
