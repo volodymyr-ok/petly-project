@@ -22,6 +22,7 @@ export const Title = styled.h1`
   line-height: 1.38;
   font-weight: 700;
   color: black;
+
   @media screen and (min-width: 324px) {
     font-size: 32px;
   }
@@ -41,9 +42,7 @@ export const HomeSection = styled.section`
   background-position: bottom;
   background-image: url(${portraitM}), url(${BgM});
   background-size: 324px 339px, 100vw 470px;
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  ${device.retina} {
     background-image: url(${portraitM2x}), url(${BgM2x});
   }
   ${device.tablet} {

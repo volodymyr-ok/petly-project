@@ -15,23 +15,6 @@ export const StepTwo = ({
   setFieldValue,
   values: { city },
 }) => {
-  const phoneNumberMask = [
-    "(",
-    /[1-9]/,
-    /\d/,
-    /\d/,
-    ")",
-    " ",
-    /\d/,
-    /\d/,
-    /\d/,
-    "-",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-  ];
-
   const NAME_INPUT_CITY = "city";
   // const handleChange = (evt) => {
   //   setFieldTouched(NAME_INPUT_CITY);
@@ -83,7 +66,6 @@ export const StepTwo = ({
           data-tel-input
           placeholder="Mobile phone"
           maxLength="13"
-          mask={phoneNumberMask}
         />
         <FormError name="phone" />
       </Label>
