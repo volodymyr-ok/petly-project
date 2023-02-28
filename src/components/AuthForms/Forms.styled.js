@@ -72,9 +72,7 @@ export const RegionInput = styled.div`
   padding: 14px 10px 13px 32px;
   width: 100%;
   height: 100%;
-  
-  
-  
+
   select {
     width: 48%;
     border: none;
@@ -286,7 +284,6 @@ export const Paragraph = styled.p`
   margin-top: 30px;
   text-align: center;
   & span {
-   
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.04em;
@@ -300,9 +297,9 @@ export const FormLink = styled(Link)`
   letter-spacing: 0.04em;
   text-decoration-line: underline;
   color: ${colors.blue};
-  &:visited {
+  /* &:visited {
     color: rgba(85, 26, 139);
-  }
+  } */
 `;
 
 export const toastStyled = {

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { device } from "./utils/mixin";
 
 export const GlobalStyle = createGlobalStyle`
 *,
@@ -6,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
 *::after {
   box-sizing: border-box;
 }
+
+/* html {
+  
+} */
 
 body {
   font-family: "Manrope", sans-serif;
@@ -15,6 +20,17 @@ body {
   margin: 0;
   padding: 0;
   min-width: 320px;
+
+   /* min-height: 601px;
+
+  ${device.tablet} {
+  min-height: 1193px;
+  }
+
+  ${device.desktop} {
+  min-height: 768px;
+  } */
+ 
 }
 
 h1,
