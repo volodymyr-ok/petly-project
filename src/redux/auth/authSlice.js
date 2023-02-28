@@ -54,13 +54,11 @@ const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, handlePending)
       .addCase(registerUser.rejected, (state, action) => {
-        console.log("fail", action, action.payload);
         state.isLoading = false;
         Notify.failure(`Fail`);
         state.error = action.payload;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        console.log("action", action);
         state.isLoading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;

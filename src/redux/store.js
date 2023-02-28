@@ -1,8 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE } from "redux-persist";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  persistReducer,
+  persistStore,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
 import { newsReducer } from "./news/newsSlice";
+import { userReducer } from "./user/userSlice";
 
 const authConfig = {
   key: "auth",
@@ -15,6 +25,7 @@ const persistedAuthReducer = persistReducer(authConfig, authReducer);
 const rootReducer = combineReducers({
   auth: persistedAuthReducer,
   news: newsReducer,
+  user: userReducer,
 });
 
 export const store = configureStore({

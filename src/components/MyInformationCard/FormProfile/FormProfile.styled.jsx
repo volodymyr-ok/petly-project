@@ -3,6 +3,9 @@ import { colors } from "../../../utils/colors";
 import { device } from "../../../utils/mixin";
 
 export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin-top: 36px;
   ${device.tablet} {
     margin: 0;

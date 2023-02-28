@@ -38,14 +38,16 @@ export const CardMyInformation = styled.div`
   }
 `;
 
-export const ImgBox = styled.span`
+export const ImgBox = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  max-width: 233px;
-  max-height: 233px;
+  min-width: 233px;
+  min-height: 233px;
+  width: 233px;
+  height: 233px;
   border-radius: 50%;
   overflow: hidden;
   filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
