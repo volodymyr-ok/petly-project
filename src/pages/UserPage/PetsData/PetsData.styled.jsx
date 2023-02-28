@@ -13,10 +13,10 @@ export const ContainerPetsDate = styled.div`
     width: 704px;
   }
   ${device.desktop} {
-    margin-top: 0;
-    width: 821px;
     display: flex;
     flex-direction: column;
+    margin-top: 0;
+    width: 821px;
   }
 `;
 

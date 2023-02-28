@@ -5,6 +5,10 @@ export const BoxPetsList = styled.div`
   ${device.desktop} {
     display: flex;
     flex-direction: column;
+    height: 532px;
+    overflow-y: scroll;
+    box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
+    border-radius: 40px 40px 40px 40px;
   }
 `;
 
