@@ -9,8 +9,6 @@ export const FormProfile = ({ user }) => {
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(isError, isLoading);
-
   const inputsList = [
     {
       value: user?.name,
@@ -73,10 +71,10 @@ export const FormProfile = ({ user }) => {
     return data;
   };
 
-  const onInputClose = () => {
-    console.log("onBlu");
-    setNameActivePancil("");
-  };
+  // const onInputClose = () => {
+  //   console.log("onBlu");
+  //   setNameActivePancil("");
+  // };
   const handleChange = ([key, val]) => {
     setDataSend((prevState) => {
       return { ...prevState, [key]: val };
@@ -85,23 +83,18 @@ export const FormProfile = ({ user }) => {
 
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
-    console.log("send1", dataSend, nameActivePancil);
 
     if (nameActivePancil === "") {
       setNameActivePancil(nameBtn);
-      console.log("send2", dataSend, nameActivePancil);
     }
 
     if (nameActivePancil === nameBtn && Object.keys(dataSend).length === 0) {
-      console.log("send3", dataSend, nameActivePancil);
       setNameActivePancil("");
     }
 
     if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
-      console.log("send", dataSend);
       updateUserData(dataSend)
         .then((data) => {
-          console.log(data);
           setIsLoading(false);
         })
         .catch((error) => {
