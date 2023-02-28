@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from "../../../../utils/colors";
 import { device } from "../../../../utils/mixin";
 
 export const BoxPetsList = styled.div`
@@ -6,9 +7,25 @@ export const BoxPetsList = styled.div`
     display: flex;
     flex-direction: column;
     height: 532px;
-    overflow-y: scroll;
+
     box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
     border-radius: 40px 40px 40px 40px;
+  }
+`;
+
+export const BoxScrollbar = styled.div`
+  overflow-y: scroll;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    color: black;
+    background-color: #fdf7f2;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${colors.accentOrange};
+    border-radius: 8px;
   }
 `;
 
@@ -39,6 +56,9 @@ export const Description = styled.div`
 export const Box = styled.div`
   &:not(:last-child) {
     margin-bottom: 20px;
+  }
+  &:last-child {
+    margin-bottom: 0;
   }
   margin: 0 auto;
   padding: 20px;
