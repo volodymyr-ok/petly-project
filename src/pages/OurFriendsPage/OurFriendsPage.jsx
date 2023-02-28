@@ -13,7 +13,6 @@ const OurFriendsPage = () => {
     const data = await axios.get(
       "https://petly-2v85.onrender.com/api/services/"
     );
-    console.log(data);
     return data;
   };
 
@@ -42,6 +41,7 @@ const OurFriendsPage = () => {
               address,
               email,
               phone,
+              workDays,
               _id,
             }) => (
               <FriendsItems
@@ -53,6 +53,7 @@ const OurFriendsPage = () => {
                 address={address}
                 email={email}
                 phone={phone}
+                workDays={workDays}
               />
             )
           )}

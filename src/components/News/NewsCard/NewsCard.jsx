@@ -6,7 +6,7 @@ export const NewsCard = ({ news }) => {
     <>
       {news?.map(({ _id, title, description, date, url }) => (
         <Item key={_id}>
-          <div style={{ height: "66px", overflow: "hidden", marginBottom: "16px" }}>
+          <div style={{ height: "70px", overflow: "hidden", marginBottom: "16px" }}>
             <CardTitle>{title}</CardTitle>
           </div>
           <div style={{ height: "136px", overflow: "hidden" }}>
