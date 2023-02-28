@@ -7,7 +7,7 @@ export const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   padding: 8px 28px;
-
+  font-family: 'Manrope';
   font-weight: 500;
   font-size: 14px;
   line-height: 1.35;

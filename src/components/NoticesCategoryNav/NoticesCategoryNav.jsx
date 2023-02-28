@@ -1,24 +1,22 @@
-import {NavBox, NavList} from "./NoticesCategoryNav.styled"
+import {NavBox, NavList, NavItem} from "./NoticesCategoryNav.styled"
 import { Button } from "../../components/Button/Button";
 import { AddNotice } from "../AddNotice/AddNotice";
 
-const isUser = true
+export const authorized = ["lost-found", "in good hands", "sell", "favorite ads", "my ads" ]
+const notAuthorized = ["lost-found", "in good hands", "sell" ]
 
-const authorized = ["lost/found", "in good hands", "sell", "favorite ads", "my ads" ]
-const notAuthorized = ["lost/found", "in good hands", "sell" ]
-
-export const NoticesCategoryNav = () => {
+export const NoticesCategoryNav = ({onChooseCategory, isLogined}) => {
     return <>
             <NavBox>
-                <NavList>
-                    { isUser? authorized.map(el=>{
-                        return <li key={el}>
+                <NavList onClick={onChooseCategory}>
+                    { isLogined? authorized.map(el=>{
+                        return <NavItem key={el}>
                         <Button>{el}</Button>
-                        </li>
+                        </NavItem>
                     }): notAuthorized.map(el=>{
-                        return <li key={el}>
+                        return <NavItem key={el}>
                         <Button>{el}</Button>
-                        </li>
+                        </NavItem>
                     })}
                 </NavList>
                 <AddNotice/>

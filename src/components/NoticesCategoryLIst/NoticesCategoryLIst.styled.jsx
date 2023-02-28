@@ -105,7 +105,9 @@ export const BtnAddSticky = styled(StyledButton)`
     ${device.tablet} {
       display: none;
     }
-
+    &.hidden{
+        display: none;
+    }
 
 `
 // export const SpaceBox = styled.div`
