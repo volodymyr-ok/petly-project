@@ -15,12 +15,27 @@ export const StepTwo = ({
   setFieldValue,
   values: { city },
 }) => {
+  const phoneNumberMask = [
+    "(",
+    /[1-9]/,
+    /\d/,
+    /\d/,
+    ")",
+    " ",
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
+
   const NAME_INPUT_CITY = "city";
   // const handleChange = (evt) => {
   //   setFieldTouched(NAME_INPUT_CITY);
-
   //   setFieldError(NAME_INPUT_CITY, true);
-
   //   setFieldValue(NAME_INPUT_CITY, evt.label);
   // };
   // const [phone, setPhone] = useState("");
@@ -48,6 +63,7 @@ export const StepTwo = ({
                         value={region}
                         onChange={(val) => setRegion(val)}/>
                 </RegionInput> */}
+
         <Input name="city" placeholder="City, region" />
         <FormError name={NAME_INPUT_CITY} />
       </Label>
@@ -67,6 +83,7 @@ export const StepTwo = ({
           data-tel-input
           placeholder="Mobile phone"
           maxLength="13"
+          mask={phoneNumberMask}
         />
         <FormError name="phone" />
       </Label>

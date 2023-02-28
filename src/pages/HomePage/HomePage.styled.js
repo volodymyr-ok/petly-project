@@ -48,7 +48,8 @@ export const HomeSection = styled.section`
   }
   ${device.tablet} {
     /* min-height: 1108px; */
-    padding-top: 88px;
+    /* padding-top: 88px; */
+    padding-top: 20px;
     min-height: calc(100vh - 80px);
     background-image: url(${portraitT}), url(${BgT});
     /* background-size: 645px 715px, 100vw 1033px; */
