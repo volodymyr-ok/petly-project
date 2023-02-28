@@ -80,7 +80,7 @@ export const RegisterForm = () => {
                 .min(5, "The address must contain the city, regions")
                 .matches(
                   /^[A-Za-z]{2,},\s[A-Za-z]{2,}$/,
-                  "The address must contain the city, regions: 'Kiev, Kiev'"
+                  "The address must contain the city, regions: 'Kyiv, Kyiv'"
                 )
                 .required("Address is required"),
               phone: Yup.string()
@@ -111,9 +111,9 @@ export const RegisterForm = () => {
                   </>
                 )}
 
-                <Text> You can registration with your Google Account:</Text>
+                <Text> You can register with your Google Account:</Text>
                 <LoginGoogle
-                  target="_blank"
+                  // target="_blank"
                   aria-label="goggle"
                   rel="noopener noreferrer nofollow"
                   href={`https://petly-2v85.onrender.com/api/users/google`}
