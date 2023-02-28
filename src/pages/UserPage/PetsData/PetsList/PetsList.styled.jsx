@@ -1,4 +1,12 @@
 import styled from "styled-components";
+import { device } from "../../../../utils/mixin";
+
+export const BoxPetsList = styled.div`
+  ${device.desktop} {
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 export const WrapperPicDiv = styled.img`
   margin-bottom: 20px;
@@ -6,7 +14,7 @@ export const WrapperPicDiv = styled.img`
   height: 240px;
   border-radius: 20px;
   background-color: #e1e1e1;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-right: 32px;
     margin-bottom: 0;
     width: 161px;
@@ -16,10 +24,11 @@ export const WrapperPicDiv = styled.img`
 
 export const Description = styled.div`
   position: relative;
-  @media (min-width: 768px) {
+
+  ${device.tablet} {
     width: 471px;
   }
-  @media (min-width: 1280px) {
+  ${device.desktop} {
     width: 580px;
   }
 `;
@@ -27,15 +36,19 @@ export const Box = styled.div`
   &:not(:last-child) {
     margin-bottom: 20px;
   }
+  margin: 0 auto;
   padding: 20px;
   border-radius: 40px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   background-color: #ffffff;
-  @media (min-width: 768px) {
+  ${device.mobile} {
+    width: 440px;
+  }
+  ${device.tablet} {
     display: flex;
     width: 704px;
   }
-  @media (min-width: 1280px) {
+  ${device.desktop} {
     width: 821px;
     margin-bottom: 22px;
   }
@@ -47,7 +60,7 @@ export const InfoPet = styled.p`
   }
   font-size: 14px;
   font-weight: 400;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-size: 16px;
     font-weight: 500;
   }
@@ -58,7 +71,7 @@ export const AdditionalInfo = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 20px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-top: 40px;
   }
 `;

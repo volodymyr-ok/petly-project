@@ -4,7 +4,11 @@ import { device } from "../../../utils/mixin";
 
 export const CardBox = styled.div`
   margin: 0 auto;
-  width: 280px;
+  min-width: 280px;
+  width: 100%;
+  ${device.mobile} {
+    width: 440px;
+  }
   ${device.tablet} {
     margin: 0;
     width: 736px;

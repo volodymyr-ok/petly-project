@@ -1,4 +1,24 @@
 import styled from "styled-components";
+import { device } from "../../../utils/mixin";
+
+export const ContainerPetsDate = styled.div`
+  margin-top: 40px;
+  ${device.mobile} {
+    margin: 40px auto;
+    width: 440px;
+  }
+
+  ${device.tablet} {
+    margin-top: 20px;
+    width: 704px;
+  }
+  ${device.desktop} {
+    margin-top: 0;
+    width: 821px;
+    display: flex;
+    flex-direction: column;
+  }
+`;
 
 export const FieldsWrapper = styled.div`
   display: flex;
@@ -17,10 +37,10 @@ export const BoxTitlePet = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 26px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-right: 32px;
   }
-  @media (min-width: 1280px) {
+  ${device.desktop} {
     margin-right: 0px;
   }
 `;
@@ -32,28 +52,32 @@ export const AddTitle = styled.p`
 export const BtnBox = styled.div`
   display: inline-flex;
   align-items: center;
-  @media (min-width: 768px) {
+  ${device.tablet} {
   }
-  @media (min-width: 1280px) {
+  ${device.desktop} {
     display: inline-flex;
   }
 `;
 
 export const BoxMessage = styled.div`
   display: flex;
-  justify-content: center;
-  padding-left: 45px;
-  padding-right: 45px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 `;
 
 export const Message = styled.h3`
-  padding-top: 10px;
   display: inline-flex;
   font-weight: 500;
   font-size: 20px;
-  @media (min-width: 768px) {
-    padding-top: 50px;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  ${device.tablet} {
     font-size: 24px;
+  }
+  ${device.desktop} {
+    padding: 0;
+    font-size: 28px;
   }
 `;
 
