@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Input, SearchForm, Label, SearchButton } from "./SearchInput.styled";
 import searchBtn from "../../assets/svg/searchBtn.svg";
 import searchReset from "../../assets/svg/searchReset.svg";
+import useDebounce from "react-debounced";
 
 export const SearchInput = ({ onSubmit }) => {
   const [search, setSearch] = useState("");
+  const debounce = useDebounce(1000);
+
+  useEffect(() => {
+    if (!search) {
+      onSubmit(search);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   const onInputChange = (e) => {
     setSearch(e.target.value);
+    debounce(() => {
+      onSubmit(e.target.value);
+    });
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit(search);
   };
 
-  const onButtonClick = (e) => {
+  const onButtonClick = () => {
     setSearch("");
   };
 
