@@ -3,6 +3,7 @@ import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, R
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
 import { newsReducer } from "./news/newsSlice";
+import { noticeReducer } from "./notice/noticeSlice";
 
 const authConfig = {
   key: "auth",
@@ -15,6 +16,7 @@ const persistedAuthReducer = persistReducer(authConfig, authReducer);
 const rootReducer = combineReducers({
   auth: persistedAuthReducer,
   news: newsReducer,
+  notice: noticeReducer,
 });
 
 export const store = configureStore({
