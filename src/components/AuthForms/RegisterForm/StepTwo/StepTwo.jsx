@@ -18,9 +18,7 @@ export const StepTwo = ({
   const NAME_INPUT_CITY = "city";
   // const handleChange = (evt) => {
   //   setFieldTouched(NAME_INPUT_CITY);
-
   //   setFieldError(NAME_INPUT_CITY, true);
-
   //   setFieldValue(NAME_INPUT_CITY, evt.label);
   // };
   // const [phone, setPhone] = useState("");
@@ -48,6 +46,7 @@ export const StepTwo = ({
                         value={region}
                         onChange={(val) => setRegion(val)}/>
                 </RegionInput> */}
+
         <Input name="city" placeholder="City, region" />
         <FormError name={NAME_INPUT_CITY} />
       </Label>
