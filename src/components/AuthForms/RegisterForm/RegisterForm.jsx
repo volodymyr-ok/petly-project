@@ -21,7 +21,7 @@ import { ReactComponent as GoogleIcon } from "../../../assets/svg/google.svg";
 
 export const passwordRegexp = /^[A-Za-z0-9!?#$%^&_\-*]{7,32}$/;
 export const nameRegexp = /^[a-zA-Z]{2,20}$/;
-export const phoneRegexp = /^\+380\d{9}$/;
+export const phoneRegexp = /^\+380\d{9}\S*$/;
 export const emailRegexp =
   /^[^-._]{1}[A-Za-z0-9._-]{1,}@[^-._]{1}[A-Za-z0-9.-]{0,}\.[A-Za-z]{2,4}$/;
 
@@ -77,10 +77,10 @@ export const RegisterForm = () => {
             validationSchema: Yup.object().shape({
               name: Yup.string().required("First name is required"),
               city: Yup.string()
-                .min(7, "Address shoud conain city and regions")
+                .min(5, "The address must contain the city, regions")
                 .matches(
                   /^[A-Za-z]{2,},\s[A-Za-z]{2,}$/,
-                  "The address must contain the city, regions: 'Kiev, Kiev'"
+                  "The address must contain the city, regions: 'Kyiv, Kyiv'"
                 )
                 .required("Address is required"),
               phone: Yup.string()
@@ -111,9 +111,9 @@ export const RegisterForm = () => {
                   </>
                 )}
 
-                <Text> You can registration with your Google Account:</Text>
+                <Text> You can register with your Google Account:</Text>
                 <LoginGoogle
-                  target="_blank"
+                  // target="_blank"
                   aria-label="goggle"
                   rel="noopener noreferrer nofollow"
                   href={`https://petly-2v85.onrender.com/api/users/google`}
