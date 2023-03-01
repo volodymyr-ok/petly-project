@@ -1,15 +1,14 @@
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
-
+import { ReactComponent as CloseButtonIcon } from "../../../assets/svg/clarity_close-line.svg";
+import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import {
   LabelBox,
   TitleItemTwo,
-  BtnAddFileIcon,
   ErrorText,
   AddFile,
   ButtonCloseModal,
-  ButtonCloseIcon,
   ModalItemTwo,
   FlexBox,
   FormStyled,
@@ -20,7 +19,6 @@ import {
   NextBtn,
   CancelBtn,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
-// import { useDispatch } from "react-redux";
 
 const validationSchema = yup.object({
   comments: yup.string().min(8).max(120).required(),
@@ -36,29 +34,12 @@ export const StepTwo = ({ data, prev, onClose }) => {
     );
   };
 
-  // const dispatch = useDispatch();
-
   const [file, setFile] = useState(null);
+  console.log("Temporary log (can be deleted) ===>", file);
 
   const handleChange = (event) => {
     setFile(event.target.files[0]);
   };
-
-  // const handleSubmit = (values, { resetForm }) => {
-  //   let formData = new FormData();
-  //   for (let value in values) {
-  //     formData.append(value, values[value]);
-  //   }
-
-  //   formData.append("myPetsPhoto", file);
-
-  //   for (let property of formData.entries()) {
-  //     console.log(property[0], property[1]);
-  //   }
-  //   dispatch(addPetOperation(formData));
-  //   resetForm();
-  //   onClose();
-  // };
 
   return (
     <Formik
@@ -69,15 +50,14 @@ export const StepTwo = ({ data, prev, onClose }) => {
       {({ values }) => (
         <ModalItemTwo>
           <ButtonCloseModal type="button" onClick={() => onClose()}>
-            <ButtonCloseIcon />
+            <CloseButtonIcon />
           </ButtonCloseModal>
           <FormStyled>
             <TitleTwo>Add pet</TitleTwo>
             <TitleItemTwo>Add photo and some comments</TitleItemTwo>
 
             <AddFile htmlFor="myPetsPhoto">
-              {file ? <p>File added success</p> : <BtnAddFileIcon />}
-
+              {file ? <p>File added success</p> : <AddPlusButton />}
               <FieldPhoto
                 id="myPetsPhoto"
                 type="file"

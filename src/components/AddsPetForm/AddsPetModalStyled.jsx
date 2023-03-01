@@ -1,7 +1,5 @@
-import styled from "@emotion/styled";
+import styled from "styled-components";
 
-import CloseIcon from "@mui/icons-material/Close";
-import AddIcon from "@mui/icons-material/Add";
 import { Form, Field } from "formik";
 
 export const Overlay = styled.div`
@@ -83,27 +81,6 @@ export const TitleTwo = styled.h3`
   }
 `;
 
-export const ButtonCloseIcon = styled(CloseIcon)`
-  cursor: pointer;
-  width: 28px;
-  height: 28px;
-  fill: rgba(17, 17, 17, 0.6);
-  &:hover {
-    fill: rgba(245, 146, 86, 1);
-  }
-  @media (min-width: 768px) {
-    width: 36px;
-    height: 36px;
-  }
-`;
-
-export const BtnAddFileIcon = styled(AddIcon)`
-  cursor: pointer;
-  fill: rgba(17, 17, 17, 0.6);
-  width: 48px;
-  height: 48px;
-`;
-
 export const ButtonCloseModal = styled.button`
   position: absolute;
   cursor: pointer;
@@ -112,6 +89,15 @@ export const ButtonCloseModal = styled.button`
   width: 34px;
   height: 34px;
   display: flex;
+  transition: color 300ms linear, background-color 300ms linear;
+  fill: rgba(17, 17, 17, 0.6);
+  svg {
+    fill: rgba(17, 17, 17, 0.6);
+    &:hover {
+      fill: rgba(245, 146, 86, 1);
+      stroke: rgba(245, 146, 86, 1);
+    }
+  }
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -165,7 +151,6 @@ export const FieldStyled = styled(Field)`
   :focus {
     outline: 0;
     outline-offset: 0;
-    border: 2px solid #ff6101;
   }
   ::placeholder {
     font-weight: 400;
@@ -293,14 +278,19 @@ export const NextBtn = styled.button`
   width: 240px;
   height: 40px;
   margin-bottom: 12px;
-  color: #ffffff;
+
   background: #f59256;
   border-radius: 40px;
   border: none;
+  color: #fff;
+  transition: color 300ms linear, background-color 300ms linear;
   :hover,
   :focus {
-    border: 2px solid #ff6101;
+    background-color: #fff;
+    color: rgba(0, 0, 0, 1);
+    border: 2px solid #f59256;
   }
+
   @media (min-width: 768px) {
     width: 180px;
     height: 44px;
@@ -313,12 +303,15 @@ export const CancelBtn = styled.button`
   display: block;
   width: 240px;
   height: 40px;
-  background: #ffffff;
-  border: 2px solid #f59256;
+  background: #fff;
   border-radius: 40px;
+  transition: color 300ms linear, background-color 300ms linear;
+  color: #000000;
+  border: 2px solid #f59256;
   :hover,
   :focus {
-    border: 2px solid #ff6101;
+    background-color: #f59256;
+    color: #fff;
   }
   @media (min-width: 768px) {
     width: 180px;
