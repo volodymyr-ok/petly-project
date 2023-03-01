@@ -12,15 +12,11 @@ import {
   BtnRemove,
 } from "./NoticeItems.styled";
 
-import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import defImage from "../../img/defaultImg.jpeg";
 import { numberToWord } from "../../hooks/numberToString";
 import { ReactComponent as Like } from "../../assets/svg/like.svg";
 import { ReactComponent as Remove } from "../../assets/svg/remove.svg";
-
-const svgLike = SvgMarkup(24, 22, "btnLike");
-const svgRemove = SvgMarkup(16, 17, "btnRemove");
-const svgEdit = SvgMarkup(16, 16, "edit");
+import { ReactComponent as Edit } from "../../assets/svg/pencil.svg";
 
 export const NoticeItem = ({
   addFavorite,
@@ -57,7 +53,7 @@ export const NoticeItem = ({
               favorite={isFavorite ? "favorite" : "noFavorite"}
               onClick={(e) => addFavorite(e, _id, isFavorite)}
             >
-              {owner === userId ? svgEdit : <Like width={24} height={22}/>}
+              {owner === userId ? <Edit width={16} height={16}/> : <Like width={24} height={22}/>}
             </BtnAdd>
             <Image
               loading="lazy"
@@ -71,20 +67,20 @@ export const NoticeItem = ({
               <InfoList>
                 <tbody>
                   <tr>
-                    <InfoItem className="name">Breed:</InfoItem>
+                    <InfoItem name={"name"}>Breed:</InfoItem>
                     <InfoItem>{breed ? breed : "No info"}</InfoItem>
                   </tr>
                   <tr>
-                    <InfoItem className="name">Place:</InfoItem>
+                    <InfoItem name={"name"}>Place:</InfoItem>
                     <InfoItem>{location ? location : "No info"}</InfoItem>
                   </tr>
                   <tr>
-                    <InfoItem className="name">Age:</InfoItem>
+                    <InfoItem name={"name"}>Age:</InfoItem>
                     <InfoItem>{textAge ? textAge : "No info"}</InfoItem>
                   </tr>
                   {categoryName === "sell" ? (
                     <tr>
-                      <InfoItem className="name">Price:</InfoItem>
+                      <InfoItem name={"name"}>Price:</InfoItem>
                       <InfoItem>{price ? price : "No info"}</InfoItem>
                     </tr>
                   ) : null}

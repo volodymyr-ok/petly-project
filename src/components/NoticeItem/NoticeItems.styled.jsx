@@ -57,19 +57,12 @@ export const BtnAdd = styled(StyledButton)`
   &.edit {
     fill: ${colors.accentOrange};
   }
-  :active{
-    background-color: ${colors.markList};
-  }
   svg {
     fill: ${(p) => (p.favorite === "favorite" ? "#F59256" : "white")};
     stroke: ${(p) => (p.favorite === "favorite" ? "white" : "#F59256")};
   }
   :hover, 
   :focus {
-    background-color: ${colors.accentOrange};
-    stroke: ${colors.white};
-  }
-  :hover svg, :focus svg {
     background-color: ${colors.accentOrange};
     stroke: ${colors.white};
   }
@@ -100,9 +93,7 @@ export const InfoItem = styled.td`
   font-weight: 500;
   font-size: 16px;
   line-height: 1.37;
-  &.name {
-    min-width: 90px;
-  }
+  min-width: ${(p) => (p.name === "name" ? "90px" : "0")};
 `;
 export const InfoAction = styled.div`
   display: flex;

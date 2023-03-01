@@ -2,7 +2,7 @@ import { ListBox, List, BtnAddSticky } from "./NoticesCategoryLIst.styled";
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import { NoticeItem } from "../NoticeItem/NoticeItem";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addFavorites,
   removeFavorites,
@@ -33,7 +33,7 @@ export const NoticesCategoryList = ({
 
   const handlerFavorite = (e, id, isFavorite) => {
     if (!isLogined) {
-     console.log("pls login first");
+    // console.log("pls login first");
     }
     if (!favorites.includes(id)) {
       dispatch(addFavorites(id));
