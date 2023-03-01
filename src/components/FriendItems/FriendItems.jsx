@@ -25,9 +25,10 @@ export const FriendsItems = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  function toggleModal() {
+  const toggleModal = () => {
     setShowModal(!showModal);
-  }
+  };
+
   const weekday = new Date().getDay() - 1;
 
   return (
