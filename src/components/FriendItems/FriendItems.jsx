@@ -25,9 +25,10 @@ export const FriendsItems = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  function toggleModal() {
+  const toggleModal = () => {
     setShowModal(!showModal);
-  }
+  };
+
   const weekday = new Date().getDay() - 1;
 
   return (
@@ -54,12 +55,14 @@ export const FriendsItems = ({
                 <p>Time:</p>
                 {workDays[weekday].isOpen ? (
                   <p>
-                    {workDays[1].from} - {workDays[1].to}
+                    {workDays[weekday].from} - {workDays[weekday].to}
                   </p>
                 ) : (
                   <p>Closed</p>
                 )}
-                {showModal && <TimeModal workDays={workDays} />}
+                {showModal && (
+                  <TimeModal workDays={workDays} onClick={toggleModal} />
+                )}
               </InfoWrap>
             )}
             {!workDays && (
