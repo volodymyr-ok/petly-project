@@ -48,7 +48,8 @@ export const logoutUser = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk(
-  "users/getUser",
+  // "users/getUser",
+  "auth/getUser",
   async (_, thunkAPI) => {
     const { auth } = thunkAPI.getState();
     const persistedToken = auth.token;
@@ -62,6 +63,30 @@ export const getUser = createAsyncThunk(
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const addFavorites = createAsyncThunk(
+  "auth/addFavorites",
+  async (id, thunkAPI) => {
+    try {
+      const { data } = await PrivateApi.patch(`/api/notices/favorite/${id}`);
+      console.log("Temporary log (can be deleted) ===>", data);
+      return id;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+export const removeFavorites = createAsyncThunk(
+  "auth/removeFavorites",
+  async (id, thunkAPI) => {
+    try {
+      await PrivateApi.patch(`/api/notices/favorite/${id}`);
+      return id;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
