@@ -38,7 +38,7 @@ const Nav = () => {
             <NavItem to="./news">News</NavItem>
           </li>
           <li>
-            <NavItem to="./notices">Find pet</NavItem>
+            <NavItem to="./notices/sell">Find pet</NavItem>
           </li>
           <li>
             <NavItem to="./friends">Our friends</NavItem>
