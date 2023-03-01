@@ -21,6 +21,14 @@ export const NavList = styled.ul`
         flex-grow: 1;
     }
 `
+export const NavItem = styled.li`
+    ${device.desktop}{
+        &:nth-child(3){
+            order: -1;
+        }
+    }
+
+`
 // export const NavPosition = styled.ul`
 //     display: flex;
 //     flex-wrap: wrap;

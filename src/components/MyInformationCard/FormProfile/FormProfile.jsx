@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form } from "./FormProfile.styled";
 import { InputItem } from "./InputItem";
 import { PrivateApi } from "../../../http/http";
+import { Notify } from "notiflix";
 
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
@@ -97,6 +98,7 @@ export const FormProfile = ({ user }) => {
     if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
       updateUserData(dataSend)
         .then((data) => {
+          Notify.success(`You have successfully updated your data`);
           setIsLoading(false);
         })
         .catch((error) => {
