@@ -10,12 +10,7 @@ export const weekday = new Date().getDay() - 1;
 
 const OurFriendsPage = () => {
   const [partners, setPartners] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-
-  function toggleModal() {
-    setShowModal(!showModal);
-  }
-
+  
   const FetchMovieByID = async () => {
     const data = await axios.get(
       "https://petly-2v85.onrender.com/api/services/"
@@ -61,8 +56,6 @@ const OurFriendsPage = () => {
                 email={email}
                 phone={phone}
                 workDays={workDays}
-                onClick={toggleModal}
-                showModal={showModal}
               />
             )
           )}

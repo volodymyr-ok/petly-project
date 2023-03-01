@@ -1,15 +1,24 @@
 import PropTypes from "prop-types";
-import { CardTitle, Text, Data, NewsBox, ReadMore, Item } from "./NewsCard.styled";
+import {
+  CardTitle,
+  Text,
+  Data,
+  NewsBox,
+  ReadMore,
+  Item,
+} from "./NewsCard.styled";
 
 export const NewsCard = ({ news }) => {
   return (
     <>
       {news?.map(({ _id, title, description, date, url }) => (
         <Item key={_id}>
-          <div style={{ height: "70px", overflow: "hidden", marginBottom: "16px" }}>
+          <div
+            style={{ height: "70px", overflow: "hidden", marginBottom: "16px" }}
+          >
             <CardTitle>{title}</CardTitle>
           </div>
-          <div style={{ height: "136px", overflow: "hidden" }}>
+          <div style={{ height: "133px", overflow: "hidden" }}>
             <Text>{description}</Text>
           </div>
           <NewsBox>
