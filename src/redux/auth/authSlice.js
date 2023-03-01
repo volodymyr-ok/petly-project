@@ -71,7 +71,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
         // toast.error(`${action.payload}Wrong email or password`);
-        Notify.failure(`${action.payload}`);
+        // Notify.failure(`${action.payload}`);
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -102,7 +102,7 @@ const authSlice = createSlice({
         state.user = action.payload;
         state.isAuth = true;
         state.isLoading = false;
-        Notify.failure(`${action.payload}`);
+        // Notify.failure(`${action.payload}`);
       })
 
       .addCase(logoutUser.pending, handlePending)
