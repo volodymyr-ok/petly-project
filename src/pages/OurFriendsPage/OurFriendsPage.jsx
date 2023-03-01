@@ -6,8 +6,15 @@ import { Container } from "../../components/Container/Container";
 import { FriendsItems } from "../../components/FriendItems/FriendItems";
 import { FriendsList } from "./OurFriendsPage.styled";
 
+export const weekday = new Date().getDay() - 1;
+
 const OurFriendsPage = () => {
   const [partners, setPartners] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  function toggleModal() {
+    setShowModal(!showModal);
+  }
 
   const FetchMovieByID = async () => {
     const data = await axios.get(
@@ -54,6 +61,8 @@ const OurFriendsPage = () => {
                 email={email}
                 phone={phone}
                 workDays={workDays}
+                onClick={toggleModal}
+                showModal={showModal}
               />
             )
           )}
