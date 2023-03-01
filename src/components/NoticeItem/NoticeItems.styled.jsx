@@ -3,6 +3,7 @@ import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
 
+
 export const Item = styled.li`
   position: relative;
   background-color: ${colors.white};
@@ -51,24 +52,27 @@ export const BtnAdd = styled(StyledButton)`
   fill: ${colors.white};
   stroke: ${colors.accentOrange};
   stroke-width: 1px;
-  stroke-dasharray: 2, 2;
+  stroke-dasharray: 80;
   stroke-linejoin: round;
   &.edit {
     fill: ${colors.accentOrange};
   }
-  &.favorite {
-    fill: ${colors.accentOrange};
-    stroke: ${colors.accentOrange};
-
-    :hover {
-      background-color: ${colors.accentOrange};
-      stroke: ${colors.white};
-    }
+  :active{
+    background-color: ${colors.markList};
   }
-
-  /* svg {
-    fill: ${(p) => (p.favorite === "favorite" ? "red" : "green")};
-  } */
+  svg {
+    fill: ${(p) => (p.favorite === "favorite" ? "#F59256" : "white")};
+    stroke: ${(p) => (p.favorite === "favorite" ? "white" : "#F59256")};
+  }
+  :hover, 
+  :focus {
+    background-color: ${colors.accentOrange};
+    stroke: ${colors.white};
+  }
+  :hover svg, :focus svg {
+    background-color: ${colors.accentOrange};
+    stroke: ${colors.white};
+  }
 `;
 export const Image = styled.img`
   object-fit: cover;

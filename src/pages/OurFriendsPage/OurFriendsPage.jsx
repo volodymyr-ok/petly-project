@@ -8,7 +8,6 @@ import { FriendsList } from "./OurFriendsPage.styled";
 
 const OurFriendsPage = () => {
   const [partners, setPartners] = useState([]);
-
   const FetchMovieByID = async () => {
     const data = await axios.get(
       "https://petly-2v85.onrender.com/api/services/"

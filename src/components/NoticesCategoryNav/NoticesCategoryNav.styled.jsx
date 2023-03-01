@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { device } from '../../utils/mixin';
-
+import { NavLink } from 'react-router-dom';
+import { colors } from '../../utils/colors';
 
 export const NavBox = styled.div`
 
@@ -21,13 +22,17 @@ export const NavList = styled.ul`
         flex-grow: 1;
     }
 `
-export const NavItem = styled.li`
+export const NavItem = styled(NavLink)`
+text-decoration: none;
     ${device.desktop}{
         &:nth-child(3){
             order: -1;
         }
     }
-
+&.active > button{
+    background-color: ${colors.accentOrange};
+    color: ${colors.white};
+}
 `
 // export const NavPosition = styled.ul`
 //     display: flex;

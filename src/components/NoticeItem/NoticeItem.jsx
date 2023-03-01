@@ -15,7 +15,8 @@ import {
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import defImage from "../../img/defaultImg.jpeg";
 import { numberToWord } from "../../hooks/numberToString";
-// import { ReactComponent as Pet } from "../../assets/svg/add-pet.svg";
+import { ReactComponent as Like } from "../../assets/svg/like.svg";
+import { ReactComponent as Remove } from "../../assets/svg/remove.svg";
 
 const svgLike = SvgMarkup(24, 22, "btnLike");
 const svgRemove = SvgMarkup(16, 17, "btnRemove");
@@ -27,7 +28,7 @@ export const NoticeItem = ({
   onReadMore,
   notices,
   user,
-  favotiresList,
+  favoritesList,
 }) => {
   const userId = user.id;
 
@@ -45,21 +46,18 @@ export const NoticeItem = ({
           title,
           _id,
         } = el;
-        const textAge = numberToWord(birthday);
-        const isFavorite = favotiresList.includes(_id);
 
+        const textAge = numberToWord(birthday);
+        const isFavorite = favoritesList?.includes(_id);
         return (
           <Item key={_id}>
             <ItemCategory>{categoryName}</ItemCategory>
             <BtnAdd
               id={_id}
               favorite={isFavorite ? "favorite" : "noFavorite"}
-              className={
-                owner === userId ? "edit" : isFavorite ? "favorite" : "null"
-              }
               onClick={(e) => addFavorite(e, _id, isFavorite)}
             >
-              {owner === userId ? svgEdit : svgLike}
+              {owner === userId ? svgEdit : <Like width={24} height={22}/>}
             </BtnAdd>
             <Image
               loading="lazy"
@@ -98,7 +96,8 @@ export const NoticeItem = ({
                 </BtnReadMore>
                 {owner === userId ? (
                   <BtnRemove id={_id} onClick={onRemove}>
-                    Delete{svgRemove}
+                    Delete
+                    <Remove width={16} height={17}/>
                   </BtnRemove>
                 ) : null}
               </InfoAction>
