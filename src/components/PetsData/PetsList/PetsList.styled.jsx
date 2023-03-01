@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../../../utils/colors";
-import { device } from "../../../../utils/mixin";
+import { colors } from "../../../utils/colors";
+import { device } from "../../../utils/mixin";
 
 export const BoxPetsList = styled.div`
   ${device.desktop} {

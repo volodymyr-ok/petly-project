@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../../utils/mixin";
+import { device } from "../../utils/mixin";
 
 export const ContainerPetsDate = styled.div`
   margin-top: 40px;

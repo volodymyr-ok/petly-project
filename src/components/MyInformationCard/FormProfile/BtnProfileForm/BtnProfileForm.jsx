@@ -1,7 +1,7 @@
-import Pencil from "../../../../../assets/svg/pencil.svg";
-import BlackPencil from "../../../../../assets/svg/black-pencil.svg";
+import Pencil from "../../../../assets/svg/pencil.svg";
+import BlackPencil from "../../../../assets/svg/black-pencil.svg";
 import { BtnPencil } from "./BtnProfileForm.styled";
-import ok from "../../../../../assets/svg/btn-ok.svg";
+import ok from "../../../../assets/svg/btn-ok.svg";
 import { useState } from "react";
 
 export const BtnProfileForm = ({
