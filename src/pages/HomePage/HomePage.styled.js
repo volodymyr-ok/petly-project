@@ -15,49 +15,48 @@ import BgD2x from "../../img/HomePage/BgD@2x.png";
 import Union from "../../img/HomePage/Union.png";
 import Union2x from "../../img/HomePage/Union@2x.png";
 import { device } from "../../utils/mixin";
-
-export const Title = styled.h1`
-  max-width: 283px;
-  font-size: 31px;
-  line-height: 1.38;
-  font-weight: 700;
-  color: black;
-
-  @media screen and (min-width: 324px) {
-    font-size: 32px;
-  }
-
-  @media screen and (min-width: 768px) {
-    max-width: 588px;
-    font-size: 68px;
-    line-height: 1.47;
-  }
-`;
+import { colors } from "../../utils/colors";
 
 export const HomeSection = styled.section`
-  padding-top: 56px;
+  margin-top: 60px;
+  width: 100%;
+  min-height: calc(100vh - 72px - 60px); // 72px це висота хедера
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-image: url(${BgM});
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100vw 470px;
+
+  ${device.tablet} {
+    margin-top: 64px;
+    min-height: calc(100vh - 96px - 64px); // 96px це висота хедера
+  }
+
+  /* padding-top: 56px; */
   /* min-height: 543px; */
-  min-height: calc(100vh - 72px);
+  /* min-height: calc(100vh - 72px);
   background-repeat: no-repeat;
   background-position: bottom;
   background-image: url(${portraitM}), url(${BgM});
-  background-size: 324px 339px, 100vw 470px;
-  ${device.retina} {
+  background-size: 324px 339px, 100vw 470px; */
+  /* ${device.retina} {
     background-image: url(${portraitM2x}), url(${BgM2x});
-  }
-  ${device.tablet} {
-    /* min-height: 1108px; */
-    /* padding-top: 88px; */
+  } */
+  /* ${device.tablet} {
+    padding-top: 88px;
     padding-top: 20px;
     min-height: calc(100vh - 80px);
     background-image: url(${portraitT}), url(${BgT});
-    /* background-size: 645px 715px, 100vw 1033px; */
+    background-size: 645px 715px, 100vw 1033px;
     background-size: 645px 715px, 100vw calc(100vh - 116px);
     ${device.retina} {
       background-image: url(${portraitT2x}), url(${BgT2x});
     }
-  }
-  ${device.desktop} {
+  } */
+  /* ${device.desktop} {
     padding-top: 92px;
     background-image: url(${portraitD}), url(${BgD}), url(${Union});
     background-size: 590px 640px, 100vw calc(100vw * 0.375), 92px 89px;
@@ -66,8 +65,37 @@ export const HomeSection = styled.section`
     ${device.retina} {
       background-image: url(${portraitD2x}), url(${BgD2x}), url(${Union2x});
     }
-  }
-  & > div {
+  } */
+  /* & > div {
     margin: 0;
-  }
+  } */
 `;
+
+export const Title = styled.h1`
+  height: 88px;
+  font-size: 31px; // має бути 32, але тоді не влізає
+  line-height: calc(44px / 31px);
+  color: ${colors.black};
+
+  ${device.tablet} {
+    height: 200px;
+    font-size: 68px;
+    line-height: calc(100px / 68px);
+  }
+
+  /* max-width: 283px;
+  font-size: 31px;
+  line-height: 1.38;
+  font-weight: 700;
+  color: black; */
+  /* @media screen and (min-width: 324px) {
+    font-size: 32px;
+  } */
+  /* @media screen and (min-width: 768px) {
+    max-width: 588px;
+    font-size: 68px;
+    line-height: 1.47;
+  } */
+`;
+
+export const Background = styled.div``;
