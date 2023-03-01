@@ -7,7 +7,7 @@ import { ReactComponent as Plus } from "../../assets/svg/plusUpload.svg";
 export const UploadFile = ({ setFile }) => {
   const filePicker = useRef(null);
   const [selectedFile, setSelecetedFile] = useState(null);
-  const [uploaded, setUploaded] = useState(null);
+  //const [uploaded, setUploaded] = useState(null);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {

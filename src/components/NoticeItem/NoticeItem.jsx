@@ -10,58 +10,71 @@ import {
     InfoAction,
     BtnReadMore,
     BtnRemove,
-    SpaceBox
 } from "./NoticeItems.styled"
 
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import defImage from "../../img/defaultImg.jpeg"
+import { numberToWord } from "../../hooks/numberToString";
 
 const svgLike = SvgMarkup(24,22,"btnLike")
 const svgRemove = SvgMarkup(16,17,"btnRemove")
+const svgEdit = SvgMarkup(16,16,"edit")
 
 
-export const NoticeItem = ({arrayFromBack, addFavorite, removePost, readMoreModal}) => {
+export const NoticeItem = ({ addFavorite, onRemove, onReadMore, notices, user}) => {
+
+    const userId = user.id
     return <>
-                    {arrayFromBack.map(el=>{
-                    const {category, image, breed, place, age, id, isPostOwner} = el
+            {notices.map(el=>{
+                const {avatar,birthday,breed,categoryName,location,owner,price,title,_id} = el
+                    const textAge = numberToWord(birthday)
                     return (
-                       <Item key={id}>
-                            <ItemCategory>{category}</ItemCategory>
-                            <BtnAdd onClick={addFavorite}>
-                                    {svgLike}
+                        <Item key={_id}>
+                            <ItemCategory>{categoryName}</ItemCategory>
+                            <BtnAdd id={_id} className={owner === userId ? "edit": null} onClick={addFavorite}>
+                                    {owner === userId ? svgEdit : svgLike}
                             </BtnAdd>
                             <Image
-                                src={image? image : defImage}
-                                alt="some info !!!IMPORTANT"
+                                loading="lazy"
+                                src={avatar? avatar : defImage}
+                                alt={categoryName}
                                 width="280"
                                 height="288"
                             />
                             <Info>
-                                <Title>Cute dog looking for a home</Title>
+                                <Title>{title ? title : "Сute dog looking for a home"}</Title>
                                 <InfoList>
                                 <tbody>
                                 <tr>
                                     <InfoItem className="name">Breed:</InfoItem>
-                                    <InfoItem>{breed}</InfoItem>
+                                    <InfoItem>{breed? breed : "No info"}</InfoItem>
                                 </tr>
                                 <tr>
                                     <InfoItem className="name">Place:</InfoItem>
-                                    <InfoItem>{place}</InfoItem>
+                                    <InfoItem>{location? location : "No info"}</InfoItem>
                                 </tr>
                                 <tr>
                                     <InfoItem className="name">Age:</InfoItem>
-                                    <InfoItem>{age}</InfoItem>
+                                    <InfoItem>{textAge? textAge : "No info"}</InfoItem>
                                 </tr>
+                                {
+                                categoryName === "sell"? 
+                                <tr>
+                                    <InfoItem className="name">Price:</InfoItem>
+                                    <InfoItem>{price? price : "No info"}</InfoItem>
+                                </tr> : null
+                                }
                                 </tbody>
                                 </InfoList>
                                 <InfoAction>
-                                    <BtnReadMore onClick={readMoreModal}>Learn more</BtnReadMore>
-                                    {isPostOwner? <BtnRemove onClick={removePost}>
+                                    <BtnReadMore id={_id} onClick={onReadMore}>Learn more</BtnReadMore>
+                                    {owner === userId ? <BtnRemove id={_id} onClick={onRemove}>
                                         Delete{svgRemove}
-                                    </BtnRemove> : <SpaceBox></SpaceBox>}
+                                    </BtnRemove> : null }
                                 </InfoAction>
                             </Info>
-                       </Item> 
+                        </Item> 
                     )
-                })}</>
+            })}
+        </>
 }
