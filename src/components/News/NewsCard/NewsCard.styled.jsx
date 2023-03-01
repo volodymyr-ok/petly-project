@@ -51,6 +51,7 @@ export const Text = styled.p`
   line-height: 1.37;
 
   color: #111321;
+  height: 133px;
 `;
 
 export const NewsBox = styled.div`
