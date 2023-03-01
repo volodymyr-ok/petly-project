@@ -8,9 +8,9 @@ export const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
-/* html {
-  
-} */
+html {
+ height : 100%;
+}
 
 body {
   font-family: "Manrope", sans-serif;
@@ -20,6 +20,7 @@ body {
   margin: 0;
   padding: 0;
   min-width: 320px;
+  height: 100%;
 
    /* min-height: 601px;
 
