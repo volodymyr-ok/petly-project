@@ -26,18 +26,17 @@ const noticeSlice = createSlice({
     error: null,
   },
   extraReducers: (builder) => {
-    builder
-    .addCase(getNotice.pending, handlePending)
-    .addCase(getNotice.fulfilled, handleFulfilled)
-    .addCase(getNotice.rejected, handleRejected)
+    builder.addCase(getNotice.pending, handlePending);
+    builder.addCase(getNotice.fulfilled, handleFulfilled);
+    builder.addCase(getNotice.rejected, handleRejected);
 
-    .addCase(getNoticeById.pending, handlePending)
-    .addCase(getNoticeById.fulfilled, handleFulfilled)
-    .addCase(getNoticeById.rejected, handleRejected)
+    builder.addCase(getNoticeById.pending, handlePending);
+    builder.addCase(getNoticeById.fulfilled, handleFulfilled);
+    builder.addCase(getNoticeById.rejected, handleRejected);
 
-    .addCase(getNoticesBySearch.pending, handlePending)
-    .addCase(getNoticesBySearch.fulfilled, handleFulfilled)
-    .addCase(getNoticesBySearch.rejected, handleRejected)
+    builder.addCase(getNoticesBySearch.pending, handlePending);
+    builder.addCase(getNoticesBySearch.fulfilled, handleFulfilled);
+    builder.addCase(getNoticesBySearch.rejected, handleRejected);
   },
 });
 

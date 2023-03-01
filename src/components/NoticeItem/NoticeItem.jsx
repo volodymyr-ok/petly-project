@@ -12,11 +12,14 @@ import {
   BtnRemove,
 } from "./NoticeItems.styled";
 
+import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import defImage from "../../img/defaultImg.jpeg";
 import { numberToWord } from "../../hooks/numberToString";
-import { ReactComponent as Like } from "../../assets/svg/like.svg";
-import { ReactComponent as Remove } from "../../assets/svg/remove.svg";
-import { ReactComponent as Edit } from "../../assets/svg/pencil.svg";
+// import { ReactComponent as Pet } from "../../assets/svg/add-pet.svg";
+
+const svgLike = SvgMarkup(24, 22, "btnLike");
+const svgRemove = SvgMarkup(16, 17, "btnRemove");
+const svgEdit = SvgMarkup(16, 16, "edit");
 
 export const NoticeItem = ({
   addFavorite,
@@ -24,7 +27,7 @@ export const NoticeItem = ({
   onReadMore,
   notices,
   user,
-  favoritesList,
+  favotiresList,
 }) => {
   const userId = user.id;
 
@@ -42,18 +45,21 @@ export const NoticeItem = ({
           title,
           _id,
         } = el;
-
         const textAge = numberToWord(birthday);
-        const isFavorite = favoritesList?.includes(_id);
+        const isFavorite = favotiresList.includes(_id);
+
         return (
           <Item key={_id}>
             <ItemCategory>{categoryName}</ItemCategory>
             <BtnAdd
               id={_id}
               favorite={isFavorite ? "favorite" : "noFavorite"}
+              className={
+                owner === userId ? "edit" : isFavorite ? "favorite" : "null"
+              }
               onClick={(e) => addFavorite(e, _id, isFavorite)}
             >
-              {owner === userId ? <Edit width={16} height={16}/> : <Like width={24} height={22}/>}
+              {owner === userId ? svgEdit : svgLike}
             </BtnAdd>
             <Image
               loading="lazy"
@@ -67,20 +73,20 @@ export const NoticeItem = ({
               <InfoList>
                 <tbody>
                   <tr>
-                    <InfoItem name={"name"}>Breed:</InfoItem>
+                    <InfoItem className="name">Breed:</InfoItem>
                     <InfoItem>{breed ? breed : "No info"}</InfoItem>
                   </tr>
                   <tr>
-                    <InfoItem name={"name"}>Place:</InfoItem>
+                    <InfoItem className="name">Place:</InfoItem>
                     <InfoItem>{location ? location : "No info"}</InfoItem>
                   </tr>
                   <tr>
-                    <InfoItem name={"name"}>Age:</InfoItem>
+                    <InfoItem className="name">Age:</InfoItem>
                     <InfoItem>{textAge ? textAge : "No info"}</InfoItem>
                   </tr>
                   {categoryName === "sell" ? (
                     <tr>
-                      <InfoItem name={"name"}>Price:</InfoItem>
+                      <InfoItem className="name">Price:</InfoItem>
                       <InfoItem>{price ? price : "No info"}</InfoItem>
                     </tr>
                   ) : null}
@@ -92,8 +98,7 @@ export const NoticeItem = ({
                 </BtnReadMore>
                 {owner === userId ? (
                   <BtnRemove id={_id} onClick={onRemove}>
-                    Delete
-                    <Remove width={16} height={17}/>
+                    Delete{svgRemove}
                   </BtnRemove>
                 ) : null}
               </InfoAction>

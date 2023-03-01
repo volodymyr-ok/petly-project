@@ -3,7 +3,6 @@ import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
 
-
 export const Item = styled.li`
   position: relative;
   background-color: ${colors.white};
@@ -52,20 +51,24 @@ export const BtnAdd = styled(StyledButton)`
   fill: ${colors.white};
   stroke: ${colors.accentOrange};
   stroke-width: 1px;
-  stroke-dasharray: 80;
+  stroke-dasharray: 2, 2;
   stroke-linejoin: round;
   &.edit {
     fill: ${colors.accentOrange};
   }
-  svg {
-    fill: ${(p) => (p.favorite === "favorite" ? "#F59256" : "white")};
-    stroke: ${(p) => (p.favorite === "favorite" ? "white" : "#F59256")};
+  &.favorite {
+    fill: ${colors.accentOrange};
+    stroke: ${colors.accentOrange};
+
+    :hover {
+      background-color: ${colors.accentOrange};
+      stroke: ${colors.white};
+    }
   }
-  :hover, 
-  :focus {
-    background-color: ${colors.accentOrange};
-    stroke: ${colors.white};
-  }
+
+  /* svg {
+    fill: ${(p) => (p.favorite === "favorite" ? "red" : "green")};
+  } */
 `;
 export const Image = styled.img`
   object-fit: cover;
@@ -93,7 +96,9 @@ export const InfoItem = styled.td`
   font-weight: 500;
   font-size: 16px;
   line-height: 1.37;
-  min-width: ${(p) => (p.name === "name" ? "90px" : "0")};
+  &.name {
+    min-width: 90px;
+  }
 `;
 export const InfoAction = styled.div`
   display: flex;
