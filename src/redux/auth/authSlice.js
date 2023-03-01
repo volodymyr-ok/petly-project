@@ -5,6 +5,8 @@ import {
   logoutUser,
   registerUser,
   loginGoogle,
+  addFavorites,
+  removeFavorites,
   // getUserProfile,
 } from "./auth-operations";
 import { Notify } from "notiflix";
@@ -29,8 +31,8 @@ const authInitialState = {
         comments: "",
       },
     ],
-    notices: [""],
-    favorites: [""],
+    notices: [],
+    favorites: [],
   },
   token: null,
   isAuth: false,
@@ -40,6 +42,7 @@ const authInitialState = {
 
 const handlePending = (state) => {
   state.isLoading = true;
+  state.error = null;
 };
 
 const handleRejected = (state, action) => {
@@ -99,10 +102,32 @@ const authSlice = createSlice({
       .addCase(getUser.pending, handlePending)
       .addCase(getUser.rejected, handleRejected)
       .addCase(getUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
         state.isAuth = true;
         state.isLoading = false;
-        // Notify.failure(`${action.payload}`);
+      })
+
+      .addCase(addFavorites.pending, handlePending)
+      .addCase(addFavorites.rejected, handleRejected)
+      .addCase(addFavorites.fulfilled, (state, action) => {
+        state.user.favorites.push(action.payload);
+        state.isAuth = true;
+        state.error = null;
+        state.isLoading = false;
+      })
+
+      .addCase(removeFavorites.pending, handlePending)
+      .addCase(removeFavorites.rejected, handleRejected)
+      .addCase(removeFavorites.fulfilled, (state, action) => {
+        state.isAuth = true;
+        state.error = null;
+        state.isLoading = false;
+        const index = state.user.favorites.findIndex(
+          (el) => el === action.payload
+        );
+        state.user.favorites.splice(index, 1);
+        // state.user.favorites.push(action.payload);
       })
 
       .addCase(logoutUser.pending, handlePending)
