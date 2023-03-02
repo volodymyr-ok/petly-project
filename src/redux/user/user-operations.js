@@ -5,7 +5,6 @@ export const updateAvatars = createAsyncThunk(
   "/user/avatar",
   async (file, thunkAPI) => {
     try {
-      console.log("oper", file);
       const formData = new FormData();
       formData.append("avatar", file);
       const res = await PrivateApi.patch("/api/users/avatars", formData);

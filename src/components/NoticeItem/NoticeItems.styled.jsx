@@ -56,35 +56,33 @@ stroke-linejoin: round;
 }
 `
 export const Image = styled.img`
-object-fit: cover;
-${device.tablet}{
-}
-`
+  object-fit: cover;
+  ${device.tablet} {
+  }
+`;
 export const Info = styled.div`
-padding: 20px 12px 16px 12px;
-flex-grow: 1;
-${device.tablet}{
-  padding: 20px 20px 12px 20px ;
-}
-`
+  padding: 20px 12px 16px 12px;
+  flex-grow: 1;
+  ${device.tablet} {
+    padding: 20px 20px 12px 20px;
+  }
+`;
 export const Title = styled.h2`
   font-weight: 700;
   font-size: 28px;
   line-height: 1.35;
   letter-spacing: -0.01em;
   margin: 0 0 20px 0;
-`
+`;
 export const InfoList = styled.table`
   margin-bottom: 20px;
-`
+`;
 export const InfoItem = styled.td`
   font-weight: 500;
   font-size: 16px;
   line-height: 1.37;
-  &.name{
-    min-width: 90px;
-  }
-`
+  min-width: ${(p) => (p.name === "name" ? "90px" : "0")};
+`;
 export const InfoAction = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,14 +90,13 @@ export const InfoAction = styled.div`
   padding: 0;
   min-height: 88px;
   justify-content: center;
-  ${device.tablet}{
+  ${device.tablet} {
     padding: 0 24px;
   }
   ${device.desktop}{
     padding: 0;
   }
-
-`
+`;
 export const BtnReadMore = styled(StyledButton)`
 font-size: 16px;
 line-height: 1.37;

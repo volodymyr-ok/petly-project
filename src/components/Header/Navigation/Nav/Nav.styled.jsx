@@ -81,8 +81,9 @@ export const NavItem = styled(NavLink)`
     text-decoration: underline;
   }
 
-  &:active {
+  &.active {
     color: ${colors.darkOrange};
+    text-decoration: underline;
   }
 `;
 
@@ -117,7 +118,7 @@ export const NavUserItem = styled(NavLink)`
     background: ${colors.darkOrange};
   }
 
-  &:active {
+  &.active {
     // color: ${colors.darkOrange};
   }
 `;
