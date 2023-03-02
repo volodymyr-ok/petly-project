@@ -12,8 +12,6 @@ const PaginationBar = ({ info, setPage }) => {
   //     perPage,
   //     total
   //   );
-  const [pageParams, setPageParams] = useSearchParams("");
-  const page = pageParams.get("page") || "";
 
   const handlePageBtn = ({ target }) => {
     setPage(target.textContent);

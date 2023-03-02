@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectError,
-  selectIsLoading,
-  selectNews,
+  // selectIsLoading,
+  // selectNews,
 } from "../../../redux/news/news-selectors";
 import { getNews, getNewsBySearch } from "../../../redux/news/news-operations";
 import { NewsCard } from "../NewsCard/NewsCard";
