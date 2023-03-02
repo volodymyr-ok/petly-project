@@ -1,23 +1,39 @@
 import React from "react";
 import { Container } from "../Container/Container";
-import { BarWrapper } from "./PaginationBar.styled";
+import { Bar, BarWrapper } from "./PaginationBar.styled";
 
-const PaginationBar = () => {
+const PaginationBar = ({ info }) => {
+  //   console.log(
+  //     currentPage,
+  //     noticesLeft,
+  //     noticesOnPage,
+  //     pageCount,
+  //     perPage,
+  //     total
+  //   );
+
+  const renderButtons = () => {
+    const buttons = [];
+
+    for (let i = 1; i <= info.pageCount; i++) {
+      buttons.push(i);
+    }
+    return buttons;
+  };
+
+  console.log("renderButtons", renderButtons());
+
   return (
     <Container>
       <BarWrapper>
         <button>left</button>
-        <ul>
-          <li>
-            <button type="button">1</button>
-          </li>
-          <li>
-            <button type="button">2</button>
-          </li>
-          <li>
-            <button type="button">3</button>
-          </li>
-        </ul>
+        <Bar>
+          {renderButtons().map((e) => (
+            <li>
+              <button type="button">{e}</button>
+            </li>
+          ))}
+        </Bar>
         <button>rigth</button>
       </BarWrapper>
     </Container>
