@@ -5,7 +5,7 @@ import { AddNotice } from "../AddNotice/AddNotice";
 export const authorized = ["lost-found", "in good hands", "sell", "favorite ads", "my ads" ]
 export const notAuthorized = ["lost-found", "in good hands", "sell" ]
 
-export const NoticesCategoryNav = ({onChooseCategory, isLogined}) => {
+export const NoticesCategoryNav = ({onChooseCategory, isLogined, onAddPet}) => {
     return <>
             <NavBox>
                 <NavList onClick={onChooseCategory}>
@@ -19,7 +19,7 @@ export const NoticesCategoryNav = ({onChooseCategory, isLogined}) => {
                         </NavItem>
                     })}
                 </NavList>
-                <AddNotice/>
+                <AddNotice onAddPet={onAddPet}/>
             </NavBox>
     </>
 };
