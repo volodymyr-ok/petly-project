@@ -21,24 +21,15 @@ export const AddsPetForm = ({ onClose }) => {
 
       const formData = new FormData();
       formData.append("avatar", file);
-      const name = new FormData();
-      name.append("name", newData.name);
-      const breed = new FormData();
-      breed.append("breed", newData.breed);
-      const comments = new FormData();
-      comments.append("comments", newData.comments);
-      const birthday = new FormData();
-      birthday.append("birthday", newData.birthday);
-     
       const petInfo = {
-        // formData,
-        // name: name,
-        // breed: breed,
-        // birthday: birthday,
-         formData
+        name: newData.name,
+        breed: newData.breed,
+        birthday: newData.birthday,
+        comments: newData.comments,
+         avatar: formData
       }
       console.log(petInfo)
-      //dispatch(addPet(petInfo))
+      dispatch(addPet(petInfo))
       // tut robymo zapros vysylajemo body i avatar okremo
     }
  

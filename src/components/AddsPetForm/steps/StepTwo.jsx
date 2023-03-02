@@ -43,6 +43,7 @@ export const StepTwo = (props) => {
 
   const handleSubmit=(e)=>{
     props.next(e, true, file)
+    props.onClose()
   }
 
   return (

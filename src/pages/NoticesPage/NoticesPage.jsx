@@ -28,13 +28,12 @@ const NoticesPage = () => {
   const dispatch = useDispatch();
   const isLogined = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
-  const noticesAll = useSelector(selectNotice);
+  const notices = useSelector(selectNotice);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
   const favorites = useSelector(selectFavorites);
   const [sortedValue, setSortedValue] = useState("sell");
   const [isModal, setIsModal] = useState(false);
-
 
   useEffect(() => {
     if(sortedValue !== "my ads" && sortedValue !== "favorite ads" ){
@@ -76,7 +75,6 @@ const NoticesPage = () => {
     // console.log(e.target.id)
     // user.notices
   };
-  const notices = noticesAll.data
   const letGetPets = () =>{
     if(notices?.length>0){
       const newSortedArray = []
@@ -124,9 +122,6 @@ const NoticesPage = () => {
             />
           )}
         </div>
-        {isModal && <Modal onClose={()=>{setIsModal(!isModal)}}>
-          <AddsPetForm onClose={()=>{setIsModal(!isModal)}}/>
-          </Modal>}
       </Container>
     </>
   );
