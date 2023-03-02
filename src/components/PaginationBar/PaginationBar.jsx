@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Container } from "../Container/Container";
 import { Bar, BarWrapper } from "./PaginationBar.styled";
 
-const PaginationBar = ({ info }) => {
+const PaginationBar = ({ info, setPage }) => {
   //   console.log(
   //     currentPage,
   //     noticesLeft,
@@ -15,9 +15,8 @@ const PaginationBar = ({ info }) => {
   const [pageParams, setPageParams] = useSearchParams("");
   const page = pageParams.get("page") || "";
 
-  const handlePageBtn = (e, el) => {
-    console.log(e);
-    setPageParams(page !== "" ? { page: el } : {});
+  const handlePageBtn = ({ target }) => {
+    setPage(target.textContent);
   };
 
   const renderButtons = () => {

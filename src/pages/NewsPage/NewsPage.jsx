@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NewsList } from "../../components/News/NewsList/NewsList";
 import { Title } from "../../components/Title/Title";
 import { Container } from "../../components/Container/Container";
