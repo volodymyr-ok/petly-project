@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PrivateApi, PublicApi } from "../../http/http";
 
-export const addPet = createAsyncThunk("/api/pets/", async (credentials, thunkAPI) => {
+export const addPet = createAsyncThunk("/api/pets/", async (data, thunkAPI) => {
     try {
-      console.log(credentials)
-      const res = await PrivateApi.post(`/api/pets/`, credentials);
+      console.log(data)
+      const res = await PrivateApi.post(`/api/pets/`, data);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

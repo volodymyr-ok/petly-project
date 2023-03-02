@@ -51,8 +51,14 @@ export const BtnAdd = styled.button`
   stroke-width: 1px;
   stroke-dasharray: 80;
   stroke-linejoin: round;
-  &.edit {
-    fill: ${colors.accentOrange};
+  svg {
+    fill: ${(p) => (p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`)};
+    stroke: ${(p) => (p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`)};
+  }
+  :hover, 
+  :focus {
+    background-color: ${colors.accentOrange};
+    stroke: ${colors.white};
   }
 `;
 export const Image = styled.img`

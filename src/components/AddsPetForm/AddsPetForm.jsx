@@ -25,13 +25,14 @@ export const AddsPetForm = ({ onClose }) => {
         comments: newData.comments,
         avatar: avatar
       }
+      console.log(petInfo)
       dispatch(addPet(petInfo))
       // tut robymo zapros vysylajemo body i avatar okremo
     }
  
     setCurrentStep((prev) => prev + 1);
   };
-
+console.log(data)
   const handlePrevStep = (newData) => {
     setData((prev) => ({ ...prev, ...newData }));
     setCurrentStep((prev) => prev - 1);

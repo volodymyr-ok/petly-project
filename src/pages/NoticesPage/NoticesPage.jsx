@@ -35,6 +35,10 @@ const NoticesPage = () => {
   const [sortedValue, setSortedValue] = useState("sell");
   const [isModal, setIsModal] = useState(false);
 
+  const lrtTry = async() => {
+    const result = await dispatch(getNotice(""))
+  }
+
   useEffect(() => {
     if(sortedValue !== "my ads" && sortedValue !== "favorite ads" ){
       dispatch(getNotice(sortedValue));
@@ -43,6 +47,7 @@ const NoticesPage = () => {
     }
   }, [dispatch, sortedValue]);
 
+ 
 
   const onSubmit = (e) => {
     if(e !== ""){
