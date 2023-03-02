@@ -7,19 +7,22 @@ import {
   addFavorites,
   removeFavorites,
 } from "../../redux/auth/auth-operations";
-//import { useDispatch, useSelector } from "react-redux";
+import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
+import { Modal } from "../Modal/Modal";
+import { useState } from "react";
+
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 
 export const NoticesCategoryList = ({
   notices,
   onRemove,
-  onReadMore,
   user,
   isLogined,
   favorites,
 }) => {
   const dispatch = useDispatch();
-
+ const [isModal, setIsModal] = useState(false)
+ const [petInfo, setPetInfo] = useState(false)
   // useEffect(() => {
   //   console.log("favorites", favotires);
   // }, [favotires]);
@@ -32,8 +35,9 @@ export const NoticesCategoryList = ({
   };
 
   const handlerFavorite = (e, id, isFavorite) => {
+    console.log(e)
     if (!isLogined) {
-    // console.log("pls login first");
+    console.log("pls login first");
     }
     if (!favorites.includes(id)) {
       dispatch(addFavorites(id));
@@ -42,6 +46,16 @@ export const NoticesCategoryList = ({
     }
   };
 
+  const handlerModalInfo = (e) => {
+    if(e?.target.id && e?.target.id !== ""){
+      setIsModal(!isModal)
+      const petPost = notices.find((el) => el._id === e.target.id);
+      setPetInfo(petPost);
+    }
+   };
+const clickHandler=(e)=>{
+  console.log(e)
+}
   return (
     <ListBox>
       <BtnAddSticky onClick={handlerModalAddPet}>
@@ -58,13 +72,20 @@ export const NoticesCategoryList = ({
               handlerFavorite(e, id, isFavorite)
             }
             onRemove={onRemove}
-            onReadMore={onReadMore}
+            onReadMore={handlerModalInfo}
 
           ></NoticeItem>
         </List>
       ) : (
         <ResultNotFound />
       )}
+      {/* {isModal && <Modal onClose={()=>setIsModal(!isModal)}> <ModalFindPet petInfo={petInfo}/></Modal>} */}
+      {isModal && <Modal onClose={()=>setIsModal(!isModal)}>
+                     <ModalFindPet  
+                      favoritesList={favorites} 
+                      addFavorite={(e, id, isFavorite) => handlerFavorite(e, id, isFavorite)}
+                      petInfo={petInfo}/> 
+                  </Modal>}
     </ListBox>
   );
 };

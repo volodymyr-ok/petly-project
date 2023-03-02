@@ -36,7 +36,7 @@ export const ItemCategory = styled.p`
   backdrop-filter: blur(2px);
   font-family: "Manrope";
 `;
-export const BtnAdd = styled(StyledButton)`
+export const BtnAdd = styled.button`
   padding: 0%;
   position: absolute;
   top: 12px;
@@ -112,26 +112,13 @@ export const InfoAction = styled.div`
 export const BtnReadMore = styled(StyledButton)`
   font-size: 16px;
   line-height: 1.37;
-  display: flex;
-  align-items: center;
-  display: flex;
-  justify-content: center;
   align-items: center;
   color: ${colors.accentOrange};
   padding-top: 6px;
   padding-bottom: 6px;
 `;
-export const BtnRemove = styled(StyledButton)`
-  font-size: 16px;
-  line-height: 1.37;
-  display: flex;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const BtnRemove = styled(BtnReadMore)`
   color: ${colors.darkOrange};
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};
-  padding-top: 6px;
-  padding-bottom: 6px;
 `;

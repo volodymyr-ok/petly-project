@@ -81,10 +81,7 @@ const NoticesPage = () => {
       }
       return []
   }
-  const handlerModalInfo = (e) => {
-   // const petPost = notices.find((el) => el.id === e.target.id);
-    // console.log(petPost);
-  };
+
 
   return (
     <>
@@ -106,7 +103,6 @@ const NoticesPage = () => {
               favorites = {favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
-              onReadMore={handlerModalInfo}
               user={user}
             />
           )}

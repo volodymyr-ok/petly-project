@@ -15,7 +15,7 @@ export const ModalCard = styled.div`
   border-radius: 30px 30px 30px 30px;
   background-color: ${colors.white};
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: hidden; */
   ${device.mobile} {
     width: 440px;
   }

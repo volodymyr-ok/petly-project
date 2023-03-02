@@ -4,6 +4,7 @@ import { Backdrop, Content } from "./Modal.styled";
 
 const modalRoot = document.querySelector("#modal-root");
 export const Modal = ({ onClose, children }) => {
+  console.log(children)
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === "Escape") {
