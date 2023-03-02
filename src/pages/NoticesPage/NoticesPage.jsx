@@ -58,7 +58,6 @@ const NoticesPage = () => {
     const petPost = notices.find((el) => el.id === e.target.id);
     console.log(petPost);
   };
-
   return (
     <>
       <Container>

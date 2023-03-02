@@ -8,7 +8,9 @@ import {
   removeFavorites,
 } from "../../redux/auth/auth-operations";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Modal } from "../../components/Modal/Modal";
+import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 
@@ -21,16 +23,18 @@ export const NoticesCategoryList = ({
 }) => {
   const dispatch = useDispatch();
   const favotires = useSelector(selectFavorites);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     console.log("favorites", favotires);
   }, [favotires]);
 
   const handlerModalAddPet = (e) => {
+    console.log("click");
     if (!isLogined) {
       console.log("pls login first");
     }
-    console.log("modal add a pet", e);
+    setIsOpen(!isOpen);
   };
 
   const handlerFavorite = (e, id, isFavorite) => {
@@ -47,27 +51,38 @@ export const NoticesCategoryList = ({
   };
 
   return (
-    <ListBox>
-      <BtnAddSticky onClick={handlerModalAddPet}>
-        {svgAdd}
-        Add pet
-      </BtnAddSticky>
-      {notices.length > 0 ? (
-        <List>
-          <NoticeItem
-            user={user}
-            notices={notices}
-            favotiresList={favotires}
-            addFavorite={(e, id, isFavorite) =>
-              handlerFavorite(e, id, isFavorite)
-            }
-            onRemove={onRemove}
-            onReadMore={onReadMore}
-          ></NoticeItem>
-        </List>
-      ) : (
-        <ResultNotFound />
+    <>
+      <ListBox>
+        <button type="button" onClick={handlerModalAddPet}>
+          Add pet
+        </button>
+        <BtnAddSticky type="button" onClick={handlerModalAddPet}>
+          {svgAdd}
+          Add pet
+        </BtnAddSticky>
+        {notices.length > 0 ? (
+          <List>
+            <NoticeItem
+              user={user}
+              notices={notices}
+              favotiresList={favotires}
+              addFavorite={(e, id, isFavorite) =>
+                handlerFavorite(e, id, isFavorite)
+              }
+              onRemove={onRemove}
+              onReadMore={onReadMore}
+            ></NoticeItem>
+          </List>
+        ) : (
+          <ResultNotFound />
+        )}
+      </ListBox>
+
+      {isOpen && (
+        <Modal type="addPet" onClose={handlerModalAddPet}>
+          <ModalAddNotice onClose={handlerModalAddPet} />
+        </Modal>
       )}
-    </ListBox>
+    </>
   );
 };
