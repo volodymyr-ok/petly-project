@@ -90,13 +90,16 @@ export const ButtonCloseModal = styled.button`
   height: 34px;
   display: flex;
   transition: stroke 300ms linear;
-
-  svg {
-    fill: #000000;
-    &:hover {
+  :hover,
+  :focus {
+    svg {
       stroke: rgba(245, 146, 86, 1);
       fill: rgba(245, 146, 86, 1);
     }
+  }
+
+  svg {
+    fill: #000000;
   }
   justify-content: center;
   align-items: center;
