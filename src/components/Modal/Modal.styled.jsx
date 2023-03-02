@@ -10,7 +10,8 @@ export const Backdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(10px);
   z-index: 1200;
 `;
 
