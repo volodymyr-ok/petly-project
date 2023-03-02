@@ -8,7 +8,7 @@ export const Modal = ({ onClose, children, type = "default" }) => {
   const body = document.querySelector("body");
 
   useEffect(() => {
-    body.classList.add("no-scroll");
+    // body.classList.add("no-scroll");
   }, [body.classList]);
 
   console.log("type", type);
@@ -16,7 +16,7 @@ export const Modal = ({ onClose, children, type = "default" }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === "Escape") {
-        body.classList.remove("no-scroll");
+        // body.classList.remove("no-scroll");
         onClose();
       }
     };
@@ -30,7 +30,7 @@ export const Modal = ({ onClose, children, type = "default" }) => {
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      body.classList.remove("no-scroll");
+      // body.classList.remove("no-scroll");
       onClose();
     }
   };

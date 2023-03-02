@@ -2,7 +2,7 @@ import { ListBox, List, BtnAddSticky } from "./NoticesCategoryLIst.styled";
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import { NoticeItem } from "../NoticeItem/NoticeItem";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addFavorites,
   removeFavorites,
@@ -11,6 +11,7 @@ import { selectFavorites } from "../../redux/auth/auth-selectors";
 import { useEffect, useState } from "react";
 import { Modal } from "../../components/Modal/Modal";
 import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
+import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 //import { useDispatch, useSelector } from "react-redux";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 
@@ -79,7 +80,8 @@ export const NoticesCategoryList = ({
 
       {isOpen && (
         <Modal type="addPet" onClose={handlerModalAddPet}>
-          <ModalAddNotice onClose={handlerModalAddPet} />
+          <AddNoticeForm onClose={handlerModalAddPet} />
+          {/* <ModalAddNotice onClose={handlerModalAddPet} /> */}
         </Modal>
       )}
     </>
