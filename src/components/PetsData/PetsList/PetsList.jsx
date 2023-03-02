@@ -18,37 +18,6 @@ export const PetsList = ({pets}) => {
   // const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [arayPets] = useState([
-
-    {
-      name: "eragon ",
-      dateOfBirth: "5456546546",
-      breed: "hgfjhgfjhgf",
-      comments:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ratione magni laborum id aspernatur quam quia sapiente, accusantium placeat assumenda tempore, nesciunt illo est, officiis amet! Dicta ea qui consequuntur.",
-    },
-    {
-      name: "goga",
-      dateOfBirth: "54",
-      breed: "hartyyui",
-      comments:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ratione magni laborum id aspernatur quam quia sapiente, accusantium placeat assumenda tempore, nesciunt illo est, officiis amet! Dicta ea qui consequuntur.",
-    },
-    {
-      name: "oga",
-      dateOfBirth: "54",
-      breed: "hartyyui",
-      comments:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ratione magni laborum id aspernatur quam quia sapiente, accusantium placeat assumenda tempore, nesciunt illo est, officiis amet! Dicta ea qui consequuntur.",
-    },
-    {
-      name: "gog",
-      dateOfBirth: "4",
-      breed: "har",
-      comments:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ratione magni laborum id aspernatur quam quia sapiente, accusantium placeat assumenda tempore, nesciunt illo est, officiis amet! Dicta ea qui consequuntur.",
-    },
-  ]);
 
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -93,8 +62,6 @@ export const PetsList = ({pets}) => {
             </Box>
           );
         })}
-
-        {/* ))} */}
       </BoxScrollbar>
     </BoxPetsList>
   );
