@@ -1,4 +1,4 @@
-import AddPet from "../../../assets/svg/add-pet.svg";
+import { ReactComponent as AddPlusButton } from "../../../assets/svg/Addpet.svg";
 import { AddPetBtn } from "./BtnAddPet.styled";
 import { useState } from "react";
 import { Modal } from "./../../../components/AddsPetForm/Modal";
@@ -16,8 +16,7 @@ export const BtnAddPet = () => {
   return (
     <>
       <AddPetBtn type="button" onClick={openModal}>
-        <span>Add pet</span>
-        <img src={AddPet} alt="plus" />
+        <AddPlusButton />
       </AddPetBtn>
       {modalOpen && (
         <Modal onClose={closeModal}>

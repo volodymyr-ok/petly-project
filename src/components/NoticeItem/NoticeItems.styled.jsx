@@ -33,8 +33,8 @@ export const ItemCategory = styled.p`
   border-top-right-radius: 20px;
   backdrop-filter: blur(2px);
 `;
-export const BtnAdd = styled(StyledButton)`
-  padding: 0;
+export const BtnAdd = styled.button`
+  padding: 0%;
   position: absolute;
   top: 12px;
   right: 12px;
@@ -49,10 +49,16 @@ export const BtnAdd = styled(StyledButton)`
   fill: ${colors.white};
   stroke: ${colors.accentOrange};
   stroke-width: 1px;
-  stroke-dasharray: 2, 2;
+  stroke-dasharray: 80;
   stroke-linejoin: round;
-  &.edit {
-    fill: ${colors.accentOrange};
+  svg {
+    fill: ${(p) => (p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`)};
+    stroke: ${(p) => (p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`)};
+  }
+  :hover, 
+  :focus {
+    background-color: ${colors.accentOrange};
+    stroke: ${colors.white};
   }
 `;
 export const Image = styled.img`
@@ -100,22 +106,13 @@ export const InfoAction = styled.div`
 export const BtnReadMore = styled(StyledButton)`
   font-size: 16px;
   line-height: 1.37;
-  display: flex;
   align-items: center;
-  justify-content: center;
   color: ${colors.accentOrange};
   padding-top: 6px;
   padding-bottom: 6px;
 `;
-export const BtnRemove = styled(StyledButton)`
-  font-size: 16px;
-  line-height: 1.37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+export const BtnRemove = styled(BtnReadMore)`
   color: ${colors.darkOrange};
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};
-  padding-top: 6px;
-  padding-bottom: 6px;
 `;
