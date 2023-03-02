@@ -23,7 +23,7 @@ const NoticesPage = () => {
 
   const [sortedValue, setSortedValue] = useState("sell");
   const [sortedValue1, setSortedValue1] = useState("sell");
-  const [isModal, setIsModal] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -82,13 +82,14 @@ const notices = data.data
     }
   };
 
-  const handlerModalAddPet = async (e) => {
+  const handlerModalAddPet = (e) => {
     if (!isLogined) {
       console.log("pls login first");
     } else {
-      setIsModal(!isModal);
+      setIsOpen(!isOpen);
     }
   };
+
 
   const onChooseCategory = (e) => {
     const expr = e.target.textContent;
@@ -125,6 +126,7 @@ const notices = data.data
             <ResultNotFound />
           ) : (
             <NoticesCategoryList
+              isOpen = {isOpen}
               onAddPet={handlerModalAddPet}
               notices={notices}
               favorites = {favorites}

@@ -26,21 +26,23 @@ export const NoticesCategoryList = ({
   favorites,
   onAddPet,
   sortedValue,
+  isOpen
 }) => {
   const dispatch = useDispatch();
-  const [isOpen, setIsOpen] = useState(false);
+ // const [isOpen, setIsOpen] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [petInfo, setPetInfo] = useState({});
   // useEffect(() => {
   //   console.log("favorites", favotires);
   // }, [favotires]);
-  const handlerModalAddPet = (e) => {
-    console.log("click");
-    if (!isLogined) {
-      // console.log("pls login first");
-    }
-    setIsOpen(!isOpen);
-  };
+
+  // const handlerModalAddPet = (e) => {
+  //   console.log("click");
+  //   if (!isLogined) {
+  //     // console.log("pls login first");
+  //   }
+  //   setIsOpen(!isOpen);
+  // };
 
   const handlerFavorite = (e, id, isFavorite) => {
     if (!isLogined) {
@@ -65,14 +67,12 @@ export const NoticesCategoryList = ({
     }
  
   }
-
+  console.log(typeof(isOpen))
+  console.log(isOpen)
   return (
     <>
       <ListBox>
-        <button type="button" onClick={handlerModalAddPet}>
-          Add pet
-        </button>
-        <BtnAddSticky type="button" onClick={handlerModalAddPet}>
+        <BtnAddSticky type="button" onClick={onAddPet}>
           {svgAdd}
           Add pet
         </BtnAddSticky>
@@ -94,12 +94,13 @@ export const NoticesCategoryList = ({
           <ResultNotFound />
         )}
       </ListBox>
-
-      {isOpen && (
-        <Modal type="addPet" onClose={handlerModalAddPet}>
-          <AddNoticeForm onClose={handlerModalAddPet} />
+    
+    
+      { isOpen && 
+        <Modal type="addPet" onClose={onAddPet}>
+          <AddNoticeForm onClose={onAddPet} />
         </Modal>
-      )}
+      }
           {isModal && (
         <Modal type="addPet" onClose={()=>setIsModal(!isModal)}>
           <ModalFindPet 
