@@ -34,6 +34,7 @@ const UserPage = () => {
         setIsLoading(false);
       });
   }, []);
+  console.log(pets)
 
   return (
     <>
