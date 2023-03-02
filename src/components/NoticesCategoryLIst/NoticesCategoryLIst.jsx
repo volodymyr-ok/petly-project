@@ -2,7 +2,7 @@ import { ListBox, List, BtnAddSticky } from "./NoticesCategoryLIst.styled";
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import { NoticeItem } from "../NoticeItem/NoticeItem";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addFavorites,
   removeFavorites,
@@ -20,32 +20,31 @@ export const NoticesCategoryList = ({
   onReadMore,
   user,
   isLogined,
+  favorites,
 }) => {
   const dispatch = useDispatch();
   const favotires = useSelector(selectFavorites);
   const [isOpen, setIsOpen] = useState(true);
 
-  useEffect(() => {
-    console.log("favorites", favotires);
-  }, [favotires]);
+  // useEffect(() => {
+  //   console.log("favorites", favotires);
+  // }, [favotires]);
 
   const handlerModalAddPet = (e) => {
     console.log("click");
     if (!isLogined) {
-      console.log("pls login first");
+      // console.log("pls login first");
     }
     setIsOpen(!isOpen);
   };
 
   const handlerFavorite = (e, id, isFavorite) => {
     if (!isLogined) {
-      console.log("pls login first");
+      // console.log("pls login first");
     }
-    if (!favotires.includes(id)) {
+    if (!favorites.includes(id)) {
       dispatch(addFavorites(id));
-    }
-
-    if (isFavorite) {
+    } else if (isFavorite) {
       dispatch(removeFavorites(id));
     }
   };

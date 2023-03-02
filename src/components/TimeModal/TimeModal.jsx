@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { TimeWrap, TimeList, TimeItem, TimeDay } from "./TimeModal.styled";
 
 export const TimeModal = ({ workDays, onClick }) => {
+  const modalRef = useRef();
+
   const day = (index) => {
     switch (index) {
       case 0:
@@ -26,31 +28,34 @@ export const TimeModal = ({ workDays, onClick }) => {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleEscapeKey);
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        onClick();
+      }
+      return;
+    };
+
+    const handleOutsideClick = (event) => {
+      const { target } = event;
+
+      if (modalRef?.current && !modalRef?.current.contains(target))
+        onClick.call(this);
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscapeKey);
 
     return () => {
-      window.removeEventListener("keydown", handleEscapeKey);
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscapeKey);
     };
-  });
-
-  function handleBackdropClose(event) {
-    if (event.currentTarget === event.target) {
-      onClick();
-    }
-  }
-
-  function handleEscapeKey(event) {
-    if (event.key === "Escape") {
-      onClick();
-    }
-    return;
-  }
+  }, [modalRef, onClick]);
 
   return (
-    <TimeWrap>
+    <TimeWrap ref={modalRef}>
       <TimeList>
         {workDays.map(({ isOpen, from, to }, index) => (
-          <TimeItem key={index} onClick={handleBackdropClose}>
+          <TimeItem key={index}>
             {!isOpen && (
               <>
                 <TimeDay>{day(index)}</TimeDay>
