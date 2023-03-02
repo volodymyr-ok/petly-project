@@ -1,4 +1,4 @@
-import {ReactComponent as Close} from "../../../assets/svg/plusUpload.svg"
+import { ReactComponent as Close } from "../../../assets/svg/plusUpload.svg";
 import { BtnAddTo } from "./BtnAddTo/BtnAddTo";
 import { BtnContct } from "./BtnContact/BtnContact";
 import {
@@ -15,19 +15,38 @@ import {
   ComentsText,
   BlokButton,
   ImgAndInfoBox,
-  BtnClose
+  BtnClose,
 } from "./ModalFindPet.styled";
 
-export const ModalFindPet = ({petInfo, addFavorite, favoritesList, onClose}) => {
+export const ModalFindPet = ({
+  petInfo,
+  addFavorite,
+  favoritesList,
+  onClose,
+}) => {
+  const {
+    avatar,
+    birthday,
+    breed,
+    categoryName,
+    name,
+    sex,
+    location,
+    // owner,
+    price,
+    title,
+    _id,
+    coments,
+  } = petInfo;
 
-const { avatar, birthday, breed, categoryName, name, sex, location, owner, price, title, _id, coments} = petInfo;
-
-const isFavorite = favoritesList?.includes(_id);
-console.log(isFavorite)
+  const isFavorite = favoritesList?.includes(_id);
+  console.log(isFavorite);
 
   return (
-    <ModalCard >
-      <BtnClose onClick={onClose}><Close width={20} height={20}/></BtnClose>
+    <ModalCard>
+      <BtnClose onClick={onClose}>
+        <Close width={20} height={20} />
+      </BtnClose>
       <ImgAndInfoBox>
         <ImgBox>
           <img src={avatar} alt="pet" />
@@ -36,29 +55,29 @@ console.log(isFavorite)
 
         <BlokInfo>
           <Title>
-             {birthday? title : "Сute pet looking for a home"}
+            {birthday ? title : "Сute pet looking for a home"}
             {/* Сute dog looking <br /> for a home */}
           </Title>
           <ListInfo>
             <ItemInfo>
               <NameInfo>Name:</NameInfo>
-              <ValueInfo>{name? name: "No Info"}</ValueInfo>
+              <ValueInfo>{name ? name : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Birthday:</NameInfo>
-              <ValueInfo>{birthday? birthday: "No Info"}</ValueInfo>
+              <ValueInfo>{birthday ? birthday : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Breed:</NameInfo>
-              <ValueInfo>{breed? breed: "No Info"}</ValueInfo>
+              <ValueInfo>{breed ? breed : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Place:</NameInfo>
-              <ValueInfo>{location? location: "No Info"}</ValueInfo>
+              <ValueInfo>{location ? location : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>The sex:</NameInfo>
-              <ValueInfo>{sex? sex: "No Info"}</ValueInfo>
+              <ValueInfo>{sex ? sex : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
@@ -68,23 +87,26 @@ console.log(isFavorite)
               <NameInfo>Phone:</NameInfo>
               <ValueInfo>+380971234567</ValueInfo>
             </ItemInfo>
-            { categoryName === "sell"?
+            {categoryName === "sell" ? (
               <ItemInfo>
-              <NameInfo>Price:</NameInfo>
-              <ValueInfo>{price? price: "No Info"}</ValueInfo>
-            </ItemInfo> : null
-            }
+                <NameInfo>Price:</NameInfo>
+                <ValueInfo>{price ? price : "No Info"}</ValueInfo>
+              </ItemInfo>
+            ) : null}
           </ListInfo>
         </BlokInfo>
       </ImgAndInfoBox>
       <BlokComments>
         <ComentsText>
-          <span>Comments: </span>{coments? coments: "No Info"}
+          <span>Comments: </span>
+          {coments ? coments : "No Info"}
         </ComentsText>
       </BlokComments>
       <BlokButton>
-        <BtnContct  />
-        <BtnAddTo type="button" like ={(e) => addFavorite(e, _id, isFavorite)}>{isFavorite?"Remove from" : "Add to"}</BtnAddTo>
+        <BtnContct />
+        <BtnAddTo type="button" like={(e) => addFavorite(e, _id, isFavorite)}>
+          {isFavorite ? "Remove from" : "Add to"}
+        </BtnAddTo>
       </BlokButton>
     </ModalCard>
   );

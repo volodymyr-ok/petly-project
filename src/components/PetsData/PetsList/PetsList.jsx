@@ -14,7 +14,7 @@ import {
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
 
-export const PetsList = ({pets}) => {
+export const PetsList = ({ pets }) => {
   // const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,23 +31,33 @@ export const PetsList = ({pets}) => {
     <BoxPetsList>
       <BoxScrollbar>
         {pets.map((el) => {
-            const {avatarURL, birthday, breed,comments,createdAt,name,owner, updatedAt,_id} = el
+          const {
+            avatarURL,
+            birthday,
+            breed,
+            comments,
+            // createdAt,
+            name,
+            // owner,
+            // updatedAt,
+            _id,
+          } = el;
           return (
             <Box key={_id}>
-              <WrapperPicDiv src={avatarURL? avatarURL: defImage}/>
+              <WrapperPicDiv src={avatarURL ? avatarURL : defImage} />
               <Description>
                 <DeletePetBtn onClick={closeModal} />
                 <InfoPet>
-                  <b> Name:</b> {name? name : "No Info"}
+                  <b> Name:</b> {name ? name : "No Info"}
                 </InfoPet>
                 <InfoPet>
-                  <b> Date of birth:</b> {birthday? birthday: "No Info" }
+                  <b> Date of birth:</b> {birthday ? birthday : "No Info"}
                 </InfoPet>
                 <InfoPet>
-                  <b>Breed:</b> {breed? breed: "No Info"}
+                  <b>Breed:</b> {breed ? breed : "No Info"}
                 </InfoPet>
                 <InfoPet>
-                  <b> Comments:</b> {comments? comments: "No Info"}
+                  <b> Comments:</b> {comments ? comments : "No Info"}
                 </InfoPet>
               </Description>
               {isModalOpen && (
