@@ -3,12 +3,11 @@ import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
 
-
 export const Item = styled.li`
   position: relative;
   background-color: ${colors.white};
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  border-radius: 0px 0px 20px 20px;
+  border-radius: 0 0 20px 20px;
   width: 280px;
   display: flex;
   flex-direction: column;
@@ -22,7 +21,6 @@ export const Item = styled.li`
 export const ItemCategory = styled.p`
   position: absolute;
   top: 20px;
-  font-family: "Inter";
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
@@ -34,10 +32,9 @@ export const ItemCategory = styled.p`
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
   backdrop-filter: blur(2px);
-  font-family: "Manrope";
 `;
 export const BtnAdd = styled(StyledButton)`
-  padding: 0%;
+  padding: 0;
   position: absolute;
   top: 12px;
   right: 12px;
@@ -52,19 +49,10 @@ export const BtnAdd = styled(StyledButton)`
   fill: ${colors.white};
   stroke: ${colors.accentOrange};
   stroke-width: 1px;
-  stroke-dasharray: 80;
+  stroke-dasharray: 2, 2;
   stroke-linejoin: round;
   &.edit {
     fill: ${colors.accentOrange};
-  }
-  svg {
-    fill: ${(p) => (p.favorite === "favorite" ? "#F59256" : "white")};
-    stroke: ${(p) => (p.favorite === "favorite" ? "white" : "#F59256")};
-  }
-  :hover, 
-  :focus {
-    background-color: ${colors.accentOrange};
-    stroke: ${colors.white};
   }
 `;
 export const Image = styled.img`
@@ -106,7 +94,7 @@ export const InfoAction = styled.div`
     padding: 0 24px;
   }
   ${device.desktop} {
-    padding: 0%;
+    padding: 0;
   }
 `;
 export const BtnReadMore = styled(StyledButton)`
@@ -114,9 +102,7 @@ export const BtnReadMore = styled(StyledButton)`
   line-height: 1.37;
   display: flex;
   align-items: center;
-  display: flex;
   justify-content: center;
-  align-items: center;
   color: ${colors.accentOrange};
   padding-top: 6px;
   padding-bottom: 6px;
@@ -126,9 +112,7 @@ export const BtnRemove = styled(StyledButton)`
   line-height: 1.37;
   display: flex;
   align-items: center;
-  display: flex;
   justify-content: center;
-  align-items: center;
   color: ${colors.darkOrange};
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};

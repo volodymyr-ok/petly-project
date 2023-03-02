@@ -1,62 +1,118 @@
-import { CardMyInformation, ImgBox, CardBox } from "./MyInformationCard.styled";
-import { TitleProfile } from "../TitleProfile/TitleProfile";
-// import IconPlus from "../img/avatar.png";
-// import { BtnEditPhoto } from "./BtnEditPhoto/BtnEditPhoto";
-import { BtnLogOut } from "./BtnLogOut/BtnLogOut";
-import { FormProfile } from "./FormProfile/FormProfile";
-import { BtnEditPhoto } from "./BtnEditPhoto/BtnEditPhoto";
-import { useEffect, useState } from "react";
-import { UploadFile } from "../UploadFile/UploadFile";
-import { useSelector } from "react-redux";
-import { selectAvatar } from "../../redux/user/user-selections";
+import {
+    CardMyInformation,
+    ImgBox,
+    CardBox,
+    ImageBox,
+    PreviewBox,
+    PreviewBtn, LeftArrow
+} from "./MyInformationCard.styled";
+import {TitleProfile} from "../TitleProfile/TitleProfile";
+import {BtnLogOut} from "./BtnLogOut/BtnLogOut";
+import {FormProfile} from "./FormProfile/FormProfile";
+import {BtnEditPhoto} from "./BtnEditPhoto/BtnEditPhoto";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAvatar} from "../../redux/user/user-selections";
+import {Modal} from "../Modal/Modal";
+import Avatar from "react-avatar-edit";
+import {updateAvatars} from "../../redux/user/user-operations";
 
-const MyInformationCard = ({ user }) => {
-  const [isUploadFile, setIsUploadFile] = useState(false);
-  const [avatarURL, setAvatarURL] = useState(user?.avatarURL);
-  const [file, setFile] = useState(null);
-  const avatar = useSelector(selectAvatar);
+const MyInformationCard = ({user}) => {
+    const dispatch = useDispatch();
+    const [avatarURL, setAvatarURL] = useState(user?.avatarURL);
+    const [fileName, setFileName] = useState(null);
+    const [show, setShow] = useState(false);
+    const avatar = useSelector(selectAvatar);
+    const [preview, setPreview] = useState(null);
 
-  console.log("Temporary log (can be deleted) ===>",  file)
-  
-  useEffect(() => {
-    if (avatar) {
-      setAvatarURL(avatar);
-      setIsUploadFile(false);
+    function onClose() {
+        setPreview(null);
     }
-  }, [avatar]);
 
-  const editPhoto = () => {
-    setIsUploadFile(!isUploadFile);
-  };
+    const dataURLtoFile = (preview, filename) => {
+        const arr = preview.split(",");
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
 
-  const renderAvatar = () => {
-    if (isUploadFile) {
-      return (
-        <ImgBox>
-          <UploadFile setFile={setFile} />
-        </ImgBox>
-      );
-    } else {
-      return (
-        <ImgBox>
-          <img src={avatarURL} alt="user avatar" />
-        </ImgBox>
-      );
+        while (n--) u8arr[n] = bstr.charCodeAt(n);
+
+        return new File([u8arr], filename, { type: mime });
+    };
+
+    function saveImageHandler() {
+        if(preview){
+            dispatch(updateAvatars(dataURLtoFile(preview, fileName)))
+        }
+        setShow(false)
+        setPreview(null);
     }
-  };
 
-  // console.log(" MyInformatio", user);
-  return (
-    <CardBox>
-      <TitleProfile>My information:</TitleProfile>
-      <CardMyInformation>
-        {renderAvatar()}
-        {!isUploadFile && <BtnEditPhoto onClick={editPhoto} />}
-        <FormProfile user={user} />
-        <BtnLogOut />
-      </CardMyInformation>
-    </CardBox>
-  );
+    function onCrop(pv) {
+        setPreview(pv);
+    }
+
+    function onBeforeFileLoad(elem) {
+        if (elem.target.files[0].size > 71680) {
+            alert("File is too big!");
+            elem.target.value = "";
+        } else {
+            const name = elem.target.files[0].name.split('.')
+            setFileName(name[0] + ".png")
+        }
+    }
+
+    useEffect(() => {
+        if (avatar) {
+            setAvatarURL(avatar);
+        }
+    }, [avatar]);
+
+
+    return (
+        <CardBox>
+            <TitleProfile>My information:</TitleProfile>
+            <CardMyInformation>
+                <ImgBox>
+                    <img src={avatarURL} alt="user avatar"/>
+                </ImgBox>
+                <BtnEditPhoto onClick={() => setShow(!show)}/>
+                <FormProfile user={user}/>
+                <BtnLogOut/>
+                {show ?
+                    <Modal onClose={() => {
+                        setShow(!show)
+                        setPreview(null);
+                    }}>
+                        <div>
+
+                            <Avatar
+                                width={380}
+                                height={233}
+                                onCrop={onCrop}
+                                onClose={onClose}
+                                onBeforeFileLoad={onBeforeFileLoad}
+                                src={null}
+                                label={"Select a file"}
+                                backgroundColor={'transparent'}
+                                closeIconColor={'transparent'}
+                            />
+                            {preview && <PreviewBox>
+                                <LeftArrow/>
+                                <ImageBox>
+                                <img src={preview} alt="Preview" style={{ width: 150 }}/>
+                                <img src={preview} alt="Preview" style={{ width: 100 }}/>
+                                <img src={preview} alt="Preview" style={{ width: 50 }}/>
+                                </ImageBox>
+                                <PreviewBtn onClick={saveImageHandler}>Save</PreviewBtn>
+                            </PreviewBox>
+                            }
+                        </div>
+                    </Modal> : null}
+            </CardMyInformation>
+        </CardBox>
+    );
 };
 
 export default MyInformationCard;

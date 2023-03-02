@@ -53,7 +53,11 @@ export const NoticeItem = ({
               favorite={isFavorite ? "favorite" : "noFavorite"}
               onClick={(e) => addFavorite(e, _id, isFavorite)}
             >
-              {owner === userId ? <Edit width={16} height={16}/> : <Like width={24} height={22}/>}
+              {owner === userId ? (
+                <Edit width={16} height={16} />
+              ) : (
+                <Like width={24} height={22} />
+              )}
             </BtnAdd>
             <Image
               loading="lazy"
@@ -93,7 +97,7 @@ export const NoticeItem = ({
                 {owner === userId ? (
                   <BtnRemove id={_id} onClick={onRemove}>
                     Delete
-                    <Remove width={16} height={17}/>
+                    <Remove width={16} height={17} />
                   </BtnRemove>
                 ) : null}
               </InfoAction>
