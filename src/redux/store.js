@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 import { authReducer } from "./auth/authSlice";
 import { newsReducer } from "./news/newsSlice";
 import { noticeReducer } from "./notice/noticeSlice";
+import { petsReducer } from "./pets/petsSlice";
 import { userReducer } from "./user/userSlice";
 
 const authConfig = {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   news: newsReducer,
   notice: noticeReducer,
   user: userReducer,
+  pets: petsReducer,
 });
 
 export const store = configureStore({

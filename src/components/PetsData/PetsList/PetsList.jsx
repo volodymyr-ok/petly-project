@@ -13,7 +13,7 @@ import {
 } from "./PetsList.styled";
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
 
-export const PetsList = () => {
+export const PetsList = ({ pets }) => {
   // const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [arayPets] = useState([
@@ -46,7 +46,7 @@ export const PetsList = () => {
         " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ratione magni laborum id aspernatur quam quia sapiente, accusantium placeat assumenda tempore, nesciunt illo est, officiis amet! Dicta ea qui consequuntur.",
     },
   ]);
-
+  console.log(pets);
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
   };

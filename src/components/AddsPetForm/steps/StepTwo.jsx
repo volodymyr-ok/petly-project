@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from "react-redux";
+import { selectPets } from "../../../redux/pets/pets-selectors";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -19,12 +21,16 @@ import {
   NextBtn,
   CancelBtn,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
+import { addPets } from "../../../redux/pets/pets-operations";
 
 const validationSchema = yup.object({
   comments: yup.string().min(8).max(120).required(),
 });
 
 export const StepTwo = ({ data, prev, onClose }) => {
+  const dispatch = useDispatch();
+  const pets = useSelector(selectPets);
+  console.log(pets);
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -35,10 +41,15 @@ export const StepTwo = ({ data, prev, onClose }) => {
   };
 
   const [file, setFile] = useState(null);
-  console.log("Temporary log (can be deleted) ===>", file);
+  // console.log("Temporary log (can be deleted) ===>", file);
 
   const handleChange = (event) => {
     setFile(event.target.files[0]);
+  };
+
+  const onSubmit = () => {
+    dispatch(addPets(data));
+    console.log(data);
   };
 
   return (
@@ -73,13 +84,15 @@ export const StepTwo = ({ data, prev, onClose }) => {
                   type="text"
                   name="comments"
                   placeholder="Type comments"
-                  as="textarea"
+                  // as="textarea"
                 />
               </StyledLabel>
             </LabelBox>
             <FormError name="comments" />
             <FlexBox>
-              <NextBtn type="submit">Done</NextBtn>
+              <NextBtn type="button" onClick={onSubmit}>
+                Done
+              </NextBtn>
               <CancelBtn type="button" onClick={() => prev(values)}>
                 Back
               </CancelBtn>
