@@ -51,7 +51,7 @@ export const ModalItemTwo = styled.div`
 `;
 
 export const TitleItemTwo = styled.h4`
-  font-family: "Inter";
+  font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -61,7 +61,7 @@ export const TitleItemTwo = styled.h4`
   color: #111111;
   @media (min-width: 768px) {
     font-size: 20px;
-    line-height: 1.2;
+    line-height: 1.35;
     letter-spacing: -0.01em;
   }
 `;
@@ -89,20 +89,20 @@ export const ButtonCloseModal = styled.button`
   width: 34px;
   height: 34px;
   display: flex;
-  transition: color 300ms linear, background-color 300ms linear;
-  fill: rgba(17, 17, 17, 0.6);
+  transition: stroke 300ms linear;
+
   svg {
-    fill: rgba(17, 17, 17, 0.6);
+    fill: #000000;
     &:hover {
-      fill: rgba(245, 146, 86, 1);
       stroke: rgba(245, 146, 86, 1);
+      fill: rgba(245, 146, 86, 1);
     }
   }
   justify-content: center;
   align-items: center;
   position: absolute;
   border: none;
-  color: #111111;
+
   background: #fdf7f2;
   border-radius: 50%;
   @media (min-width: 768px) {
@@ -201,6 +201,7 @@ export const AddFile = styled.label`
 
 export const FieldTextarea = styled(Field)`
   cursor: pointer;
+  resize: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.35;

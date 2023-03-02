@@ -1,7 +1,7 @@
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
-import { ReactComponent as CloseButtonIcon } from "../../../assets/svg/clarity_close-line.svg";
+import { ReactComponent as CloseButtonIcon } from "../../../assets/svg/closeiconmodal.svg";
 import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import {
   LabelBox,

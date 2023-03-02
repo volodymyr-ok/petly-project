@@ -13,7 +13,7 @@ import {
   LabelBox,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
 import * as yup from "yup";
-import { ReactComponent as CloseButtonIcon } from "../../../assets/svg/clarity_close-line.svg";
+import { ReactComponent as CloseButtonIcon } from "../../../assets/svg/closeiconmodal.svg";
 const cyrillic = /[A-Za-z]/;
 const validationSchema = yup.object({
   name: yup
