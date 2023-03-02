@@ -25,7 +25,23 @@ export const NoticeItem = ({
   notices,
   user,
   favoritesList,
+  sortedValue,
 }) => {
+  const breedExt = (breed) => {
+    if (breed.length > 20) {
+      return breed
+        .split("")
+        .map((e) => {
+          if (breed.indexOf(e) < 5) {
+            return e;
+          }
+          return null;
+        })
+        .join("");
+    } else {
+      return breed;
+    }
+  };
   const userId = user.id;
 
   return (
@@ -42,6 +58,11 @@ export const NoticeItem = ({
           title,
           _id,
         } = el;
+
+        //   console.log(breed.length)
+        //   if(breed.length>20){
+        //   breedExt(breed)
+        // }
 
         const textAge = numberToWord(birthday);
         const isFavorite = favoritesList?.includes(_id);
@@ -72,7 +93,7 @@ export const NoticeItem = ({
                 <tbody>
                   <tr>
                     <InfoItem name={"name"}>Breed:</InfoItem>
-                    <InfoItem>{breed ? breed : "No info"}</InfoItem>
+                    <InfoItem>{breed ? breedExt(breed) : "No info"}</InfoItem>
                   </tr>
                   <tr>
                     <InfoItem name={"name"}>Place:</InfoItem>
@@ -91,7 +112,11 @@ export const NoticeItem = ({
                 </tbody>
               </InfoList>
               <InfoAction>
-                <BtnReadMore id={_id} onClick={onReadMore}>
+                <BtnReadMore
+                  to={`/notices/${sortedValue}/${_id}`}
+                  id={_id}
+                  onClick={onReadMore}
+                >
                   Learn more
                 </BtnReadMore>
                 {owner === userId ? (

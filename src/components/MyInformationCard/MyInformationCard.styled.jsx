@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
-import {StyledButton} from "../Button/Button.styled";
+import { StyledButton } from "../Button/Button.styled";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 
 export const CardBox = styled.div`
@@ -26,7 +26,7 @@ export const LeftArrow = styled(HiArrowLeftCircle)`
   top: -235px;
   width: 25px;
   height: 25px;
- color: ${colors.accentOrange};
+  color: ${colors.accentOrange};
 `;
 
 export const CardMyInformation = styled.div`
@@ -43,6 +43,7 @@ export const CardMyInformation = styled.div`
     flex-wrap: wrap;
   }
   ${device.desktop} {
+    margin-top: 25px;
     display: block;
     padding: 20px 16px 18px 16px;
     position: relative;
