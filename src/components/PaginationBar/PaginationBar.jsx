@@ -1,17 +1,9 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
 import { Container } from "../Container/Container";
 import { Bar, BarWrapper } from "./PaginationBar.styled";
 
 const PaginationBar = ({ info, setPage }) => {
-  //   console.log(
-  //     currentPage,
-  //     noticesLeft,
-  //     noticesOnPage,
-  //     pageCount,
-  //     perPage,
-  //     total
-  //   );
+  // currentPage, noticesLeft, noticesOnPage, pageCount, perPage, total
 
   const handlePageBtn = ({ target }) => {
     setPage(target.textContent);
