@@ -12,11 +12,14 @@ import {
   BoxScrollbar,
 } from "./PetsList.styled";
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
+import defImage from "../../../img/defaultImg.jpeg";
 
-export const PetsList = () => {
+export const PetsList = ({pets}) => {
   // const dispatch = useDispatch();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [arayPets] = useState([
+
     {
       name: "eragon ",
       dateOfBirth: "5456546546",
@@ -58,24 +61,24 @@ export const PetsList = () => {
   return (
     <BoxPetsList>
       <BoxScrollbar>
-        {/* {pets.map(({ _id, avatarURL, name, date, breed, comments }) => ( */}
-        {arayPets.map((el) => {
+        {pets.map((el) => {
+            const {avatarURL, birthday, breed,comments,createdAt,name,owner, updatedAt,_id} = el
           return (
-            <Box key={el.name}>
-              <WrapperPicDiv />
+            <Box key={_id}>
+              <WrapperPicDiv src={avatarURL? avatarURL: defImage}/>
               <Description>
                 <DeletePetBtn onClick={closeModal} />
                 <InfoPet>
-                  <b> Name:</b> {el.name}
+                  <b> Name:</b> {name? name : "No Info"}
                 </InfoPet>
                 <InfoPet>
-                  <b> Date of birth:</b> {el.dateOfBirth}
+                  <b> Date of birth:</b> {birthday? birthday: "No Info" }
                 </InfoPet>
                 <InfoPet>
-                  <b>Breed:</b> {el.breed}
+                  <b>Breed:</b> {breed? breed: "No Info"}
                 </InfoPet>
                 <InfoPet>
-                  <b> Comments:</b> {el.comments}
+                  <b> Comments:</b> {comments? comments: "No Info"}
                 </InfoPet>
               </Description>
               {isModalOpen && (
