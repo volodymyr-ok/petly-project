@@ -31,6 +31,10 @@ body {
   ${device.desktop} {
   min-height: 768px;
   } */
+
+  &.no-scroll {
+  overflow: hidden !important;
+}
  
 }
 
@@ -48,11 +52,16 @@ ol {
   padding: 0;
   list-style: none;
 }
+li {
+  list-style: none;
+}
 
 img {
   display: block;
   width: 100%;
 }
+
+
 
 input:-webkit-autofill,
   input:-webkit-autofill:hover,

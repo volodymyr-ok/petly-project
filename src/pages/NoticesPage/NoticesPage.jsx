@@ -103,7 +103,6 @@ const NoticesPage = () => {
     }
     return [];
   };
-
   return (
     <>
       <Container>
