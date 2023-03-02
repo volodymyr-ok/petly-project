@@ -19,6 +19,7 @@ export const NoticesCategoryList = ({
   user,
   isLogined,
   favorites,
+  onAddPet
 }) => {
   const dispatch = useDispatch();
  const [isModal, setIsModal] = useState(false)
@@ -27,15 +28,9 @@ export const NoticesCategoryList = ({
   //   console.log("favorites", favotires);
   // }, [favotires]);
 
-  const handlerModalAddPet = (e) => {
-    if (!isLogined) {
-     // console.log("pls login first");
-    }
-  //  console.log("modal add a pet", e);
-  };
+
 
   const handlerFavorite = (e, id, isFavorite) => {
-    console.log(e)
     if (!isLogined) {
     console.log("pls login first");
     }
@@ -53,12 +48,10 @@ export const NoticesCategoryList = ({
       setPetInfo(petPost);
     }
    };
-const clickHandler=(e)=>{
-  console.log(e)
-}
+
   return (
     <ListBox>
-      <BtnAddSticky onClick={handlerModalAddPet}>
+      <BtnAddSticky onClick={onAddPet}>
         {svgAdd}
         Add pet
       </BtnAddSticky>
@@ -79,12 +72,14 @@ const clickHandler=(e)=>{
       ) : (
         <ResultNotFound />
       )}
-      {/* {isModal && <Modal onClose={()=>setIsModal(!isModal)}> <ModalFindPet petInfo={petInfo}/></Modal>} */}
       {isModal && <Modal onClose={()=>setIsModal(!isModal)}>
-                     <ModalFindPet  
+                   <div>
+                   <ModalFindPet  
+                      onClose={()=>setIsModal(!isModal)}
                       favoritesList={favorites} 
                       addFavorite={(e, id, isFavorite) => handlerFavorite(e, id, isFavorite)}
                       petInfo={petInfo}/> 
+                   </div>
                   </Modal>}
     </ListBox>
   );

@@ -49,7 +49,7 @@ export const BtnAdd = styled.button`
   fill: ${colors.white};
   stroke: ${colors.accentOrange};
   stroke-width: 1px;
-  stroke-dasharray: 2, 2;
+  stroke-dasharray: 80;
   stroke-linejoin: round;
   &.edit {
     fill: ${colors.accentOrange};

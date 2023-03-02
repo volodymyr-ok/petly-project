@@ -21,6 +21,8 @@ import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
+import { Modal } from "../../components/Modal/Modal";
+import { AddsPetForm } from "../../components/AddsPetForm/AddsPetForm";
 
 const NoticesPage = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const NoticesPage = () => {
   const error = useSelector(selectError);
   const favorites = useSelector(selectFavorites);
   const [sortedValue, setSortedValue] = useState("sell");
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
     if(sortedValue !== "my ads" && sortedValue !== "favorite ads" ){
@@ -46,6 +49,14 @@ const NoticesPage = () => {
        dispatch(getNoticesBySearch(e));
     }
 
+  };
+
+  const handlerModalAddPet = (e) => {
+    if (!isLogined) {
+     console.log("pls login first");
+    }else{
+      setIsModal(!isModal)
+    }
   };
 
   const onChooseCategory = (e) => {
@@ -82,13 +93,13 @@ const NoticesPage = () => {
       return []
   }
 
-
   return (
     <>
       <Container>
         <Title>Find your favorite pet</Title>
         <SearchInput onSubmit={onSubmit} />
         <NoticesCategoryNav
+          onAddPet={handlerModalAddPet}
           isLogined={isLogined}
           onChooseCategory={onChooseCategory}
         />
@@ -99,6 +110,7 @@ const NoticesPage = () => {
             <ResultNotFound />
           ) : (
             <NoticesCategoryList
+              onAddPet={handlerModalAddPet}
               notices={letGetPets()}
               favorites = {favorites}
               isLogined={isLogined}
@@ -107,6 +119,9 @@ const NoticesPage = () => {
             />
           )}
         </div>
+        {isModal && <Modal onClose={()=>{setIsModal(!isModal)}}>
+          <AddsPetForm onClose={()=>{setIsModal(!isModal)}}/>
+          </Modal>}
       </Container>
     </>
   );

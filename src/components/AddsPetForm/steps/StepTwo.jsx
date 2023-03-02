@@ -21,10 +21,11 @@ import {
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
 
 const validationSchema = yup.object({
-  comments: yup.string().min(8).max(120).required(),
+  comments: yup.string().min(8).max(200).required(),
 });
 
-export const StepTwo = ({ data, prev, onClose }) => {
+export const StepTwo = (props) => {
+
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -35,21 +36,24 @@ export const StepTwo = ({ data, prev, onClose }) => {
   };
 
   const [file, setFile] = useState(null);
-  console.log("Temporary log (can be deleted) ===>", file);
 
   const handleChange = (event) => {
     setFile(event.target.files[0]);
   };
 
+  const handleSubmit=(e)=>{
+    props.next(e, true, file)
+  }
+
   return (
     <Formik
-      initialValues={data}
-      // onSubmit={handleSubmit}
+      initialValues={props.data}
+      onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
       {({ values }) => (
         <ModalItemTwo>
-          <ButtonCloseModal type="button" onClick={() => onClose()}>
+          <ButtonCloseModal type="button" onClick={() => props.onClose()}>
             <CloseButtonIcon />
           </ButtonCloseModal>
           <FormStyled>
@@ -66,6 +70,7 @@ export const StepTwo = ({ data, prev, onClose }) => {
               />
             </AddFile>
             <FormError name="myPetsPhoto" />
+
             <LabelBox>
               <StyledLabel htmlFor="comments">
                 Comments
@@ -73,14 +78,13 @@ export const StepTwo = ({ data, prev, onClose }) => {
                   type="text"
                   name="comments"
                   placeholder="Type comments"
-                  as="textarea"
                 />
               </StyledLabel>
             </LabelBox>
             <FormError name="comments" />
             <FlexBox>
-              <NextBtn type="submit">Done</NextBtn>
-              <CancelBtn type="button" onClick={() => prev(values)}>
+              <NextBtn type="submit" >Done</NextBtn>
+              <CancelBtn type="button" onClick={() => props.prev(values)}>
                 Back
               </CancelBtn>
             </FlexBox>

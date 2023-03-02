@@ -1,4 +1,4 @@
-import Dog from "../../../assets/dog.png";
+import {ReactComponent as Close} from "../../../assets/svg/plusUpload.svg"
 import { BtnAddTo } from "./BtnAddTo/BtnAddTo";
 import { BtnContct } from "./BtnContact/BtnContact";
 import {
@@ -15,23 +15,19 @@ import {
   ComentsText,
   BlokButton,
   ImgAndInfoBox,
+  BtnClose
 } from "./ModalFindPet.styled";
 
-export const ModalFindPet = ({petInfo, addFavorite, favoritesList}) => {
+export const ModalFindPet = ({petInfo, addFavorite, favoritesList, onClose}) => {
 
 const { avatar, birthday, breed, categoryName, name, sex, location, owner, price, title, _id, coments} = petInfo;
 
 const isFavorite = favoritesList?.includes(_id);
+console.log(isFavorite)
 
-const clickHandler = (e) =>{
-  console.log(e)
-}
   return (
-    <ModalCard>
-      {/* {petInfo.map(el=>{
-        const { avatar, birthday, breed, categoryName, location, owner, price, title, _id,} = el;
-        return
-      })} */}
+    <ModalCard >
+      <BtnClose onClick={onClose}><Close width={20} height={20}/></BtnClose>
       <ImgAndInfoBox>
         <ImgBox>
           <img src={avatar} alt="pet" />
@@ -87,9 +83,8 @@ const clickHandler = (e) =>{
         </ComentsText>
       </BlokComments>
       <BlokButton>
-        <BtnContct type="button"  />
-        {/* <BtnAddTo type="button" onClick ={(e) => addFavorite(e, _id, isFavorite)}/> */}
-        <BtnAddTo type="button" onClick ={clickHandler}/>
+        <BtnContct  />
+        <BtnAddTo type="button" like ={(e) => addFavorite(e, _id, isFavorite)}>{isFavorite?"Remove from" : "Add to"}</BtnAddTo>
       </BlokButton>
     </ModalCard>
   );
