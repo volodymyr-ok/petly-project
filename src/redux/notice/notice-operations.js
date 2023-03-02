@@ -7,7 +7,11 @@ export const getNotice = createAsyncThunk(
     try {
       if (value === "in good hands") value = "in-good-hands";
       const res = await PublicApi.get(`/api/notices/${value}`);
+<<<<<<< HEAD
       return res.data;
+=======
+      return res.data.data;
+>>>>>>> main
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -26,6 +30,7 @@ export const getNoticeById = createAsyncThunk(
   }
 );
 
+<<<<<<< HEAD
 export const addNotice = createAsyncThunk(
   "notices/addNotice",
   async (data, thunkAPI) => {
@@ -37,6 +42,8 @@ export const addNotice = createAsyncThunk(
     }
   }
 );
+=======
+>>>>>>> main
 export const addToFavorite = createAsyncThunk(
   "/notices/favorite",
   async (id, thunkAPI) => {
@@ -54,7 +61,7 @@ export const getNoticesBySearch = createAsyncThunk(
   async (query, thunkAPI) => {
     try {
       const res = await PublicApi.get(`/api/notices?search=${query}`);
-      return res.data;
+      return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
