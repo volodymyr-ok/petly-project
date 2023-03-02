@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
+import { NavLink } from "react-router-dom";
 
 export const Item = styled.li`
   position: relative;
@@ -55,8 +56,7 @@ export const BtnAdd = styled.button`
     fill: ${(p) => (p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`)};
     stroke: ${(p) => (p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`)};
   }
-  :hover, 
-  :focus {
+  :hover {
     background-color: ${colors.accentOrange};
     stroke: ${colors.white};
   }
@@ -103,15 +103,30 @@ export const InfoAction = styled.div`
     padding: 0;
   }
 `;
-export const BtnReadMore = styled(StyledButton)`
+export const BtnReadMore = styled(NavLink)`
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 28px;
+  font-family: 'Manrope';
+  font-weight: 500;
   font-size: 16px;
+  line-height: 1.37;
+  color: ${colors.primaryText};
+  border: 2px solid ${colors.accentOrange};
+  border-radius: 40px;
+  background-color: ${colors.white};
+  text-decoration: none;
+`;
+
+
+export const BtnRemove = styled(StyledButton)`
+ font-size: 16px;
   line-height: 1.37;
   align-items: center;
   color: ${colors.accentOrange};
   padding-top: 6px;
   padding-bottom: 6px;
-`;
-export const BtnRemove = styled(BtnReadMore)`
   color: ${colors.darkOrange};
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};
