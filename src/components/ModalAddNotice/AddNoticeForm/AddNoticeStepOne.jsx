@@ -64,7 +64,12 @@ export const AddNoticeStepOne = ({ values, error }) => {
         <LabelText>
           Tittle of ad<span>*</span>
         </LabelText>
-        <Input name="title" type="text" placeholder="Type name pet" />
+        <Input
+          name="title"
+          type="text"
+          data-title
+          placeholder="Type name pet"
+        />
         <FormError name="title" />
       </Label>
       <Label>

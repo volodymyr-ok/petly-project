@@ -1,4 +1,5 @@
 import { FormikWizard } from "formik-wizard-form";
+import { useEffect } from "react";
 import * as Yup from "yup";
 import { StepTwo } from "../../AuthForms/RegisterForm/StepTwo/StepTwo";
 import {
@@ -19,8 +20,6 @@ export const emailRegexp =
 const category = ["lost-found", "in-good-hands", "sell"];
 
 export const AddNoticeForm = ({ onClose }) => {
-
-  useE
   // const dispatch = useDispatch();
 
   const initialValues = {
