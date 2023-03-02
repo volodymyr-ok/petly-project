@@ -15,24 +15,36 @@ export const AddsPetForm = ({ onClose }) => {
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const handleNextStep = (newData, final = false, avatar = null) => {
+  const handleNextStep = (newData, final = false, file = null) => {
     setData((prev) => ({ ...prev, ...newData}));
     if (final) {
+
+      const formData = new FormData();
+      formData.append("avatar", file);
+      const name = new FormData();
+      name.append("name", newData.name);
+      const breed = new FormData();
+      breed.append("breed", newData.breed);
+      const comments = new FormData();
+      comments.append("comments", newData.comments);
+      const birthday = new FormData();
+      birthday.append("birthday", newData.birthday);
+     
       const petInfo = {
-        name: newData.name,
-        birthday: newData.birthday,
-        breed: newData.breed,
-        comments: newData.comments,
-        avatar: avatar
+        // formData,
+        // name: name,
+        // breed: breed,
+        // birthday: birthday,
+         formData
       }
       console.log(petInfo)
-      dispatch(addPet(petInfo))
+      //dispatch(addPet(petInfo))
       // tut robymo zapros vysylajemo body i avatar okremo
     }
  
     setCurrentStep((prev) => prev + 1);
   };
-console.log(data)
+
   const handlePrevStep = (newData) => {
     setData((prev) => ({ ...prev, ...newData }));
     setCurrentStep((prev) => prev - 1);

@@ -6,8 +6,10 @@ import { PublicApi } from "../../http/http";
 
 export const getNotice = createAsyncThunk("/notices", async (value, thunkAPI) => {
   try {
+
     if(value === "in good hands") value = "in-good-hands"
     const res = await PublicApi.get(`/api/notices/${value}`);
+    console.log(res.data)
     return res.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
