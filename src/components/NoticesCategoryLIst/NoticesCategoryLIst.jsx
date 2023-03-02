@@ -25,7 +25,7 @@ export const NoticesCategoryList = ({
 }) => {
   const dispatch = useDispatch();
   const favotires = useSelector(selectFavorites);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   // useEffect(() => {
   //   console.log("favorites", favotires);

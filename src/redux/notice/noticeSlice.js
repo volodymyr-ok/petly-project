@@ -36,8 +36,7 @@ const noticeSlice = createSlice({
       .addCase(getNotice.pending, handlePending)
       .addCase(getNotice.rejected, handleRejected)
       .addCase(getNotice.fulfilled, (state, action) => {
-        // console.log("chds", state.items, action.payload);
-        state.items = action.payload.data;
+        state.items = action.payload;
         state.error = null;
         state.isLoading = false;
       })
