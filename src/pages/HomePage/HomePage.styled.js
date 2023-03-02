@@ -48,7 +48,7 @@ export const HomeSection = styled.section`
     margin-bottom: 0;
     padding-bottom: 0;
 
-    min-height: calc(100vh - 88px - 33px); // 88px це висота хедера
+    min-height: calc(100vh - 88px - 40px); // 88px це висота хедера
     gap: 70px;
 
     background-image: url(${mainBgD});

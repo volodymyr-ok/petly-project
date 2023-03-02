@@ -3,7 +3,6 @@ import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
 
-
 export const Item = styled.li`
   position: relative;
   background-color: ${colors.white};
@@ -61,7 +60,7 @@ export const BtnAdd = styled(StyledButton)`
     fill: ${(p) => (p.favorite === "favorite" ? "#F59256" : "white")};
     stroke: ${(p) => (p.favorite === "favorite" ? "white" : "#F59256")};
   }
-  :hover, 
+  :hover,
   :focus {
     background-color: ${colors.accentOrange};
     stroke: ${colors.white};
