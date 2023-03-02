@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { PublicApi } from "../../http/http";
+import { PrivateApi, PublicApi } from "../../http/http";
 
 export const getNotice = createAsyncThunk(
   "/notices",
@@ -26,6 +26,17 @@ export const getNoticeById = createAsyncThunk(
   }
 );
 
+export const addNotice = createAsyncThunk(
+  "notices/addNotice",
+  async (data, thunkAPI) => {
+    try {
+      const res = await PrivateApi.post(`/api/notices`, data);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 export const addToFavorite = createAsyncThunk(
   "/notices/favorite",
   async (id, thunkAPI) => {

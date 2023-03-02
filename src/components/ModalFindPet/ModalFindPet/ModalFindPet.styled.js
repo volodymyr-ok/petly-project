@@ -3,10 +3,10 @@ import { colors } from "../../../utils/colors";
 import { device } from "../../../utils/mixin";
 
 export const ModalCard = styled.div`
-  position: absolute;
-  top: 50%;
+  position: relative;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) scale(1); */
 
   padding: 60px 20px 40px 20px;
   min-width: 280px;
@@ -15,7 +15,7 @@ export const ModalCard = styled.div`
   border-radius: 30px 30px 30px 30px;
   background-color: ${colors.white};
   overflow-y: auto;
-  overflow-x: hidden;
+  overflow-x: hidden; */
   ${device.mobile} {
     width: 440px;
   }
@@ -24,6 +24,33 @@ export const ModalCard = styled.div`
     padding: 32px 20px;
   }
 `;
+export const BtnClose = styled.button`
+position: absolute;
+right: 10px;
+top: 10px;
+border: 1px solid black;
+ cursor: pointer;
+ background-color: transparent;
+ border-radius: 50%;
+ width: 30px;
+ height: 30px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ stroke: ${colors.black};
+  stroke-width: 1px;
+  stroke-dasharray: 80;
+  stroke-linejoin: round;
+ & svg{
+  transform: rotate(45deg);
+ }
+ &:hover,
+  &:focus{
+    stroke: ${colors.darkOrange};
+    border-color: ${colors.darkOrange};
+  }
+ `;
+
 
 export const ImgAndInfoBox = styled.div`
   ${device.tablet} {

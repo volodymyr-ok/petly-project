@@ -21,6 +21,8 @@ import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
+// import { Modal } from "../../components/Modal/Modal";
+// import { AddsPetForm } from "../../components/AddsPetForm/AddsPetForm";
 
 const NoticesPage = () => {
   const dispatch = useDispatch();
@@ -31,67 +33,83 @@ const NoticesPage = () => {
   const error = useSelector(selectError);
   const favorites = useSelector(selectFavorites);
   const [sortedValue, setSortedValue] = useState("sell");
+  const [isModal, setIsModal] = useState(false);
 
   useEffect(() => {
-    if(sortedValue !== "my ads" && sortedValue !== "favorite ads" ){
+    if (sortedValue !== "my ads" && sortedValue !== "favorite ads") {
       dispatch(getNotice(sortedValue));
-    }else{
-      dispatch(getNotice(""))
+    } else {
+      dispatch(getNotice(""));
     }
   }, [dispatch, sortedValue]);
 
-
   const onSubmit = (e) => {
-    if(e !== ""){
-       dispatch(getNoticesBySearch(e));
+    if (e !== "") {
+      dispatch(getNoticesBySearch(e));
     }
+  };
 
+  const handlerModalAddPet = (e) => {
+    if (!isLogined) {
+      console.log("pls login first");
+    } else {
+      setIsModal(!isModal);
+    }
   };
 
   const onChooseCategory = (e) => {
     const expr = e.target.textContent;
-      authorized.map(el=>{
-        if(el === expr){
-          setSortedValue(expr)
-        }else{
-          return null
-        }
-        return null
-      })
-  }
-  const handlerRemove=(e)=>{
+    authorized.map((el) => {
+      if (el === expr) {
+        setSortedValue(expr);
+      } else {
+        return null;
+      }
+      return null;
+    });
+  };
+  const handlerRemove = (e) => {
     // console.log(e.target.id)
     // user.notices
   };
-  const letGetPets = () =>{
-    const newSortedArray = []
-      if(!isLogined){
-        return notices
-      }else if(isLogined && sortedValue !== "my ads" && sortedValue !== "favorite ads" ){
-        return notices
-      }else if(isLogined &&  sortedValue === "favorite ads" ){
-        notices.map(el=>{
-        return favorites.find(e=>{if(e===el._id){return newSortedArray.push(el)}return null})})
-        return newSortedArray
-      }else if(isLogined && sortedValue === "my ads" ){
-        notices.map(el=>{
-         if(el.owner===el._id) return newSortedArray.push(el)
-         return null })
-        return newSortedArray
+  const letGetPets = () => {
+    if (notices?.length > 0) {
+      const newSortedArray = [];
+      if (!isLogined) {
+        return notices;
+      } else if (
+        isLogined &&
+        sortedValue !== "my ads" &&
+        sortedValue !== "favorite ads"
+      ) {
+        return notices;
+      } else if (isLogined && sortedValue === "favorite ads") {
+        notices.map((el) => {
+          return favorites.find((e) => {
+            if (e === el._id) {
+              return newSortedArray.push(el);
+            }
+            return null;
+          });
+        });
+        return newSortedArray;
+      } else if (isLogined && sortedValue === "my ads") {
+        notices.map((el) => {
+          if (el.owner === el._id) return newSortedArray.push(el);
+          return null;
+        });
+        return newSortedArray;
       }
-      return []
-  }
-  const handlerModalInfo = (e) => {
-   // const petPost = notices.find((el) => el.id === e.target.id);
-    // console.log(petPost);
+    }
+    return [];
   };
-
   return (
     <>
       <Container>
         <Title>Find your favorite pet</Title>
         <SearchInput onSubmit={onSubmit} />
         <NoticesCategoryNav
+          onAddPet={handlerModalAddPet}
           isLogined={isLogined}
           onChooseCategory={onChooseCategory}
         />
@@ -102,11 +120,11 @@ const NoticesPage = () => {
             <ResultNotFound />
           ) : (
             <NoticesCategoryList
+              onAddPet={handlerModalAddPet}
               notices={letGetPets()}
-              favorites = {favorites}
+              favorites={favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
-              onReadMore={handlerModalInfo}
               user={user}
             />
           )}
