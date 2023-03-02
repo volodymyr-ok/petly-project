@@ -1,4 +1,5 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 import { Container } from "../Container/Container";
 import { Bar, BarWrapper } from "./PaginationBar.styled";
 
@@ -11,17 +12,21 @@ const PaginationBar = ({ info }) => {
   //     perPage,
   //     total
   //   );
+  const [pageParams, setPageParams] = useSearchParams("");
+  const page = pageParams.get("page") || "";
+
+  const handlePageBtn = (e, el) => {
+    console.log(e);
+    setPageParams(page !== "" ? { page: el } : {});
+  };
 
   const renderButtons = () => {
     const buttons = [];
-
     for (let i = 1; i <= info.pageCount; i++) {
       buttons.push(i);
     }
     return buttons;
   };
-
-  console.log("renderButtons", renderButtons());
 
   return (
     <Container>
@@ -29,12 +34,14 @@ const PaginationBar = ({ info }) => {
         <button>left</button>
         <Bar>
           {renderButtons().map((e) => (
-            <li>
-              <button type="button">{e}</button>
+            <li key={e + "buttonId"}>
+              <button type="button" onClick={handlePageBtn}>
+                {e}
+              </button>
             </li>
           ))}
         </Bar>
-        <button>rigth</button>
+        <button>right</button>
       </BarWrapper>
     </Container>
   );
