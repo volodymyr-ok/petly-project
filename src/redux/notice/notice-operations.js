@@ -41,7 +41,18 @@ export const addToFavorite = createAsyncThunk(
   "/notices/favorite",
   async (id, thunkAPI) => {
     try {
-      const res = await PublicApi.patch(`/api/notices/favorite/${id}`);
+      const res = await PublicApi.patch(`/api/notices/favorite`);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const getMyNorices = createAsyncThunk(
+  "/notices/my",
+  async (id, thunkAPI) => {
+    try {
+      const res = await PublicApi.patch(`/api/notices/my`);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

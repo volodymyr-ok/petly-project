@@ -24,6 +24,7 @@ export const ModalFindPet = ({
   favoritesList,
   onClose,
 }) => {
+
   const {
     avatar,
     birthday,
@@ -39,8 +40,7 @@ export const ModalFindPet = ({
     coments,
   } = petInfo;
 
-  const isFavorite = favoritesList?.includes(_id);
-  console.log(isFavorite);
+const isFavorite = favoritesList?.includes(_id);
 
   return (
     <ModalCard>
