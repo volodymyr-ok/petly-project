@@ -29,7 +29,7 @@ const validationSchema = yup.object({
 
 export const StepTwo = (props) => {
   const dispatch = useDispatch();
-  const pets = useSelector(selectPets);
+  // const pets = useSelector(selectPets);
   // console.log(pets);
 
   const FormError = ({ name }) => {
