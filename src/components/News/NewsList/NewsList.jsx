@@ -1,32 +1,28 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectError,
-  // selectIsLoading,
-  // selectNews,
-} from "../../../redux/news/news-selectors";
-import { getNews, getNewsBySearch } from "../../../redux/news/news-operations";
+// import { useDispatch, useSelector } from "react-redux";
+// import { selectError } from "../../../redux/news/news-selectors";
+// import { getNews, getNewsBySearch } from "../../../redux/news/news-operations";
 import { NewsCard } from "../NewsCard/NewsCard";
 import { SearchInput } from "../../SearchInput/SearchInput";
 import { PawsLoader } from "../../Loader/PawsLoader/PawsLoader";
 import { ListNews, Section } from "./NewsList.styled";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import PaginationBar from "../../PaginationBar/PaginationBar";
-import { getNews as getAllNews } from "../../../pages/NewsPage/newsServices";
+import { getNews, getNewsBySearch } from "../../../pages/NewsPage/newsServices";
 
 export const NewsList = () => {
+  // const dispatch = useDispatch();
+  // const error = useSelector(selectError);
+  // useEffect(() => {
+  //   dispatch(getNews());
+  // }, [dispatch]);
   const [news, setNews] = useState({});
   const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const dispatch = useDispatch();
-  // const news = useSelector(selectNews);
-  // const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
-
   // axios запит
   useEffect(() => {
-    getAllNews({ page })
+    getNews({ page })
       .then((d) => {
         setIsLoading(true);
         console.log("data ==>", d.data);
@@ -37,12 +33,8 @@ export const NewsList = () => {
       .catch((e) => console.log);
   }, [page]);
 
-  useEffect(() => {
-    dispatch(getNews());
-  }, [dispatch]);
-
-  const onSubmit = (search) => {
-    dispatch(getNewsBySearch(search));
+  const onSubmit = (query) => {
+    // dispatch(getNewsBySearch(search));
   };
 
   return (
@@ -54,7 +46,7 @@ export const NewsList = () => {
         <ListNews>
           {isLoading ? (
             <PawsLoader />
-          ) : error ? (
+          ) : !news.length ? (
             <ResultNotFound />
           ) : (
             <NewsCard news={news.data} />

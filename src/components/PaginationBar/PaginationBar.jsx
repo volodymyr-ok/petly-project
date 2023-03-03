@@ -15,39 +15,22 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   useEffect(() => {
     if (currentPage === 1) setIsPrevBtnDisabled(true);
     else setIsPrevBtnDisabled(false);
-
     if (currentPage === pageCount) setIsNextBtnDisabled(true);
     else setIsNextBtnDisabled(false);
   }, [currentPage, pageCount]);
 
-  //   const handlePrevBtnDisabled = () => {
-  //     if (currentPage === 1) setIsPrevBtnDisabled(true);
-  //     else setIsPrevBtnDisabled(false);
-  //   };
-
-  //   const handleNextBtnDisabled = () => {
-  //     if (currentPage === pageCount) return true;
-  //     else return false;
-  //   };
-
   const handlePrevPage = (e) => {
-    console.log("currentPage, e", currentPage, e);
     if (currentPage === 1) return;
     setPage(currentPage - 1);
   };
-
   const handleNextPage = (e) => {
-    console.log(e);
-
     if (currentPage === pageCount) return;
     setPage(currentPage + 1);
   };
 
-  const handleVariant = (num) => {
-    if (currentPage === num) {
-      console.log("hello");
-      return "active";
-    }
+  const handleActive = (num) => {
+    if (currentPage === num) return true;
+    return false;
   };
 
   const renderButtons = () => {
@@ -69,14 +52,14 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
           <AiOutlineLeftSquare />
         </button>
         <Bar>
-          {renderButtons().map((e) => (
-            <li key={e + "buttonId"}>
+          {renderButtons().map((el) => (
+            <li key={"buttonId" + el}>
               <NumBtn
                 type="button"
-                variant={handleVariant(e)}
+                active={handleActive(el)}
                 onClick={changePage}
               >
-                {e}
+                {el}
               </NumBtn>
             </li>
           ))}

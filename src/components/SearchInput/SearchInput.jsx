@@ -10,31 +10,27 @@ export const SearchInput = ({ onSubmit }) => {
   const debounce = useDebounce(1000);
 
   useEffect(() => {
-    if (!search) {
-      onSubmit(search);
-    }
+    if (!search) onSubmit(search);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const onInputChange = (e) => {
     setSearch(e.target.value);
-    debounce(() => {
-      onSubmit(e.target.value);
-    });
+    debounce(() => onSubmit(e.target.value));
   };
 
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const onButtonClick = () => {
-    setSearch("");
-  };
+  const onFormSubmit = (e) => e.preventDefault();
+  const onButtonClick = () => setSearch("");
 
   return (
     <SearchForm onSubmit={onFormSubmit}>
       <Label>
-        <Input type="text" placeholder="Search" onChange={onInputChange} value={search} />
+        <Input
+          type="text"
+          placeholder="Search"
+          onChange={onInputChange}
+          value={search}
+        />
         {!search ? (
           <SearchButton type="submit">
             <img src={searchBtn} alt="search" />

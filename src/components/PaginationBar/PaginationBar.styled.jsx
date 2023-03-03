@@ -16,6 +16,5 @@ export const Bar = styled.ul`
 `;
 
 export const NumBtn = styled.button`
-  background-color: ${({ variant }) =>
-    variant === "active" ? "#f3800f" : "#397eba"};
+  background-color: ${({ active }) => (active ? "#f3800f" : "#397eba")};
 `;

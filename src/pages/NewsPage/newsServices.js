@@ -17,6 +17,13 @@ export const getNews = async (params) => {
   return response.data;
 };
 
+export const getNewsBySearch = async (query, params) => {
+  try {
+    const res = await newsApi.get(`/news?search=${query}`, { params });
+    return res.data;
+  } catch (error) {}
+};
+
 // export const getNotice1 = async (value) => {
 //   try {
 //     if (value === "in good hands") value = "in-good-hands";
