@@ -59,11 +59,11 @@ export const LabelText = styled.span`
   }
 `;
 export const LabelSex = styled(Label)`
-  margin-bottom: 8px;
+  margin-bottom: 18px;
   display: inline-block;
 
   ${device.tablet} {
-    margin-bottom: 12px;
+    margin-bottom: 31px;
   }
 
   span {
@@ -106,7 +106,7 @@ export const SexBox = styled.div`
 
   label {
     display: flex;
-    gap: 20px;
+    gap: 14px;
     flex-direction: column;
     align-items: center;
     font-size: 18px;
@@ -114,6 +114,10 @@ export const SexBox = styled.div`
     line-height: 1.4;
     color: ${colors.black};
     cursor: pointer;
+
+    ${device.tablet} {
+      gap: 20px;
+    }
 
     svg {
       position: relative;
@@ -234,13 +238,14 @@ export const ButtonBox = styled.div`
     width: 100%;
     gap: 20px;
     justify-content: center;
-    margin-top: 12px;
+    /* margin-top: 12px; */
   }
 `;
 export const Button = styled.button`
   padding: 8px 37px;
   background-color: #f59256;
   border: 2px solid #f59256;
+  /* margin-top: 12px; */
   border-radius: 40px;
   font-weight: 500;
   font-size: 20px;
@@ -335,7 +340,9 @@ export const FieldTextarea = styled(Field)`
     border: 1px solid rgba(245, 146, 86, 0.5);
   }
   ::placeholder {
-    padding: 14px 12px;
+    font-family: "Manrope";
+    font-style: normal;
+    /* padding: 14px 12px; */
     font-weight: 400;
     font-size: 14px;
     line-height: 1.35;
@@ -347,7 +354,7 @@ export const FieldTextarea = styled(Field)`
     line-height: 1.6;
     margin-top: 20px;
     padding: 16px;
-    width: 394px;
+    /* width: 394px; */
     height: 116px;
   }
 `;
@@ -356,7 +363,7 @@ export const LabelBox = styled.div`
   position: relative;
   margin-bottom: 16px;
   ${device.tablet} {
-    margin-bottom: 28px;
+    margin-bottom: 12px;
   }
 `;
 
