@@ -33,6 +33,16 @@ export const FriendsItems = ({
   };
 
   const weekday = new Date().getDay() - 1;
+  const userTime = new Date().getHours();
+
+  const isStoreOpen = (weekday) => {
+    if (!weekday) return;
+
+    const toTime = +weekday?.to?.split(":")[0];
+    const fromTime = +weekday?.from?.split(":")[0];
+
+    return userTime < toTime && userTime >= fromTime;
+  };
 
   return (
     title && (
@@ -61,9 +71,9 @@ export const FriendsItems = ({
             {workDays && (
               <InfoWrap onClick={toggleModal}>
                 <p>Time:</p>
-                {workDays[weekday].isOpen ? (
+                {isStoreOpen(workDays[weekday]) ? (
                   <p>
-                    {workDays[weekday].from} -{workDays[weekday].to}
+                    {workDays[weekday].from} - {workDays[weekday].to}
                   </p>
                 ) : (
                   <p>Closed</p>
