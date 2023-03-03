@@ -13,7 +13,6 @@ import {
   getNotice,
   getNoticesBySearch,
 } from "../../redux/notice/notice-operations";
-//import { getNoticeById} from "../../redux/notice/notice-operations";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
@@ -21,8 +20,6 @@ import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
-// import { Modal } from "../../components/Modal/Modal";
-// import { AddsPetForm } from "../../components/AddsPetForm/AddsPetForm";
 
 const NoticesPage = () => {
   const dispatch = useDispatch();

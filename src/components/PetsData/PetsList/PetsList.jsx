@@ -30,7 +30,7 @@ export const PetsList = ({ pets }) => {
   return (
     <BoxPetsList>
       <BoxScrollbar>
-        {pets.map((el) => {
+        {pets?.map((el) => {
           const {
             avatarURL,
             birthday,
