@@ -11,8 +11,6 @@ export const Modal = ({ onClose, children, type = "default" }) => {
     // body.classList.add("no-scroll");
   }, [body.classList]);
 
-  console.log("type", type);
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === "Escape") {

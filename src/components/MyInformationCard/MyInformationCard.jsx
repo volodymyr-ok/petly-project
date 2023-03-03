@@ -69,7 +69,7 @@ const MyInformationCard = ({user}) => {
         }
     }, [avatar]);
 
-
+    
     return (
         <CardBox>
             <TitleProfile>My information:</TitleProfile>

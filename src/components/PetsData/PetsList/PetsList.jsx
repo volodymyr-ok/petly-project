@@ -14,7 +14,7 @@ import {
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
 
-export const PetsList = ({ pets }) => {
+export const PetsList = ({ pets, onRemove }) => {
   // const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,15 +36,12 @@ export const PetsList = ({ pets }) => {
             birthday,
             breed,
             comments,
-            // createdAt,
             name,
-            // owner,
-            // updatedAt,
             _id,
           } = el;
           return (
             <Box key={_id}>
-              <WrapperPicDiv src={avatarURL ? avatarURL : defImage} />
+              <WrapperPicDiv><img src={avatarURL ? avatarURL : defImage} alt={name} /></WrapperPicDiv>
               <Description>
                 <DeletePetBtn onClick={closeModal} />
                 <InfoPet>
@@ -62,8 +59,9 @@ export const PetsList = ({ pets }) => {
               </Description>
               {isModalOpen && (
                 <WarningMessage
+                  onRemove={(id)=>onRemove(id)}
                   type="approve"
-                  // id={_id}
+                  id={_id}
                   // approveFunk={deletePetItem}
                   onClose={closeModal}
                   text="Do you want to delete the pet?"

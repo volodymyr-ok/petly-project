@@ -10,7 +10,7 @@ import {
 } from "./PetsData.styled";
 import { BtnAddPet } from "./BtnAddPet/BtnAddPet";
 
-export const PetsData = ({ pets }) => {
+export const PetsData = ({ pets, onRemove }) => {
   return (
     <ContainerPetsDate>
       <BoxMessage>
@@ -19,7 +19,7 @@ export const PetsData = ({ pets }) => {
         <BtnAddPet />
       </BoxMessage>
 
-      <PetsList pets={pets} />
+      <PetsList pets={pets} onRemove={(id)=>onRemove(id)} />
     </ContainerPetsDate>
   );
 };

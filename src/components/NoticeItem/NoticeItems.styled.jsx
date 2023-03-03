@@ -52,13 +52,23 @@ export const BtnAdd = styled.button`
   stroke-width: 1px;
   stroke-dasharray: 80;
   stroke-linejoin: round;
+  transition-duration: 500ms;
   svg {
     fill: ${(p) => (p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`)};
     stroke: ${(p) => (p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`)};
+    fill: ${(p) => (p.edit === "edit" && `transparent`)};
+    stroke: ${(p) => (p.edit === "edit" && `${colors.accentOrange}`)};
+    transition-duration: 500ms;
   }
   :hover {
+
     background-color: ${colors.accentOrange};
     stroke: ${colors.white};
+  }
+  :hover svg {
+    transform: ${(p) => (p.favorite === "favorite" && `scale(1.1)`)};
+    stroke: ${(p) => (p.edit === "edit" && `${colors.white}`)};
+    transform: ${(p) => (p.edit === "edit" && `scale(1.2)`)};
   }
 `;
 export const Image = styled.img`

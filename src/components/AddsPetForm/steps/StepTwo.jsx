@@ -1,8 +1,4 @@
-import {
-  useDispatch,
-  // useSelector
-} from "react-redux";
-// import { selectPets } from "../../../redux/pets/pets-selectors";
+
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -24,16 +20,13 @@ import {
   NextBtn,
   CancelBtn,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
-import { addPets } from "../../../redux/pets/pets-operations";
+
 
 const validationSchema = yup.object({
   comments: yup.string().min(8).max(200).required(),
 });
 
 export const StepTwo = (props) => {
-  const dispatch = useDispatch();
-  // const pets = useSelector(selectPets);
-  // console.log(pets);
 
   const FormError = ({ name }) => {
     return (
@@ -51,19 +44,8 @@ export const StepTwo = (props) => {
   };
 
   const handleSubmit = (e) => {
-    // props.next(e, true, file);
-    props.onClose();
-    const { file, name, birthday, breed, comments } = props.data;
-    const formData = new FormData();
-    formData.append("avatarURL", file);
-    formData.append("name", name);
-    formData.append("birthday", birthday);
-    formData.append("breed", breed);
-    formData.append("comments", comments);
-
-    console.log("handleSubm", file);
-
-    dispatch(addPets(formData));
+     props.next(e, true, imgFile);
+     props.onClose();
   };
 
   return (

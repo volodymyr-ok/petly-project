@@ -33,7 +33,7 @@ export const ModalFindPet = ({
     name,
     sex,
     location,
-    // owner,
+    owner,
     price,
     title,
     _id,
@@ -41,6 +41,8 @@ export const ModalFindPet = ({
   } = petInfo;
 
 const isFavorite = favoritesList?.includes(_id);
+const email = owner?.email
+const number = owner?.number
 
   return (
     <ModalCard>
@@ -52,7 +54,6 @@ const isFavorite = favoritesList?.includes(_id);
           <img src={avatar} alt="pet" />
           <TextOnImg>Sell</TextOnImg>
         </ImgBox>
-
         <BlokInfo>
           <Title>
             {birthday ? title : "Сute pet looking for a home"}
@@ -81,11 +82,11 @@ const isFavorite = favoritesList?.includes(_id);
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              <ValueInfo>user@mail1111111.com</ValueInfo>
+              <ValueInfo>{email? {email} :"user@mail1111111.com"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
-              <ValueInfo>+380971234567</ValueInfo>
+              <ValueInfo>{number? {number}:"+380971234567"}</ValueInfo>
             </ItemInfo>
             {categoryName === "sell" ? (
               <ItemInfo>
@@ -104,7 +105,7 @@ const isFavorite = favoritesList?.includes(_id);
       </BlokComments>
       <BlokButton>
         <BtnContct />
-        <BtnAddTo type="button" like={(e) => addFavorite(e, _id, isFavorite)}>
+        <BtnAddTo type="button" like={(e) => addFavorite(e, _id, owner, isFavorite)}>
           {isFavorite ? "Remove from" : "Add to"}
         </BtnAddTo>
       </BlokButton>
