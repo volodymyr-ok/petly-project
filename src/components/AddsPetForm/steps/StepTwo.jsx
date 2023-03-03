@@ -20,7 +20,7 @@ import {
   NextBtn,
   CancelBtn,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
-
+import {ImageCropper} from '../../ImageCropper/ImageCropper'
 
 const validationSchema = yup.object({
   comments: yup.string().min(8).max(200).required(),
@@ -73,7 +73,7 @@ export const StepTwo = (props) => {
               />
             </AddFile>
             <FormError name="myPetsPhoto" />
-
+            <button>Privet</button>
             <LabelBox>
               <StyledLabel htmlFor="comments">
                 Comments
