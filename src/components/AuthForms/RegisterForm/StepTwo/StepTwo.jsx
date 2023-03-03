@@ -27,10 +27,10 @@ export const StepTwo = ({
   // console.log(country);
   return (
     <>
-      {/* <Label>
+      <Label>
         <Input name="name" placeholder="Name" />
         <FormError name="name" />
-      </Label> */}
+      </Label>
       <Label>
         {/* <RegionInput>
                     <CountryDropdown
