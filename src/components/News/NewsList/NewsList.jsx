@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectError } from "../../../redux/news/news-selectors";
-// import { getNews, getNewsBySearch } from "../../../redux/news/news-operations";
 import { NewsCard } from "../NewsCard/NewsCard";
 import { SearchInput } from "../../SearchInput/SearchInput";
 import { PawsLoader } from "../../Loader/PawsLoader/PawsLoader";
 import { ListNews, Section } from "./NewsList.styled";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import PaginationBar from "../../PaginationBar/PaginationBar";
-import { getNews, getNewsBySearch } from "../../../pages/NewsPage/newsServices";
+import { getNews } from "../../../pages/NewsPage/newsServices";
 
 export const NewsList = () => {
   const [news, setNews] = useState({});
   const [page, setPage] = useState(1);
-  // const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  // axios запит
+
   useEffect(() => {
-    getNews({ page })
+    getNews({ page, search })
       .then((d) => {
         setIsLoading(true);
 
@@ -25,19 +22,11 @@ export const NewsList = () => {
         setIsLoading(false);
       })
       .catch((e) => console.log);
-  }, [page]);
+  }, [page, search]);
 
-  const onSubmit = (search) => {
-    console.log("file: NewsList.jsx:36 ~ search >>", search);
-    if (!search) return;
-    getNews({ page, search })
-      .then((d) => {
-        console.log("file: NewsList.jsx:48 ~ d >>", d);
-        // setIsLoading(true);
-        // setNews(d);
-        // setIsLoading(false);
-      })
-      .catch((e) => console.log);
+  const onSubmit = (query) => {
+    setPage(1);
+    setSearch(query);
   };
 
   return (
@@ -49,7 +38,7 @@ export const NewsList = () => {
         <ListNews>
           {isLoading ? (
             <PawsLoader />
-          ) : null ? (
+          ) : !news.data?.length ? (
             <ResultNotFound />
           ) : (
             <NewsCard news={news.data} />

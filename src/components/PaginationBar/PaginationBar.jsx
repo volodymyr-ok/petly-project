@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../Container/Container";
 import {
-  Bar,
+  NumBar,
   BarWrapper,
   NextBtn,
   NumBtn,
   PrevBtn,
 } from "./PaginationBar.styled";
 import { TbPaw } from "react-icons/tb";
-
 // noticesLeft, noticesOnPage, perPage, total
 const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false);
@@ -17,6 +16,7 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   useEffect(() => {
     if (currentPage === 1) setIsPrevBtnDisabled(true);
     else setIsPrevBtnDisabled(false);
+
     if (currentPage === pageCount) setIsNextBtnDisabled(true);
     else setIsNextBtnDisabled(false);
   }, [currentPage, pageCount]);
@@ -31,15 +31,16 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
     setPage(target.textContent);
   };
 
-  const handlePrevPage = (e) => {
+  const toPrevPage = () => {
     if (currentPage === 1) return;
     setPage(currentPage - 1);
   };
-  const handleNextPage = (e) => {
+  const toNextPage = () => {
     if (currentPage === pageCount) return;
     setPage(currentPage + 1);
   };
-  const handleActive = (num) => {
+
+  const turnToActive = (num) => {
     if (currentPage === num) return true;
     return false;
   };
@@ -51,27 +52,27 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
           <PrevBtn
             type="button"
             disabled={isPrevBtnDisabled}
-            onClick={handlePrevPage}
+            onClick={toPrevPage}
           >
             <TbPaw size={30} />
           </PrevBtn>
-          <Bar>
+          <NumBar>
             {renderButtons().map((el) => (
               <li key={"buttonId" + el}>
                 <NumBtn
                   type="button"
-                  active={handleActive(el)}
+                  active={turnToActive(el)}
                   onClick={changePage}
                 >
                   {el}
                 </NumBtn>
               </li>
             ))}
-          </Bar>
+          </NumBar>
           <NextBtn
             type="button"
             disabled={isNextBtnDisabled}
-            onClick={handleNextPage}
+            onClick={toNextPage}
           >
             <TbPaw size={30} />
           </NextBtn>

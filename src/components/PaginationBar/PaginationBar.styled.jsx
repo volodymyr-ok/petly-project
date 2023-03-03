@@ -9,7 +9,7 @@ export const BarWrapper = styled.div`
   gap: 10px;
 `;
 
-export const Bar = styled.ul`
+export const NumBar = styled.ul`
   height: 30px;
 
   display: flex;
@@ -18,18 +18,24 @@ export const Bar = styled.ul`
   justify-content: center;
 `;
 
-export const PrevBtn = styled.button`
+const ArrowBtn = styled.button`
   display: flex;
   align-items: center;
-  cursor: pointer;
-
   padding: 0;
-
+  cursor: pointer;
   background-color: transparent;
   border-color: transparent;
   border-radius: 50%;
-
+  svg {
+    pointer-events: none;
+    stroke: ${colors.darkOrange};
+    :hover,
+    :focus {
+      fill: ${colors.accentOrange};
+    }
+  }
   :disabled {
+    cursor: not-allowed;
     svg {
       stroke: ${colors.accentOrange};
     }
@@ -38,49 +44,19 @@ export const PrevBtn = styled.button`
       svg {
         fill: transparent;
       }
-    }
-  }
-
-  svg {
-    stroke: ${colors.darkOrange};
-    transform: rotate(-90deg);
-    :hover,
-    :focus {
-      fill: ${colors.accentOrange};
     }
   }
 `;
 
-export const NextBtn = styled.button`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  padding: 0;
-
-  background-color: transparent;
-  border-color: transparent;
-  border-radius: 50%;
-
-  :disabled {
-    svg {
-      stroke: ${colors.accentOrange};
-    }
-    :hover,
-    :focus {
-      svg {
-        fill: transparent;
-      }
-    }
-  }
-
+export const PrevBtn = styled(ArrowBtn)`
   svg {
-    stroke: ${colors.darkOrange};
+    transform: rotate(-90deg);
+  }
+`;
+
+export const NextBtn = styled(ArrowBtn)`
+  svg {
     transform: rotate(90deg);
-    :hover,
-    :focus {
-      fill: ${colors.accentOrange};
-    }
   }
 `;
 
