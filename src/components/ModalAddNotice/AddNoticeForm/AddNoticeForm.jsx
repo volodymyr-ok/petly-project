@@ -27,6 +27,7 @@ export const AddNoticeForm = ({ onClose }) => {
     price: "",
     comments: "",
     avatar: "",
+    description: "",
   });
   const [currentStep, setCurrentStep] = useState(0);
 
