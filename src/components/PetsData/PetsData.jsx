@@ -2,12 +2,7 @@ import PropTypes from "prop-types";
 
 import { PetsList } from "./PetsList/PetsList";
 
-import {
-  BoxMessage,
-  Message,
-  ContainerPetsDate,
-  SpanAddPet,
-} from "./PetsData.styled";
+import { BoxMessage, Message, ContainerPetsDate, SpanAddPet } from "./PetsData.styled";
 import { BtnAddPet } from "./BtnAddPet/BtnAddPet";
 
 export const PetsData = ({ pets }) => {

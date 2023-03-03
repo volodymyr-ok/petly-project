@@ -1,18 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 // import { useDispatch } from "react-redux";
-
 import { DeletePetBtn } from "../../DeletePetBtn/DeletePetBtn";
-import {
-  WrapperPicDiv,
-  Box,
-  Description,
-  InfoPet,
-  BoxPetsList,
-  BoxScrollbar,
-} from "./PetsList.styled";
+import { WrapperPicDiv, Box, Description, InfoPet, BoxPetsList, BoxScrollbar } from "./PetsList.styled";
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
+import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 
 export const PetsList = ({ pets }) => {
   // const dispatch = useDispatch();
@@ -30,7 +23,8 @@ export const PetsList = ({ pets }) => {
   return (
     <BoxPetsList>
       <BoxScrollbar>
-        {pets.map((el) => {
+        {pets.length === 0 && <ResultNotFound text="There is no pet here" />}
+        {pets?.map((el) => {
           const {
             avatarURL,
             birthday,

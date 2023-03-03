@@ -26,7 +26,15 @@ export const NewsList = () => {
     <>
       <SearchInput onSubmit={onSubmit} />
       <Section>
-        <ListNews>{isLoading ? <PawsLoader /> : error ? <ResultNotFound /> : <NewsCard news={news} />}</ListNews>
+        <ListNews>
+          {isLoading ? (
+            <PawsLoader />
+          ) : error ? (
+            <ResultNotFound text="No results was found" />
+          ) : (
+            <NewsCard news={news} />
+          )}
+        </ListNews>
       </Section>
     </>
   );
