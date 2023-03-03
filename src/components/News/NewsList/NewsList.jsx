@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { NewsCard } from "../NewsCard/NewsCard";
 import { SearchInput } from "../../SearchInput/SearchInput";
 import { PawsLoader } from "../../Loader/PawsLoader/PawsLoader";
@@ -6,28 +6,29 @@ import { ListNews, Section } from "./NewsList.styled";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import PaginationBar from "../../PaginationBar/PaginationBar";
 import { getNews } from "../../../pages/NewsPage/newsServices";
+import usePrevious from "../../../hooks/usePrevious";
 
 export const NewsList = () => {
   const [news, setNews] = useState({});
   const [page, setPage] = useState(1);
-  const [search, setSearch] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState("");
+  const prevSearch = usePrevious(search);
 
   useEffect(() => {
-    getNews({ page, search })
-      .then((d) => {
-        setIsLoading(true);
+    if (prevSearch !== search && page > 1) setPage(1);
 
-        setNews(d);
+    getNews({ page, search })
+      .then((data) => {
+        setIsLoading(true);
+        setNews(data);
         setIsLoading(false);
       })
-      .catch((e) => console.log);
+      .catch((e) => console.log("file: NewsList.jsx:24 ~ e >>", e));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, search]);
 
-  const onSubmit = (query) => {
-    setPage(1);
-    setSearch(query);
-  };
+  const onSubmit = (query) => setSearch(query);
 
   return (
     <>

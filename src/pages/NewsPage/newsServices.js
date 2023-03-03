@@ -14,6 +14,6 @@ export const getNews = async (params) => {
     const response = await newsApi.get(`/news`, { params });
     return response.data;
   } catch (error) {
-    console.log("file: newsServices.js:24 ~ error >>", error);
+    console.log("file: newsServices.js:17 ~ error >>", error);
   }
 };

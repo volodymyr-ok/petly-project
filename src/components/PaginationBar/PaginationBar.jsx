@@ -46,7 +46,7 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   };
 
   return (
-    pageCount !== 1 && (
+    pageCount > 1 && (
       <Container>
         <BarWrapper>
           <PrevBtn
