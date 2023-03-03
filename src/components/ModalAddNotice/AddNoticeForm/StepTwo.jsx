@@ -73,7 +73,7 @@ export const StepTwo = ({ data, prev, onClose }) => {
       comments,
     } = data;
     console.log("DATA", data);
-    const comment = comments ? comments : "testtest";
+    // const comment = comments ? comments : "testtest";
     const formData = new FormData();
     formData.append("avatar", file);
     formData.append("title", title);
