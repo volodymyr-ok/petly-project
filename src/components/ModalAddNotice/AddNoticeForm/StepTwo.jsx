@@ -38,7 +38,7 @@ const validationSchema = yup.object({
     )
     .required("Address is required"),
   comments: yup.string().min(8).max(120).required("Comments are required"),
-  price: yup.number().matches(/^[1-9]+$/, "price must be greater than 0"),
+  // price: yup.number().matches(/^[1-9]+$/, "price must be greater than 0"),
 
   // price: yup.string().when("categoryName", {
   //   is: "sell",
