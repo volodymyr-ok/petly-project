@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { Form, Field } from "formik";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export const ModalBox = styled.div`
   background: #ffffff;

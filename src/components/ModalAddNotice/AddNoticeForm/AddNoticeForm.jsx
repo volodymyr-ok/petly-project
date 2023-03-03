@@ -1,19 +1,19 @@
-import { FormikWizard } from "formik-wizard-form";
+// import { FormikWizard } from "formik-wizard-form";
 import { useState } from "react";
-import * as Yup from "yup";
+// import * as Yup from "yup";
 
 import {
-  ButtonBox,
-  FormCustom,
-  Title,
-  BackBtn,
-  Button,
+  // ButtonBox,
+  // FormCustom,
+  // Title,
+  // BackBtn,
+  // Button,
   ModalBox,
 } from "../ModalAddNotice.styled";
 import { StepOne } from "./StepOne";
 import { StepTwo } from "./StepTwo";
 
-const category = ["lost-found", "in-good-hands", "sell"];
+// const category = ["lost-found", "in-good-hands", "sell"];
 
 export const AddNoticeForm = ({ onClose }) => {
   const [data, setData] = useState({

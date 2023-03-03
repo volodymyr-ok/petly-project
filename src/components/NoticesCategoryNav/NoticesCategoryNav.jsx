@@ -2,14 +2,42 @@ import { NavBox, NavList, NavItem } from "./NoticesCategoryNav.styled";
 import { Button } from "../../components/Button/Button";
 import { AddNotice } from "../AddNotice/AddNotice";
 
-export const authorized = [
-  "lost-found",
-  "in good hands",
-  "sell",
-  "favorite ads",
-  "my ads",
+export const notAuthorized = [
+  {
+    href: "lost-found",
+    text: "lost-found",
+  },
+  {
+    href: "in-good-hands",
+    text: "in good hands",
+  },
+  {
+    href: "sell",
+    text: "sell",
+  },
 ];
-export const notAuthorized = ["lost-found", "in good hands", "sell"];
+export const authorized = [
+  {
+    href: "lost-found",
+    text: "lost-found",
+  },
+  {
+    href: "in-good-hands",
+    text: "in good hands",
+  },
+  {
+    href: "sell",
+    text: "sell",
+  },
+  {
+    href: "favorite-ads",
+    text: "favorite ads",
+  },
+  {
+    href: "my-ads",
+    text: "my ads",
+  },
+];
 
 export const NoticesCategoryNav = ({
   onChooseCategory,
@@ -21,17 +49,17 @@ export const NoticesCategoryNav = ({
       <NavBox>
         <NavList onClick={onChooseCategory}>
           {isLogined
-            ? authorized.map((el) => {
+            ? authorized.map(({ href, text }) => {
                 return (
-                  <NavItem to={`/notices/${el}`} key={el}>
-                    <Button href={`/notices/${el}`}>{el}</Button>
+                  <NavItem to={`/notices/${href}`} key={href}>
+                    <Button>{text}</Button>
                   </NavItem>
                 );
               })
-            : notAuthorized.map((el) => {
+            : notAuthorized.map(({ href, text }) => {
                 return (
-                  <NavItem to={`/notices/${el}`} key={el}>
-                    <Button href={`/notices/${el}`}>{el}</Button>
+                  <NavItem to={`/notices/${href}`} key={href}>
+                    <Button>{text}</Button>
                   </NavItem>
                 );
               })}
@@ -40,4 +68,5 @@ export const NoticesCategoryNav = ({
       </NavBox>
     </>
   );
+  //   );
 };

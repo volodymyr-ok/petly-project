@@ -11,7 +11,7 @@ const UserPage = () => {
   const [pets, setPets] = useState([]);
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  // console.log("user", user, pets);
+  console.log("pets", pets);
 
   const FetchUserData = async () => {
     const data = await PrivateApi.get(
@@ -25,16 +25,22 @@ const UserPage = () => {
     setIsLoading(true);
     FetchUserData()
       .then((data) => {
+        console.log("data", data);
+
         setUser(data.data?.user);
         setPets(data.data?.pets);
         setIsLoading(false);
+
+        // if (data.data.pets === null) {
+        //   setPets([]);
+        //   return;
+        // }
       })
       .catch((error) => {
         setIsError(error);
         setIsLoading(false);
       });
   }, []);
-  console.log(pets)
 
   return (
     <>
