@@ -94,6 +94,27 @@ export const FriendsLogo = styled.img`
   }
 `;
 
+export const AlternativeLogo = styled.img`
+  display: block;
+
+  width: 80px;
+  height: 78px;
+  margin-left: 10px;
+  margin-right: 18px;
+
+  ${device.tablet} {
+    width: 90px;
+    height: 85px;
+    margin-left: 15px;
+  }
+
+  ${device.desktop} {
+    width: 110px;
+    height: 112px;
+    margin-right: 30px;
+  }
+`;
+
 export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -125,9 +146,15 @@ export const InfoWrap = styled.a`
     max-width: 199px;
   }
 
-  &:hover,
-  &:focus {
+  :hover,
+  :focus {
     color: ${colors.accentOrange};
+  }
+
+  svg {
+    position: absolute;
+    top: 5px;
+    right: 25px;
   }
 `;
 

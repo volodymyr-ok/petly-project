@@ -2,16 +2,19 @@ import { ModalWindow } from "../ModalWindow/ModalWindow";
 import { CancelBtn } from "../CancelBtn/CancelBtn";
 import { Text, Wrap, StyledLink, Title, Button } from "./WarningMessage.styled";
 
+
 export const WarningMessage = ({
   onClose,
   text,
   title,
   type,
+  onRemove,
   // approveFunk,
   id,
 }) => {
+
   const clickHandler = () => {
-    // approveFunk(id);
+    onRemove(id)
     onClose();
   };
 

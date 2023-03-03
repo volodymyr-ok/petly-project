@@ -6,6 +6,7 @@ export const FriendsList = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  padding-bottom: 100px;
 
   margin-bottom: 100px;
   ${device.tablet} {

@@ -4,48 +4,81 @@ import { Container } from "../../components/Container/Container";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
 import { NoticesCategoryNav } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { NoticesCategoryList } from "../../components/NoticesCategoryLIst/NoticesCategoryLIst";
-import {
-  selectError,
-  selectIsLoading,
-  selectNotice,
-} from "../../redux/notice/notice-selectors";
-import {
-  getNotice,
-  getNoticesBySearch,
-} from "../../redux/notice/notice-operations";
-//import { getNoticeById} from "../../redux/notice/notice-operations";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
 import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
-// import { Modal } from "../../components/Modal/Modal";
-// import { AddsPetForm } from "../../components/AddsPetForm/AddsPetForm";
+import { getNotice1, getFavorite1, getMyNorices1, getNoticesBySearch1, removeNotice } from "./services";
+//getNoticeById1
 
 const NoticesPage = () => {
-  const dispatch = useDispatch();
   const isLogined = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
-  const notices = useSelector(selectNotice);
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectError);
+
   const favorites = useSelector(selectFavorites);
+
   const [sortedValue, setSortedValue] = useState("sell");
-  const [isModal, setIsModal] = useState(false);
+  const [isModalAddPet, setIsModalAddPet] = useState(false);
+  const [reload, setReload] = useState(false)
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState({ data: [] });
+
+  const notices = data.data;
+
 
   useEffect(() => {
-    if (sortedValue !== "my ads" && sortedValue !== "favorite ads") {
-      dispatch(getNotice(sortedValue));
+    setIsLoading(true);
+    if(sortedValue === "my-ads"){
+      getMyNorices1(sortedValue)
+      .then((data) => {
+       setData(data)
+       setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsLoading(false);
+      });
+    }else if(sortedValue === "favorite-ads"){
+      getFavorite1(sortedValue)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
     } else {
-      dispatch(getNotice(""));
+      getNotice1(sortedValue)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
     }
-  }, [dispatch, sortedValue]);
+    
+  }, [sortedValue, reload]);
 
   const onSubmit = (e) => {
-    if (e !== "") {
-      dispatch(getNoticesBySearch(e));
+    if(e !== ""){
+      setIsLoading(true)
+       getNoticesBySearch1(e) 
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
     }
   };
 
@@ -53,56 +86,38 @@ const NoticesPage = () => {
     if (!isLogined) {
       console.log("pls login first");
     } else {
-      setIsModal(!isModal);
+      setIsModalAddPet(!isModalAddPet);
     }
   };
 
   const onChooseCategory = (e) => {
-    const expr = e.target.textContent;
-    authorized.map((el) => {
-      if (el === expr) {
-        setSortedValue(expr);
-      } else {
-        return null;
-      }
-      return null;
-    });
-  };
-  const handlerRemove = (e) => {
-    // console.log(e.target.id)
-    // user.notices
-  };
-  const letGetPets = () => {
-    if (notices?.length > 0) {
-      const newSortedArray = [];
-      if (!isLogined) {
-        return notices;
-      } else if (
-        isLogined &&
-        sortedValue !== "my ads" &&
-        sortedValue !== "favorite ads"
-      ) {
-        return notices;
-      } else if (isLogined && sortedValue === "favorite ads") {
-        notices.map((el) => {
-          return favorites.find((e) => {
-            if (e === el._id) {
-              return newSortedArray.push(el);
-            }
-            return null;
-          });
-        });
-        return newSortedArray;
-      } else if (isLogined && sortedValue === "my ads") {
-        notices.map((el) => {
-          if (el.owner === el._id) return newSortedArray.push(el);
-          return null;
-        });
-        return newSortedArray;
-      }
+    // console.log(e.target)
+    const expr = e.target.id;
+      authorized.map(({href})=>{
+        if(href === expr){
+          setSortedValue(expr)
+        }else{
+          return null
+        }
+        return null
+      })
+  }
+  const handlerRemove=(e)=>{
+    if(e.target.id && e.target.id !== ""){
+      console.log("ja tut")
+      setIsLoading(true)
+      removeNotice(e.target.id)
+        .then(() => {
+        setReload(!reload)
+        setIsLoading(false);
+       })
+       .catch((error) => {
+         setError(error);
+         setIsLoading(false);
+       });;
     }
-    return [];
   };
+
   return (
     <>
       <Container>
@@ -120,12 +135,14 @@ const NoticesPage = () => {
             <ResultNotFound />
           ) : (
             <NoticesCategoryList
+              isModalAddPet = {isModalAddPet}
               onAddPet={handlerModalAddPet}
-              notices={letGetPets()}
+              notices={notices}
               favorites={favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
               user={user}
+              sortedValue={sortedValue}
             />
           )}
         </div>

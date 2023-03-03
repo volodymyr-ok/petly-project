@@ -1,3 +1,4 @@
+
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -20,6 +21,7 @@ import {
   CancelBtn,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
 
+
 const validationSchema = yup.object({
   comments: yup.string().min(8).max(200).required(),
 });
@@ -35,16 +37,16 @@ export const StepTwo = (props) => {
     );
   };
 
-  const [file, setFile] = useState(null);
+  const [imgFile, setImgFile] = useState(null);
 
   const handleChange = (event) => {
-    setFile(event.target.files[0]);
+    setImgFile(event.target.files[0]);
   };
 
-  const handleSubmit=(e)=>{
-    props.next(e, true, file)
-    props.onClose()
-  }
+  const handleSubmit = (e) => {
+     props.next(e, true, imgFile);
+     props.onClose();
+  };
 
   return (
     <Formik
@@ -62,7 +64,7 @@ export const StepTwo = (props) => {
             <TitleItemTwo>Add photo and some comments</TitleItemTwo>
 
             <AddFile htmlFor="myPetsPhoto">
-              {file ? <p>File added success</p> : <AddPlusButton />}
+              {imgFile ? <p>File added success</p> : <AddPlusButton />}
               <FieldPhoto
                 id="myPetsPhoto"
                 type="file"
@@ -84,7 +86,7 @@ export const StepTwo = (props) => {
             </LabelBox>
             <FormError name="comments" />
             <FlexBox>
-              <NextBtn type="submit" >Done</NextBtn>
+              <NextBtn type="submit">Done</NextBtn>
               <CancelBtn type="button" onClick={() => props.prev(values)}>
                 Back
               </CancelBtn>

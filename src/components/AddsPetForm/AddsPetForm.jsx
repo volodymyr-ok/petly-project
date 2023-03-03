@@ -18,19 +18,14 @@ export const AddsPetForm = ({ onClose }) => {
   const handleNextStep = (newData, final = false, file = null) => {
     setData((prev) => ({ ...prev, ...newData}));
     if (final) {
-
       const formData = new FormData();
       formData.append("avatar", file);
-      const petInfo = {
-        name: newData.name,
-        breed: newData.breed,
-        birthday: newData.birthday,
-        comments: newData.comments,
-         avatar: formData
-      }
-      console.log(petInfo)
-      dispatch(addPet(petInfo))
-      // tut robymo zapros vysylajemo body i avatar okremo
+      formData.append("name", newData.name);
+      formData.append("birthday", newData.birthday);
+      formData.append("breed", newData.breed);
+      formData.append("comments", newData.comments);
+      dispatch(addPet(formData))
+
     }
  
     setCurrentStep((prev) => prev + 1);

@@ -16,7 +16,8 @@ import defImage from "../../img/defaultImg.jpeg";
 import { numberToWord } from "../../hooks/numberToString";
 import { ReactComponent as Like } from "../../assets/svg/like.svg";
 import { ReactComponent as Remove } from "../../assets/svg/remove.svg";
-import { ReactComponent as Edit } from "../../assets/svg/pencil.svg";
+//import { ReactComponent as Edit } from "../../assets/svg/edit-photo.svg";
+import { ReactComponent as Edit } from "../../assets/svg/penciNotices.svg";
 
 export const NoticeItem = ({
   addFavorite,
@@ -25,8 +26,24 @@ export const NoticeItem = ({
   notices,
   user,
   favoritesList,
+  sortedValue,
 }) => {
-  const userId = user.id;
+  const breedExt = (breed) => {
+    if (breed.length > 20) {
+      return breed
+        .split("")
+        .map((e) => {
+          if (breed.indexOf(e) < 5) {
+            return e;
+          }
+          return null;
+        })
+        .join("");
+    } else {
+      return breed;
+    }
+  };
+  const userId = user._id;
 
   return (
     <>
@@ -51,10 +68,11 @@ export const NoticeItem = ({
             <BtnAdd
               id={_id}
               favorite={isFavorite ? "favorite" : "noFavorite"}
-              onClick={(e) => addFavorite(e, _id, isFavorite)}
+              edit ={owner === userId ? "edit" : "like"}
+              onClick={(e) => addFavorite(e, _id, owner, isFavorite)}
             >
               {owner === userId ? (
-                <Edit width={16} height={16} />
+                <Edit edit={"edit"} width={30} height={30} />
               ) : (
                 <Like width={24} height={22} />
               )}
@@ -72,7 +90,7 @@ export const NoticeItem = ({
                 <tbody>
                   <tr>
                     <InfoItem name={"name"}>Breed:</InfoItem>
-                    <InfoItem>{breed ? breed : "No info"}</InfoItem>
+                    <InfoItem>{breed ? breedExt(breed) : "No info"}</InfoItem>
                   </tr>
                   <tr>
                     <InfoItem name={"name"}>Place:</InfoItem>
@@ -91,7 +109,11 @@ export const NoticeItem = ({
                 </tbody>
               </InfoList>
               <InfoAction>
-                <BtnReadMore id={_id} onClick={onReadMore}>
+                <BtnReadMore
+                  to={`/notices/${sortedValue}/${_id}`}
+                  id={_id}
+                  onClick={onReadMore}
+                >
                   Learn more
                 </BtnReadMore>
                 {owner === userId ? (

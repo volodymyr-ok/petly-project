@@ -6,7 +6,7 @@ export const TimeWrap = styled.div`
   position: absolute;
   top: 35px;
   padding: 12px;
-  width: 145px;
+  width: 147px;
   height: 160px;
   background: ${colors.white};
   border: 1px solid ${colors.accentOrange};
@@ -39,6 +39,9 @@ export const TimeItem = styled.li`
   display: flex;
   align-items: center;
   gap: 12px;
+  padding-left: 3px;
+
+  border-radius: 6px;
 `;
 
 export const TimeDay = styled.span`

@@ -61,30 +61,22 @@ export const StepOne = ({ onClose, next, data }) => {
               <Field
                 type="radio"
                 name="categoryName"
-                // checked={values.categoryName === "lost-found"}
                 value="lost-found"
                 id="lost-found"
               />
-              <RadioLabel htmlFor="lost-found">lost-found</RadioLabel>
+              <RadioLabel htmlFor="lost-found">lost/found</RadioLabel>
             </RadioBox>
             <RadioBox>
               <Field
                 type="radio"
                 name="categoryName"
-                // checked={values.categoryName === "in-good-hands"}
                 value="in-good-hands"
                 id="in-good-hands"
               />
-              <RadioLabel htmlFor="in-good-hands">in-good-hands</RadioLabel>
+              <RadioLabel htmlFor="in-good-hands">in good hands</RadioLabel>
             </RadioBox>
             <RadioBox>
-              <Field
-                type="radio"
-                name="categoryName"
-                // checked={values.categoryName === "sell"}
-                value="sell"
-                id="sell"
-              />
+              <Field type="radio" name="categoryName" value="sell" id="sell" />
               <RadioLabel htmlFor="sell">sell</RadioLabel>
             </RadioBox>
           </RadioGroup>
