@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Form, Field } from "formik";
+import { device } from "../../utils/mixin";
 
 export const Overlay = styled.div`
   overflow-y: scroll;
@@ -89,12 +90,12 @@ export const ButtonCloseModal = styled.button`
   height: 34px;
   display: flex;
   transition: color 300ms linear, background-color 300ms linear;
- // fill: rgba(17, 17, 17, 0.6);
+  // fill: rgba(17, 17, 17, 0.6);
   svg {
     fill: rgba(17, 17, 17, 0.6);
     &:hover {
       fill: rgba(245, 146, 86, 1);
-     // stroke: rgba(245, 146, 86, 1);
+      // stroke: rgba(245, 146, 86, 1);
     }
   }
 
@@ -204,14 +205,13 @@ export const AddFile = styled.label`
 
 export const FieldTextarea = styled(Field)`
   cursor: pointer;
-  resize: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.35;
   display: block;
   margin-top: 8px;
   padding: 14px 12px;
-  width: 240px;
+  width: 100%;
   height: 76px;
 
   background: #fdf7f2;
@@ -231,20 +231,20 @@ export const FieldTextarea = styled(Field)`
     line-height: 1.35;
     color: rgba(27, 27, 27, 0.6);
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
     margin-top: 20px;
     padding: 16px;
     width: 394px;
-    height: 116px;
+    height: 113px;
   }
 `;
 
 export const LabelBox = styled.div`
   margin-bottom: 16px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-bottom: 28px;
   }
 `;
