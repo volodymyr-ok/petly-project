@@ -18,14 +18,16 @@ export const NewsList = () => {
   // }, [dispatch]);
   const [news, setNews] = useState({});
   const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
+  // const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   // axios запит
   useEffect(() => {
     getNews({ page })
       .then((d) => {
         setIsLoading(true);
-        console.log("data ==>", d.data);
+        // console.log("news.data.length ==>", news.data.length);
+        console.log("news.data ==>", news.data);
+        console.log("news ==>", news);
 
         setNews(d);
         setIsLoading(false);
@@ -34,7 +36,8 @@ export const NewsList = () => {
   }, [page]);
 
   const onSubmit = (query) => {
-    // dispatch(getNewsBySearch(search));
+    getNewsBySearch(query);
+    // dispatch();
   };
 
   return (
@@ -46,7 +49,7 @@ export const NewsList = () => {
         <ListNews>
           {isLoading ? (
             <PawsLoader />
-          ) : !news.length ? (
+          ) : news.length ? (
             <ResultNotFound />
           ) : (
             <NewsCard news={news.data} />
