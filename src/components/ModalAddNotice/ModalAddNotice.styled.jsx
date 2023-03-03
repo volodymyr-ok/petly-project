@@ -78,6 +78,10 @@ export const RadioGroup = styled.div`
   /* margin-bottom: 16px; */
   position: relative;
 `;
+export const RadioGroupSex = styled(RadioGroup)`
+  gap: 83px;
+  /* margin-bottom: 16px; */
+`;
 export const RadioBox = styled.div`
   display: flex;
   align-items: center;
@@ -101,10 +105,22 @@ export const SexBox = styled.div`
   gap: 14px;
 
   label {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    align-items: center;
     font-size: 18px;
     font-weight: 500;
     line-height: 1.4;
     color: ${colors.black};
+    cursor: pointer;
+
+    svg {
+      position: relative;
+      top: 1px;
+      width: 36px;
+      height: 36px;
+    }
   }
 
   input {
@@ -114,13 +130,6 @@ export const SexBox = styled.div`
   }
   input:checked + label {
     color: ${colors.accentOrange};
-  }
-
-  svg {
-    position: relative;
-    top: 1px;
-    width: 36px;
-    height: 36px;
   }
 
   :hover {
@@ -238,11 +247,11 @@ export const Button = styled.button`
   line-height: 27px;
   letter-spacing: 0.04em;
   color: #fff;
+  cursor: pointer;
   transition: color 300ms linear, background-color 300ms linear;
-  :hover,
-  :focus {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 1);
+  :hover {
+    background-color: ${colors.darkOrange};
+    /* color: rgba(0, 0, 0, 1); */
   }
   ${device.tablet} {
     width: 180px;
@@ -260,10 +269,10 @@ export const BackBtn = styled(Button)`
   background: #fff;
   color: #000000;
   border: 2px solid #f59256;
-  :hover,
-  :focus {
-    background-color: #f59256;
-    color: #fff;
+  :hover {
+    border: 2px solid ${colors.darkOrange};
+    background: #fff;
+    color: #000000;
   }
 `;
 
@@ -297,8 +306,8 @@ export const AddFile = styled.label`
   padding: 10px;
   white-space: wrap;
 
-  @media (min-width: 768px) {
-    margin-bottom: 40px;
+  ${device.tablet} {
+    /* margin-bottom: 40px; */
     width: 184px;
     height: 184px;
   }
@@ -332,7 +341,7 @@ export const FieldTextarea = styled(Field)`
     line-height: 1.35;
     color: rgba(27, 27, 27, 0.6);
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
@@ -344,8 +353,9 @@ export const FieldTextarea = styled(Field)`
 `;
 
 export const LabelBox = styled.div`
+  position: relative;
   margin-bottom: 16px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-bottom: 28px;
   }
 `;
@@ -358,7 +368,7 @@ export const StyledLabel = styled.label`
   font-size: 18px;
   line-height: 1.47;
   color: #111111;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-size: 24px;
     line-height: 1.1;
   }

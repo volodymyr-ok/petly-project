@@ -11,11 +11,15 @@ import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
-import { getNotice1, getFavorite1, getMyNorices1, getNoticesBySearch1 } from "./services";
+import {
+  getNotice1,
+  getFavorite1,
+  getMyNorices1,
+  getNoticesBySearch1,
+} from "./services";
 //getNoticeById1
 
 const NoticesPage = () => {
-
   const isLogined = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
 
@@ -25,60 +29,58 @@ const NoticesPage = () => {
   const [sortedValue1, setSortedValue1] = useState("sell");
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [data, setData] = useState({data: []})
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState({ data: [] });
 
-const notices = data.data
+  const notices = data.data;
 
   useEffect(() => {
     setIsLoading(true);
-    if(sortedValue === "my ads"){
+    if (sortedValue === "my ads") {
       getMyNorices1(sortedValue)
-      .then((data) => {
-       setData(data)
-       setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-    }else if(sortedValue === "favorite ads"){
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+    } else if (sortedValue === "favorite ads") {
       getFavorite1(sortedValue)
-      .then((data) => {
-       setData(data)
-       setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
-    }else{
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+    } else {
       getNotice1(sortedValue)
-      .then((data) => {
-       setData(data)
-       setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
     }
-    
   }, [sortedValue]);
 
-
   const onSubmit = (e) => {
-    if(e !== ""){
-       getNoticesBySearch1(e) 
+    if (e !== "") {
+      getNoticesBySearch1(e)
         .then((data) => {
-        setData(data)
-        setIsLoading(false);
-       })
-       .catch((error) => {
-         setError(error);
-         setIsLoading(false);
-       });;
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
     }
   };
 
@@ -90,24 +92,22 @@ const notices = data.data
     }
   };
 
-
   const onChooseCategory = (e) => {
     const expr = e.target.textContent;
-      authorized.map(({text})=>{
-        if(text === expr){
-          setSortedValue(expr)
-          setSortedValue1(expr)
-        }else{
-          return null
-        }
-        return null
-      })
-  }
-  const handlerRemove=(e)=>{
+    authorized.map(({ text }) => {
+      if (text === expr) {
+        setSortedValue(expr);
+        setSortedValue1(expr);
+      } else {
+        return null;
+      }
+      return null;
+    });
+  };
+  const handlerRemove = (e) => {
     // console.log(e.target.id)
     // user.notices
   };
-
 
   return (
     <>
@@ -126,10 +126,10 @@ const notices = data.data
             <ResultNotFound />
           ) : (
             <NoticesCategoryList
-              isOpen = {isOpen}
+              isOpen={isOpen}
               onAddPet={handlerModalAddPet}
               notices={notices}
-              favorites = {favorites}
+              favorites={favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
               user={user}

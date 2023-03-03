@@ -2,7 +2,7 @@ import {
   Input,
   Label,
   LabelText,
-  RadioGroup,
+  RadioGroupSex,
   LabelSex,
   SexBox,
   ErrorText,
@@ -37,8 +37,8 @@ const validationSchema = yup.object({
       "The address must contain the city, regions: 'Kyiv, Kyiv'"
     )
     .required("Address is required"),
-  comments: yup.string().min(8).max(120),
-  price: yup.number("Only numbers"),
+  comments: yup.string().min(8).max(120).required("Comments are required"),
+  price: yup.string().matches(/^[1-9]+$/, "price must be greater than 0"),
 });
 
 export const StepTwo = ({ data, prev, onClose }) => {
@@ -73,7 +73,7 @@ export const StepTwo = ({ data, prev, onClose }) => {
       comments,
     } = data;
     console.log("DATA", data);
-    const comment = comments ? comments : "test test";
+    // const comment = comments ? comments : "testtest";
     const formData = new FormData();
     formData.append("avatar", file);
     formData.append("title", title);
@@ -82,13 +82,16 @@ export const StepTwo = ({ data, prev, onClose }) => {
     formData.append("categoryName", categoryName);
     formData.append("sex", sex);
     formData.append("location", location);
-    formData.append("price", price);
     formData.append("breed", breed);
-    formData.append("comments", comment);
+    formData.append("comments", comments);
+    if (price !== "") {
+      formData.append("price", price);
+    }
 
     console.log("handleSubm", formData, file);
 
     dispatch(addNotice(formData));
+    onClose();
   };
 
   return (
@@ -104,18 +107,22 @@ export const StepTwo = ({ data, prev, onClose }) => {
             <LabelSex>
               The sex<span>*</span>:
             </LabelSex>
-            <RadioGroup role="group" aria-labelledby="my-radio-group">
+            <RadioGroupSex role="group" aria-labelledby="my-radio-group">
               <SexBox>
-                <MaleSvg />
                 <Field type="radio" name="sex" value="male" id="male" />
-                <label htmlFor="male">Male</label>
+                <label htmlFor="male">
+                  <MaleSvg />
+                  Male
+                </label>
               </SexBox>
               <SexBox>
-                <FemaleSvg />
                 <Field type="radio" name="sex" value="female" id="female" />
-                <label htmlFor="female">Female</label>
+                <label htmlFor="female">
+                  <FemaleSvg />
+                  Female
+                </label>
               </SexBox>
-            </RadioGroup>
+            </RadioGroupSex>
             <FormError name="sex" checked />
           </RadioWrap>
 
@@ -157,11 +164,13 @@ export const StepTwo = ({ data, prev, onClose }) => {
                 type="text"
                 name="comments"
                 placeholder="Type comments"
-                as="textarea"
+                component="textarea"
+                rows="4"
               />
             </StyledLabel>
+            <FormError name="comments" />
           </LabelBox>
-          <FormError name="comments" />
+
           <ButtonBox>
             <Button type="submit">Done</Button>
             <BackBtn type="button" onClick={() => prev(values)}>
