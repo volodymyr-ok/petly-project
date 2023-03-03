@@ -47,7 +47,14 @@ export const Modal = ({ onClose, children, type = "default" }) => {
       );
     }
 
-    return <Content>{children}</Content>;
+    return (
+      <Content>
+        <CloseBtn type="button" onClick={onClose}>
+          <CloseSvg />
+        </CloseBtn>
+        {children}
+      </Content>
+    );
   };
 
   return createPortal(
