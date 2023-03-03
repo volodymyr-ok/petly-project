@@ -62,8 +62,6 @@ export const TimeModal = ({ workDays, onClick, weekday }) => {
               weekday === index
                 ? {
                     backgroundColor: `${colors.accentOrange}`,
-                    // border: "1px solid",
-                    // borderColor: `${colors.accentOrange}`,
                   }
                 : { background: "none" }
             }
