@@ -14,3 +14,8 @@ export const Bar = styled.ul`
   gap: 10px;
   /* justify-content: space-evenly; */
 `;
+
+export const NumBtn = styled.button`
+  background-color: ${({ variant }) =>
+    variant === "active" ? "#f3800f" : "#397eba"};
+`;

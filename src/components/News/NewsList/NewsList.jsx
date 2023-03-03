@@ -49,6 +49,8 @@ export const NewsList = () => {
     <>
       <SearchInput onSubmit={onSubmit} />
       <Section>
+        <PaginationBar setPage={setPage} info={news} />
+
         <ListNews>
           {isLoading ? (
             <PawsLoader />
