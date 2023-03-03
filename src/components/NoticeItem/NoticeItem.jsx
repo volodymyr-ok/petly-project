@@ -25,7 +25,23 @@ export const NoticeItem = ({
   notices,
   user,
   favoritesList,
+  sortedValue,
 }) => {
+  const breedExt = (breed) => {
+    if (breed.length > 20) {
+      return breed
+        .split("")
+        .map((e) => {
+          if (breed.indexOf(e) < 5) {
+            return e;
+          }
+          return null;
+        })
+        .join("");
+    } else {
+      return breed;
+    }
+  };
   const userId = user.id;
 
   return (
@@ -43,6 +59,11 @@ export const NoticeItem = ({
           _id,
         } = el;
 
+        //   console.log(breed.length)
+        //   if(breed.length>20){
+        //   breedExt(breed)
+        // }
+
         const textAge = numberToWord(birthday);
         const isFavorite = favoritesList?.includes(_id);
         return (
@@ -53,7 +74,11 @@ export const NoticeItem = ({
               favorite={isFavorite ? "favorite" : "noFavorite"}
               onClick={(e) => addFavorite(e, _id, isFavorite)}
             >
-              {owner === userId ? <Edit width={16} height={16}/> : <Like width={24} height={22}/>}
+              {owner === userId ? (
+                <Edit width={16} height={16} />
+              ) : (
+                <Like width={24} height={22} />
+              )}
             </BtnAdd>
             <Image
               loading="lazy"
@@ -68,7 +93,7 @@ export const NoticeItem = ({
                 <tbody>
                   <tr>
                     <InfoItem name={"name"}>Breed:</InfoItem>
-                    <InfoItem>{breed ? breed : "No info"}</InfoItem>
+                    <InfoItem>{breed ? breedExt(breed) : "No info"}</InfoItem>
                   </tr>
                   <tr>
                     <InfoItem name={"name"}>Place:</InfoItem>
@@ -87,13 +112,17 @@ export const NoticeItem = ({
                 </tbody>
               </InfoList>
               <InfoAction>
-                <BtnReadMore id={_id} onClick={onReadMore}>
+                <BtnReadMore
+                  to={`/notices/${sortedValue}/${_id}`}
+                  id={_id}
+                  onClick={onReadMore}
+                >
                   Learn more
                 </BtnReadMore>
                 {owner === userId ? (
                   <BtnRemove id={_id} onClick={onRemove}>
                     Delete
-                    <Remove width={16} height={17}/>
+                    <Remove width={16} height={17} />
                   </BtnRemove>
                 ) : null}
               </InfoAction>

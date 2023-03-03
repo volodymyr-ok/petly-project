@@ -20,11 +20,10 @@ export const Overlay = styled.div`
 export const ModalItem = styled.div`
   position: relative;
   display: block;
-  padding: 40px 20px;
+  /* padding: 40px 20px; */
   width: 280px;
   height: 530px;
   background: #ffffff;
-  box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 40px;
   @media (min-width: 768px) {
     padding: 40px 80px;
@@ -37,11 +36,11 @@ export const ModalItemTwo = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  /* padding: 40px 20px; */
   width: 280px;
   height: 670px;
   background: #ffffff;
-  box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+  /* box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11); */
   border-radius: 40px;
   @media (min-width: 768px) {
     padding: 40px auto;
@@ -51,7 +50,7 @@ export const ModalItemTwo = styled.div`
 `;
 
 export const TitleItemTwo = styled.h4`
-  font-family: "Inter";
+  font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -61,7 +60,7 @@ export const TitleItemTwo = styled.h4`
   color: #111111;
   @media (min-width: 768px) {
     font-size: 20px;
-    line-height: 1.2;
+    line-height: 1.35;
     letter-spacing: -0.01em;
   }
 `;
@@ -90,19 +89,23 @@ export const ButtonCloseModal = styled.button`
   height: 34px;
   display: flex;
   transition: color 300ms linear, background-color 300ms linear;
-  fill: rgba(17, 17, 17, 0.6);
+ // fill: rgba(17, 17, 17, 0.6);
   svg {
     fill: rgba(17, 17, 17, 0.6);
     &:hover {
       fill: rgba(245, 146, 86, 1);
-      stroke: rgba(245, 146, 86, 1);
+     // stroke: rgba(245, 146, 86, 1);
     }
+  }
+
+  svg {
+    fill: #000000;
   }
   justify-content: center;
   align-items: center;
   position: absolute;
   border: none;
-  color: #111111;
+
   background: #fdf7f2;
   border-radius: 50%;
   @media (min-width: 768px) {
@@ -201,6 +204,7 @@ export const AddFile = styled.label`
 
 export const FieldTextarea = styled(Field)`
   cursor: pointer;
+  resize: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.35;

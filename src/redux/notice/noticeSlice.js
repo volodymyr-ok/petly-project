@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getNotice, getNoticeById, getNoticesBySearch } from "./notice-operations";
+import {
+  addNotice,
+  getNotice,
+  getNoticeById,
+  getNoticesBySearch,
+} from "./notice-operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -7,6 +12,7 @@ const handlePending = (state) => {
 };
 
 const handleFulfilled = (state, action) => {
+  console.log("getNoti", action.payload);
   state.items = action.payload;
   state.isLoading = false;
   state.error = null;
@@ -27,17 +33,30 @@ const noticeSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(getNotice.pending, handlePending)
-    .addCase(getNotice.fulfilled, handleFulfilled)
-    .addCase(getNotice.rejected, handleRejected)
+      .addCase(getNotice.pending, handlePending)
+      .addCase(getNotice.rejected, handleRejected)
+      .addCase(getNotice.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.error = null;
+        state.isLoading = false;
+      })
 
-    .addCase(getNoticeById.pending, handlePending)
-    .addCase(getNoticeById.fulfilled, handleFulfilled)
-    .addCase(getNoticeById.rejected, handleRejected)
+      .addCase(getNoticeById.pending, handlePending)
+      .addCase(getNoticeById.fulfilled, handleFulfilled)
+      .addCase(getNoticeById.rejected, handleRejected)
 
-    .addCase(getNoticesBySearch.pending, handlePending)
-    .addCase(getNoticesBySearch.fulfilled, handleFulfilled)
-    .addCase(getNoticesBySearch.rejected, handleRejected)
+      .addCase(getNoticesBySearch.pending, handlePending)
+      .addCase(getNoticesBySearch.fulfilled, handleFulfilled)
+      .addCase(getNoticesBySearch.rejected, handleRejected)
+
+      .addCase(addNotice.pending, handlePending)
+      .addCase(addNotice.rejected, handleRejected)
+      .addCase(addNotice.fulfilled, (state, action) => {
+        console.log("chds", state.items, action.payload);
+        state.items.push(action.payload);
+        state.error = null;
+        state.isLoading = false;
+      });
   },
 });
 

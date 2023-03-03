@@ -23,9 +23,16 @@ export const ContainerPetsDate = styled.div`
 export const FieldsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
   gap: 16px;
+`;
+
+export const SpanAddPet = styled.span`
+  margin-right: 15px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.35;
+  margin-left: auto;
 `;
 
 export const BoxPet = styled.section`
@@ -61,7 +68,7 @@ export const BtnBox = styled.div`
 
 export const BoxMessage = styled.div`
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
   margin-bottom: 25px;
 `;

@@ -61,12 +61,17 @@ const App = () => {
           <Route path="/news" element={<NewsPage />} />
           <Route path="/friends" element={<OurFriendsPage />} />
           <Route path="/user" element={<UserPage />} />
-          <Route path="/notices" element={<NoticesPage />} >
-            <Route path="sell" element={<NoticesCategoryList />}></Route>
+          <Route path="/notices" element={<NoticesPage />}>
+            <Route path="sell" element={<NoticesCategoryList />}/>
+            <Route path="sell/:id"></Route>
             <Route path="lost-found" element={<NoticesCategoryList />}></Route>
-            <Route path="favorite ads" element={<NoticesCategoryList />}></Route>
-            <Route path="my ads" element={<NoticesCategoryList />}></Route>
-            <Route path="in good hands" element={<NoticesCategoryList />}></Route>
+            <Route path="lost-found/:id"></Route>
+            <Route path="in-good-hands" element={<NoticesCategoryList />}></Route>
+            <Route path="in-good-hands/:id"></Route>
+            <Route path="favorite-ads" element={<NoticesCategoryList />}></Route>
+            <Route path="favorite-ads/:id"></Route>
+            <Route path="my-ads" element={<NoticesCategoryList />}></Route>
+            <Route path="my-ads/:id"></Route>
           </Route>
           {/* <Route path="*" element={<div>404</div>} /> */}
           <Route path="/*" element={<NotFound />} />
