@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Form, Field } from "formik";
+import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 
 export const Overlay = styled.div`
@@ -15,6 +16,7 @@ export const Overlay = styled.div`
   justify-content: center;
   align-items: center;
   background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(10px);
   z-index: 1200;
 `;
 
@@ -26,7 +28,7 @@ export const ModalItem = styled.div`
   height: 530px;
   background: #ffffff;
   border-radius: 40px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     padding: 40px 80px;
     width: 608px;
     height: 570px;
@@ -43,7 +45,7 @@ export const ModalItemTwo = styled.div`
   background: #ffffff;
   /* box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11); */
   border-radius: 40px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     padding: 40px auto;
     width: 608px;
     height: 661px;
@@ -59,7 +61,7 @@ export const TitleItemTwo = styled.h4`
   text-align: center;
   margin-bottom: 20px;
   color: #111111;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-size: 20px;
     line-height: 1.35;
     letter-spacing: -0.01em;
@@ -75,7 +77,7 @@ export const TitleTwo = styled.h3`
   font-size: 24px;
   line-height: 1.37;
   color: #111111;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-size: 36px;
     line-height: 1.36;
   }
@@ -99,9 +101,17 @@ export const ButtonCloseModal = styled.button`
     }
   }
 
-  svg {
-    fill: #000000;
+  :hover,
+  :focus,
+  :active {
+    stroke: rgba(245, 146, 86, 1);
+    fill: rgba(245, 146, 86, 1);
   }
+
+  svg {
+    fill: black;
+  }
+
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -109,7 +119,7 @@ export const ButtonCloseModal = styled.button`
 
   background: #fdf7f2;
   border-radius: 50%;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 44px;
     height: 44px;
     top: 25px;
@@ -126,7 +136,7 @@ export const Title = styled.h3`
   font-size: 24px;
   line-height: 1.37;
   color: #111111;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-size: 36px;
     line-height: 1.36;
   }
@@ -161,13 +171,13 @@ export const FieldStyled = styled(Field)`
     font-size: 14px;
     line-height: 1.35;
     color: rgba(27, 27, 27, 0.6);
-    @media (min-width: 768px) {
+    ${device.tablet} {
       font-size: 16px;
       line-height: 1.62;
       color: rgba(17, 17, 17, 0.6);
     }
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
@@ -193,10 +203,28 @@ export const AddFile = styled.label`
   margin-right: auto;
   width: 208px;
   height: 208px;
-  background: #fdf7f2;
+  background-color: #fdf7f2;
   border-radius: 20px;
   margin-bottom: 20px;
-  @media (min-width: 768px) {
+
+  :hover,
+  :focus,
+  :active {
+    filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
+    box-shadow: 0px 0px 6px 1px rgba(255, 255, 255, 0.11);
+    transition: transform 300ms linear, stroke 300ms linear;
+    transform: scale(1.05);
+    stroke: rgba(245, 146, 86, 0.5);
+    fill: rgba(245, 146, 86, 0.5);
+
+    border: 1px solid rgba(245, 146, 86, 0.5);
+  }
+
+  svg {
+    stroke: #111111;
+  }
+
+  ${device.tablet} {
     margin-bottom: 40px;
     width: 184px;
     height: 184px;
@@ -213,7 +241,6 @@ export const FieldTextarea = styled(Field)`
   padding: 14px 12px;
   width: 100%;
   height: 76px;
-
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
   border-radius: 20px;
@@ -225,11 +252,18 @@ export const FieldTextarea = styled(Field)`
     border: 1px solid rgba(245, 146, 86, 0.5);
   }
   ::placeholder {
+    position: absolute;
+    top: 0px;
+    left: 5px;
     padding: 14px 12px;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.35;
     color: rgba(27, 27, 27, 0.6);
+    ${device.tablet} {
+      top: 5px;
+      left: 8px;
+    }
   }
   ${device.tablet} {
     font-weight: 400;
@@ -257,7 +291,7 @@ export const StyledLabel = styled.label`
   font-size: 18px;
   line-height: 1.47;
   color: #111111;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-size: 24px;
     line-height: 1.1;
   }
@@ -270,7 +304,7 @@ export const FlexBox = styled.div`
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     flex-direction: row-reverse;
     display: flex;
   }
@@ -287,21 +321,23 @@ export const NextBtn = styled.button`
   border-radius: 40px;
   border: none;
   color: #fff;
+  font-size: 16px;
+  line-height: 1.38;
+  letter-spacing: 0.04em;
   transition: color 300ms linear, background-color 300ms linear;
-  :hover,
-  :focus {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 1);
-    border: 2px solid #f59256;
-  }
 
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 180px;
     height: 44px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
   }
 `;
 
 export const CancelBtn = styled.button`
+  font-family: "Manrope";
+  font-style: normal;
   cursor: pointer;
   margin-right: 15px;
   display: block;
@@ -310,16 +346,28 @@ export const CancelBtn = styled.button`
   background: #fff;
   border-radius: 40px;
   transition: color 300ms linear, background-color 300ms linear;
-  color: #000000;
+  color: #111111;
   border: 2px solid #f59256;
-  :hover,
-  :focus {
-    background-color: #f59256;
-    color: #fff;
+  font-size: 16px;
+  line-height: 1.38;
+  letter-spacing: 0.04em;
+  &:hover,
+  &:focus {
+    background: ${(props) => (props.color ? `${colors.darkOrange}` : ``)};
+    border: 2px solid ${colors.darkOrange};
   }
-  @media (min-width: 768px) {
+
+  &.active {
+    background: ${(props) => (props.color ? `${colors.darkOrange}` : ``)};
+    border: 2px solid ${colors.darkOrange};
+  }
+
+  ${device.tablet} {
     width: 180px;
     height: 44px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
   }
 `;
 
@@ -335,7 +383,7 @@ export const ErrorText = styled.p`
   @media (min-width: 320px) {
     margin-left: 10px;
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-top: -30px;
   }
 `;
