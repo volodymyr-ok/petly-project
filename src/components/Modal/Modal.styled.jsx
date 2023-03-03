@@ -21,7 +21,8 @@ export const Backdrop = styled.div`
 `;
 
 export const Content = styled.div`
-  min-width: 380px;
+  position: relative;
+  min-width: 280px;
   min-height: 194px;
   padding: 20px;
   background-color: ${colors.white};
@@ -45,7 +46,7 @@ export const CloseBtn = styled.button`
   align-items: center;
   justify-content: center;
   color: ${colors.black};
-  transition: box-shadow 250ms ease-in, color 250ms ease-in;
+  /* transition: box-shadow 250ms ease-in, color 250ms ease-in; */
 
   ${device.tablet} {
     right: 20px;

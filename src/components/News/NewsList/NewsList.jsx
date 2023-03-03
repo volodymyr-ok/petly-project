@@ -34,17 +34,15 @@ export const NewsList = () => {
       <SearchInput onSubmit={onSubmit} />
       <Section>
         <PaginationBar setPage={setPage} info={news} />
-
         <ListNews>
           {isLoading ? (
             <PawsLoader />
           ) : !news.data?.length ? (
-            <ResultNotFound />
+            <ResultNotFound text="No results was found" />
           ) : (
-            <NewsCard news={news.data} />
+            <NewsCard news={news} />
           )}
         </ListNews>
-
         <PaginationBar setPage={setPage} info={news} />
       </Section>
     </>
