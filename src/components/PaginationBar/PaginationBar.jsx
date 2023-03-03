@@ -18,7 +18,7 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
 
     if (currentPage === pageCount) setIsNextBtnDisabled(true);
     else setIsNextBtnDisabled(false);
-  }, [currentPage]);
+  }, [currentPage, pageCount]);
 
   //   const handlePrevBtnDisabled = () => {
   //     if (currentPage === 1) setIsPrevBtnDisabled(true);
