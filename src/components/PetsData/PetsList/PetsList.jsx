@@ -1,18 +1,11 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 // import { useDispatch } from "react-redux";
-
 import { DeletePetBtn } from "../../DeletePetBtn/DeletePetBtn";
-import {
-  WrapperPicDiv,
-  Box,
-  Description,
-  InfoPet,
-  BoxPetsList,
-  BoxScrollbar,
-} from "./PetsList.styled";
+import { WrapperPicDiv, Box, Description, InfoPet, BoxPetsList, BoxScrollbar } from "./PetsList.styled";
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
+import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 
 export const PetsList = ({ pets, onRemove }) => {
   // const dispatch = useDispatch();
@@ -30,18 +23,14 @@ export const PetsList = ({ pets, onRemove }) => {
   return (
     <BoxPetsList>
       <BoxScrollbar>
+        {pets.length === 0 && <ResultNotFound text="There is no pet here" />}
         {pets?.map((el) => {
-          const {
-            avatarURL,
-            birthday,
-            breed,
-            comments,
-            name,
-            _id,
-          } = el;
+          const { avatarURL, birthday, breed, comments, name, _id } = el;
           return (
             <Box key={_id}>
-              <WrapperPicDiv><img src={avatarURL ? avatarURL : defImage} alt={name} /></WrapperPicDiv>
+              <WrapperPicDiv>
+                <img src={avatarURL ? avatarURL : defImage} alt={name} />
+              </WrapperPicDiv>
               <Description>
                 <DeletePetBtn onClick={closeModal} />
                 <InfoPet>
@@ -59,7 +48,7 @@ export const PetsList = ({ pets, onRemove }) => {
               </Description>
               {isModalOpen && (
                 <WarningMessage
-                  onRemove={(id)=>onRemove(id)}
+                  onRemove={(id) => onRemove(id)}
                   type="approve"
                   id={_id}
                   // approveFunk={deletePetItem}
