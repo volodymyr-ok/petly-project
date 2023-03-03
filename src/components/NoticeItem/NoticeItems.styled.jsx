@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
+import { NavLink } from "react-router-dom";
 
 export const Item = styled.li`
   position: relative;
@@ -33,8 +34,8 @@ export const ItemCategory = styled.p`
   border-top-right-radius: 20px;
   backdrop-filter: blur(2px);
 `;
-export const BtnAdd = styled(StyledButton)`
-  padding: 0;
+export const BtnAdd = styled.button`
+  padding: 0%;
   position: absolute;
   top: 12px;
   right: 12px;
@@ -49,10 +50,25 @@ export const BtnAdd = styled(StyledButton)`
   fill: ${colors.white};
   stroke: ${colors.accentOrange};
   stroke-width: 1px;
-  stroke-dasharray: 2, 2;
+  stroke-dasharray: 80;
   stroke-linejoin: round;
-  &.edit {
-    fill: ${colors.accentOrange};
+  transition-duration: 500ms;
+  svg {
+    fill: ${(p) => (p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`)};
+    stroke: ${(p) => (p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`)};
+    fill: ${(p) => (p.edit === "edit" && `transparent`)};
+    stroke: ${(p) => (p.edit === "edit" && `${colors.accentOrange}`)};
+    transition-duration: 500ms;
+  }
+  :hover {
+
+    background-color: ${colors.accentOrange};
+    stroke: ${colors.white};
+  }
+  :hover svg {
+    transform: ${(p) => (p.favorite === "favorite" && `scale(1.1)`)};
+    stroke: ${(p) => (p.edit === "edit" && `${colors.white}`)};
+    transform: ${(p) => (p.edit === "edit" && `scale(1.2)`)};
   }
 `;
 export const Image = styled.img`
@@ -97,25 +113,31 @@ export const InfoAction = styled.div`
     padding: 0;
   }
 `;
-export const BtnReadMore = styled(StyledButton)`
-  font-size: 16px;
-  line-height: 1.37;
-  display: flex;
+export const BtnReadMore = styled(NavLink)`
+ display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px 28px;
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.37;
+  color: ${colors.primaryText};
+  border: 2px solid ${colors.accentOrange};
+  border-radius: 40px;
+  background-color: ${colors.white};
+  text-decoration: none;
+`;
+
+
+export const BtnRemove = styled(StyledButton)`
+ font-size: 16px;
+  line-height: 1.37;
+  align-items: center;
   color: ${colors.accentOrange};
   padding-top: 6px;
   padding-bottom: 6px;
-`;
-export const BtnRemove = styled(StyledButton)`
-  font-size: 16px;
-  line-height: 1.37;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: ${colors.darkOrange};
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};
-  padding-top: 6px;
-  padding-bottom: 6px;
 `;

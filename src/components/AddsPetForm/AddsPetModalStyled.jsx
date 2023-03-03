@@ -23,11 +23,10 @@ export const Overlay = styled.div`
 export const ModalItem = styled.div`
   position: relative;
   display: block;
-  padding: 40px 20px;
+  /* padding: 40px 20px; */
   width: 280px;
   height: 530px;
   background: #ffffff;
-  box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
   border-radius: 40px;
   ${device.tablet} {
     padding: 40px 80px;
@@ -40,11 +39,11 @@ export const ModalItemTwo = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  /* padding: 40px 20px; */
   width: 280px;
   height: 670px;
   background: #ffffff;
-  box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
+  /* box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11); */
   border-radius: 40px;
   ${device.tablet} {
     padding: 40px auto;
@@ -92,7 +91,15 @@ export const ButtonCloseModal = styled.button`
   width: 34px;
   height: 34px;
   display: flex;
-  transition: stroke 300ms linear;
+  transition: color 300ms linear, background-color 300ms linear;
+  // fill: rgba(17, 17, 17, 0.6);
+  svg {
+    fill: rgba(17, 17, 17, 0.6);
+    &:hover {
+      fill: rgba(245, 146, 86, 1);
+      // stroke: rgba(245, 146, 86, 1);
+    }
+  }
 
   :hover,
   :focus,
@@ -226,14 +233,13 @@ export const AddFile = styled.label`
 
 export const FieldTextarea = styled(Field)`
   cursor: pointer;
-  resize: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.35;
   display: block;
   margin-top: 8px;
   padding: 14px 12px;
-  width: 240px;
+  width: 100%;
   height: 76px;
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);
@@ -266,7 +272,7 @@ export const FieldTextarea = styled(Field)`
     margin-top: 20px;
     padding: 16px;
     width: 394px;
-    height: 116px;
+    height: 113px;
   }
 `;
 

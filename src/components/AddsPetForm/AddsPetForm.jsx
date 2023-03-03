@@ -1,6 +1,8 @@
 import { StepOne } from "./steps/StepOne";
 import { StepTwo } from "./steps/StepTwo";
 import { useState } from "react";
+import { addPet } from "../../redux/pet/pet-operations";
+import { useDispatch } from "react-redux";
 
 export const AddsPetForm = ({ onClose }) => {
   const [data, setData] = useState({
@@ -9,15 +11,23 @@ export const AddsPetForm = ({ onClose }) => {
     breed: "",
     comments: "",
   });
+  const dispatch = useDispatch()
 
   const [currentStep, setCurrentStep] = useState(0);
 
-  const handleNextStep = (newData, final = false) => {
-    setData((prev) => ({ ...prev, ...newData }));
+  const handleNextStep = (newData, final = false, file = null) => {
+    setData((prev) => ({ ...prev, ...newData}));
     if (final) {
-      return;
-    }
+      const formData = new FormData();
+      formData.append("avatar", file);
+      formData.append("name", newData.name);
+      formData.append("birthday", newData.birthday);
+      formData.append("breed", newData.breed);
+      formData.append("comments", newData.comments);
+      dispatch(addPet(formData))
 
+    }
+ 
     setCurrentStep((prev) => prev + 1);
   };
 
@@ -28,7 +38,7 @@ export const AddsPetForm = ({ onClose }) => {
 
   const steps = [
     <StepOne next={handleNextStep} data={data} onClose={onClose} />,
-    <StepTwo prev={handlePrevStep} data={data} onClose={onClose} />,
+    <StepTwo prev={handlePrevStep} next={handleNextStep} data={data} onClose={onClose} />,
   ];
 
   return <div>{steps[currentStep]}</div>;

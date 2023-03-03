@@ -1,4 +1,4 @@
-import Dog from "../../../assets/dog.png";
+import { ReactComponent as Close } from "../../../assets/svg/plusUpload.svg";
 import { BtnAddTo } from "./BtnAddTo/BtnAddTo";
 import { BtnContct } from "./BtnContact/BtnContact";
 import {
@@ -15,67 +15,99 @@ import {
   ComentsText,
   BlokButton,
   ImgAndInfoBox,
+  BtnClose,
 } from "./ModalFindPet.styled";
 
-export const ModalFindPet = () => {
+export const ModalFindPet = ({
+  petInfo,
+  addFavorite,
+  favoritesList,
+  onClose,
+}) => {
+
+  const {
+    avatar,
+    birthday,
+    breed,
+    categoryName,
+    name,
+    sex,
+    location,
+    owner,
+    price,
+    title,
+    _id,
+    coments,
+  } = petInfo;
+
+const isFavorite = favoritesList?.includes(_id);
+const email = owner?.email
+const number = owner?.number
+
   return (
     <ModalCard>
+      <BtnClose onClick={onClose}>
+        <Close width={20} height={20} />
+      </BtnClose>
       <ImgAndInfoBox>
         <ImgBox>
-          <img src={Dog} alt="pet" />
+          <img src={avatar} alt="pet" />
           <TextOnImg>Sell</TextOnImg>
         </ImgBox>
-
         <BlokInfo>
           <Title>
-            Сute dog looking <br /> for a home
+            {birthday ? title : "Сute pet looking for a home"}
+            {/* Сute dog looking <br /> for a home */}
           </Title>
           <ListInfo>
             <ItemInfo>
               <NameInfo>Name:</NameInfo>
-              <ValueInfo>Rich</ValueInfo>
+              <ValueInfo>{name ? name : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Birthday:</NameInfo>
-              <ValueInfo>21.09.2020</ValueInfo>
+              <ValueInfo>{birthday ? birthday : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Breed:</NameInfo>
-              <ValueInfo>Pomeranian</ValueInfo>
+              <ValueInfo>{breed ? breed : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Place:</NameInfo>
-              <ValueInfo>Lviv</ValueInfo>
+              <ValueInfo>{location ? location : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>The sex:</NameInfo>
-              <ValueInfo>male</ValueInfo>
+              <ValueInfo>{sex ? sex : "No Info"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              <ValueInfo>user@mail1111111.com</ValueInfo>
+              <ValueInfo>{email? {email} :"user@mail1111111.com"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
-              <ValueInfo>+380971234567</ValueInfo>
+              <ValueInfo>{number? {number}:"+380971234567"}</ValueInfo>
             </ItemInfo>
-            <ItemInfo>
-              <NameInfo>Price:</NameInfo>
-              <ValueInfo>150$</ValueInfo>
-            </ItemInfo>
+            {categoryName === "sell" ? (
+              <ItemInfo>
+                <NameInfo>Price:</NameInfo>
+                <ValueInfo>{price ? price : "No Info"}</ValueInfo>
+              </ItemInfo>
+            ) : null}
           </ListInfo>
         </BlokInfo>
       </ImgAndInfoBox>
       <BlokComments>
         <ComentsText>
-          <span>Comments: </span>Lorem ipsum dolor sit amet, consectetur Lorem
-          ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
-          consectetur Lorem
+          <span>Comments: </span>
+          {coments ? coments : "No Info"}
         </ComentsText>
       </BlokComments>
       <BlokButton>
         <BtnContct />
-        <BtnAddTo />
+        <BtnAddTo type="button" like={(e) => addFavorite(e, _id, owner, isFavorite)}>
+          {isFavorite ? "Remove from" : "Add to"}
+        </BtnAddTo>
       </BlokButton>
     </ModalCard>
   );
