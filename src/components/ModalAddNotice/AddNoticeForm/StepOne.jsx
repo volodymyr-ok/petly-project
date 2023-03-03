@@ -64,7 +64,7 @@ export const StepOne = ({ onClose, next, data }) => {
                 value="lost-found"
                 id="lost-found"
               />
-              <RadioLabel htmlFor="lost-found">lost-found</RadioLabel>
+              <RadioLabel htmlFor="lost-found">lost/found</RadioLabel>
             </RadioBox>
             <RadioBox>
               <Field
@@ -73,7 +73,7 @@ export const StepOne = ({ onClose, next, data }) => {
                 value="in-good-hands"
                 id="in-good-hands"
               />
-              <RadioLabel htmlFor="in-good-hands">in-good-hands</RadioLabel>
+              <RadioLabel htmlFor="in-good-hands">in good hands</RadioLabel>
             </RadioBox>
             <RadioBox>
               <Field type="radio" name="categoryName" value="sell" id="sell" />

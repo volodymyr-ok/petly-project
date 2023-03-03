@@ -38,10 +38,7 @@ const validationSchema = yup.object({
     )
     .required("Address is required"),
   comments: yup.string().min(8).max(120).required("Comments are required"),
-  price: yup
-    .string()
-    .matches(/^[1-9]$/, "price must be greater than 0")
-    .required("Price is required"),
+  price: yup.string().matches(/^[1-9]+$/, "price must be greater than 0"),
 });
 
 export const StepTwo = ({ data, prev, onClose }) => {
@@ -76,7 +73,7 @@ export const StepTwo = ({ data, prev, onClose }) => {
       comments,
     } = data;
     console.log("DATA", data);
-    const comment = comments ? comments : "test test";
+    const comment = comments ? comments : "testtest";
     const formData = new FormData();
     formData.append("avatar", file);
     formData.append("title", title);
@@ -85,9 +82,11 @@ export const StepTwo = ({ data, prev, onClose }) => {
     formData.append("categoryName", categoryName);
     formData.append("sex", sex);
     formData.append("location", location);
-    formData.append("price", price);
     formData.append("breed", breed);
-    formData.append("comments", comment);
+    formData.append("comments", comments);
+    if (price !== "") {
+      formData.append("price", price);
+    }
 
     console.log("handleSubm", formData, file);
 
