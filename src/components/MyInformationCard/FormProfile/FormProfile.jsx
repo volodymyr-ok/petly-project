@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Form } from "./FormProfile.styled";
-import { InputItem } from "./InputItem";
-import { PrivateApi } from "../../../http/http";
-import { Notify } from "notiflix";
+import {useState} from "react";
+import {Form} from "./FormProfile.styled";
+import {InputItem} from "./InputItem";
+import {PrivateApi} from "../../../http/http";
+import {Notify} from "notiflix";
 
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
-  const [nameActivePancil, setNameActivePancil] = useState("");
+  const [nameActivePencil, setNameActivePencil] = useState("");
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -69,14 +69,12 @@ export const FormProfile = ({ user }) => {
   ];
 
   const updateUserData = async (dataSend) => {
-    const data = await PrivateApi.patch("api/users", dataSend);
-
-    return data;
+    return await PrivateApi.patch("api/users", dataSend);
   };
 
   // const onInputClose = () => {
   //   console.log("onBlu");
-  //   setNameActivePancil("");
+  //   setNameActivePencil("");
   // };
   const handleChange = ([key, val]) => {
     setDataSend((prevState) => {
@@ -87,15 +85,15 @@ export const FormProfile = ({ user }) => {
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
 
-    if (nameActivePancil === "") {
-      setNameActivePancil(nameBtn);
+    if (nameActivePencil === "") {
+      setNameActivePencil(nameBtn);
     }
 
-    if (nameActivePancil === nameBtn && Object.keys(dataSend).length === 0) {
-      setNameActivePancil("");
+    if (nameActivePencil === nameBtn && Object.keys(dataSend).length === 0) {
+      setNameActivePencil("");
     }
 
-    if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
+    if (nameActivePencil === nameBtn && Object.keys(dataSend).length) {
       updateUserData(dataSend)
         .then((data) => {
           Notify.success(`You have successfully updated your data`);
@@ -105,9 +103,9 @@ export const FormProfile = ({ user }) => {
           setIsError(error);
           setIsLoading(false);
         });
-      setNameActivePancil("");
+      setNameActivePencil("");
     }
-    if (nameActivePancil !== nameBtn) setNameActivePancil(nameBtn);
+    if (nameActivePencil !== nameBtn) setNameActivePencil(nameBtn);
   };
 
   return (
@@ -120,8 +118,8 @@ export const FormProfile = ({ user }) => {
           name={name}
           mask={mask}
           title={title}
-          dark={nameActivePancil !== "" ? "dark" : "ok"}
-          disable={nameActivePancil !== name || nameActivePancil === ""}
+          dark={nameActivePencil !== "" ? "dark" : "ok"}
+          disable={nameActivePencil !== name || nameActivePencil === ""}
           onClickPencil={(e) => handleInput(e, name)}
           onChange={(data) => handleChange(data)}
           // onBlur={onInputClose}

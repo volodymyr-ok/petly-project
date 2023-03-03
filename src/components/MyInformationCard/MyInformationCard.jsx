@@ -86,7 +86,6 @@ const MyInformationCard = ({user}) => {
                         setPreview(null);
                     }}>
                         <div>
-
                             <Avatar
                                 width={380}
                                 height={233}
