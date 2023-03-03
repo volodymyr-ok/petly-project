@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../Container/Container";
-import { Bar, BarWrapper, NumBtn } from "./PaginationBar.styled";
-import { AiOutlineLeftSquare, AiOutlineRightSquare } from "react-icons/ai";
+import {
+  Bar,
+  BarWrapper,
+  NextBtn,
+  NumBtn,
+  PrevBtn,
+} from "./PaginationBar.styled";
+import { TbPaw } from "react-icons/tb";
 
 const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   // currentPage, noticesLeft, noticesOnPage, pageCount, perPage, total
@@ -44,13 +50,13 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   return (
     <Container>
       <BarWrapper>
-        <button
+        <PrevBtn
           type="button"
           disabled={isPrevBtnDisabled}
           onClick={handlePrevPage}
         >
-          <AiOutlineLeftSquare />
-        </button>
+          <TbPaw size={30} />
+        </PrevBtn>
         <Bar>
           {renderButtons().map((el) => (
             <li key={"buttonId" + el}>
@@ -64,13 +70,13 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
             </li>
           ))}
         </Bar>
-        <button
+        <NextBtn
           type="button"
           disabled={isNextBtnDisabled}
           onClick={handleNextPage}
         >
-          <AiOutlineRightSquare />
-        </button>
+          <TbPaw size={30} />
+        </NextBtn>
       </BarWrapper>
     </Container>
   );

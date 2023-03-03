@@ -11,12 +11,7 @@ import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
-import {
-  getNotice1,
-  getFavorite1,
-  getMyNorices1,
-  getNoticesBySearch1,
-} from "./services";
+import { getNotice1, getFavorite1, getMyNorices1, getNoticesBySearch1, removeNotice } from "./services";
 //getNoticeById1
 
 const NoticesPage = () => {
@@ -26,8 +21,8 @@ const NoticesPage = () => {
   const favorites = useSelector(selectFavorites);
 
   const [sortedValue, setSortedValue] = useState("sell");
-  const [sortedValue1, setSortedValue1] = useState("sell");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isModalAddPet, setIsModalAddPet] = useState(false);
+  const [reload, setReload] = useState(false)
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,19 +30,20 @@ const NoticesPage = () => {
 
   const notices = data.data;
 
+
   useEffect(() => {
     setIsLoading(true);
-    if (sortedValue === "my ads") {
+    if(sortedValue === "my-ads"){
       getMyNorices1(sortedValue)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    } else if (sortedValue === "favorite ads") {
+      .then((data) => {
+       setData(data)
+       setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setIsLoading(false);
+      });
+    }else if(sortedValue === "favorite-ads"){
       getFavorite1(sortedValue)
         .then((data) => {
           setData(data);
@@ -68,11 +64,13 @@ const NoticesPage = () => {
           setIsLoading(false);
         });
     }
-  }, [sortedValue]);
+    
+  }, [sortedValue, reload]);
 
   const onSubmit = (e) => {
-    if (e !== "") {
-      getNoticesBySearch1(e)
+    if(e !== ""){
+      setIsLoading(true)
+       getNoticesBySearch1(e) 
         .then((data) => {
           setData(data);
           setIsLoading(false);
@@ -88,25 +86,36 @@ const NoticesPage = () => {
     if (!isLogined) {
       console.log("pls login first");
     } else {
-      setIsOpen(!isOpen);
+      setIsModalAddPet(!isModalAddPet);
     }
   };
 
   const onChooseCategory = (e) => {
-    const expr = e.target.textContent;
-    authorized.map(({ text }) => {
-      if (text === expr) {
-        setSortedValue(expr);
-        setSortedValue1(expr);
-      } else {
-        return null;
-      }
-      return null;
-    });
-  };
-  const handlerRemove = (e) => {
-    // console.log(e.target.id)
-    // user.notices
+    // console.log(e.target)
+    const expr = e.target.id;
+      authorized.map(({href})=>{
+        if(href === expr){
+          setSortedValue(expr)
+        }else{
+          return null
+        }
+        return null
+      })
+  }
+  const handlerRemove=(e)=>{
+    if(e.target.id && e.target.id !== ""){
+      console.log("ja tut")
+      setIsLoading(true)
+      removeNotice(e.target.id)
+        .then(() => {
+        setReload(!reload)
+        setIsLoading(false);
+       })
+       .catch((error) => {
+         setError(error);
+         setIsLoading(false);
+       });;
+    }
   };
 
   return (
@@ -126,14 +135,14 @@ const NoticesPage = () => {
             <ResultNotFound />
           ) : (
             <NoticesCategoryList
-              isOpen={isOpen}
+              isModalAddPet = {isModalAddPet}
               onAddPet={handlerModalAddPet}
               notices={notices}
               favorites={favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
               user={user}
-              sortedValue={sortedValue1}
+              sortedValue={sortedValue}
             />
           )}
         </div>

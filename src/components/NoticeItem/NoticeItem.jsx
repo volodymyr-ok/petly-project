@@ -16,7 +16,8 @@ import defImage from "../../img/defaultImg.jpeg";
 import { numberToWord } from "../../hooks/numberToString";
 import { ReactComponent as Like } from "../../assets/svg/like.svg";
 import { ReactComponent as Remove } from "../../assets/svg/remove.svg";
-import { ReactComponent as Edit } from "../../assets/svg/pencil.svg";
+//import { ReactComponent as Edit } from "../../assets/svg/edit-photo.svg";
+import { ReactComponent as Edit } from "../../assets/svg/penciNotices.svg";
 
 export const NoticeItem = ({
   addFavorite,
@@ -42,7 +43,7 @@ export const NoticeItem = ({
       return breed;
     }
   };
-  const userId = user.id;
+  const userId = user._id;
 
   return (
     <>
@@ -59,11 +60,6 @@ export const NoticeItem = ({
           _id,
         } = el;
 
-        //   console.log(breed.length)
-        //   if(breed.length>20){
-        //   breedExt(breed)
-        // }
-
         const textAge = numberToWord(birthday);
         const isFavorite = favoritesList?.includes(_id);
         return (
@@ -72,10 +68,11 @@ export const NoticeItem = ({
             <BtnAdd
               id={_id}
               favorite={isFavorite ? "favorite" : "noFavorite"}
-              onClick={(e) => addFavorite(e, _id, isFavorite)}
+              edit ={owner === userId ? "edit" : "like"}
+              onClick={(e) => addFavorite(e, _id, owner, isFavorite)}
             >
               {owner === userId ? (
-                <Edit width={16} height={16} />
+                <Edit edit={"edit"} width={30} height={30} />
               ) : (
                 <Like width={24} height={22} />
               )}
