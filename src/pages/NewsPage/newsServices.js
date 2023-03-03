@@ -8,20 +8,26 @@ export const newsApi = axios.create({
   params: {
     limit: 6,
     page: 1,
+    search: "",
   },
 });
 
 export const getNews = async (params) => {
-  console.log("params ==>", params);
-  const response = await newsApi.get(`/news`, { params });
-  return response.data;
+  try {
+    const response = await newsApi.get(`/news`, { params });
+    return response.data;
+  } catch (error) {
+    console.log("file: newsServices.js:24 ~ error >>", error);
+  }
 };
 
-export const getNewsBySearch = async (query, params) => {
+export const getNewsBySearch = async (params) => {
   try {
-    const res = await newsApi.get(`/news?search=${query}`, { params });
+    const res = await newsApi.get(`/news`, { params });
     return res.data;
-  } catch (error) {}
+  } catch (error) {
+    console.log("file: newsServices.js:29 ~ error >>", error);
+  }
 };
 
 // export const getNotice1 = async (value) => {

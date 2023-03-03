@@ -11,11 +11,6 @@ import PaginationBar from "../../PaginationBar/PaginationBar";
 import { getNews, getNewsBySearch } from "../../../pages/NewsPage/newsServices";
 
 export const NewsList = () => {
-  // const dispatch = useDispatch();
-  // const error = useSelector(selectError);
-  // useEffect(() => {
-  //   dispatch(getNews());
-  // }, [dispatch]);
   const [news, setNews] = useState({});
   const [page, setPage] = useState(1);
   // const [query, setQuery] = useState("");
@@ -25,9 +20,6 @@ export const NewsList = () => {
     getNews({ page })
       .then((d) => {
         setIsLoading(true);
-        // console.log("news.data.length ==>", news.data.length);
-        console.log("news.data ==>", news.data);
-        console.log("news ==>", news);
 
         setNews(d);
         setIsLoading(false);
@@ -35,9 +27,17 @@ export const NewsList = () => {
       .catch((e) => console.log);
   }, [page]);
 
-  const onSubmit = (query) => {
-    getNewsBySearch(query);
-    // dispatch();
+  const onSubmit = (search) => {
+    console.log("file: NewsList.jsx:36 ~ search >>", search);
+    if (!search) return;
+    getNews({ page, search })
+      .then((d) => {
+        console.log("file: NewsList.jsx:48 ~ d >>", d);
+        // setIsLoading(true);
+        // setNews(d);
+        // setIsLoading(false);
+      })
+      .catch((e) => console.log);
   };
 
   return (
@@ -49,7 +49,7 @@ export const NewsList = () => {
         <ListNews>
           {isLoading ? (
             <PawsLoader />
-          ) : news.length ? (
+          ) : null ? (
             <ResultNotFound />
           ) : (
             <NewsCard news={news.data} />
