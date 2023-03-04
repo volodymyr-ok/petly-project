@@ -16,6 +16,7 @@ export const ListNews = styled.ul`
   }
   ${device.desktop} {
     column-gap: 36px;
+    margin-bottom: 40px;
   }
 `;
 

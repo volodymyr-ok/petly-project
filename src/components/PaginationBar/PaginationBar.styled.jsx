@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
+import { Container } from "../Container/Container";
+
+export const BarContainer = styled(Container)`
+  /* margin-top: 40px; */
+`;
 
 export const BarWrapper = styled.div`
-  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;

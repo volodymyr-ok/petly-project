@@ -8,4 +8,5 @@ export const colors = {
   darkOrange: "#FF6101",
   markList: "#ffffff99",
   blue: "#3091eb",
+  newsText: "#111321",
 };
