@@ -1,4 +1,4 @@
-import { ReactComponent as Close } from "../../../assets/svg/plusUpload.svg";
+
 import { BtnAddTo } from "./BtnAddTo/BtnAddTo";
 import { BtnContct } from "./BtnContact/BtnContact";
 import {
@@ -15,14 +15,13 @@ import {
   ComentsText,
   BlokButton,
   ImgAndInfoBox,
-  BtnClose,
 } from "./ModalFindPet.styled";
 
 export const ModalFindPet = ({
   petInfo,
   addFavorite,
   favoritesList,
-  onClose,
+  user
 }) => {
 
   const {
@@ -40,15 +39,13 @@ export const ModalFindPet = ({
     coments,
   } = petInfo;
 
+const isOwner = user._id === owner || owner?._id 
 const isFavorite = favoritesList?.includes(_id);
 const email = owner?.email
 const number = owner?.number
 
   return (
     <ModalCard>
-      <BtnClose onClick={onClose}>
-        <Close width={20} height={20} />
-      </BtnClose>
       <ImgAndInfoBox>
         <ImgBox>
           <img src={avatar} alt="pet" />
@@ -104,10 +101,10 @@ const number = owner?.number
         </ComentsText>
       </BlokComments>
       <BlokButton>
-        <BtnContct />
-        <BtnAddTo type="button" like={(e) => addFavorite(e, _id, owner, isFavorite)}>
-          {isFavorite ? "Remove from" : "Add to"}
-        </BtnAddTo>
+       {!isOwner && <BtnContct />}
+       <BtnAddTo type="button" like={(e) => addFavorite(e, _id, owner, isFavorite)}>
+          {!isOwner ? (isFavorite ? "Remove from" : "Add to"): "Edit"}
+        </BtnAddTo> 
       </BlokButton>
     </ModalCard>
   );

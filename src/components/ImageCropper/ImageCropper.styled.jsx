@@ -9,9 +9,9 @@ export const BtnAdd = styled.button`
     border-radius: 20px;
     background-color: ${colors.hzModalPet};
     border: none;
-    /* & svg{
-      
-    } */
+    & svg{
+      stroke: ${colors.black};
+    }
 `
 
 

@@ -8,12 +8,12 @@ import { CropBox, CropImgPrevue, CropContainer, CropControls, ControlsButtonBox,
  import { useState, useRef  } from "react";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 
-export const ImageCropper = ({setCroppedImageFor}) => {
+export const ImageCropper = ({setCroppedImageFor, avatar}) => {
   const inputRef = useRef();
 
   const triggerFileSelectPopup = () => inputRef.current.click();
 
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null || avatar);
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -22,7 +22,7 @@ export const ImageCropper = ({setCroppedImageFor}) => {
 
   const onCropComplete = async (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
-	getPrevue(croppedAreaPixels)
+	  getPrevue(croppedAreaPixels)
 
   };
 
@@ -30,7 +30,7 @@ export const ImageCropper = ({setCroppedImageFor}) => {
     try {
        // const result = await getCroppedImgPrevue(image, croppedAreaPixels, 0, true)
         // setPrevue(result)
-        const croppedImageUrl = await getCroppedImgPrevue(image, croppedArea);
+        const croppedImageUrl = await getCroppedImgPrevue(image, croppedArea || croppedAreaPixels);
         const canvasDataUrl = croppedImageUrl.toDataURL("image/jpeg");
         const [fileName,  ] = name.split(".")
         console.log(fileName)
