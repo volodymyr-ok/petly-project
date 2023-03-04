@@ -13,16 +13,13 @@ export const NewsCard = ({ news }) => {
     <>
       {news?.map(({ _id, title, description, date, url }) => (
         <Item key={_id}>
-          <div
-            style={{ height: "70px", overflow: "hidden", marginBottom: "16px" }}
-          >
-            <CardTitle>{title}</CardTitle>
-          </div>
-          <div style={{ height: "133px", overflow: "hidden" }}>
-            <Text>{description}</Text>
-          </div>
+          <CardTitle>{title}</CardTitle>
+
+          <Text>{description}</Text>
+
           <NewsBox>
             <Data>{date?.split("-").reverse().join("/")}</Data>
+
             <ReadMore href={url} target="_blank">
               Read more
             </ReadMore>

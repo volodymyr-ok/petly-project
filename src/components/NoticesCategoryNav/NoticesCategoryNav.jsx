@@ -39,22 +39,34 @@ export const authorized = [
   },
 ];
 
-export const NoticesCategoryNav = ({onChooseCategory, isLogined, onAddPet}) => {
-    return <>
-            <NavBox>
-                <NavList onClick={onChooseCategory}>
-                    { isLogined? authorized.map(({href, text})=>{
-                        return <NavItem to={`/notices/${href}`} key={href}>
-                        <Button id={href}>{text}</Button>
-                        </NavItem>
-                    }): notAuthorized.map(({href, text})=>{
-                        return <NavItem  to={`/notices/${href}`} key={href}>
-                        <Button >{text}</Button>
-                        </NavItem>
-                    })}
-                </NavList>
-                <AddNotice onAddPet={onAddPet}/>
-            </NavBox>
+export const NoticesCategoryNav = ({
+  onChooseCategory,
+  isLogined,
+  onAddPet,
+}) => {
+  return (
+    <>
+      <NavBox>
+        <NavList onClick={onChooseCategory}>
+          {isLogined
+            ? authorized.map(({ href, text }) => {
+                return (
+                  <NavItem to={`/notices/${href}`} key={href}>
+                    <Button id={href}>{text}</Button>
+                  </NavItem>
+                );
+              })
+            : notAuthorized.map(({ href, text }) => {
+                return (
+                  <NavItem to={`/notices/${href}`} key={href}>
+                    <Button>{text}</Button>
+                  </NavItem>
+                );
+              })}
+        </NavList>
+        <AddNotice onAddPet={onAddPet} />
+      </NavBox>
     </>
+  );
   //   );
 };
