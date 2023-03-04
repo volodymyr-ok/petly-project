@@ -1,4 +1,3 @@
-
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -21,13 +20,11 @@ import {
   CancelBtn,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
 
-
 const validationSchema = yup.object({
   comments: yup.string().min(8).max(200).required(),
 });
 
 export const StepTwo = (props) => {
-
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -44,8 +41,8 @@ export const StepTwo = (props) => {
   };
 
   const handleSubmit = (e) => {
-     props.next(e, true, imgFile);
-     props.onClose();
+    props.next(e, true, imgFile);
+    props.onClose();
   };
 
   return (
@@ -81,6 +78,7 @@ export const StepTwo = (props) => {
                   type="text"
                   name="comments"
                   placeholder="Type comments"
+                  as="textarea"
                 />
               </StyledLabel>
             </LabelBox>
