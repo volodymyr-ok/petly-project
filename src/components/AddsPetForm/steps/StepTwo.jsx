@@ -1,4 +1,3 @@
-
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
@@ -89,6 +88,7 @@ export const StepTwo = (props) => {
                   type="text"
                   name="comments"
                   placeholder="Type comments"
+                  as="textarea"
                 />
               </StyledLabel>
             </LabelBox>

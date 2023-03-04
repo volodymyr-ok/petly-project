@@ -4,29 +4,31 @@ import { Input, SearchForm, Label, SearchButton } from "./SearchInput.styled";
 import searchBtn from "../../assets/svg/searchBtn.svg";
 import searchReset from "../../assets/svg/searchReset.svg";
 import useDebounce from "react-debounced";
-import { useSearchParams } from "react-router-dom";
 
 export const SearchInput = ({ onSubmit }) => {
-  const [searchParams, setSearchParams] = useSearchParams("");
-  const search = searchParams.get("query") || "";
+  const [search, setSearch] = useState("");
   const debounce = useDebounce(1000);
-  const [needClear, setNeedClear] = useState(false);
 
   useEffect(() => {
-    if (!search && needClear) onSubmit(search);
-    setNeedClear(false);
+    if (!search) {
+      onSubmit(search);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  const onInputChange = ({ target: { value } }) => {
-    setSearchParams(value !== "" ? { query: value } : {});
-    debounce(() => onSubmit(value));
+  const onInputChange = (e) => {
+    setSearch(e.target.value);
+    debounce(() => {
+      onSubmit(e.target.value);
+    });
   };
 
-  const onFormSubmit = (e) => e.preventDefault();
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+  };
+
   const onButtonClick = () => {
-    setNeedClear(true);
-    setSearchParams({});
+    setSearch("");
   };
 
   return (
