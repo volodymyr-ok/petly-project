@@ -11,13 +11,13 @@ const UserPage = () => {
   const [pets, setPets] = useState([]);
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  // console.log("user", user, pets);
+  console.log("user", user, pets);
 
   const FetchUserData = async () => {
     const data = await PrivateApi.get(
       "https://petly-2v85.onrender.com/api/users/profile"
     );
-
+      console.log('data', data)
     return data;
   };
 
@@ -41,7 +41,7 @@ const UserPage = () => {
         {!isLoading ? (
           <BoxCards>
             <MyInformationCard user={user} />
-            <PetsData pets={pets} />
+            {/*<PetsData pets={pets} />*/}
           </BoxCards>
         ) : (
           <PawsLoader />

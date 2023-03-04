@@ -15,6 +15,7 @@ import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
 
 export const PetsList = ({ pets }) => {
+  console.log(pets)
   // const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
