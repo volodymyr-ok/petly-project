@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Container } from "../Container/Container";
+
 import {
   NumBar,
   BarWrapper,
   NextBtn,
   NumBtn,
   PrevBtn,
-  BarContainer,
 } from "./PaginationBar.styled";
 import { TbPaw } from "react-icons/tb";
 // noticesLeft, noticesOnPage, perPage, total
@@ -47,7 +48,7 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
 
   return (
     pageCount > 1 && (
-      <BarContainer>
+      <Container>
         <BarWrapper>
           <PrevBtn
             type="button"
@@ -77,7 +78,7 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
             <TbPaw size={30} />
           </NextBtn>
         </BarWrapper>
-      </BarContainer>
+      </Container>
     )
   );
 };

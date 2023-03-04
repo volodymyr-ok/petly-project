@@ -8,6 +8,8 @@ export const ListNews = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  margin-bottom: 40px;
+
   ${device.tablet} {
     flex-direction: row;
     flex-wrap: wrap;
@@ -16,7 +18,6 @@ export const ListNews = styled.ul`
   }
   ${device.desktop} {
     column-gap: 36px;
-    margin-bottom: 40px;
   }
 `;
 

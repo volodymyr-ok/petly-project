@@ -78,7 +78,6 @@ export const StepTwo = (props) => {
                   type="text"
                   name="comments"
                   placeholder="Type comments"
-                  as="textarea"
                 />
               </StyledLabel>
             </LabelBox>
