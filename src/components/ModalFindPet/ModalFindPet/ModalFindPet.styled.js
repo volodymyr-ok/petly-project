@@ -10,14 +10,14 @@ export const ModalCard = styled.div`
 
   padding: 60px 20px 40px 20px;
   min-width: 280px;
-  width: calc(100% - 40px);
+ // width: calc(100% - 40px);
   /* min-height: 901px; */
   border-radius: 30px 30px 30px 30px;
   background-color: ${colors.white};
   overflow-y: auto;
   overflow-x: hidden; */
   ${device.mobile} {
-    width: 440px;
+   max-width: 440px;
   }
   ${device.tablet} {
     width: 704px;
@@ -64,6 +64,14 @@ export const ImgBox = styled.div`
   ${device.tablet} {
     width: 288px;
     height: 328px;
+  }
+  & img{
+    object-fit: cover;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    ${device.tablet}{
+      height: 328px;
+    }
   }
 `;
 

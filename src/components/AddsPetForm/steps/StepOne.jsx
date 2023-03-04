@@ -1,6 +1,5 @@
 import { Formik, ErrorMessage } from "formik";
 import {
-  ButtonCloseModal,
   Title,
   ErrorText,
   ModalItem,
@@ -13,7 +12,6 @@ import {
   LabelBox,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
 import * as yup from "yup";
-import { ReactComponent as CloseButtonIcon } from "../../../assets/svg/closeiconmodal.svg";
 const cyrillic = /[A-Za-z]/;
 const validationSchema = yup.object({
   name: yup
@@ -54,9 +52,9 @@ export const StepOne = (props) => {
     >
       {() => (
         <ModalItem>
-          <ButtonCloseModal type="button" onClick={() => onClose()}>
+          {/* <ButtonCloseModal type="button" onClick={() => onClose()}>
             <CloseButtonIcon />
-          </ButtonCloseModal>
+          </ButtonCloseModal> */}
           <FormStyled>
             <Title>Add pet</Title>
             <LabelBox>

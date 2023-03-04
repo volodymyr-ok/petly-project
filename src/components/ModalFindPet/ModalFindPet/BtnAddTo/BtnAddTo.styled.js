@@ -11,7 +11,10 @@ export const Btn = styled.button`
   background-color: ${colors.white};
   border: 2px solid ${colors.accentOrange};
   border-radius: 40px;
-
+  gap: 8px;
+  & svg{
+    fill: ${colors.accentOrange};
+  }
   span {
     font-weight: 500;
     font-size: 16px;
@@ -33,7 +36,6 @@ export const Btn = styled.button`
 `;
 
 export const IconHeart = styled(Heart)`
-  margin-left: 8px;
   width: 16px;
   height: 16px;
   fill: ${colors.accentOrange};

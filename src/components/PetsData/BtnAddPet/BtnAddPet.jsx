@@ -1,7 +1,8 @@
 import { ReactComponent as AddPlusButton } from "../../../assets/svg/Addpet.svg";
 import { AddPetBtn } from "./BtnAddPet.styled";
 import { useState } from "react";
-import { Modal } from "./../../../components/AddsPetForm/Modal";
+
+import { Modal } from "../../Modal/Modal";
 
 import { AddsPetForm } from "../../../components/AddsPetForm/AddsPetForm";
 
@@ -18,8 +19,13 @@ export const BtnAddPet = () => {
       <AddPetBtn type="button" onClick={openModal}>
         <AddPlusButton />
       </AddPetBtn>
-      {modalOpen && (
+      {/* {modalOpen && (
         <Modal onClose={closeModal}>
+          <AddsPetForm onClose={closeModal}></AddsPetForm>
+        </Modal>
+      )} */}
+       {modalOpen && (
+        <Modal type="addPet" onClose={closeModal}>
           <AddsPetForm onClose={closeModal}></AddsPetForm>
         </Modal>
       )}

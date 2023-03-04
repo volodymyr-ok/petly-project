@@ -20,8 +20,8 @@ export const BoxScrollbar = styled.div`
     width: 7px;
   }
   ::-webkit-scrollbar-track {
-    color: black;
-    background-color: #fdf7f2;
+    color: ${colors.black};
+    background-color: ${colors.hzModalPet};
   }
   ::-webkit-scrollbar-thumb {
     background-color: ${colors.accentOrange};
@@ -40,6 +40,10 @@ export const WrapperPicDiv = styled.div`
     margin-bottom: 0;
     width: 161px;
     height: 161px;
+  }
+  & > img {
+    object-fit: cover;
+    border-radius: inherit;
   }
 `;
 
@@ -64,7 +68,7 @@ export const Box = styled.div`
   padding: 20px;
   border-radius: 40px;
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  background-color: #ffffff;
+  background-color: ${colors.white};
   ${device.mobile} {
     width: 440px;
   }
@@ -104,14 +108,14 @@ export const Date = styled.p`
   font-weight: 400;
   font-size: 16px;
   line-height: calc(22 / 16);
-  color: rgba(17, 17, 17, 0.6);
+  color: ${colors.inputSecText};
 `;
 
 export const Link = styled.a`
   position: relative;
   font-size: 16px;
   line-height: calc(22 / 16);
-  color: #f59256;
+  color: ${colors.accentOrange};
   ::after {
     content: "";
     position: absolute;
@@ -119,7 +123,7 @@ export const Link = styled.a`
     bottom: 0;
     width: 0;
     height: 1px;
-    background-color: #f59256;
+    background-color: ${colors.accentOrange};
     transition: width 300ms linear;
   }
   :hover::after {
