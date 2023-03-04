@@ -127,6 +127,11 @@ export const BtnReadMore = styled(NavLink)`
   border-radius: 40px;
   background-color: ${colors.white};
   text-decoration: none;
+  :hover,
+  :focus {
+    color: ${colors.white};
+    background-color: ${colors.accentOrange};
+  }
 `;
 
 
@@ -140,4 +145,5 @@ export const BtnRemove = styled(StyledButton)`
   color: ${colors.darkOrange};
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};
+  gap: 5px;
 `;

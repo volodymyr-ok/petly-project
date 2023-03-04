@@ -30,7 +30,7 @@ const validationSchema = yup.object({
   breed: yup.string().min(2).max(16).matches(cyrillic, "only Latin letters"),
 });
 
-export const StepOne = ({ onClose, next, data }) => {
+export const StepOne = ({ onClose, next, data, id }) => {
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -51,7 +51,7 @@ export const StepOne = ({ onClose, next, data }) => {
     >
       {() => (
         <FormCustom>
-          <Title>Add pet</Title>
+          <Title>{id? "Edit pet" : "Add pet"}</Title>
           <SubTitle>
             Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
             consectetur

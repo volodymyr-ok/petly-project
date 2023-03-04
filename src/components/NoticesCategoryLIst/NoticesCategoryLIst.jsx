@@ -53,6 +53,8 @@ export const NoticesCategoryList = ({
         dispatch(removeFavorites(id));
       }
     } else {
+      // console.log(owner)
+      setPetInfo(notices.find((el) => el._id === id));
       setIsModalEditPost(!isModalEditPost);
     }
   };
@@ -98,10 +100,11 @@ export const NoticesCategoryList = ({
       )}
       {isModalReadMore && (
         <Modal
-          type="addPet"
+          // type="addPet"
           onClose={() => setIsModalReadMore(!isModalReadMore)}
         >
           <ModalFindPet
+            user = {user}
             onClose={() => setIsModalReadMore(!isModalReadMore)}
             petInfo={petInfo}
             favoritesList={favorites}
@@ -112,7 +115,9 @@ export const NoticesCategoryList = ({
         </Modal>
       )}
       {isModalEditPost && (
-        <Modal onClose={() => setIsModalEditPost(!isModalEditPost)}></Modal>
+        <Modal onClose={() => setIsModalEditPost(!isModalEditPost)}>
+                <AddNoticeForm   petInfo={petInfo} onClose={() => setIsModalEditPost(!isModalEditPost)} />
+        </Modal>
       )}
     </>
   );
