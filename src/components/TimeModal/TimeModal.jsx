@@ -2,8 +2,9 @@ import React, { useRef } from "react";
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { TimeWrap, TimeList, TimeItem, TimeDay } from "./TimeModal.styled";
+import { colors } from "../../utils/colors";
 
-export const TimeModal = ({ workDays, onClick }) => {
+export const TimeModal = ({ workDays, onClick, weekday }) => {
   const modalRef = useRef();
 
   const day = (index) => {
@@ -55,7 +56,16 @@ export const TimeModal = ({ workDays, onClick }) => {
     <TimeWrap ref={modalRef}>
       <TimeList>
         {workDays.map(({ isOpen, from, to }, index) => (
-          <TimeItem key={index}>
+          <TimeItem
+            key={index}
+            style={
+              weekday === index
+                ? {
+                    backgroundColor: `${colors.accentOrange}`,
+                  }
+                : { background: "none" }
+            }
+          >
             {!isOpen && (
               <>
                 <TimeDay>{day(index)}</TimeDay>

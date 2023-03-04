@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Form, Field } from "formik";
+import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
-import {colors} from "../../utils/colors"
 
 
 // can remove
@@ -229,6 +229,9 @@ export const FieldTextarea = styled(Field)`
     border: 1px solid ${colors.accentOrange};
   }
   ::placeholder {
+    position: absolute;
+    top: 0px;
+    left: 5px;
     padding: 14px 12px;
     font-weight: 400;
     font-size: 14px;
@@ -304,10 +307,15 @@ export const NextBtn = styled.button`
   ${device.tablet} {
     width: 180px;
     height: 44px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
   }
 `;
 
 export const CancelBtn = styled.button`
+  font-family: "Manrope";
+  font-style: normal;
   cursor: pointer;
   display: block;
   /* width: 240px; */
@@ -325,6 +333,9 @@ export const CancelBtn = styled.button`
   ${device.tablet} {
     width: 180px;
     height: 44px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
   }
 `;
 

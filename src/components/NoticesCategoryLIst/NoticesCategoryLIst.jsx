@@ -7,10 +7,8 @@ import {
   addFavorites,
   removeFavorites,
 } from "../../redux/auth/auth-operations";
-import {
-  useState,
-} from "react";
-import { Modal } from "../../components/Modal/Modal";
+import { useState } from "react";
+import { Modal } from "../Modal/Modal";
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
@@ -25,10 +23,10 @@ export const NoticesCategoryList = ({
   favorites,
   onAddPet,
   sortedValue,
-  isModalAddPet
+  isModalAddPet,
 }) => {
   const dispatch = useDispatch();
- // const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
   const [isModalEditPost, setIsModalEditPost] = useState(false);
@@ -46,28 +44,26 @@ export const NoticesCategoryList = ({
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) {
-       console.log("pls login first");
+      console.log("pls login first");
     }
-    if(user._id !== owner){
+    if (user._id !== owner) {
       if (!favorites.includes(id)) {
         dispatch(addFavorites(id));
       } else if (isFavorite) {
         dispatch(removeFavorites(id));
       }
-    }else{
-      setIsModalEditPost(!isModalEditPost)
+    } else {
+      setIsModalEditPost(!isModalEditPost);
     }
- 
   };
-  // let petInfo 
+  // let petInfo
 
-  const readMoreModal = (e)=>{
-    if(e.target.id && e.target.id!==""){
-      setPetInfo(notices.find(el=>el._id===e.target.id))
-      setIsModalReadMore(!isModalReadMore)
+  const readMoreModal = (e) => {
+    if (e.target.id && e.target.id !== "") {
+      setPetInfo(notices.find((el) => el._id === e.target.id));
+      setIsModalReadMore(!isModalReadMore);
     }
- 
-  }
+  };
 
   return (
     <>
@@ -94,28 +90,30 @@ export const NoticesCategoryList = ({
           <ResultNotFound />
         )}
       </ListBox>
-    
-    
-      { isModalAddPet && 
+
+      {isModalAddPet && (
         <Modal type="addPet" onClose={onAddPet}>
           <AddNoticeForm onClose={onAddPet} />
         </Modal>
-      }  
-          {isModalReadMore && (
-        <Modal type="addPet" onClose={()=>setIsModalReadMore(!isModalReadMore)}>
-          <ModalFindPet 
-          onClose={()=>setIsModalReadMore(!isModalReadMore)} 
-          petInfo={petInfo}   
-          favoritesList={favorites}
-          addFavorite={(e, id, owner, isFavorite) =>
-            handlerFavorite(e, id, owner, isFavorite)
-          }
+      )}
+      {isModalReadMore && (
+        <Modal
+          type="addPet"
+          onClose={() => setIsModalReadMore(!isModalReadMore)}
+        >
+          <ModalFindPet
+            onClose={() => setIsModalReadMore(!isModalReadMore)}
+            petInfo={petInfo}
+            favoritesList={favorites}
+            addFavorite={(e, id, owner, isFavorite) =>
+              handlerFavorite(e, id, owner, isFavorite)
+            }
           />
         </Modal>
       )}
-      {
-        isModalEditPost && <Modal onClose={()=>setIsModalEditPost(!isModalEditPost)} ></Modal>
-      }
+      {isModalEditPost && (
+        <Modal onClose={() => setIsModalEditPost(!isModalEditPost)}></Modal>
+      )}
     </>
   );
 };

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../Container/Container";
-import { Bar, BarWrapper, NumBtn } from "./PaginationBar.styled";
-import { AiOutlineLeftSquare, AiOutlineRightSquare } from "react-icons/ai";
-
+import {
+  NumBar,
+  BarWrapper,
+  NextBtn,
+  NumBtn,
+  PrevBtn,
+} from "./PaginationBar.styled";
+import { TbPaw } from "react-icons/tb";
+// noticesLeft, noticesOnPage, perPage, total
 const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
-  // currentPage, noticesLeft, noticesOnPage, pageCount, perPage, total
   const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
-
-  const changePage = ({ target }) => {
-    setPage(target.textContent);
-  };
 
   useEffect(() => {
     if (currentPage === 1) setIsPrevBtnDisabled(true);
@@ -20,76 +21,64 @@ const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
     else setIsNextBtnDisabled(false);
   }, [currentPage, pageCount]);
 
-  //   const handlePrevBtnDisabled = () => {
-  //     if (currentPage === 1) setIsPrevBtnDisabled(true);
-  //     else setIsPrevBtnDisabled(false);
-  //   };
+  const renderButtons = () => {
+    const buttons = [];
+    for (let i = 1; i <= pageCount; i++) buttons.push(i);
+    return buttons;
+  };
 
-  //   const handleNextBtnDisabled = () => {
-  //     if (currentPage === pageCount) return true;
-  //     else return false;
-  //   };
+  const changePage = ({ target }) => {
+    setPage(target.textContent);
+  };
 
-  const handlePrevPage = (e) => {
-    console.log("currentPage, e", currentPage, e);
+  const toPrevPage = () => {
     if (currentPage === 1) return;
     setPage(currentPage - 1);
   };
-
-  const handleNextPage = (e) => {
-    console.log(e);
-
+  const toNextPage = () => {
     if (currentPage === pageCount) return;
     setPage(currentPage + 1);
   };
 
-  const handleVariant = (num) => {
-    if (currentPage === num) {
-      console.log("hello");
-      return "active";
-    }
-  };
-
-  const renderButtons = () => {
-    const buttons = [];
-    for (let i = 1; i <= pageCount; i++) {
-      buttons.push(i);
-    }
-    return buttons;
+  const turnToActive = (num) => {
+    if (currentPage === num) return true;
+    return false;
   };
 
   return (
-    <Container>
-      <BarWrapper>
-        <button
-          type="button"
-          disabled={isPrevBtnDisabled}
-          onClick={handlePrevPage}
-        >
-          <AiOutlineLeftSquare />
-        </button>
-        <Bar>
-          {renderButtons().map((e) => (
-            <li key={e + "buttonId"}>
-              <NumBtn
-                type="button"
-                variant={handleVariant(e)}
-                onClick={changePage}
-              >
-                {e}
-              </NumBtn>
-            </li>
-          ))}
-        </Bar>
-        <button
-          type="button"
-          disabled={isNextBtnDisabled}
-          onClick={handleNextPage}
-        >
-          <AiOutlineRightSquare />
-        </button>
-      </BarWrapper>
-    </Container>
+    pageCount > 1 && (
+      <Container>
+        <BarWrapper>
+          <PrevBtn
+            type="button"
+            disabled={isPrevBtnDisabled}
+            onClick={toPrevPage}
+          >
+            <TbPaw size={30} />
+          </PrevBtn>
+          <NumBar>
+            {renderButtons().map((el) => (
+              <li key={"buttonId" + el}>
+                <NumBtn
+                  type="button"
+                  active={turnToActive(el)}
+                  onClick={changePage}
+                >
+                  {el}
+                </NumBtn>
+              </li>
+            ))}
+          </NumBar>
+          <NextBtn
+            type="button"
+            disabled={isNextBtnDisabled}
+            onClick={toNextPage}
+          >
+            <TbPaw size={30} />
+          </NextBtn>
+        </BarWrapper>
+      </Container>
+    )
   );
 };
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Title } from "../../components/Title/Title";
 import { Container } from "../../components/Container/Container";
+import { Title } from "../../components/Title/Title";
 import { FriendsItems } from "../../components/FriendItems/FriendItems";
 import { FriendsList } from "./OurFriendsPage.styled";
 
