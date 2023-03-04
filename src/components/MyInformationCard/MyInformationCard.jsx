@@ -80,6 +80,7 @@ const MyInformationCard = ({user}) => {
                 <BtnEditPhoto onClick={() => setShow(!show)}/>
                 <FormProfile user={user}/>
                 <BtnLogOut/>
+                
                 {show ?
                     <Modal onClose={() => {
                         setShow(!show)

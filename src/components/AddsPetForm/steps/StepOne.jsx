@@ -54,9 +54,9 @@ export const StepOne = (props) => {
     >
       {() => (
         <ModalItem>
-          <ButtonCloseModal type="button" onClick={() => onClose()}>
+          {/* <ButtonCloseModal type="button" onClick={() => onClose()}>
             <CloseButtonIcon />
-          </ButtonCloseModal>
+          </ButtonCloseModal> */}
           <FormStyled>
             <Title>Add pet</Title>
             <LabelBox>

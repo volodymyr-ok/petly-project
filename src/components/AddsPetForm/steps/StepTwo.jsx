@@ -28,6 +28,11 @@ const validationSchema = yup.object({
 
 export const StepTwo = (props) => {
 
+
+  const [image, setImage] = useState(null);
+  const setCroppedImageFor =(file)=>{
+    setImage(file)
+  }
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -37,15 +42,17 @@ export const StepTwo = (props) => {
     );
   };
 
-  const [imgFile, setImgFile] = useState(null);
+  // const [imgFile, setImgFile] = useState(null);
 
-  const handleChange = (event) => {
-    setImgFile(event.target.files[0]);
-  };
+  // const handleChange = (event) => {
+  //   setImgFile(event.target.files[0]);
+  // };
 
   const handleSubmit = (e) => {
-     props.next(e, true, imgFile);
+     props.next(e, true, image);
      props.onClose();
+
+    //  const data = new FormData(event.target);
   };
 
   return (
@@ -56,14 +63,14 @@ export const StepTwo = (props) => {
     >
       {({ values }) => (
         <ModalItemTwo>
-          <ButtonCloseModal type="button" onClick={() => props.onClose()}>
+          {/* <ButtonCloseModal type="button" onClick={() => props.onClose()}>
             <CloseButtonIcon />
-          </ButtonCloseModal>
+          </ButtonCloseModal> */}
           <FormStyled>
             <TitleTwo>Add pet</TitleTwo>
             <TitleItemTwo>Add photo and some comments</TitleItemTwo>
 
-            <AddFile htmlFor="myPetsPhoto">
+            {/* <AddFile htmlFor="myPetsPhoto">
               {imgFile ? <p>File added success</p> : <AddPlusButton />}
               <FieldPhoto
                 id="myPetsPhoto"
@@ -72,8 +79,9 @@ export const StepTwo = (props) => {
                 onChange={handleChange}
               />
             </AddFile>
-            <FormError name="myPetsPhoto" />
-            <button>Privet</button>
+            <FormError name="myPetsPhoto" /> */}
+           
+            <ImageCropper setCroppedImageFor={setCroppedImageFor}></ImageCropper>
             <LabelBox>
               <StyledLabel htmlFor="comments">
                 Comments

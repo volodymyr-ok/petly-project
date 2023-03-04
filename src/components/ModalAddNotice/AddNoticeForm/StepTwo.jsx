@@ -26,6 +26,7 @@ import { useState } from "react";
 import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import { useDispatch } from "react-redux";
 import { addNotice } from "../../../redux/notice/notice-operations";
+// import { ImageCropper } from "../../ImageCropper/ImageCropper";
 
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
@@ -156,7 +157,6 @@ export const StepTwo = ({ data, prev, onClose }) => {
             </AddFile>
             <FormError name="myPetsPhoto" />
           </Label>
-
           <LabelBox>
             <StyledLabel htmlFor="comments">
               Comments
