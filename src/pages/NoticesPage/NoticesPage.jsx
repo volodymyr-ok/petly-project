@@ -36,7 +36,7 @@ const NoticesPage = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState({ data: [] });
 
-  const [location, setLocation] = useState(useLocation())
+  const location = useLocation()
 
   const notices = data.data;
 
