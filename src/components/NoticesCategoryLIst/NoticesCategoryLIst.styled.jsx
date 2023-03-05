@@ -12,6 +12,8 @@ export const List = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 32px;
+
+  margin-bottom: 40px;
   ${device.tablet} {
     flex-direction: row;
     flex-wrap: wrap;

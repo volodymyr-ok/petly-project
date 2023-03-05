@@ -12,7 +12,10 @@ import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
 import { authorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
 import {
-  getNotice1,
+  getNoticesByCategory,
+  getFavoriteNotices,
+  getMyOwnNotices,
+  getNotice1, // <== getNoticesByCategory
   getFavorite1,
   getMyNorices1,
   getNoticesBySearch1,
@@ -26,7 +29,8 @@ const NoticesPage = () => {
 
   const favorites = useSelector(selectFavorites);
 
-  const [sortedValue, setSortedValue] = useState("sell");
+  const [page, setPage] = useState(1);
+  const [category, setCategory] = useState("sell");
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [reload, setReload] = useState(false);
 
@@ -34,12 +38,12 @@ const NoticesPage = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState({ data: [] });
 
-  const notices = data.data;
+  // const notices = data.data;
 
   useEffect(() => {
     setIsLoading(true);
-    if (sortedValue === "my-ads") {
-      getMyNorices1(sortedValue)
+    if (category === "my-ads") {
+      getMyNorices1(category)
         .then((data) => {
           setData(data);
           setIsLoading(false);
@@ -48,8 +52,11 @@ const NoticesPage = () => {
           setError(error);
           setIsLoading(false);
         });
-    } else if (sortedValue === "favorite-ads") {
-      getFavorite1(sortedValue)
+    } else if (category === "favorite-ads") {
+      const params = { page };
+
+      // getFavorite1(category)
+      getFavoriteNotices(params)
         .then((data) => {
           setData(data);
           setIsLoading(false);
@@ -59,7 +66,9 @@ const NoticesPage = () => {
           setIsLoading(false);
         });
     } else {
-      getNotice1(sortedValue)
+      const params = { page };
+      getNoticesByCategory(category, params)
+        // getNotice1(category)
         .then((data) => {
           setData(data);
           setIsLoading(false);
@@ -69,7 +78,8 @@ const NoticesPage = () => {
           setIsLoading(false);
         });
     }
-  }, [sortedValue, reload]);
+  }, [category, page]);
+  // }, [category, reload]);
 
   const onSubmit = (e) => {
     if (e !== "") {
@@ -99,7 +109,7 @@ const NoticesPage = () => {
     const expr = e.target.id;
     authorized.map(({ href }) => {
       if (href === expr) {
-        setSortedValue(expr);
+        setCategory(expr);
       } else {
         return null;
       }
@@ -141,12 +151,13 @@ const NoticesPage = () => {
             <NoticesCategoryList
               isModalAddPet={isModalAddPet}
               onAddPet={handlerModalAddPet}
-              notices={notices}
+              data={data}
               favorites={favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
               user={user}
-              sortedValue={sortedValue}
+              category={category}
+              setPage={setPage}
             />
           )}
         </div>

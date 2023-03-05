@@ -34,7 +34,8 @@ export const authorized = [
     text: "favorite ads",
   },
   {
-    href: "my-ads",
+    // href: "my-ads",
+    href: "own",
     text: "my ads",
   },
 ];
