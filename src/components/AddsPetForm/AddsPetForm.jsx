@@ -4,35 +4,34 @@ import { useState } from "react";
 import { addPet } from "../../redux/pet/pet-operations";
 import { useDispatch } from "react-redux";
 
-export const AddsPetForm = ({ onClose, onEdit, post }) => {
+export const AddsPetForm = ({ onClose }) => {
   const [data, setData] = useState({
-    name: post?.name || "",
-    birthday: post?.birthday || "",
-    breed: post?.breed || "",
-    comments: post?.comments || "",
+    name: "",
+    birthday: "",
+    breed: "",
+    comments: "",
   });
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNextStep = (newData, final = false, file = null) => {
-    setData((prev) => ({ ...prev, ...newData}));
-    if(final && post?._id && file){
+    setData((prev) => ({ ...prev, ...newData }));
+    if (final) {
       const formData = new FormData();
       formData.append("avatar", file);
-      onEdit([post._id, newData, formData])
-    }else if(final && post?._id && !file){
-      onEdit([post._id, newData, false])
+      const petInfo = {
+        name: newData.name,
+        breed: newData.breed,
+        birthday: newData.birthday,
+        comments: newData.comments,
+        avatar: formData,
+      };
+      console.log(petInfo);
+      dispatch(addPet(petInfo));
+      // tut robymo zapros vysylajemo body i avatar okremo
     }
-    else if(final && !post?._id){
-      const formData = new FormData();
-      formData.append("avatar", file);
-      formData.append("name", newData.name);
-      formData.append("birthday", newData.birthday);
-      formData.append("breed", newData.breed);
-      formData.append("comments", newData.comments);
-      dispatch(addPet(formData))
-    }
+
     setCurrentStep((prev) => prev + 1);
   };
 
@@ -43,7 +42,12 @@ export const AddsPetForm = ({ onClose, onEdit, post }) => {
 
   const steps = [
     <StepOne next={handleNextStep} data={data} onClose={onClose} />,
-    <StepTwo prev={handlePrevStep} avatar={post?.avatarURL} next={handleNextStep} data={data} onClose={onClose} />,
+    <StepTwo
+      prev={handlePrevStep}
+      next={handleNextStep}
+      data={data}
+      onClose={onClose}
+    />,
   ];
 
   return <div>{steps[currentStep]}</div>;

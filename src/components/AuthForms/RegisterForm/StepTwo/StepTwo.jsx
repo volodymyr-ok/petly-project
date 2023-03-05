@@ -16,15 +16,7 @@ export const StepTwo = ({
   values: { city },
 }) => {
   const NAME_INPUT_CITY = "city";
-  // const handleChange = (evt) => {
-  //   setFieldTouched(NAME_INPUT_CITY);
-  //   setFieldError(NAME_INPUT_CITY, true);
-  //   setFieldValue(NAME_INPUT_CITY, evt.label);
-  // };
-  // const [phone, setPhone] = useState("");
-  // const [country, setCountry] = useState("");
-  // const [region, setRegion] = useState("");
-  // console.log(country);
+
   return (
     <>
       <Label>
