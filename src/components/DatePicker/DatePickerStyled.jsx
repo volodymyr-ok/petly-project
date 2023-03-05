@@ -7,7 +7,7 @@ const DatePickerStyled = ({startDate, disabled, handleChange}) => {
 
     const range = () => {
         const years = []
-        for (let i = 1950; i < 2024; i++) {
+        for (let i = 1900; i < 2024; i++) {
             years.push(i)
         }
         return years

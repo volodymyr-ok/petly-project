@@ -4,6 +4,7 @@ import {ReactComponent as Pencil} from "../../../assets/svg/pencil.svg";
 import {ReactComponent as Check} from "../../../assets/svg/btn-ok.svg";
 import {useEffect, useState} from "react";
 import DatePickerStyled from "../../DatePicker/DatePickerStyled";
+import LocationPicker from "../../LocationPicker/LocationPicker";
 
 export const InputItem = ({
                               type,
@@ -34,6 +35,8 @@ export const InputItem = ({
         setStartDate(e)
         if (name === 'birthday') {
             onChange([name, e]);
+        } else if (name === 'city') {
+            onChange([name, e]);
         } else {
             setVal(e.target.value);
             onChange([name, e.target.value]);
@@ -43,21 +46,23 @@ export const InputItem = ({
     return (
         <BoxInput>
             <NameInput>{title}:</NameInput>
-            {name === 'birthday' ?
-                <DatePickerStyled
-                    startDate={startDate}
-                    disabled={disable}
-                    handleChange={handleChange}
-                />
-                :
-                <input
-                    type={type}
-                    value={val}
-                    name={name}
-                    mask={mask}
-                    onChange={handleChange}
-                    disabled={disable}
-                />}
+            {name === 'birthday' ? (<DatePickerStyled
+                startDate={startDate}
+                disabled={disable}
+
+                handleChange={handleChange}
+            />) : (name === 'city') ? (<LocationPicker
+                value={val}
+                onChange={handleChange}
+                disabled={disable}
+            />) : (<input
+                type={type}
+                value={val}
+                name={name}
+                mask={mask}
+                onChange={handleChange}
+                disabled={disable}
+            />)}
             <BtnPencil type="button" dark={dark} onClick={onClickPencil} name={name}>
                 {disable ? <Pencil dark={dark}/> : <Check/>}
             </BtnPencil>
