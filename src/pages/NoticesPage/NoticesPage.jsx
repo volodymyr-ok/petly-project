@@ -15,33 +15,36 @@ import {
 } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
 import {
-  getNotice1,
-  getFavorite1,
-  getMyNorices1,
-  getNoticesBySearch1,
+  getNoticesByCategory,
+  getFavoriteNotices,
+  getMyOwnNotices,
+  getNoticesBySearch,
   removeNotice,
 } from "./services";
 import { useLocation } from "react-router-dom";
+import usePrevious from "../../hooks/usePrevious";
 //import { Navigate } from 'react-router-dom';
-//getNoticeById1
 
 const NoticesPage = () => {
-  const isLogined = useSelector(selectIsAuth);
-  const user = useSelector(selectUser);
-
-  const favorites = useSelector(selectFavorites);
-
-  const [sortedValue, setSortedValue] = useState("");
+  const [page, setPage] = useState(1);
+  const [categoryName, setCategoryName] = useState("");
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [reload, setReload] = useState(false);
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState({ data: [] });
+  const [data, setData] = useState({});
+  const [search, setSearch] = useState("");
 
   const location = useLocation();
+  const isLogined = useSelector(selectIsAuth);
+  const user = useSelector(selectUser);
+  const favorites = useSelector(selectFavorites);
 
-  const notices = data.data;
+  const prevSearch = usePrevious(search);
+  const prevCategoryName = usePrevious(categoryName);
+  const needToResetPage =
+    (prevSearch !== search && page > 1) ||
+    (prevCategoryName !== categoryName && page > 1);
 
   useEffect(() => {
     const { pathname } = location;
@@ -54,17 +57,16 @@ const NoticesPage = () => {
       notAuthorized.map(({ href }) => [href, true])
     );
 
-    const sortedValueToUpdate = getSortedValue(
+    const newCategoryName = getCategoryName(
       secName,
       isLogined,
       authorizedHrefs,
       notAuthorizedHrefs
     );
-
-    setSortedValue(sortedValueToUpdate);
+    setCategoryName(newCategoryName);
   }, [location, isLogined]);
 
-  function getSortedValue(
+  function getCategoryName(
     secName,
     isAuthenticated,
     authorizedHrefs,
@@ -76,20 +78,36 @@ const NoticesPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    const searchParams = { search, page };
+    if (needToResetPage) setPage(1);
+
+    if (search !== "") {
+      getNoticesBySearch(searchParams)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+
+      return;
+    }
 
     const fetchData = async () => {
       try {
         let data;
 
-        switch (sortedValue) {
+        switch (categoryName) {
           case "own":
-            data = await getMyNorices1(sortedValue);
+            data = await getMyOwnNotices({ page }); // sortedValue
             break;
           case "favorite-ads":
-            data = await getFavorite1(sortedValue);
+            data = await getFavoriteNotices({ page });
             break;
           default:
-            data = await getNotice1(sortedValue);
+            data = await getNoticesByCategory(categoryName, { page });
             break;
         }
 
@@ -102,22 +120,10 @@ const NoticesPage = () => {
     };
 
     fetchData();
-  }, [sortedValue, reload]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryName, page, search]);
 
-  const onSubmit = (e) => {
-    if (e !== "") {
-      setIsLoading(true);
-      getNoticesBySearch1(e)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }
-  };
+  const onSubmit = (query) => setSearch(query);
 
   const handlerModalAddPet = (e) => {
     if (!isLogined) {
@@ -133,16 +139,18 @@ const NoticesPage = () => {
     const expr = e.target.dataset.id;
     authorized.map(({ href }) => {
       if (href === expr) {
-        setSortedValue(expr);
+        setCategoryName(expr);
       } else {
         return null;
       }
       return null;
     });
   };
+
   const handlerRemove = (e) => {
     if (e.target.id && e.target.id !== "") {
       setIsLoading(true);
+
       removeNotice(e.target.id)
         .then(() => {
           setReload(!reload);
@@ -165,6 +173,7 @@ const NoticesPage = () => {
           isLogined={isLogined}
           onChooseCategory={onChooseCategory}
         />
+
         <div>
           {isLoading ? (
             <PawsLoader />
@@ -174,12 +183,13 @@ const NoticesPage = () => {
             <NoticesCategoryList
               isModalAddPet={isModalAddPet}
               onAddPet={handlerModalAddPet}
-              notices={notices}
+              data={data}
               favorites={favorites}
               isLogined={isLogined}
               onRemove={handlerRemove}
               user={user}
-              sortedValue={sortedValue}
+              categoryName={categoryName}
+              setPage={setPage}
             />
           )}
         </div>

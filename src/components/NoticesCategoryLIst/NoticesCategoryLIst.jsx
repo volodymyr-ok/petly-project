@@ -9,31 +9,34 @@ import {
 } from "../../redux/auth/auth-operations";
 import { useState } from "react";
 import { Modal } from "../Modal/Modal";
-// import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
-//import { useDispatch, useSelector } from "react-redux";
+import PaginationBar from "../PaginationBar/PaginationBar";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
+// import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
+//import { useDispatch, useSelector } from "react-redux";
 
 export const NoticesCategoryList = ({
-  notices,
+  data,
   onRemove,
   user,
   isLogined,
   favorites,
   onAddPet,
-  sortedValue,
+  categoryName,
   isModalAddPet,
+  setPage,
 }) => {
-  const dispatch = useDispatch();
-  // const [isOpen, setIsOpen] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
   const [isModalEditPost, setIsModalEditPost] = useState(false);
+
+  const notices = data.data;
+  const dispatch = useDispatch();
+  // const [isOpen, setIsOpen] = useState(false);
   // useEffect(() => {
   //   console.log("favorites", favotires);
   // }, [favotires]);
-
   // const handlerModalAddPet = (e) => {
   //   console.log("click");
   //   if (!isLogined) {
@@ -43,24 +46,20 @@ export const NoticesCategoryList = ({
   // };
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
-    if (!isLogined) {
-      console.log("pls login first");
-    }
+    if (!isLogined) console.log("pls login first");
+
     if (user._id !== owner) {
-      if (!favorites.includes(id)) {
-        dispatch(addFavorites(id));
-      } else if (isFavorite) {
-        dispatch(removeFavorites(id));
-      }
+      if (!favorites.includes(id)) dispatch(addFavorites(id));
+      else if (isFavorite) dispatch(removeFavorites(id));
     } else {
-      // console.log(owner)
       setPetInfo(notices.find((el) => el._id === id));
+
       setIsModalEditPost(!isModalEditPost);
     }
   };
-  // let petInfo
 
   const readMoreModal = (e) => {
+    // Нащо друга умова (&& e.target.id !== ""), якщо перша повертає ідентичне значення...
     if (e.target.id && e.target.id !== "") {
       setPetInfo(notices.find((el) => el._id === e.target.id));
       setIsModalReadMore(!isModalReadMore);
@@ -85,12 +84,13 @@ export const NoticesCategoryList = ({
               }
               onRemove={onRemove}
               onReadMore={readMoreModal}
-              sortedValue={sortedValue}
+              categoryName={categoryName}
             ></NoticeItem>
           </List>
         ) : (
           <ResultNotFound />
         )}
+        <PaginationBar info={data} setPage={setPage} />
       </ListBox>
 
       {isModalAddPet && (
@@ -104,7 +104,7 @@ export const NoticesCategoryList = ({
           onClose={() => setIsModalReadMore(!isModalReadMore)}
         >
           <ModalFindPet
-            user = {user}
+            user={user}
             onClose={() => setIsModalReadMore(!isModalReadMore)}
             petInfo={petInfo}
             favoritesList={favorites}
@@ -116,7 +116,10 @@ export const NoticesCategoryList = ({
       )}
       {isModalEditPost && (
         <Modal onClose={() => setIsModalEditPost(!isModalEditPost)}>
-                <AddNoticeForm   petInfo={petInfo} onClose={() => setIsModalEditPost(!isModalEditPost)} />
+          <AddNoticeForm
+            petInfo={petInfo}
+            onClose={() => setIsModalEditPost(!isModalEditPost)}
+          />
         </Modal>
       )}
     </>
