@@ -249,6 +249,13 @@ export const FieldTextarea = styled(Field)`
   }
 `;
 
+export const LabelBoxModifaed = styled.div`
+margin-top: 30px;
+  margin-bottom: 16px;
+  ${device.tablet} {
+    margin-bottom: 28px;
+  }
+`;
 export const LabelBox = styled.div`
   margin-bottom: 16px;
   ${device.tablet} {

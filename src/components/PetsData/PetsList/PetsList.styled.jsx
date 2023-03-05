@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../../utils/colors";
 import { device } from "../../../utils/mixin";
+import { DeleteBtn } from "../../DeletePetBtn/DeletePetBtn.styled";
 
 export const BoxPetsList = styled.div`
   ${device.desktop} {
@@ -129,5 +130,20 @@ export const Link = styled.a`
   :hover::after {
     width: 100%;
     transition: 250ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+  }
+`;
+export const EditPetBtn = styled(DeleteBtn)`
+  right: 0;
+  top: 30px;
+  fill: ${colors.accentOrange};
+  ${device.tablet}{
+    top: 0;
+    right: 40px;
+  }
+  :hover,
+  :focus {
+    fill: ${colors.darkOrange};
+    transform: scale(1.1);
+    transition: transform 250ms linear;
   }
 `;
