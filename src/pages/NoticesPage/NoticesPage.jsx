@@ -60,6 +60,7 @@ const NoticesPage = () => {
       authorizedHrefs,
       notAuthorizedHrefs
     );
+
     setSortedValue(sortedValueToUpdate);
   }, [location, isLogined]);
 
