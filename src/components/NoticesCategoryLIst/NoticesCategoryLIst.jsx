@@ -27,7 +27,7 @@ export const NoticesCategoryList = ({
   isModalAddPet,
   setPage,
 }) => {
-  console.log("file: NoticesCategoryLIst.jsx:29 ~ notices >>", data);
+  // console.log("file: NoticesCategoryLIst.jsx:29 ~ notices >>", data);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
   const [isModalEditPost, setIsModalEditPost] = useState(false);

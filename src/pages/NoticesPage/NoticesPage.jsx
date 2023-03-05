@@ -18,15 +18,16 @@ import {
   getNoticesByCategory,
   getFavoriteNotices,
   getMyOwnNotices,
-  getNotice1, // <== getNoticesByCategory
-  getFavorite1,
-  getMyNorices1,
-  getNoticesBySearch1,
+  getNoticesBySearch,
+  // getNotice1,
+  // getFavorite1,
+  // getMyNorices1,
+  // getNoticesBySearch1,
   removeNotice,
 } from "./services";
 import { useLocation } from "react-router-dom";
+import usePrevious from "../../hooks/usePrevious";
 //import { Navigate } from 'react-router-dom';
-//getNoticeById1
 
 const NoticesPage = () => {
   const [page, setPage] = useState(1);
@@ -35,14 +36,19 @@ const NoticesPage = () => {
   const [reload, setReload] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState({ data: [] });
-  // const [sortedValue, setSortedValue] = useState("");
+  const [data, setData] = useState({});
+  const [search, setSearch] = useState("");
 
   const location = useLocation();
   const isLogined = useSelector(selectIsAuth);
   const user = useSelector(selectUser);
   const favorites = useSelector(selectFavorites);
-  // const notices = data.data;
+
+  const prevSearch = usePrevious(search);
+  const prevCategoryName = usePrevious(categoryName);
+  const needToResetPage =
+    (prevSearch !== search && page > 1) ||
+    (prevCategoryName !== categoryName && page > 1);
 
   useEffect(() => {
     const { pathname } = location;
@@ -76,22 +82,36 @@ const NoticesPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
+    const searchParams = { search, page };
+    if (needToResetPage) setPage(1);
+
+    if (search !== "") {
+      getNoticesBySearch(searchParams)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+
+      return;
+    }
 
     const fetchData = async () => {
-      const params = { page };
-
       try {
         let data;
 
         switch (categoryName) {
           case "own":
-            data = await getMyNorices1(categoryName); // sortedValue
+            data = await getMyOwnNotices({ page }); // sortedValue
             break;
           case "favorite-ads":
-            data = await getFavoriteNotices(params);
+            data = await getFavoriteNotices({ page });
             break;
           default:
-            data = await getNoticesByCategory(categoryName, params);
+            data = await getNoticesByCategory(categoryName, { page });
             break;
         }
 
@@ -104,23 +124,25 @@ const NoticesPage = () => {
     };
 
     fetchData();
-  }, [categoryName, page]); // [sortedValue, reload]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryName, page, search]); // [sortedValue, reload]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (query) => {
+    setSearch(query);
     // const params = { page };
 
-    if (e !== "") {
-      setIsLoading(true);
-      getNoticesBySearch1(e)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }
+    // if (e !== "") {
+    //   setIsLoading(true);
+    //   getNoticesBySearch(search)
+    //     .then((data) => {
+    //       setData(data);
+    //       setIsLoading(false);
+    //     })
+    //     .catch((error) => {
+    //       setError(error);
+    //       setIsLoading(false);
+    //     });
+    // }
   };
 
   const handlerModalAddPet = (e) => {
@@ -174,6 +196,7 @@ const NoticesPage = () => {
           isLogined={isLogined}
           onChooseCategory={onChooseCategory}
         />
+
         <div>
           {isLoading ? (
             <PawsLoader />

@@ -31,8 +31,25 @@ export const getMyOwnNotices = async (params) => {
   }
 };
 
-// -----------------------------------------------------------
+export const getNoticesBySearch = async (params) => {
+  try {
+    const res = await PublicNoticesApi.get(`/api/notices`, { params });
+    return res.data;
+  } catch (error) {
+    return error.message;
+  }
+};
 
+// export const getNoticeById = async (id) => {
+//   try {
+//     const res = await PublicNoticesApi.get(`/api/notices/${id}`);
+//     return res.data;
+//   } catch (error) {
+//     return error.message;
+//   }
+// };
+
+// -----------------------------------------------------------
 // export const getNotice1 = async (value) => {
 //   try {
 //     // if (value === "in good hands") value = "in-good-hands";
@@ -50,31 +67,23 @@ export const getMyOwnNotices = async (params) => {
 //     return error.message;
 //   }
 // };
-export const getNoticeById1 = async (id) => {
-  try {
-    const res = await PublicNoticesApi.get(`/api/notices/${id}`);
-    return res.data;
-  } catch (error) {
-    return error.message;
-  }
-};
+// export const getMyNorices1 = async () => {
+//   try {
+//     const res = await PrivateNoticesApi.get(`/api/notices/my`);
+//     return res.data;
+//   } catch (error) {
+//     return error.message;
+//   }
+// };
+// export const getNoticeById1 = async (id) => {
+//   try {
+//     const res = await PublicNoticesApi.get(`/api/notices/${id}`);
+//     return res.data;
+//   } catch (error) {
+//     return error.message;
+//   }
+// };
 
-export const getMyNorices1 = async () => {
-  try {
-    const res = await PrivateNoticesApi.get(`/api/notices/my`);
-    return res.data;
-  } catch (error) {
-    return error.message;
-  }
-};
-export const getNoticesBySearch1 = async (query) => {
-  try {
-    const res = await PublicNoticesApi.get(`/api/notices?search=${query}`);
-    return res.data;
-  } catch (error) {
-    return error.message;
-  }
-};
 export const removeNotice = async (id) => {
   try {
     const res = await PrivateNoticesApi.delete(`/api/notices/${id}`);
