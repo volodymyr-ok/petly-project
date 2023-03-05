@@ -26,7 +26,7 @@ export const NoticeItem = ({
   notices,
   user,
   favoritesList,
-  sortedValue,
+  categoryName,
 }) => {
   const breedExt = (breed) => {
     if (breed.length > 20) {
@@ -68,7 +68,7 @@ export const NoticeItem = ({
             <BtnAdd
               id={_id}
               favorite={isFavorite ? "favorite" : "noFavorite"}
-              edit ={owner === userId ? "edit" : "like"}
+              edit={owner === userId ? "edit" : "like"}
               onClick={(e) => addFavorite(e, _id, owner, isFavorite)}
             >
               {owner === userId ? (
@@ -110,7 +110,7 @@ export const NoticeItem = ({
               </InfoList>
               <InfoAction>
                 <BtnReadMore
-                  to={`/notices/${sortedValue}/${_id}`}
+                  to={`/notices/${categoryName}/${_id}`}
                   id={_id}
                   onClick={onReadMore}
                 >

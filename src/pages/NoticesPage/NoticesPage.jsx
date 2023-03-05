@@ -186,7 +186,7 @@ const NoticesPage = () => {
               isLogined={isLogined}
               onRemove={handlerRemove}
               user={user}
-              category={categoryName}
+              categoryName={categoryName}
               setPage={setPage}
             />
           )}

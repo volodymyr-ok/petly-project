@@ -23,7 +23,7 @@ export const NoticesCategoryList = ({
   isLogined,
   favorites,
   onAddPet,
-  sortedValue,
+  categoryName,
   isModalAddPet,
   setPage,
 }) => {
@@ -84,7 +84,7 @@ export const NoticesCategoryList = ({
               }
               onRemove={onRemove}
               onReadMore={readMoreModal}
-              sortedValue={sortedValue}
+              categoryName={categoryName}
             ></NoticeItem>
           </List>
         ) : (
