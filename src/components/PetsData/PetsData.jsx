@@ -5,7 +5,7 @@ import { PetsList } from "./PetsList/PetsList";
 import { BoxMessage, Message, ContainerPetsDate, SpanAddPet } from "./PetsData.styled";
 import { BtnAddPet } from "./BtnAddPet/BtnAddPet";
 
-export const PetsData = ({ pets, onRemove }) => {
+export const PetsData = ({ pets, onRemove, onEdit }) => {
   return (
     <ContainerPetsDate>
       <BoxMessage>
@@ -14,7 +14,7 @@ export const PetsData = ({ pets, onRemove }) => {
         <BtnAddPet />
       </BoxMessage>
 
-      <PetsList pets={pets} onRemove={(id)=>onRemove(id)} />
+      <PetsList onEdit={(id)=>onEdit(id)} pets={pets} onRemove={(id)=>onRemove(id)} />
     </ContainerPetsDate>
   );
 };

@@ -2,19 +2,13 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 // import { useDispatch } from "react-redux";
 import { DeletePetBtn } from "../../DeletePetBtn/DeletePetBtn";
-import {
-  WrapperPicDiv,
-  Box,
-  Description,
-  InfoPet,
-  BoxPetsList,
-  BoxScrollbar,
-} from "./PetsList.styled";
+import { WrapperPicDiv, Box, Description, InfoPet, BoxPetsList, BoxScrollbar, EditPetBtn } from "./PetsList.styled";
 import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
+import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
 
-export const PetsList = ({ pets, onRemove }) => {
+export const PetsList = ({ pets, onRemove, onEdit }) => {
   // const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,6 +34,7 @@ export const PetsList = ({ pets, onRemove }) => {
               </WrapperPicDiv>
               <Description>
                 <DeletePetBtn onClick={closeModal} />
+                <EditPetBtn onClick={onEdit}><Edit width={30} height={30}/></EditPetBtn>
                 <InfoPet>
                   <b> Name:</b> {name ? name : "No Info"}
                 </InfoPet>

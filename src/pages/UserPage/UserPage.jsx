@@ -33,7 +33,7 @@ const UserPage = () => {
       setIsLoading(false);
     })
   }
-console.log(pets)
+
   useEffect(() => {
     setIsLoading(true);
     FetchUserData()
@@ -48,13 +48,17 @@ console.log(pets)
       });
   }, [reload]);
 
+  const handlerEditModal = (id) =>{
+
+  }
+
   return (
     <>
       <ContainerUserPage>
         {!isLoading ? (
           <BoxCards>
             <MyInformationCard user={user} />
-            <PetsData pets={pets} onRemove={(id)=>approveRemoveFunk(id)}/>
+            <PetsData pets={pets} onEdit={(id)=>handlerEditModal(id)} onRemove={(id)=>approveRemoveFunk(id)}/>
           </BoxCards>
         ) : (
           <PawsLoader />

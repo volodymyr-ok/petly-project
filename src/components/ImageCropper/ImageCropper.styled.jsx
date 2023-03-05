@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
+import { StyledButton } from "../Button/Button.styled";
 
 export const BtnAdd = styled.button`
     margin: 0 auto;
@@ -13,7 +14,18 @@ export const BtnAdd = styled.button`
       stroke: ${colors.black};
     }
 `
+export const BtnClose = styled(StyledButton)`
+width: 90px;
+    padding: 5px 10px;
+    background-color: ${colors.accentOrange};
+    color: ${colors.white};
+`
 
+export const Image = styled.img`
+   border-radius: 20px;
+   width: 208px;
+   height: 208px;
+`
 
 export const ControllerBox = styled.div`
     display: flex;
@@ -32,6 +44,7 @@ export const ImagePrev = styled.div`
 `
 
 export const CropImgPrevue = styled.div`
+position: relative;
 width: 100%;
 
 `
@@ -50,20 +63,11 @@ position: relative;
   }
 `
 export const CropControls = styled.div`
-  /* position: fixed; */
-  /* bottom: 0; */
-
-  /* width: 195px; */
-text-align: center;
-/* & input[type=range]{
-  background-color: red;
-  border: 10px solid blue;
-} */
-/* padding-left: 30px; */
+/* text-align: center; */
+//margin-bottom: 20px;
+display: flex;
 & input{
-  width: 99%;
-  /* margin-left: 8%; */
-  /* background-color: red; */
+  width: 100%;
   
 }
 &input[type="range"] {
@@ -101,7 +105,7 @@ export const ControlsButtonBox = styled.div`
 
       display: flex;
     gap: 10px;
-    justify-content: center;
+    justify-content: flex-end;
 `
 
 export const ButtonCancel = styled.button`
