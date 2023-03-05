@@ -17,14 +17,17 @@ export const NewsList = () => {
 
   useEffect(() => {
     if (prevSearch !== search && page > 1) setPage(1);
+    setIsLoading(true);
 
     getNews({ page, search })
       .then((data) => {
-        setIsLoading(true);
         setNews(data);
         setIsLoading(false);
       })
-      .catch((e) => console.log("file: NewsList.jsx:24 ~ e >>", e));
+      .catch((e) => {
+        setIsLoading(false);
+        console.log("file: NewsList.jsx:29 ~ e >>", e);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, search]);
 

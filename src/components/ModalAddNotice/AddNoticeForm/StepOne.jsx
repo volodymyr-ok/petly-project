@@ -40,6 +40,9 @@ export const StepOne = ({ onClose, next, data, id }) => {
     );
   };
   const handleSubmit = (data) => {
+    if (data.categoryName !== "sell") {
+      data.price = 1;
+    }
     next(data);
   };
 
@@ -51,7 +54,7 @@ export const StepOne = ({ onClose, next, data, id }) => {
     >
       {() => (
         <FormCustom>
-          <Title>{id? "Edit pet" : "Add pet"}</Title>
+          <Title>{id ? "Edit pet" : "Add pet"}</Title>
           <SubTitle>
             Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
             consectetur
@@ -80,7 +83,7 @@ export const StepOne = ({ onClose, next, data, id }) => {
               <RadioLabel htmlFor="sell">sell</RadioLabel>
             </RadioBox>
           </RadioGroup>
-          <FormError name="categoryName" checked />
+          <FormError name="categoryName" />
 
           <Label>
             <LabelText>

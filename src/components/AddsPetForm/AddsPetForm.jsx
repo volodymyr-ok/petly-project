@@ -5,17 +5,17 @@ import { useState } from "react";
 export const AddsPetForm = ({onClose,onEdit,post}) => {
 
   const [data, setData] = useState({
-    name: post?.name || "",
-    birthday: post?.birthday || "",
-    breed: post?.breed || "",
-    comments: post?.comments || "",
+    name: "",
+    birthday: "",
+    breed: "",
+    comments: "",
   });
 
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNextStep = (newData, final = false, file = null) => {
-    setData((prev) => ({ ...prev, ...newData}));
-    if(final && post?._id && file){
+    setData((prev) => ({ ...prev, ...newData }));
+    if (final) {
       const formData = new FormData();
       formData.append("avatar", file);
       onEdit([post._id, newData, formData])
@@ -31,6 +31,7 @@ export const AddsPetForm = ({onClose,onEdit,post}) => {
       formData.append("comments", newData.comments);
       onEdit(formData)
     }
+
     setCurrentStep((prev) => prev + 1);
   };
 
@@ -42,7 +43,12 @@ export const AddsPetForm = ({onClose,onEdit,post}) => {
   const steps = [
     
     <StepOne next={handleNextStep} data={data} onClose={onClose} />,
-    <StepTwo prev={handlePrevStep} avatar={post?.avatarURL} next={handleNextStep} data={data} onClose={onClose} />,
+    <StepTwo
+      prev={handlePrevStep}
+      next={handleNextStep}
+      data={data}
+      onClose={onClose}
+    />,
   ];
 
   return <div>

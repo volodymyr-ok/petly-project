@@ -20,6 +20,7 @@ export const Form = styled.form`
 export const BoxInput = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
 
   input {

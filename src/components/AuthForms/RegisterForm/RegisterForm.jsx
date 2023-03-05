@@ -75,7 +75,10 @@ export const RegisterForm = () => {
           {
             component: StepTwo,
             validationSchema: Yup.object().shape({
-              name: Yup.string().required("First name is required"),
+              name: Yup.string()
+                .min(2)
+                .max(16)
+                .required("First name is required"),
               city: Yup.string()
                 .min(5, "The address must contain the city, regions")
                 .matches(
