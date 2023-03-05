@@ -5,12 +5,11 @@ import {PrivateApi} from "../../../http/http";
 import {Notify} from "notiflix";
 import moment from "moment";
 
-
 export const FormProfile = ({user}) => {
     const [dataSend, setDataSend] = useState({});
     const [nameActivePencil, setNameActivePencil] = useState("");
-    // const [isError, setIsError] = useState("");
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isError, setIsError] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     const inputsList = [
         {
@@ -93,11 +92,11 @@ export const FormProfile = ({user}) => {
             updateUserData(dataSend)
                 .then(() => {
                     Notify.success(`You have successfully updated your data`);
-                    // setIsLoading(false);
+                    setIsLoading(false);
                 })
                 .catch((error) => {
-                    // setIsError(error);
-                    // setIsLoading(false);
+                    setIsError(error);
+                    setIsLoading(false);
                 });
             setNameActivePencil("");
         }
