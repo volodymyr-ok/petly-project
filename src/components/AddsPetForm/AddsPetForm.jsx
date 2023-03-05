@@ -1,17 +1,15 @@
 import { StepOne } from "./steps/StepOne";
 import { StepTwo } from "./steps/StepTwo";
 import { useState } from "react";
-import { addPet } from "../../redux/pet/pet-operations";
-import { useDispatch } from "react-redux";
 
-export const AddsPetForm = ({ onClose }) => {
+export const AddsPetForm = ({onClose,onEdit,post}) => {
+
   const [data, setData] = useState({
     name: "",
     birthday: "",
     breed: "",
     comments: "",
   });
-  const dispatch = useDispatch();
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -20,16 +18,18 @@ export const AddsPetForm = ({ onClose }) => {
     if (final) {
       const formData = new FormData();
       formData.append("avatar", file);
-      const petInfo = {
-        name: newData.name,
-        breed: newData.breed,
-        birthday: newData.birthday,
-        comments: newData.comments,
-        avatar: formData,
-      };
-      console.log(petInfo);
-      dispatch(addPet(petInfo));
-      // tut robymo zapros vysylajemo body i avatar okremo
+      onEdit([post._id, newData, formData])
+    }else if(final && post?._id && !file){
+      onEdit([post._id, newData, false])
+    }
+    else if(final && !post?._id){
+      const formData = new FormData();
+      formData.append("avatar", file);
+      formData.append("name", newData.name);
+      formData.append("birthday", newData.birthday);
+      formData.append("breed", newData.breed);
+      formData.append("comments", newData.comments);
+      onEdit(formData)
     }
 
     setCurrentStep((prev) => prev + 1);
@@ -41,6 +41,7 @@ export const AddsPetForm = ({ onClose }) => {
   };
 
   const steps = [
+    
     <StepOne next={handleNextStep} data={data} onClose={onClose} />,
     <StepTwo
       prev={handlePrevStep}
@@ -50,5 +51,6 @@ export const AddsPetForm = ({ onClose }) => {
     />,
   ];
 
-  return <div>{steps[currentStep]}</div>;
+  return <div>
+    {steps[currentStep]}</div>;
 };
