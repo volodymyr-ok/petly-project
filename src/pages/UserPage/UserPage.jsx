@@ -5,7 +5,7 @@ import { BoxCards, ContainerUserPage, ErrorText } from "./UserPage.styled";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
 // import axios from "axios";
 import { PrivateApi } from "../../http/http";
-import { removePet } from "./services";
+import { removePet,editPet, editPetAvatar  } from "./services";
 
 const UserPage = () => {
   const [user, setUser] = useState({});
@@ -26,7 +26,7 @@ const UserPage = () => {
     removePet(id)
     .then(()=>{
       setReload(!reload)
-      setIsLoading(false)
+      // setIsLoading(false)
     })
     .catch((error)=>{
       setIsError(error);
@@ -48,9 +48,19 @@ const UserPage = () => {
       });
   }, [reload]);
 
-  const handlerEditModal = (id) =>{
-
-  }
+  const handlerEditModal = (id) => {
+    setIsLoading(true);
+    editPet(id)
+      .then(() => editPetAvatar(id))
+      .then(() => {
+        // setIsLoading(false);
+        setReload(!reload)
+      })
+      .catch((error) => {
+        setIsError(error);
+        setIsLoading(false);
+      });
+  };
 
   return (
     <>

@@ -25,6 +25,7 @@ export const StepTwo = (props) => {
   const setCroppedImageFor = (file) => {
     setImage(file);
   };
+
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -51,6 +52,7 @@ export const StepTwo = (props) => {
             <TitleItemTwo>Add photo and some comments</TitleItemTwo>
             <ImageCropper
               setCroppedImageFor={setCroppedImageFor}
+              avatar = {props.avatar}
             ></ImageCropper>
             <LabelBoxModifaed>
               <StyledLabel htmlFor="comments">

@@ -19,10 +19,6 @@ import {
   getFavoriteNotices,
   getMyOwnNotices,
   getNoticesBySearch,
-  // getNotice1,
-  // getFavorite1,
-  // getMyNorices1,
-  // getNoticesBySearch1,
   removeNotice,
 } from "./services";
 import { useLocation } from "react-router-dom";
@@ -125,25 +121,9 @@ const NoticesPage = () => {
 
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryName, page, search]); // [sortedValue, reload]);
+  }, [categoryName, page, search]);
 
-  const onSubmit = (query) => {
-    setSearch(query);
-    // const params = { page };
-
-    // if (e !== "") {
-    //   setIsLoading(true);
-    //   getNoticesBySearch(search)
-    //     .then((data) => {
-    //       setData(data);
-    //       setIsLoading(false);
-    //     })
-    //     .catch((error) => {
-    //       setError(error);
-    //       setIsLoading(false);
-    //     });
-    // }
-  };
+  const onSubmit = (query) => setSearch(query);
 
   const handlerModalAddPet = (e) => {
     if (!isLogined) {
@@ -167,11 +147,6 @@ const NoticesPage = () => {
 
   const handlerRemove = (e) => {
     if (e.target.id && e.target.id !== "") {
-      console.log("file: NoticesPage.jsx:151 ~ e.target.id >>", e.target.id);
-      console.log(
-        "file: NoticesPage.jsx:152 ~ e.target.id !== '' >>",
-        e.target.id !== ""
-      );
       setIsLoading(true);
 
       removeNotice(e.target.id)

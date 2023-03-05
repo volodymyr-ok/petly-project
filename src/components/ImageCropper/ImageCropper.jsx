@@ -31,7 +31,6 @@ export const ImageCropper = ({setCroppedImageFor, avatar}) => {
  
   const getPrevue= async(croppedAreaPixels)=>{
     try {
-      console.log("we are going")
        const result = await getCroppedImgPrevue(image, croppedArea, 0, true)
        setPrevue(true)
         setPrevueUrl(result)

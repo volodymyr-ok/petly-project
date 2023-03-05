@@ -27,7 +27,6 @@ export const NoticesCategoryList = ({
   isModalAddPet,
   setPage,
 }) => {
-  // console.log("file: NoticesCategoryLIst.jsx:29 ~ notices >>", data);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
   const [isModalEditPost, setIsModalEditPost] = useState(false);
@@ -60,7 +59,7 @@ export const NoticesCategoryList = ({
   };
 
   const readMoreModal = (e) => {
-    // Нащо друга умова (&& e.target.id !== "")? Вона усе одно буде false...
+    // Нащо друга умова (&& e.target.id !== ""), якщо перша повертає ідентичне значення...
     if (e.target.id && e.target.id !== "") {
       setPetInfo(notices.find((el) => el._id === e.target.id));
       setIsModalReadMore(!isModalReadMore);
@@ -70,8 +69,6 @@ export const NoticesCategoryList = ({
   return (
     <>
       <ListBox>
-        <PaginationBar info={data} setPage={setPage} />
-
         <BtnAddSticky type="button" onClick={onAddPet}>
           {svgAdd}
           Add pet
