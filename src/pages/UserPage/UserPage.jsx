@@ -18,7 +18,7 @@ const UserPage = () => {
     const data = await PrivateApi.get(
       "https://petly-2v85.onrender.com/api/users/profile"
     );
-    
+
     return data;
   };
   const approveRemoveFunk =(id)=>{
