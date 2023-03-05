@@ -5,6 +5,7 @@ import {ReactComponent as Pencil} from "../../../assets/svg/pencil.svg";
 import {ReactComponent as Check} from "../../../assets/svg/btn-ok.svg";
 import {forwardRef, useEffect, useState} from "react";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const InputItem = ({
                               type,
@@ -77,7 +78,7 @@ export const InputItem = ({
     ];
 
     const ExampleCustomInput = forwardRef(({value, onClick}, ref) => (
-        <BirthBtn onClick={onClick} ref={ref}>
+        <BirthBtn onClick={onClick} ref={ref} disabled={disable}>
             {value}
         </BirthBtn>
     ));

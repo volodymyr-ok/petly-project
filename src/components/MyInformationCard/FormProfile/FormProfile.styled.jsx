@@ -1,6 +1,6 @@
 import styled, {createGlobalStyle} from "styled-components";
-import { colors } from "../../../utils/colors";
-import { device } from "../../../utils/mixin";
+import {colors} from "../../../utils/colors";
+import {device} from "../../../utils/mixin";
 
 export const DatePickerWrapperStyles = createGlobalStyle`
   .react-datepicker {
@@ -52,7 +52,8 @@ export const DatePickerWrapperStyles = createGlobalStyle`
 
   .react-datepicker__day {
     &:hover {
-      background-color: #FDF7F2;
+      background-color: ${colors.accentOrange};
+      color: ${colors.white};
       border-radius: 50%;
     }
   }
@@ -73,9 +74,11 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 8px;
   margin-top: 36px;
+
   ${device.tablet} {
     margin: 0;
   }
+
   ${device.desktop} {
     margin-top: 36px;
   }
@@ -97,27 +100,21 @@ export const SelectMonth = styled.select`
 `;
 
 export const BirthBtn = styled.div`
-  //position: absolute;
-  //top: -114px;
-  //left: 65px;
-  width: 150px;
-  min-width: 150px;
+  width: calc(100% - 75px);
+  min-width: 156px;
   max-width: 270px;
-  padding: 4px 4px 4px 16px;
+  padding: 4px 4px 4px 18px;
   font-size: 12px;
   line-height: 1.33;
-  //background-color: #fdf7f2;
-  border: none;
+  border: ${(props) => (props === true ? "none" : `1px solid rgba(245, 146, 86, 0.5)`)};;
+  background-color: ${(props) => (props === true ? "none" : `#fdf7f2`)};;
   border-radius: 40px;
   outline: none;
 
   ${device.tablet} {
-    top: -140px;
-    left: 101px;
-    height: 30px;
-    width: 210px;
+    width: 216px;
     font-size: 18px;
-    line-height: 1.33;
+    line-height: 1.38;
   }
 `;
 
@@ -125,6 +122,7 @@ export const BoxInput = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+
   input {
     width: calc(100% - 75px);
     min-width: 156px;
@@ -136,12 +134,14 @@ export const BoxInput = styled.div`
     border: 1px solid rgba(245, 146, 86, 0.5);
     border-radius: 40px;
     outline: none;
+
     ${device.tablet} {
       width: 216px;
       font-size: 18px;
       line-height: 1.38;
     }
   }
+
   input:disabled {
     font-size: 12px;
     line-height: 16px;
@@ -149,6 +149,7 @@ export const BoxInput = styled.div`
     color: ${colors.primaryText};
     background-color: ${colors.white};
     border: none;
+
     ${device.tablet} {
       font-size: 18px;
       line-height: 1.38;
@@ -164,6 +165,7 @@ export const NameInput = styled.label`
   line-height: 1.33;
   letter-spacing: 0.04em;
   color: ${colors.primaryText};
+
   ${device.tablet} {
     width: 83px;
     font-size: 18px;
