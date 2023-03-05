@@ -5,10 +5,10 @@ import { useState } from "react";
 export const AddsPetForm = ({onClose,onEdit,post}) => {
 
   const [data, setData] = useState({
-    name: "",
-    birthday: "",
-    breed: "",
-    comments: "",
+    name: post?.name || "",
+    birthday: post?.birthday || "",
+    breed: post?.breed || "",
+    comments: post?.comments || "",
   });
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -44,6 +44,7 @@ export const AddsPetForm = ({onClose,onEdit,post}) => {
     
     <StepOne next={handleNextStep} data={data} onClose={onClose} />,
     <StepTwo
+      avatar={post?.avatarURL}
       prev={handlePrevStep}
       next={handleNextStep}
       data={data}

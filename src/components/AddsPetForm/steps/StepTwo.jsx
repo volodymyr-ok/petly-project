@@ -25,7 +25,7 @@ export const StepTwo = (props) => {
   const setCroppedImageFor = (file) => {
     setImage(file);
   };
-
+console.log(props)
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
