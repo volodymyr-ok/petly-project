@@ -1,11 +1,11 @@
 import { DeleteBtn, DelIcon } from "./DeletePetBtn.styled";
 
-export const DeletePetBtn = ({ onClick }) => {
-  const clickHandler = () => {
-    onClick();
+export const DeletePetBtn = ({ onClick, name }) => {
+  const clickHandler = (e) => {
+    onClick(e);
   };
   return (
-    <DeleteBtn type="button" onClick={clickHandler}>
+    <DeleteBtn name={name} type="button" onClick={clickHandler}>
       <DelIcon />
     </DeleteBtn>
   );

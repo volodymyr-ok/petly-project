@@ -4,12 +4,12 @@ import { useState } from "react";
 import { addPet } from "../../redux/pet/pet-operations";
 import { useDispatch } from "react-redux";
 
-export const AddsPetForm = ({ onClose }) => {
+export const AddsPetForm = ({ onClose, onEdit, post }) => {
   const [data, setData] = useState({
-    name: "",
-    birthday: "",
-    breed: "",
-    comments: "",
+    name: post?.name || "",
+    birthday: post?.birthday || "",
+    breed: post?.breed || "",
+    comments: post?.comments || "",
   });
   const dispatch = useDispatch()
 
@@ -17,7 +17,14 @@ export const AddsPetForm = ({ onClose }) => {
 
   const handleNextStep = (newData, final = false, file = null) => {
     setData((prev) => ({ ...prev, ...newData}));
-    if (final) {
+    if(final && post?._id && file){
+      const formData = new FormData();
+      formData.append("avatar", file);
+      onEdit([post._id, newData, formData])
+    }else if(final && post?._id && !file){
+      onEdit([post._id, newData, false])
+    }
+    else if(final && !post?._id){
       const formData = new FormData();
       formData.append("avatar", file);
       formData.append("name", newData.name);
@@ -25,9 +32,7 @@ export const AddsPetForm = ({ onClose }) => {
       formData.append("breed", newData.breed);
       formData.append("comments", newData.comments);
       dispatch(addPet(formData))
-
     }
- 
     setCurrentStep((prev) => prev + 1);
   };
 
@@ -38,7 +43,7 @@ export const AddsPetForm = ({ onClose }) => {
 
   const steps = [
     <StepOne next={handleNextStep} data={data} onClose={onClose} />,
-    <StepTwo prev={handlePrevStep} next={handleNextStep} data={data} onClose={onClose} />,
+    <StepTwo prev={handlePrevStep} avatar={post?.avatarURL} next={handleNextStep} data={data} onClose={onClose} />,
   ];
 
   return <div>{steps[currentStep]}</div>;

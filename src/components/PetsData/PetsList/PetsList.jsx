@@ -7,19 +7,31 @@ import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
-
+import { AddsPetForm } from "../../AddsPetForm/AddsPetForm";
+import { Modal } from "../../Modal/Modal";
 export const PetsList = ({ pets, onRemove, onEdit }) => {
   // const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalEdit, setIsModalEdit] = useState(false);
+  const [postId, setPostId] = useState(null);
 
   const closeModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+  const editHandler = (e)=>{
+    setIsModalEdit(!isModalEdit)
+    setPostId(e.currentTarget.name)
+  }
+  const removeHandler = (e)=>{
+    setIsModalOpen(!isModalOpen)
+    setPostId(e.currentTarget.name)
+  }
   // const deletePetItem = (id) => {
   //   dispatch(deletePet(id));
   // };
+
 
   return (
     <BoxPetsList>
@@ -33,8 +45,8 @@ export const PetsList = ({ pets, onRemove, onEdit }) => {
                 <img src={avatarURL ? avatarURL : defImage} alt={name} />
               </WrapperPicDiv>
               <Description>
-                <DeletePetBtn onClick={closeModal} />
-                <EditPetBtn onClick={onEdit}><Edit width={30} height={30}/></EditPetBtn>
+                <DeletePetBtn  name={_id} onClick={removeHandler} />
+                <EditPetBtn name={_id} onClick={editHandler}><Edit width={30} height={30}/></EditPetBtn>
                 <InfoPet>
                   <b> Name:</b> {name ? name : "No Info"}
                 </InfoPet>
@@ -48,19 +60,30 @@ export const PetsList = ({ pets, onRemove, onEdit }) => {
                   <b> Comments:</b> {comments ? comments : "No Info"}
                 </InfoPet>
               </Description>
-              {isModalOpen && (
+            
+             
+            </Box>
+          );
+        })}
+          {isModalOpen && (
                 <WarningMessage
-                  onRemove={(id) => onRemove(id)}
+                  onRemove={(postId) => onRemove(postId)}
                   type="approve"
-                  id={_id}
+                  id={postId}
                   // approveFunk={deletePetItem}
                   onClose={closeModal}
                   text="Do you want to delete the pet?"
                 />
               )}
-            </Box>
-          );
-        })}
+            {isModalEdit && 
+                 <Modal onClose={()=>setIsModalEdit(!isModalEdit)}>
+                  <AddsPetForm
+                  onClose={()=>setIsModalEdit(!isModalEdit)}
+                  onEdit={(postId)=>onEdit(postId)}
+                  post = {pets.find(el=>el._id === postId)}
+                  />
+                  </Modal>
+              }
       </BoxScrollbar>
     </BoxPetsList>
   );

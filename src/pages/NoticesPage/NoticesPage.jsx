@@ -127,7 +127,6 @@ const NoticesPage = () => {
   };
 
   const onChooseCategory = (e) => {
-    // console.log(e.target)
     const expr = e.target.id;
     authorized.map(({ href }) => {
       if (href === expr) {
@@ -140,7 +139,6 @@ const NoticesPage = () => {
   };
   const handlerRemove = (e) => {
     if (e.target.id && e.target.id !== "") {
-      console.log("ja tut");
       setIsLoading(true);
       removeNotice(e.target.id)
         .then(() => {
