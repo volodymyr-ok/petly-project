@@ -19,6 +19,9 @@ width: 90px;
     padding: 5px 10px;
     background-color: ${colors.accentOrange};
     color: ${colors.white};
+    ${device.tablet}{
+      width: 120px;
+    }
 `
 
 export const Image = styled.img`
