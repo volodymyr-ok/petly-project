@@ -2,7 +2,7 @@ import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
 import {
-  LabelBox,
+  LabelBoxModifaed,
   TitleItemTwo,
   ErrorText,
   ModalItemTwo,
@@ -52,7 +52,7 @@ export const StepTwo = (props) => {
             <ImageCropper
               setCroppedImageFor={setCroppedImageFor}
             ></ImageCropper>
-            <LabelBox>
+            <LabelBoxModifaed>
               <StyledLabel htmlFor="comments">
                 Comments
                 <FieldTextarea
@@ -64,7 +64,7 @@ export const StepTwo = (props) => {
                 />
               </StyledLabel>
               <FormError name="comments" />
-            </LabelBox>
+            </LabelBoxModifaed>
             <FormError name="comments" />
             <FlexBox>
               <NextBtn type="submit">Done</NextBtn>

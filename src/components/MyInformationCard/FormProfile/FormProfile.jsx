@@ -3,14 +3,15 @@ import { Form } from "./FormProfile.styled";
 import { InputItem } from "./InputItem";
 import { PrivateApi } from "../../../http/http";
 import { Notify } from "notiflix";
+import moment from "moment";
 
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
-  const [nameActivePancil, setNameActivePancil] = useState("");
+  const [nameActivePencil, setNameActivePencil] = useState("");
   const [isError, setIsError] = useState("");
+  console.log("file: FormProfile.jsx:12 ~ isError >>", isError);
   const [isLoading, setIsLoading] = useState(true);
-
-  console.log("Temporary log (can be deleted) ===>", isError, isLoading);
+  console.log("file: FormProfile.jsx:14 ~ isLoading >>", isLoading);
 
   const inputsList = [
     {
@@ -69,35 +70,29 @@ export const FormProfile = ({ user }) => {
   ];
 
   const updateUserData = async (dataSend) => {
-    const data = await PrivateApi.patch("api/users", dataSend);
-
-    return data;
+    return await PrivateApi.patch("api/users", dataSend);
   };
-
-  // const onInputClose = () => {
-  //   console.log("onBlu");
-  //   setNameActivePancil("");
-  // };
   const handleChange = ([key, val]) => {
-    setDataSend((prevState) => {
-      return { ...prevState, [key]: val };
-    });
+    if (key === "birthday") {
+      val = moment(val).format("DD.MM.YYYY");
+    }
+    setDataSend({ [key]: val });
   };
 
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
 
-    if (nameActivePancil === "") {
-      setNameActivePancil(nameBtn);
+    if (nameActivePencil === "") {
+      setNameActivePencil(nameBtn);
     }
 
-    if (nameActivePancil === nameBtn && Object.keys(dataSend).length === 0) {
-      setNameActivePancil("");
+    if (nameActivePencil === nameBtn && Object.keys(dataSend).length === 0) {
+      setNameActivePencil("");
     }
 
-    if (nameActivePancil === nameBtn && Object.keys(dataSend).length) {
+    if (nameActivePencil === nameBtn && Object.keys(dataSend).length) {
       updateUserData(dataSend)
-        .then((data) => {
+        .then(() => {
           Notify.success(`You have successfully updated your data`);
           setIsLoading(false);
         })
@@ -105,9 +100,9 @@ export const FormProfile = ({ user }) => {
           setIsError(error);
           setIsLoading(false);
         });
-      setNameActivePancil("");
+      setNameActivePencil("");
     }
-    if (nameActivePancil !== nameBtn) setNameActivePancil(nameBtn);
+    if (nameActivePencil !== nameBtn) setNameActivePencil(nameBtn);
   };
 
   return (
@@ -120,11 +115,10 @@ export const FormProfile = ({ user }) => {
           name={name}
           mask={mask}
           title={title}
-          dark={nameActivePancil !== "" ? "dark" : "ok"}
-          disable={nameActivePancil !== name || nameActivePancil === ""}
+          dark={nameActivePencil !== "" ? "dark" : "ok"}
+          disable={nameActivePencil !== name || nameActivePencil === ""}
           onClickPencil={(e) => handleInput(e, name)}
           onChange={(data) => handleChange(data)}
-          // onBlur={onInputClose}
         />
       ))}
     </Form>

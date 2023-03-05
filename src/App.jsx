@@ -66,8 +66,7 @@ const App = () => {
               <Route path=":id" />
             </Route>
           </Route>
-          {/* <Route path="*" element={<div>404</div>} /> */}
-          <Route path="/*" element={<NotFound />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </>

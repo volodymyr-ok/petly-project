@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { HiTrash } from "react-icons/hi2";
 
+
+
 export const DeleteBtn = styled.button`
   position: absolute;
   display: flex;
@@ -14,7 +16,6 @@ export const DeleteBtn = styled.button`
   background-color: #fdf7f2;
   cursor: pointer;
   border-radius: 50%;
-  border: none;
   @media (min-width: 768px) {
     width: 32px;
     height: 32px;

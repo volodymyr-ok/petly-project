@@ -4,7 +4,7 @@ import React from "react";
 import { dataURLtoFile } from "./cropService";
 import { getCroppedImgPrevue } from "./cropService";
 import {ReactComponent as Add} from "../../assets/svg/Plus.svg"
-import { CropBox, CropImgPrevue, CropContainer, CropControls, ControlsButtonBox, BtnAdd, ControllerBox, Boxik, ButtonCancel } from "./ImageCropper.styled";
+import { CropBox, CropImgPrevue, CropContainer, CropControls, ControlsButtonBox, BtnAdd, ControllerBox, Boxik, ButtonCancel, BtnClose, Image } from "./ImageCropper.styled";
  import { useState, useRef  } from "react";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 
@@ -17,23 +17,27 @@ export const ImageCropper = ({setCroppedImageFor, avatar}) => {
   const [croppedArea, setCroppedArea] = useState(null);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  // const [prevue, setPrevue] = useState(null);
+  const [prevue, setPrevue] = useState(false);
+  const [prevueUrl, setPrevueUrl] = useState(false);
   const [name, setName] = useState("example.jpg");
+
 
   const onCropComplete = async (croppedAreaPercentage, croppedAreaPixels) => {
     setCroppedArea(croppedAreaPixels);
-	  getPrevue(croppedAreaPixels)
+	  // getPrevue(croppedAreaPixels)
 
   };
 
+ 
   const getPrevue= async(croppedAreaPixels)=>{
     try {
-       // const result = await getCroppedImgPrevue(image, croppedAreaPixels, 0, true)
-        // setPrevue(result)
+      console.log("we are going")
+       const result = await getCroppedImgPrevue(image, croppedArea, 0, true)
+       setPrevue(true)
+        setPrevueUrl(result)
         const croppedImageUrl = await getCroppedImgPrevue(image, croppedArea || croppedAreaPixels);
         const canvasDataUrl = croppedImageUrl.toDataURL("image/jpeg");
         const [fileName,  ] = name.split(".")
-        console.log(fileName)
         const convertedUrlToFile = dataURLtoFile(
           canvasDataUrl,
           `${fileName}.jpg`
@@ -56,6 +60,7 @@ export const ImageCropper = ({setCroppedImageFor, avatar}) => {
   };
   const onCancel = () => {
     setImage(null);
+    setPrevue(false)
     // setPrevue(null)
   };
 
@@ -63,7 +68,7 @@ export const ImageCropper = ({setCroppedImageFor, avatar}) => {
   return (
     <CropBox id="1">
 		<CropImgPrevue id="2">
-		{image && (
+		{image && !prevue && (
         <Boxik id="3">
           <CropContainer id="4">
             <Cropper
@@ -77,12 +82,12 @@ export const ImageCropper = ({setCroppedImageFor, avatar}) => {
             />
                <ButtonCancel type="button" onClick={onCancel}><HiArrowLeftCircle></HiArrowLeftCircle></ButtonCancel>
           </CropContainer>
-          <CropControls id="5">
+       <CropControls id="5">
 
               <input
                 type="range"
-                min={0}
-                max={3}
+                min={0.7}
+                max={2}
                 step={0.1}
                 value={zoom}
                 onInput={(e) => setZoom(e.target.value)}
@@ -90,12 +95,13 @@ export const ImageCropper = ({setCroppedImageFor, avatar}) => {
 
             <ControlsButtonBox id="6">
            
-              {/* <button type="button" onClick={onCrop}>crop</button> */}
+              <BtnClose type="button" onClick={getPrevue}>Set image</BtnClose>
             </ControlsButtonBox>
           </CropControls>
         </Boxik>
       )}
-   {/* {prevue && <ImagePrev width={200} height={200} src={prevue} alt="prevue"></ImagePrev>} */}
+   {prevue && (<><Image width={200} height={200} src={prevueUrl} alt="prevue"></Image>
+   <ButtonCancel type="button" onClick={onCancel}><HiArrowLeftCircle></HiArrowLeftCircle></ButtonCancel></>)}
 		</CropImgPrevue>
 
       <ControllerBox>
