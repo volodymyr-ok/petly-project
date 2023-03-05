@@ -52,7 +52,7 @@ export const NoticesCategoryNav = ({
             ? authorized.map(({ href, text }) => {
                 return (
                   <NavItem to={`/notices/${href}`} key={href}>
-                    <Button id={href}>{text}</Button>
+                    <Button data-id={href}>{text}</Button>
                   </NavItem>
                 );
               })

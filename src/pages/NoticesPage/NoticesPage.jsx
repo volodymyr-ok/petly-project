@@ -127,7 +127,9 @@ const NoticesPage = () => {
   };
 
   const onChooseCategory = (e) => {
-    const expr = e.target.id;
+    console.log("onChooseCate", e, e.target.data, "UUU", e.target.dataset.id);
+    // const expr = e.target.id;
+    const expr = e.target.dataset.id;
     authorized.map(({ href }) => {
       if (href === expr) {
         setSortedValue(expr);
