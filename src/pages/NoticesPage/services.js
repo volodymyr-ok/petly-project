@@ -2,7 +2,7 @@ import { PublicApi, PrivateApi } from "../../http/http";
 
 export const getNotice1 = async (value) => {
       try {
-        if (value === "in good hands") value = "in-good-hands";
+        // if (value === "in good hands") value = "in-good-hands";
         const res = await PublicApi.get(`/api/notices/${value}`)
         return res.data;
       } catch (error) {
@@ -40,4 +40,12 @@ export const getNoticesBySearch1 = async (query) => {
       } catch (error) {
         return (error.message);
       }
+}
+export const removeNotice = async (id) => {
+  try {
+    const res = await PrivateApi.delete(`/api/notices/${id}`);
+    return res.data;
+  } catch (error) {
+    return (error.message);
+  }
 }

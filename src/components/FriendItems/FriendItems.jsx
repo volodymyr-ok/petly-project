@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import { TbPaw } from "react-icons/tb";
+
 import { TimeModal } from "../TimeModal/TimeModal";
 import {
   FriendsItem,
@@ -9,9 +11,10 @@ import {
   InfoWrap,
   Wrap,
   DescrWrap,
+  AlternativeLogo,
   Descr,
 } from "./FriendItems.styled";
-import petPartner from "../../img/petPartner.png";
+import petPartner from "../../img/petPartner.jpg";
 
 export const FriendsItems = ({
   title,
@@ -30,6 +33,16 @@ export const FriendsItems = ({
   };
 
   const weekday = new Date().getDay() - 1;
+  const userTime = new Date().getHours();
+
+  const isStoreOpen = (weekday) => {
+    if (!weekday) return;
+
+    const toTime = +weekday?.to?.split(":")[0];
+    const fromTime = +weekday?.from?.split(":")[0];
+
+    return userTime < toTime && userTime >= fromTime;
+  };
 
   return (
     title && (
@@ -44,7 +57,12 @@ export const FriendsItems = ({
         </FriendsTitle>
         <DescrWrap>
           {!imageUrl && (
-            <FriendsLogo src={petPartner} alt={title} width="110" height="78" />
+            <AlternativeLogo
+              src={petPartner}
+              alt={title}
+              width="80"
+              height="78"
+            />
           )}
           {imageUrl && (
             <FriendsLogo src={imageUrl} alt={title} width="110" height="78" />
@@ -53,7 +71,7 @@ export const FriendsItems = ({
             {workDays && (
               <InfoWrap onClick={toggleModal}>
                 <p>Time:</p>
-                {workDays[weekday].isOpen ? (
+                {isStoreOpen(workDays[weekday]) ? (
                   <p>
                     {workDays[weekday].from} - {workDays[weekday].to}
                   </p>
@@ -61,8 +79,13 @@ export const FriendsItems = ({
                   <p>Closed</p>
                 )}
                 {showModal && (
-                  <TimeModal workDays={workDays} onClick={toggleModal} />
+                  <TimeModal
+                    weekday={weekday}
+                    workDays={workDays}
+                    onClick={toggleModal}
+                  />
                 )}
+                <TbPaw style={{ sroke: "inherit" }} size={"15px"} />
               </InfoWrap>
             )}
             {!workDays && (

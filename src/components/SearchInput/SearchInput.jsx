@@ -34,7 +34,12 @@ export const SearchInput = ({ onSubmit }) => {
   return (
     <SearchForm onSubmit={onFormSubmit}>
       <Label>
-        <Input type="text" placeholder="Search" onChange={onInputChange} value={search} />
+        <Input
+          type="text"
+          placeholder="Search"
+          onChange={onInputChange}
+          value={search}
+        />
         {!search ? (
           <SearchButton type="submit">
             <img src={searchBtn} alt="search" />

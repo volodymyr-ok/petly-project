@@ -1,51 +1,56 @@
 import styled from "styled-components";
-
 import { Form, Field } from "formik";
+import { colors } from "../../utils/colors";
+import { device } from "../../utils/mixin";
 
-export const Overlay = styled.div`
-  overflow-y: scroll;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  padding: 99px auto;
-  justify-content: center;
-  align-items: center;
-  background: rgba(17, 17, 17, 0.6);
-  z-index: 1200;
-`;
+
+// can remove
+// export const Overlay = styled.div`
+//   overflow-y: scroll;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   display: flex;
+//   padding: 99px auto;
+//   justify-content: center;
+//   align-items: center;
+//   background: rgba(17, 17, 17, 0.6);
+//   z-index: 1200;
+// `;
+
+// can remove
 
 export const ModalItem = styled.div`
-  position: relative;
+  /* position: relative; */
   display: block;
-  /* padding: 40px 20px; */
-  width: 280px;
-  height: 530px;
-  background: #ffffff;
+  padding: 40px 20px;
+  width: 100%;
+  /* height: 530px; */
+  background:${colors.white};
   border-radius: 40px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     padding: 40px 80px;
     width: 608px;
-    height: 570px;
+    /* height: 570px; */
   }
 `;
 
 export const ModalItemTwo = styled.div`
-  position: relative;
+  /* position: relative; */
   display: flex;
   justify-content: center;
-  /* padding: 40px 20px; */
-  width: 280px;
-  height: 670px;
-  background: #ffffff;
+  padding: 40px 20px;
+  /* width: 280px; */
+  /* height: 670px; */
+  background: ${colors.white};
   /* box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11); */
   border-radius: 40px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     padding: 40px auto;
-    width: 608px;
-    height: 661px;
+    /* width: 608px;
+    height: 661px; */
   }
 `;
 
@@ -53,12 +58,12 @@ export const TitleItemTwo = styled.h4`
   font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.37;
   text-align: center;
   margin-bottom: 20px;
-  color: #111111;
-  @media (min-width: 768px) {
+  color: ${colors.primaryText};
+  ${device.tablet} {
     font-size: 20px;
     line-height: 1.35;
     letter-spacing: -0.01em;
@@ -73,59 +78,59 @@ export const TitleTwo = styled.h3`
   font-weight: 500;
   font-size: 24px;
   line-height: 1.37;
-  color: #111111;
-  @media (min-width: 768px) {
+  color: ${colors.primaryText};
+  ${device.tablet} {
     font-size: 36px;
     line-height: 1.36;
   }
 `;
 
-export const ButtonCloseModal = styled.button`
-  position: absolute;
-  cursor: pointer;
-  top: 20px;
-  right: 20px;
-  width: 34px;
-  height: 34px;
-  display: flex;
-  transition: color 300ms linear, background-color 300ms linear;
- // fill: rgba(17, 17, 17, 0.6);
-  svg {
-    fill: rgba(17, 17, 17, 0.6);
-    &:hover {
-      fill: rgba(245, 146, 86, 1);
-     // stroke: rgba(245, 146, 86, 1);
-    }
-  }
+// export const ButtonCloseModal = styled.button`
+//   position: absolute;
+//   cursor: pointer;
+//   top: 20px;
+//   right: 20px;
+//   width: 34px;
+//   height: 34px;
+//   display: flex;
+//   transition: color 300ms linear, background-color 300ms linear;
+//   // fill: rgba(17, 17, 17, 0.6);
+//   svg {
+//     fill: ${colors.inputSecText};
+//     &:hover {
+//       fill: ${colors.blurOrange};
+//       // stroke: rgba(245, 146, 86, 1);
+//     }
+//   }
 
-  svg {
-    fill: #000000;
-  }
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  border: none;
+//   svg {
+//     fill:${colors.black};
+//   }
+//   justify-content: center;
+//   align-items: center;
+//   position: absolute;
+//   border: none;
 
-  background: #fdf7f2;
-  border-radius: 50%;
-  @media (min-width: 768px) {
-    width: 44px;
-    height: 44px;
-    top: 25px;
-    right: 25px;
-  }
-`;
+//   background:  ${colors.hzModalPet};
+//   border-radius: 50%;
+//   ${device.tablet} {
+//     /* width: 44px;
+//     height: 44px; */
+//     top: 25px;
+//     right: 25px;
+//   }
+// `;
 
 export const Title = styled.h3`
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   text-align: center;
   font-family: "Manrope";
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
   line-height: 1.37;
-  color: #111111;
-  @media (min-width: 768px) {
+  color:  ${colors.primaryText};
+  ${device.tablet} {
     font-size: 36px;
     line-height: 1.36;
   }
@@ -141,13 +146,14 @@ export const FieldStyled = styled(Field)`
   font-size: 14px;
   line-height: 1.35;
   cursor: pointer;
-  width: 240px;
+  width: 100%;
+  /* width: 240px; */
   height: 40px;
-  color: rgba(17, 17, 17, 0.6);
+  color:  ${colors.inputPriText};
   margin-top: 8px;
   padding: 11px 14px;
-  background: #fdf7f2;
-  border: 1px solid rgba(245, 146, 86, 0.5);
+  background:  ${colors.hzModalPet};
+  border: 1px solid ${colors.accentOrange};
   border-radius: 40px;
   :active,
   :hover,
@@ -159,19 +165,18 @@ export const FieldStyled = styled(Field)`
     font-weight: 400;
     font-size: 14px;
     line-height: 1.35;
-    color: rgba(27, 27, 27, 0.6);
-    @media (min-width: 768px) {
+    color: ${colors.inputSecText};
+    ${device.tablet} {
       font-size: 16px;
       line-height: 1.62;
-      color: rgba(17, 17, 17, 0.6);
     }
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
     padding: 16px 10px;
-    width: 448px;
+    /* width: 448px; */
     height: 48px;
     margin-top: 12px;
   }
@@ -190,12 +195,12 @@ export const AddFile = styled.label`
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  width: 208px;
-  height: 208px;
-  background: #fdf7f2;
+  /* width: 208px;
+  height: 208px; */
+  background: ${colors.hzModalPet};
   border-radius: 20px;
   margin-bottom: 20px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-bottom: 40px;
     width: 184px;
     height: 184px;
@@ -204,47 +209,49 @@ export const AddFile = styled.label`
 
 export const FieldTextarea = styled(Field)`
   cursor: pointer;
-  resize: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.35;
   display: block;
   margin-top: 8px;
   padding: 14px 12px;
-  width: 240px;
+  width: 100%;
   height: 76px;
 
-  background: #fdf7f2;
-  border: 1px solid rgba(245, 146, 86, 0.5);
+  background:${colors.hzModalPet};
+  border: 1px solid ${colors.accentOrange};
   border-radius: 20px;
   :active,
   :hover,
   :focus {
     outline: 0;
     outline-offset: 0;
-    border: 1px solid rgba(245, 146, 86, 0.5);
+    border: 1px solid ${colors.accentOrange};
   }
   ::placeholder {
+    position: absolute;
+    top: 0px;
+    left: 5px;
     padding: 14px 12px;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.35;
-    color: rgba(27, 27, 27, 0.6);
+    color: ${colors.inputSecText};
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
     margin-top: 20px;
     padding: 16px;
-    width: 394px;
-    height: 116px;
+    /* width: 394px; */
+    height: 113px;
   }
 `;
 
 export const LabelBox = styled.div`
   margin-bottom: 16px;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-bottom: 28px;
   }
 `;
@@ -256,8 +263,8 @@ export const StyledLabel = styled.label`
   font-weight: 500;
   font-size: 18px;
   line-height: 1.47;
-  color: #111111;
-  @media (min-width: 768px) {
+  color:${colors.primaryText};
+  ${device.tablet} {
     font-size: 24px;
     line-height: 1.1;
   }
@@ -270,56 +277,65 @@ export const FlexBox = styled.div`
   margin-top: 40px;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 768px) {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  ${device.tablet} {
     flex-direction: row-reverse;
     display: flex;
+    gap: 20px;
   }
 `;
 
 export const NextBtn = styled.button`
   cursor: pointer;
   display: block;
-  width: 240px;
+  /* width: 240px; */
   height: 40px;
-  margin-bottom: 12px;
-
-  background: #f59256;
+  background: ${colors.accentOrange};
   border-radius: 40px;
   border: none;
-  color: #fff;
+  color:${colors.white};
   transition: color 300ms linear, background-color 300ms linear;
   :hover,
   :focus {
-    background-color: #fff;
-    color: rgba(0, 0, 0, 1);
-    border: 2px solid #f59256;
+    background-color: ${colors.white};
+    color: ${colors.black};
+    border: 2px solid ${colors.accentOrange};
   }
 
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 180px;
     height: 44px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
   }
 `;
 
 export const CancelBtn = styled.button`
+  font-family: "Manrope";
+  font-style: normal;
   cursor: pointer;
-  margin-right: 15px;
   display: block;
-  width: 240px;
+  /* width: 240px; */
   height: 40px;
-  background: #fff;
+  background: ${colors.white};
   border-radius: 40px;
   transition: color 300ms linear, background-color 300ms linear;
-  color: #000000;
-  border: 2px solid #f59256;
+  color: ${colors.black};
+  border: 2px solid ${colors.accentOrange};
   :hover,
   :focus {
-    background-color: #f59256;
-    color: #fff;
+    background-color: ${colors.accentOrange};
+    color: ${colors.white};
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 180px;
     height: 44px;
+    font-size: 20px;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
   }
 `;
 
@@ -332,10 +348,10 @@ export const ErrorText = styled.p`
   color: red;
   margin-top: -20px;
   position: absolute;
-  @media (min-width: 320px) {
+  ${device.tablet} {
     margin-left: 10px;
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     margin-top: -30px;
   }
 `;

@@ -15,22 +15,28 @@ import { StepTwo } from "./StepTwo";
 
 // const category = ["lost-found", "in-good-hands", "sell"];
 
-export const AddNoticeForm = ({ onClose }) => {
+export const AddNoticeForm = ({ onClose, petInfo}) => {
+
+ console.log(petInfo)
+
   const [data, setData] = useState({
-    title: "",
-    name: "",
-    birthday: "",
-    breed: "",
-    categoryName: "sell",
-    sex: "",
-    location: "",
-    price: "",
-    comments: "",
-    avatar: "",
+    title: petInfo?.title || "" ,
+    name: petInfo?.name || "",
+    birthday: petInfo?.birthday || "",
+    breed: petInfo?.breed || "",
+    categoryName: "sell" || petInfo?.categoryName,
+    sex: petInfo?.sex || "",
+    location: petInfo?.location || "",
+    price: petInfo?.price || "",
+    comments: petInfo?.comments || "",
+    avatar: petInfo?.avatar || "",
+    description: " ",
   });
+
+
   const [currentStep, setCurrentStep] = useState(0);
 
-  // const dispatch = useDispatch();
+  // const dispatch = useDispatch(); "6403601a42dc8b5f0ae334ac"
 
   const handleNextStep = (newData, final = false) => {
     setData((prev) => ({ ...prev, ...newData }));
@@ -47,8 +53,8 @@ export const AddNoticeForm = ({ onClose }) => {
   };
 
   const steps = [
-    <StepOne next={handleNextStep} data={data} onClose={onClose} />,
-    <StepTwo prev={handlePrevStep} data={data} onClose={onClose} />,
+    <StepOne next={handleNextStep} id={petInfo?._id} data={data} onClose={onClose} />,
+    <StepTwo prev={handlePrevStep} id={petInfo?._id} avatar ={petInfo?.avatar} data={data} onClose={onClose} />,
   ];
 
   return <ModalBox>{steps[currentStep]}</ModalBox>;

@@ -7,10 +7,8 @@ import {
   addFavorites,
   removeFavorites,
 } from "../../redux/auth/auth-operations";
-import {
-  useState,
-} from "react";
-import { Modal } from "../../components/Modal/Modal";
+import { useState } from "react";
+import { Modal } from "../Modal/Modal";
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
@@ -20,18 +18,18 @@ const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 export const NoticesCategoryList = ({
   notices,
   onRemove,
-  onReadMore,
   user,
   isLogined,
   favorites,
   onAddPet,
   sortedValue,
-  isOpen
+  isModalAddPet,
 }) => {
   const dispatch = useDispatch();
- // const [isOpen, setIsOpen] = useState(false);
-  const [isModal, setIsModal] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
+  const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
+  const [isModalEditPost, setIsModalEditPost] = useState(false);
   // useEffect(() => {
   //   console.log("favorites", favotires);
   // }, [favotires]);
@@ -44,31 +42,31 @@ export const NoticesCategoryList = ({
   //   setIsOpen(!isOpen);
   // };
 
-  const handlerFavorite = (e, id, isFavorite) => {
+  const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) {
-   
-      // console.log("pls login first");
+      console.log("pls login first");
     }
-    if (!favorites.includes(id)) {
-      console.log(e)
-      dispatch(addFavorites(id));
-    } else if (isFavorite) {
-      console.log(e)
-      dispatch(removeFavorites(id));
+    if (user._id !== owner) {
+      if (!favorites.includes(id)) {
+        dispatch(addFavorites(id));
+      } else if (isFavorite) {
+        dispatch(removeFavorites(id));
+      }
+    } else {
+      // console.log(owner)
+      setPetInfo(notices.find((el) => el._id === id));
+      setIsModalEditPost(!isModalEditPost);
     }
   };
-  // let petInfo 
+  // let petInfo
 
-  const readMoreModal = (e)=>{
-    if(e.target.id && e.target.id!==""){
-
-      setPetInfo(notices.find(el=>el._id===e.target.id))
-      setIsModal(!isModal)
+  const readMoreModal = (e) => {
+    if (e.target.id && e.target.id !== "") {
+      setPetInfo(notices.find((el) => el._id === e.target.id));
+      setIsModalReadMore(!isModalReadMore);
     }
- 
-  }
-  console.log(typeof(isOpen))
-  console.log(isOpen)
+  };
+
   return (
     <>
       <ListBox>
@@ -76,14 +74,14 @@ export const NoticesCategoryList = ({
           {svgAdd}
           Add pet
         </BtnAddSticky>
-        {notices.length > 0 ? (
+        {notices?.length > 0 ? (
           <List>
             <NoticeItem
               user={user}
               notices={notices}
-              favotiresList={favorites}
-              addFavorite={(e, id, isFavorite) =>
-                handlerFavorite(e, id, isFavorite)
+              favoritesList={favorites}
+              addFavorite={(e, id, owner, isFavorite) =>
+                handlerFavorite(e, id, owner, isFavorite)
               }
               onRemove={onRemove}
               onReadMore={readMoreModal}
@@ -94,23 +92,31 @@ export const NoticesCategoryList = ({
           <ResultNotFound />
         )}
       </ListBox>
-    
-    
-      { isOpen && 
+
+      {isModalAddPet && (
         <Modal type="addPet" onClose={onAddPet}>
           <AddNoticeForm onClose={onAddPet} />
         </Modal>
-      }
-          {isModal && (
-        <Modal type="addPet" onClose={()=>setIsModal(!isModal)}>
-          <ModalFindPet 
-          onClose={()=>setIsModal(!isModal)} 
-          petInfo={petInfo}   
-          favoritesList={favorites}
-          addFavorite={(e, id, isFavorite) =>
-            handlerFavorite(e, id, isFavorite)
-          }
+      )}
+      {isModalReadMore && (
+        <Modal
+          // type="addPet"
+          onClose={() => setIsModalReadMore(!isModalReadMore)}
+        >
+          <ModalFindPet
+            user = {user}
+            onClose={() => setIsModalReadMore(!isModalReadMore)}
+            petInfo={petInfo}
+            favoritesList={favorites}
+            addFavorite={(e, id, owner, isFavorite) =>
+              handlerFavorite(e, id, owner, isFavorite)
+            }
           />
+        </Modal>
+      )}
+      {isModalEditPost && (
+        <Modal onClose={() => setIsModalEditPost(!isModalEditPost)}>
+                <AddNoticeForm   petInfo={petInfo} onClose={() => setIsModalEditPost(!isModalEditPost)} />
         </Modal>
       )}
     </>

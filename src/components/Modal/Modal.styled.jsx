@@ -21,15 +21,23 @@ export const Backdrop = styled.div`
 `;
 
 export const Content = styled.div`
-  min-width: 380px;
+  position: relative;
+  min-width: 280px;
   min-height: 194px;
   padding: 20px;
-  background-color: ${colors.white};
+  //background-color: ${colors.white};
 
   border-radius: 20px;
 
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
+  ${device.mobile} {
+   max-width: 480px;
+  }
+  ${device.tablet} {
+    background-color: ${colors.white};
+   max-width: 744px;
+  }
 `;
 export const CloseBtn = styled.button`
   border: none;
@@ -45,7 +53,8 @@ export const CloseBtn = styled.button`
   align-items: center;
   justify-content: center;
   color: ${colors.black};
-  transition: box-shadow 250ms ease-in, color 250ms ease-in;
+  z-index: 1;
+  /* transition: box-shadow 250ms ease-in, color 250ms ease-in; */
 
   ${device.tablet} {
     right: 20px;

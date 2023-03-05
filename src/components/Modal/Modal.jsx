@@ -11,8 +11,6 @@ export const Modal = ({ onClose, children, type = "default" }) => {
     // body.classList.add("no-scroll");
   }, [body.classList]);
 
-  console.log("type", type);
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.code === "Escape") {
@@ -47,7 +45,14 @@ export const Modal = ({ onClose, children, type = "default" }) => {
       );
     }
 
-    return <Content>{children}</Content>;
+    return (
+      <Content>
+        <CloseBtn type="button" onClick={onClose}>
+          <CloseSvg />
+        </CloseBtn>
+        {children}
+      </Content>
+    );
   };
 
   return createPortal(

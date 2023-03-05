@@ -2,7 +2,7 @@ import {
   Input,
   Label,
   LabelText,
-  RadioGroup,
+  RadioGroupSex,
   LabelSex,
   SexBox,
   ErrorText,
@@ -11,8 +11,8 @@ import {
   ButtonBox,
   Button,
   BackBtn,
-  AddFile,
-  FieldPhoto,
+  // AddFile,
+  // FieldPhoto,
   FieldTextarea,
   LabelBox,
   StyledLabel,
@@ -23,9 +23,11 @@ import { ReactComponent as FemaleSvg } from "../../../assets/svg/female.svg";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
-import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
+import {ImageCropper} from '../../ImageCropper/ImageCropper'
+//import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import { useDispatch } from "react-redux";
-import { addNotice } from "../../../redux/notice/notice-operations";
+import { addNotice, updateNotice, updateNoticeAvatar } from "../../../redux/notice/notice-operations";
+// import { ImageCropper } from "../../ImageCropper/ImageCropper";
 
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
@@ -37,13 +39,23 @@ const validationSchema = yup.object({
       "The address must contain the city, regions: 'Kyiv, Kyiv'"
     )
     .required("Address is required"),
-  comments: yup.string().min(8).max(120),
-  price: yup.number("Only numbers"),
+  comments: yup.string().min(8).max(120).required("Comments are required"),
+  // price: yup.number().matches(/^[1-9]+$/, "price must be greater than 0"),
+
+  // price: yup.string().when("categoryName", {
+  //   is: "sell",
+  //   then: yup.string().required("Must enter email address"),
+  // }),
 });
 
-export const StepTwo = ({ data, prev, onClose }) => {
+export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
   const dispatch = useDispatch();
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
+
+  const [image, setImage] = useState(null);
+  const setCroppedImageFor =(file)=>{
+    setImage(file)
+  }
 
   const FormError = ({ name }) => {
     return (
@@ -54,11 +66,11 @@ export const StepTwo = ({ data, prev, onClose }) => {
     );
   };
 
-  console.log("Temporary log (can be deleted) ===>", file);
+  //console.log("Temporary log (can be deleted) ===>", file);
 
-  const handleChange = (event) => {
-    setFile(event.target.files[0]);
-  };
+  // const handleChange = (event) => {
+  //   setFile(event.target.files[0]);
+  // };
 
   const handleSubmit = (data) => {
     const {
@@ -73,22 +85,61 @@ export const StepTwo = ({ data, prev, onClose }) => {
       comments,
     } = data;
     console.log("DATA", data);
-    const comment = comments ? comments : "test test";
-    const formData = new FormData();
-    formData.append("avatar", file);
-    formData.append("title", title);
-    formData.append("name", name);
-    formData.append("birthday", birthday);
-    formData.append("categoryName", categoryName);
-    formData.append("sex", sex);
-    formData.append("location", location);
-    formData.append("price", price);
-    formData.append("breed", breed);
-    formData.append("comments", comment);
+    // const comment = comments ? comments : "testtest";
+    // const formData = new FormData();
+    // // formData.append("avatar", file);
+    // formData.append("avatar", image);
+    // formData.append("title", title);
+    // formData.append("name", name);
+    // formData.append("birthday", birthday);
+    // formData.append("categoryName", categoryName);
+    // formData.append("sex", sex);
+    // formData.append("location", location);
+    // formData.append("breed", breed);
+    // formData.append("comments", comments);
+    // if (price !== "") {
+    //   formData.append("price", price);
+    // }
 
-    console.log("handleSubm", formData, file);
+    //console.log("handleSubm", formData, file);
+    if(id){
+      
+      const newData = {
+        title: data.title,
+        name: data.name,
+        birthday: data.birthday,
+        breed: data.breed,
+        categoryName: data.categoryName,
+        sex: data.sex,
+        location: data.location,
+        price: data.price,
+        comments: data.comments,
+      }
 
-    dispatch(addNotice(formData));
+      const formImage = new FormData();
+      formImage.append("avatar", image)
+      dispatch(updateNotice([newData, id]))
+      dispatch(updateNoticeAvatar([formImage, id]))
+    }else{
+      console.log("chomus tut")
+      const formData = new FormData();
+    // formData.append("avatar", file);
+      formData.append("avatar", image);
+      formData.append("title", title);
+      formData.append("name", name);
+      formData.append("birthday", birthday);
+      formData.append("categoryName", categoryName);
+      formData.append("sex", sex);
+      formData.append("location", location);
+      formData.append("breed", breed);
+      formData.append("comments", comments);
+      if (price !== "") {
+        formData.append("price", price);
+      }
+      dispatch(addNotice(formData));
+    }
+
+    onClose();
   };
 
   return (
@@ -99,23 +150,27 @@ export const StepTwo = ({ data, prev, onClose }) => {
     >
       {({ values }) => (
         <FormCustom>
-          <Title>Add pet</Title>
+          <Title>{id? "Edit pet" : "Add pet"}</Title>
           <RadioWrap>
             <LabelSex>
               The sex<span>*</span>:
             </LabelSex>
-            <RadioGroup role="group" aria-labelledby="my-radio-group">
+            <RadioGroupSex role="group" aria-labelledby="my-radio-group">
               <SexBox>
-                <MaleSvg />
                 <Field type="radio" name="sex" value="male" id="male" />
-                <label htmlFor="male">Male</label>
+                <label htmlFor="male">
+                  <MaleSvg />
+                  Male
+                </label>
               </SexBox>
               <SexBox>
-                <FemaleSvg />
                 <Field type="radio" name="sex" value="female" id="female" />
-                <label htmlFor="female">Female</label>
+                <label htmlFor="female">
+                  <FemaleSvg />
+                  Female
+                </label>
               </SexBox>
-            </RadioGroup>
+            </RadioGroupSex>
             <FormError name="sex" checked />
           </RadioWrap>
 
@@ -138,7 +193,7 @@ export const StepTwo = ({ data, prev, onClose }) => {
           )}
           <Label>
             <LabelText>Load the pet&apos;s image</LabelText>
-            <AddFile htmlFor="myPetsPhoto">
+            {/* <AddFile htmlFor="myPetsPhoto">
               {file ? <p>file downloaded</p> : <AddPlusButton />}
               <FieldPhoto
                 id="myPetsPhoto"
@@ -146,10 +201,10 @@ export const StepTwo = ({ data, prev, onClose }) => {
                 name="myPetsPhoto"
                 onChange={handleChange}
               />
-            </AddFile>
+            </AddFile> */}
+              <ImageCropper avatar={avatar} setCroppedImageFor={setCroppedImageFor}></ImageCropper>
             <FormError name="myPetsPhoto" />
           </Label>
-
           <LabelBox>
             <StyledLabel htmlFor="comments">
               Comments
@@ -157,11 +212,13 @@ export const StepTwo = ({ data, prev, onClose }) => {
                 type="text"
                 name="comments"
                 placeholder="Type comments"
-                as="textarea"
+                component="textarea"
+                rows="4"
               />
             </StyledLabel>
+            <FormError name="comments" />
           </LabelBox>
-          <FormError name="comments" />
+
           <ButtonBox>
             <Button type="submit">Done</Button>
             <BackBtn type="button" onClick={() => prev(values)}>

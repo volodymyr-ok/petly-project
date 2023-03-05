@@ -30,7 +30,7 @@ const validationSchema = yup.object({
   breed: yup.string().min(2).max(16).matches(cyrillic, "only Latin letters"),
 });
 
-export const StepOne = ({ onClose, next, data }) => {
+export const StepOne = ({ onClose, next, data, id }) => {
   const FormError = ({ name }) => {
     return (
       <ErrorMessage
@@ -51,7 +51,7 @@ export const StepOne = ({ onClose, next, data }) => {
     >
       {() => (
         <FormCustom>
-          <Title>Add pet</Title>
+          <Title>{id? "Edit pet" : "Add pet"}</Title>
           <SubTitle>
             Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
             consectetur
@@ -61,30 +61,22 @@ export const StepOne = ({ onClose, next, data }) => {
               <Field
                 type="radio"
                 name="categoryName"
-                // checked={values.categoryName === "lost-found"}
                 value="lost-found"
                 id="lost-found"
               />
-              <RadioLabel htmlFor="lost-found">lost-found</RadioLabel>
+              <RadioLabel htmlFor="lost-found">lost/found</RadioLabel>
             </RadioBox>
             <RadioBox>
               <Field
                 type="radio"
                 name="categoryName"
-                // checked={values.categoryName === "in-good-hands"}
                 value="in-good-hands"
                 id="in-good-hands"
               />
-              <RadioLabel htmlFor="in-good-hands">in-good-hands</RadioLabel>
+              <RadioLabel htmlFor="in-good-hands">in good hands</RadioLabel>
             </RadioBox>
             <RadioBox>
-              <Field
-                type="radio"
-                name="categoryName"
-                // checked={values.categoryName === "sell"}
-                value="sell"
-                id="sell"
-              />
+              <Field type="radio" name="categoryName" value="sell" id="sell" />
               <RadioLabel htmlFor="sell">sell</RadioLabel>
             </RadioBox>
           </RadioGroup>
