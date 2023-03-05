@@ -9,7 +9,10 @@ import { useSelector } from "react-redux";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
 import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
 import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
-import { authorized, notAuthorized } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
+import {
+  authorized,
+  notAuthorized,
+} from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
 import {
   getNotice1,
@@ -18,7 +21,7 @@ import {
   getNoticesBySearch1,
   removeNotice,
 } from "./services";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 //import { Navigate } from 'react-router-dom';
 //getNoticeById1
 
@@ -36,46 +39,59 @@ const NoticesPage = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState({ data: [] });
 
-  const location = useLocation()
+  const location = useLocation();
 
   const notices = data.data;
 
-useEffect(() => {
-  const { pathname } = location;
-  const [,, secName] = pathname.split("/");
+  useEffect(() => {
+    const { pathname } = location;
+    const [, , secName] = pathname.split("/");
 
-  const authorizedHrefs = Object.fromEntries(authorized.map(({ href }) => [href, true]));
-  const notAuthorizedHrefs = Object.fromEntries(notAuthorized.map(({ href }) => [href, true]));
+    const authorizedHrefs = Object.fromEntries(
+      authorized.map(({ href }) => [href, true])
+    );
+    const notAuthorizedHrefs = Object.fromEntries(
+      notAuthorized.map(({ href }) => [href, true])
+    );
 
-  const sortedValueToUpdate = getSortedValue(secName, isLogined, authorizedHrefs, notAuthorizedHrefs);
-  setSortedValue(sortedValueToUpdate);
-}, [location, isLogined]);
+    const sortedValueToUpdate = getSortedValue(
+      secName,
+      isLogined,
+      authorizedHrefs,
+      notAuthorizedHrefs
+    );
+    setSortedValue(sortedValueToUpdate);
+  }, [location, isLogined]);
 
-function getSortedValue(secName, isAuthenticated, authorizedHrefs, notAuthorizedHrefs) {
-  const hrefs = isAuthenticated ? authorizedHrefs : notAuthorizedHrefs;
-  return hrefs[secName] ? secName : "sell";
-}
-
+  function getSortedValue(
+    secName,
+    isAuthenticated,
+    authorizedHrefs,
+    notAuthorizedHrefs
+  ) {
+    const hrefs = isAuthenticated ? authorizedHrefs : notAuthorizedHrefs;
+    return hrefs[secName] ? secName : "sell";
+  }
 
   useEffect(() => {
     setIsLoading(true);
-  
+
     const fetchData = async () => {
       try {
         let data;
-  
+
         switch (sortedValue) {
-          case 'my-ads':
+          case "own":
             data = await getMyNorices1(sortedValue);
             break;
-          case 'favorite-ads':
+          case "favorite-ads":
             data = await getFavorite1(sortedValue);
             break;
           default:
             data = await getNotice1(sortedValue);
             break;
         }
-  
+
         setData(data);
         setIsLoading(false);
       } catch (error) {
@@ -83,11 +99,9 @@ function getSortedValue(secName, isAuthenticated, authorizedHrefs, notAuthorized
         setIsLoading(false);
       }
     };
-  
+
     fetchData();
   }, [sortedValue, reload]);
-
-
 
   const onSubmit = (e) => {
     if (e !== "") {

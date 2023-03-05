@@ -63,14 +63,9 @@ const App = () => {
           <Route path="/user" element={<UserPage />} />
           <Route path="/notices" element={<NoticesPage />}>
             <Route path=":category" element={<NoticesCategoryList />}>
-
-
-           
-
-
-            <Route path=":id" />
+              <Route path=":id" />
             </Route>
-           
+
             {/* <Route path="sell/:id"></Route>
             <Route path="lost-found" element={<NoticesCategoryList />}></Route>
             <Route path="lost-found/:id"></Route>
