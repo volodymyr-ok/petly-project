@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
-import { device } from "../../utils/mixin";
+import { device, transition } from "../../utils/mixin";
 
 export const StyledButton = styled.button`
   display: flex;
@@ -16,6 +16,8 @@ export const StyledButton = styled.button`
   border-radius: 40px;
   background-color: ${colors.white};
   cursor: pointer;
+
+  transition: color ${transition}, background-color ${transition};
 
   &.search {
     width: 40px;
