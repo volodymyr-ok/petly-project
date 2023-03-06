@@ -56,6 +56,7 @@ export const RegisterForm = () => {
             component: StepOne,
             validationSchema: Yup.object().shape({
               email: Yup.string()
+                .max(64)
                 .matches(emailRegexp, "Please enter valid email")
                 .required("Email is required"),
               password: Yup.string()
