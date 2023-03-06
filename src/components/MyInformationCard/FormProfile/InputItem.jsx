@@ -17,6 +17,9 @@ export const InputItem = ({
   disable,
   dark,
 }) => {
+  const [val, setVal] = useState(value);
+  const [startDate, setStartDate] = useState(new Date());
+
   useEffect(() => {
     if (!value) return;
     const initData = value.split(".");
@@ -27,9 +30,6 @@ export const InputItem = ({
       setStartDate(new Date(year, month - 1, day));
     }
   }, [name, value]);
-
-  const [val, setVal] = useState(value);
-  const [startDate, setStartDate] = useState(new Date());
 
   const handleChange = (e) => {
     setStartDate(e);
