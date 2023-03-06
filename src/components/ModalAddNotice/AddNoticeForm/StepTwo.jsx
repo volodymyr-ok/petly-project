@@ -128,7 +128,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, isValid, dirty }) => (
+      {({ values }) => (
         <FormCustom>
           <Title>{id ? "Edit pet" : "Add pet"}</Title>
 
@@ -197,9 +197,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
           </LabelBox>
 
           <ButtonBox>
-            <Button type="submit" disabled={!isValid || !dirty}>
-              Done
-            </Button>
+            <Button type="submit">Done</Button>
             <BackBtn type="button" onClick={() => prev(values)}>
               Back
             </BackBtn>
