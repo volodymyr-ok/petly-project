@@ -48,6 +48,7 @@ const validationSchema = yup.object({
     .string()
     .matches(/^[1-9]+$/, "price must be greater than 0")
     .min(1)
+    .max(9)
     .required("Price is required"),
 });
 
