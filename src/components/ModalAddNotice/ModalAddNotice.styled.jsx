@@ -45,6 +45,11 @@ export const Label = styled.label`
     font-size: 24px;
     line-height: 1.1;
   }
+
+  button {
+    /* max-width: 140px; */
+    /* max-height: 140px; */
+  }
 `;
 
 export const LabelText = styled.span`
@@ -266,6 +271,10 @@ export const Button = styled.button`
     justify-content: center;
     margin: 0;
     /* padding: 10px 28px; */
+  }
+
+  :disabled {
+    opacity: 0.8;
   }
 `;
 

@@ -47,6 +47,7 @@ const validationSchema = yup.object({
   price: yup
     .string()
     .matches(/^[1-9]+$/, "price must be greater than 0")
+    .min(1)
     .required("Price is required"),
 });
 
@@ -131,6 +132,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       {({ values }) => (
         <FormCustom>
           <Title>{id ? "Edit pet" : "Add pet"}</Title>
+
           <RadioWrap>
             <LabelSex>
               The sex<span>*</span>:
@@ -171,10 +173,11 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
               <FormError name="price" />
             </Label>
           )}
-          <Label>
+          <Label file>
             <LabelText>Load the pet&apos;s image</LabelText>
 
             <ImageCropper
+              small
               avatar={avatar}
               setCroppedImageFor={setCroppedImageFor}
             ></ImageCropper>

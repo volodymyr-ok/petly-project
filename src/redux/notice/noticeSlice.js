@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Notify } from "notiflix";
 import {
   addNotice,
   getNotice,
@@ -23,7 +24,8 @@ const handleFulfilled = (state, action) => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
-  // state.items = [];
+  state.items = [];
+  Notify.failure(`An error occurred, please try again`);
 };
 
 const noticeSlice = createSlice({
@@ -62,8 +64,7 @@ const noticeSlice = createSlice({
       .addCase(addNotice.pending, handlePending)
       .addCase(addNotice.rejected, handleRejected)
       .addCase(addNotice.fulfilled, (state, action) => {
-        // console.log("chds", state.items, action.payload);
-        // state.items.push(action.payload);
+        state.items.push(action.payload);
         state.error = null;
         state.isLoading = false;
       });
