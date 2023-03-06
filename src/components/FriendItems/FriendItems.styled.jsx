@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
+import { transition } from "../../utils/mixin";
 
 export const FriendsItem = styled.li`
   display: flex;
@@ -45,6 +46,8 @@ export const FriendsTitle = styled.a`
   text-decoration-line: underline;
 
   font-weight: 700;
+
+  transition: color ${transition};
 
   ${device.tablet} {
     height: 42px;
@@ -138,6 +141,8 @@ export const InfoWrap = styled.a`
   text-decoration: none;
   cursor: pointer;
 
+  transition: color ${transition};
+
   ${device.tablet} {
     max-width: 181px;
   }
@@ -166,12 +171,5 @@ export const Descr = styled.p`
 
   ${device.tablet} {
     width: 176px;
-  }
-
-  ${device.desktop} {
-  }
-
-  &:hover,
-  &:focus {
   }
 `;
