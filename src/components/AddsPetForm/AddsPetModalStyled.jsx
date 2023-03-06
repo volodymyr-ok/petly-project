@@ -3,7 +3,6 @@ import { Form, Field } from "formik";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 
-
 // can remove
 // export const Overlay = styled.div`
 //   overflow-y: scroll;
@@ -28,7 +27,7 @@ export const ModalItem = styled.div`
   padding: 40px 20px;
   width: 100%;
   /* height: 530px; */
-  background:${colors.white};
+  background: ${colors.white};
   border-radius: 40px;
   ${device.tablet} {
     padding: 40px 80px;
@@ -129,7 +128,7 @@ export const Title = styled.h3`
   font-weight: 500;
   font-size: 24px;
   line-height: 1.37;
-  color:  ${colors.primaryText};
+  color: ${colors.primaryText};
   ${device.tablet} {
     font-size: 36px;
     line-height: 1.36;
@@ -149,10 +148,10 @@ export const FieldStyled = styled(Field)`
   width: 100%;
   /* width: 240px; */
   height: 40px;
-  color:  ${colors.inputPriText};
+  color: ${colors.inputPriText};
   margin-top: 8px;
   padding: 11px 14px;
-  background:  ${colors.hzModalPet};
+  background: ${colors.hzModalPet};
   border: 1px solid ${colors.accentOrange};
   border-radius: 40px;
   :active,
@@ -218,7 +217,7 @@ export const FieldTextarea = styled(Field)`
   width: 100%;
   height: 76px;
 
-  background:${colors.hzModalPet};
+  background: ${colors.hzModalPet};
   border: 1px solid ${colors.accentOrange};
   border-radius: 20px;
   :active,
@@ -250,7 +249,7 @@ export const FieldTextarea = styled(Field)`
 `;
 
 export const LabelBoxModifaed = styled.div`
-margin-top: 30px;
+  margin-top: 30px;
   margin-bottom: 16px;
   ${device.tablet} {
     margin-bottom: 28px;
@@ -270,7 +269,7 @@ export const StyledLabel = styled.label`
   font-weight: 500;
   font-size: 18px;
   line-height: 1.47;
-  color:${colors.primaryText};
+  color: ${colors.primaryText};
   ${device.tablet} {
     font-size: 24px;
     line-height: 1.1;
@@ -302,7 +301,7 @@ export const NextBtn = styled.button`
   background: ${colors.accentOrange};
   border-radius: 40px;
   border: none;
-  color:${colors.white};
+  color: ${colors.white};
   transition: color 300ms linear, background-color 300ms linear;
   :hover,
   :focus {
