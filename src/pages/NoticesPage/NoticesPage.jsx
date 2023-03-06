@@ -161,7 +161,6 @@ const NoticesPage = () => {
     });
   };
 
-
   return (
     <>
       <Container>
