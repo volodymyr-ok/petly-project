@@ -83,11 +83,11 @@ const NoticesPage = () => {
   }
 
   useEffect(() => {
-      setIsLoading(true);
       const searchParams = { search, page };
       if (needToResetPage) setPage(1);
   
       if (search !== "") {
+        setIsLoading(true);
         getNoticesBySearch(searchParams)
           .then((data) => {
             setData(data);
@@ -104,18 +104,21 @@ const NoticesPage = () => {
       const fetchData = async () => {
         try {
           let data;
-          switch (categoryName) {
-            case "own":
-              data = await getMyOwnNotices({ page }); // sortedValue
-              break;
-            case "favorite-ads":
-              data = await getFavoriteNotices({ page });
-              break;
-            case "sell" || "in-good-hands" || "lost-found":
-                data = await getNoticesByCategory(categoryName, { page });
+          if(categoryName!==""){
+            switch (categoryName) {
+              case "own":
+                setIsLoading(true);
+                data = await getMyOwnNotices({ page }); // sortedValue
                 break;
-            default:
-              return
+              case "favorite-ads":
+                setIsLoading(true);
+                data = await getFavoriteNotices({ page });
+                break;
+                default :
+                setIsLoading(true);
+                  data = await getNoticesByCategory(categoryName, { page });
+                  break;
+            }
           }
           if(data){
             setData(data);
@@ -157,8 +160,6 @@ const NoticesPage = () => {
       return null;
     });
   };
-
-
 
   return (
     <>
