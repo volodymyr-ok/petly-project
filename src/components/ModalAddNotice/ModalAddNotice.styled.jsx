@@ -45,6 +45,15 @@ export const Label = styled.label`
     font-size: 24px;
     line-height: 1.1;
   }
+
+  button {
+    max-width: 140px;
+    max-height: 140px;
+  }
+  div {
+    max-height: 140px;
+    margin-bottom: 0;
+  }
 `;
 
 export const LabelText = styled.span`
