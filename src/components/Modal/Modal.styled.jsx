@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
-import { device } from "../../utils/mixin";
+import { device, transition } from "../../utils/mixin";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -58,7 +58,7 @@ export const CloseBtn = styled.button`
   justify-content: center;
   color: ${colors.black};
   z-index: 1;
-  /* transition: box-shadow 250ms ease-in, color 250ms ease-in; */
+  transition: box-shadow ${transition}, color ${transition};
 
   ${device.tablet} {
     right: 20px;
