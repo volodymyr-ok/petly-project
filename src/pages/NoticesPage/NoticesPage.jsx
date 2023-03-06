@@ -23,7 +23,6 @@ import {
 } from "./services";
 import { useLocation } from "react-router-dom";
 import usePrevious from "../../hooks/usePrevious";
-import { selectIsLoading } from "../../redux/notice/notice-selectors";
 //import { Navigate } from 'react-router-dom';
 
 const NoticesPage = () => {
@@ -131,9 +130,6 @@ const NoticesPage = () => {
       fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName, page, search]);
-
-
-console.log(selectIsLoading)
 
 
   const onSubmit = (query) =>{

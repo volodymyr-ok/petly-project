@@ -38,6 +38,7 @@ export const NoticesCategoryList = ({
   const [modalRemove, setModalRemove] = useState(false);
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false)
+  console.log(error)
 
   const notices = data.data;
   const dispatch = useDispatch();
