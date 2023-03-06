@@ -16,7 +16,7 @@ const handleFulfilled = (state, action) => {
 
 const handleRejected = (state, action) => {
   state.isLoading = false;
-  Notify.error(`An error occurred. Please try again later`);
+  Notify.failure(`An error occurred. Please try again later`);
   state.error = action.payload;
   state.avatar = "";
 };

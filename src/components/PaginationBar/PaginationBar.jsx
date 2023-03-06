@@ -11,7 +11,6 @@ import {
 import { TbPaw } from "react-icons/tb";
 
 // noticesLeft, noticesOnPage, perPage, total
-
 const PaginationBar = ({ info: { currentPage, pageCount }, setPage }) => {
   const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);

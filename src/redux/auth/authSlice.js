@@ -48,6 +48,7 @@ const handlePending = (state) => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
+  Notify.failure(`An error occurred, please try again`);
 };
 
 const authSlice = createSlice({
@@ -56,11 +57,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, handlePending)
-      .addCase(registerUser.rejected, (state, action) => {
-        state.isLoading = false;
-        Notify.failure(`Fail`);
-        state.error = action.payload;
-      })
+      .addCase(registerUser.rejected, handleRejected)
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
@@ -70,12 +67,7 @@ const authSlice = createSlice({
       })
 
       .addCase(loginUser.pending, handlePending)
-      .addCase(loginUser.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
-        // toast.error(`${action.payload}Wrong email or password`);
-        // Notify.failure(`${action.payload}`);
-      })
+      .addCase(loginUser.rejected, handleRejected)
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload.user;
@@ -85,11 +77,7 @@ const authSlice = createSlice({
       })
 
       .addCase(loginGoogle.pending, handlePending)
-      .addCase(loginGoogle.rejected, (state, action) => {
-        state.isLoading = false;
-        Notify.failure(`Wrong email or password`);
-        state.error = action.payload;
-      })
+      .addCase(loginGoogle.rejected, handleRejected)
       .addCase(loginGoogle.fulfilled, (state, action) => {
         state.isLoading = false;
         state.pets = action.payload.pets;
@@ -100,7 +88,10 @@ const authSlice = createSlice({
       })
 
       .addCase(getUser.pending, handlePending)
-      .addCase(getUser.rejected, handleRejected)
+      .addCase(getUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.token = action.payload.token;

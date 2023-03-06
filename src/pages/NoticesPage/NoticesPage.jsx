@@ -19,26 +19,30 @@ import {
   getFavoriteNotices,
   getMyOwnNotices,
   getNoticesBySearch,
-  removeNotice,
+//  removeNotice,
 } from "./services";
 import { useLocation } from "react-router-dom";
 import usePrevious from "../../hooks/usePrevious";
 //import { Navigate } from 'react-router-dom';
 
 const NoticesPage = () => {
+
   const [page, setPage] = useState(1);
   const [categoryName, setCategoryName] = useState("");
   const [isModalAddPet, setIsModalAddPet] = useState(false);
-  const [reload, setReload] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isModalLogined, setIsModalLogined] = useState(false);
+ // const [reload, setReload] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState({});
   const [search, setSearch] = useState("");
+  //const [modalRemove, setModalRemove] = useState(false);
 
   const location = useLocation();
-  const isLogined = useSelector(selectIsAuth);
+
   const user = useSelector(selectUser);
   const favorites = useSelector(selectFavorites);
+  const isLogined = useSelector(selectIsAuth);
 
   const prevSearch = usePrevious(search);
   const prevCategoryName = usePrevious(categoryName);
@@ -63,8 +67,10 @@ const NoticesPage = () => {
       authorizedHrefs,
       notAuthorizedHrefs
     );
+   if(newCategoryName !== categoryName){
     setCategoryName(newCategoryName);
-  }, [location, isLogined]);
+   }
+  }, [location, isLogined, categoryName]);
 
   function getCategoryName(
     secName,
@@ -77,65 +83,70 @@ const NoticesPage = () => {
   }
 
   useEffect(() => {
-    setIsLoading(true);
-    const searchParams = { search, page };
-    if (needToResetPage) setPage(1);
-
-    if (search !== "") {
-      getNoticesBySearch(searchParams)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
+      setIsLoading(true);
+      const searchParams = { search, page };
+      if (needToResetPage) setPage(1);
+  
+      if (search !== "") {
+        getNoticesBySearch(searchParams)
+          .then((data) => {
+            setData(data);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setError(error);
+            setIsLoading(false);
+          });
+  
+        return;
+      }
+  
+      const fetchData = async () => {
+        try {
+          let data;
+          switch (categoryName) {
+            case "own":
+              data = await getMyOwnNotices({ page }); // sortedValue
+              break;
+            case "favorite-ads":
+              data = await getFavoriteNotices({ page });
+              break;
+            case "sell" || "in-good-hands" || "lost-found":
+                data = await getNoticesByCategory(categoryName, { page });
+                break;
+            default:
+              return
+          }
+          if(data){
+            setData(data);
+            setIsLoading(false);
+          }
+        } catch (error) {
           setError(error);
           setIsLoading(false);
-        });
-
-      return;
-    }
-
-    const fetchData = async () => {
-      try {
-        let data;
-
-        switch (categoryName) {
-          case "own":
-            data = await getMyOwnNotices({ page }); // sortedValue
-            break;
-          case "favorite-ads":
-            data = await getFavoriteNotices({ page });
-            break;
-          default:
-            data = await getNoticesByCategory(categoryName, { page });
-            break;
         }
-
-        setData(data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
+      };
+  
+      fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName, page, search]);
 
-  const onSubmit = (query) => setSearch(query);
 
-  const handlerModalAddPet = (e) => {
+  const onSubmit = (query) =>{
+    if(query!==""){
+      setSearch(query)
+    }
+  };
+
+  const handlerModalAddPet = () => {
     if (!isLogined) {
-      console.log("pls login first");
+      setIsModalLogined(!isModalLogined)
     } else {
       setIsModalAddPet(!isModalAddPet);
     }
   };
 
   const onChooseCategory = (e) => {
-    console.log("onChooseCate", e, e.target.data, "UUU", e.target.dataset.id);
-    // const expr = e.target.id;
     const expr = e.target.dataset.id;
     authorized.map(({ href }) => {
       if (href === expr) {
@@ -147,21 +158,7 @@ const NoticesPage = () => {
     });
   };
 
-  const handlerRemove = (e) => {
-    if (e.target.id && e.target.id !== "") {
-      setIsLoading(true);
 
-      removeNotice(e.target.id)
-        .then(() => {
-          setReload(!reload);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }
-  };
 
   return (
     <>
@@ -182,11 +179,11 @@ const NoticesPage = () => {
           ) : (
             <NoticesCategoryList
               isModalAddPet={isModalAddPet}
+              isModalLogined={isModalLogined}
               onAddPet={handlerModalAddPet}
               data={data}
               favorites={favorites}
               isLogined={isLogined}
-              onRemove={handlerRemove}
               user={user}
               categoryName={categoryName}
               setPage={setPage}

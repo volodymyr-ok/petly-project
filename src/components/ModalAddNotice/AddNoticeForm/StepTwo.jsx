@@ -31,7 +31,7 @@ import {
   updateNotice,
   updateNoticeAvatar,
 } from "../../../redux/notice/notice-operations";
-// import { ImageCropper } from "../../ImageCropper/ImageCropper";
+
 
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
@@ -47,6 +47,7 @@ const validationSchema = yup.object({
   price: yup
     .string()
     .matches(/^[1-9]+$/, "price must be greater than 0")
+    .min(1)
     .required("Price is required"),
 });
 
@@ -80,7 +81,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       price,
       comments,
     } = data;
-    console.log("DATA", data);
+   // console.log("DATA", data);
 
     if (id) {
       const newData = {
@@ -97,10 +98,11 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
 
       const formImage = new FormData();
       formImage.append("avatar", image);
+      onClose([id, newData, formImage])
       dispatch(updateNotice([newData, id]));
       dispatch(updateNoticeAvatar([formImage, id]));
     } else {
-      console.log("chomus tut");
+    //  console.log("chomus tut");
       const formData = new FormData();
       // formData.append("avatar", file);
       formData.append("avatar", image);
@@ -130,6 +132,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       {({ values }) => (
         <FormCustom>
           <Title>{id ? "Edit pet" : "Add pet"}</Title>
+
           <RadioWrap>
             <LabelSex>
               The sex<span>*</span>:
@@ -170,10 +173,11 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
               <FormError name="price" />
             </Label>
           )}
-          <Label>
+          <Label file>
             <LabelText>Load the pet&apos;s image</LabelText>
 
             <ImageCropper
+              small
               avatar={avatar}
               setCroppedImageFor={setCroppedImageFor}
             ></ImageCropper>

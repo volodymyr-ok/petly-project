@@ -25,7 +25,7 @@ export const AddNoticeForm = ({ onClose, petInfo }) => {
   // const dispatch = useDispatch(); "6403601a42dc8b5f0ae334ac"
 
   const handleNextStep = (newData, final = false) => {
-    console.log("newData", newData);
+   // console.log("newData", newData);
     setData((prev) => ({ ...prev, ...newData }));
     if (final) {
       return;
@@ -51,7 +51,7 @@ export const AddNoticeForm = ({ onClose, petInfo }) => {
       id={petInfo?._id}
       avatar={petInfo?.avatar}
       data={data}
-      onClose={onClose}
+      onClose={(arrayOfData)=>onClose(arrayOfData)}
     />,
   ];
 

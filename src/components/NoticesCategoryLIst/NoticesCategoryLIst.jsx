@@ -12,13 +12,16 @@ import { Modal } from "../Modal/Modal";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
 import PaginationBar from "../PaginationBar/PaginationBar";
+import { removeNotice } from "../../pages/NoticesPage/services";
+import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
+import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
+import { WarningMessage } from "../WarningMessage/WarningMessage";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
 
 export const NoticesCategoryList = ({
   data,
-  onRemove,
   user,
   isLogined,
   favorites,
@@ -26,40 +29,53 @@ export const NoticesCategoryList = ({
   categoryName,
   isModalAddPet,
   setPage,
+  isModalLogined,
 }) => {
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
+  const [petId, setPetId] = useState("");
   const [isModalEditPost, setIsModalEditPost] = useState(false);
+  const [modalRemove, setModalRemove] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  console.log(error);
 
   const notices = data.data;
   const dispatch = useDispatch();
-  // const [isOpen, setIsOpen] = useState(false);
-  // useEffect(() => {
-  //   console.log("favorites", favotires);
-  // }, [favotires]);
-  // const handlerModalAddPet = (e) => {
-  //   console.log("click");
-  //   if (!isLogined) {
-  //     // console.log("pls login first");
-  //   }
-  //   setIsOpen(!isOpen);
-  // };
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
-    if (!isLogined) console.log("pls login first");
-
+    if (!isLogined) onAddPet();
     if (user._id !== owner) {
       if (!favorites.includes(id)) dispatch(addFavorites(id));
       else if (isFavorite) dispatch(removeFavorites(id));
     } else {
       setPetInfo(notices.find((el) => el._id === id));
-
       setIsModalEditPost(!isModalEditPost);
+    }
+  };
+
+  const handlerRemove = (e) => {
+    if (modalRemove && petId !== "") {
+      setModalRemove(!modalRemove);
+      setIsLoading(true);
+      removeNotice(petId)
+        .then(() => {
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setError(error);
+          setIsLoading(false);
+        });
+    }
+    if (e.target.id && e.target.id !== "") {
+      setPetId(e.target.id);
+      setModalRemove(!modalRemove);
     }
   };
 
   const readMoreModal = (e) => {
     // Нащо друга умова (&& e.target.id !== ""), якщо перша повертає ідентичне значення...
+    // для того щоб бути впевненим, ось наприклад 133 строчка в NoticePage там 2 рази сетилось пусте значення, після чого йшов пошук по пустій сточці і нам видавало мікс категорій
     if (e.target.id && e.target.id !== "") {
       setPetInfo(notices.find((el) => el._id === e.target.id));
       setIsModalReadMore(!isModalReadMore);
@@ -75,17 +91,21 @@ export const NoticesCategoryList = ({
         </BtnAddSticky>
         {notices?.length > 0 ? (
           <List>
-            <NoticeItem
-              user={user}
-              notices={notices}
-              favoritesList={favorites}
-              addFavorite={(e, id, owner, isFavorite) =>
-                handlerFavorite(e, id, owner, isFavorite)
-              }
-              onRemove={onRemove}
-              onReadMore={readMoreModal}
-              categoryName={categoryName}
-            ></NoticeItem>
+            {!isLoading ? (
+              <NoticeItem
+                user={user}
+                notices={notices}
+                favoritesList={favorites}
+                addFavorite={(e, id, owner, isFavorite) =>
+                  handlerFavorite(e, id, owner, isFavorite)
+                }
+                onRemove={handlerRemove}
+                onReadMore={readMoreModal}
+                categoryName={categoryName}
+              />
+            ) : (
+              <PawsLoader />
+            )}
           </List>
         ) : (
           <ResultNotFound />
@@ -121,6 +141,26 @@ export const NoticesCategoryList = ({
             onClose={() => setIsModalEditPost(!isModalEditPost)}
           />
         </Modal>
+      )}
+      {modalRemove && (
+        <ModalConfirm
+          text={"Are you sure you want to remove pet?"}
+          onClose={() => setModalRemove(!modalRemove)}
+          question={"Are you shure?"}
+          actionText={"Delete"}
+          action={handlerRemove}
+          cancelText={"Cancel"}
+        />
+      )}
+      {isModalLogined && (
+        <WarningMessage
+          // onRemove={(postId) => onRemove(postId)}
+          type="auth"
+          id={petInfo}
+          // approveFunk={deletePetItem}
+          onClose={onAddPet}
+          text="To do any actions, pls, login or register first"
+        />
       )}
     </>
   );
