@@ -66,10 +66,9 @@ export const RegisterForm = () => {
                   "Password can only contain letters and numbers"
                 )
                 .required("Password is required"),
-              confirmPassword: Yup.string().oneOf(
-                [Yup.ref("password"), null],
-                "Passwords must match"
-              ),
+              confirmPassword: Yup.string()
+                .oneOf([Yup.ref("password"), null], "Passwords must match")
+                .required("Password is required"),
             }),
           },
           {
