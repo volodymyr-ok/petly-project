@@ -1,8 +1,8 @@
-import {BtnPencil} from "./BtnProfileForm/BtnProfileForm.styled";
-import {BoxInput, NameInput} from "./FormProfile.styled";
-import {ReactComponent as Pencil} from "../../../assets/svg/pencil.svg";
-import {ReactComponent as Check} from "../../../assets/svg/btn-ok.svg";
-import {useEffect, useState} from "react";
+import { BtnPencil } from "./BtnProfileForm/BtnProfileForm.styled";
+import { BoxInput, NameInput } from "./FormProfile.styled";
+import { ReactComponent as Pencil } from "../../../assets/svg/pencil.svg";
+import { ReactComponent as Check } from "../../../assets/svg/btn-ok.svg";
+import { useEffect, useState } from "react";
 import DatePickerStyled from "../../DatePicker/DatePickerStyled";
 import LocationPicker from "../../LocationPicker/LocationPicker";
 
@@ -19,6 +19,7 @@ export const InputItem = ({
                           }) => {
 
     useEffect(() => {
+        if (!value) return;
         const initData = value.split('.')
         if (name === 'birthday') {
             const month = initData[1] < 10 ? initData[1].slice(1) : initData[1]
@@ -44,29 +45,34 @@ export const InputItem = ({
         }
     };
 
-    return (
-        <BoxInput>
-            <NameInput>{title}:</NameInput>
-            {name === 'birthday' ? (<DatePickerStyled
-                startDate={startDate}
-                disabled={disable}
-
-                handleChange={handleChange}
-            />) : (name === 'city') ? (<LocationPicker
-                value={val}
-                onChange={handleChange}
-                disabled={disable}
-            />) : (<input
-                type={type}
-                value={val}
-                name={name}
-                mask={mask}
-                onChange={handleChange}
-                disabled={disable}
-            />)}
-            <BtnPencil type="button" dark={dark} onClick={onClickPencil} name={name}>
-                {disable ? <Pencil dark={dark}/> : <Check/>}
-            </BtnPencil>
-        </BoxInput>
-    );
+  return (
+    <BoxInput>
+      <NameInput>{title}:</NameInput>
+      {name === "birthday" ? (
+        <DatePickerStyled
+          startDate={startDate}
+          disabled={disable}
+          handleChange={handleChange}
+        />
+      ) : name === "city" ? (
+        <LocationPicker
+          value={val}
+          onChange={handleChange}
+          disabled={disable}
+        />
+      ) : (
+        <input
+          type={type}
+          value={val}
+          name={name}
+          mask={mask}
+          onChange={handleChange}
+          disabled={disable}
+        />
+      )}
+      <BtnPencil type="button" dark={dark} onClick={onClickPencil} name={name}>
+        {disable ? <Pencil dark={dark} /> : <Check />}
+      </BtnPencil>
+    </BoxInput>
+  );
 };

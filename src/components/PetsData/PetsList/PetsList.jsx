@@ -1,25 +1,11 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
-// import { useDispatch } from "react-redux";
 import { DeletePetBtn } from "../../DeletePetBtn/DeletePetBtn";
 import { WrapperPicDiv, Box, Description, InfoPet, BoxPetsList, BoxScrollbar, EditPetBtn } from "./PetsList.styled";
-import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import defImage from "../../../img/defaultImg.jpeg";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
 
-export const PetsList = ({ pets, onRemove, onEdit }) => {
-  // const dispatch = useDispatch();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  // const deletePetItem = (id) => {
-  //   dispatch(deletePet(id));
-  // };
+export const PetsList = ({ pets, onPostHandler, removeHandler }) => {
 
   return (
     <BoxPetsList>
@@ -33,8 +19,8 @@ export const PetsList = ({ pets, onRemove, onEdit }) => {
                 <img src={avatarURL ? avatarURL : defImage} alt={name} />
               </WrapperPicDiv>
               <Description>
-                <DeletePetBtn onClick={closeModal} />
-                <EditPetBtn onClick={onEdit}><Edit width={30} height={30}/></EditPetBtn>
+                <DeletePetBtn  name={_id} onClick={removeHandler} />
+                <EditPetBtn name={_id} onClick={onPostHandler}><Edit width={30} height={30}/></EditPetBtn>
                 <InfoPet>
                   <b> Name:</b> {name ? name : "No Info"}
                 </InfoPet>
@@ -48,19 +34,10 @@ export const PetsList = ({ pets, onRemove, onEdit }) => {
                   <b> Comments:</b> {comments ? comments : "No Info"}
                 </InfoPet>
               </Description>
-              {isModalOpen && (
-                <WarningMessage
-                  onRemove={(id) => onRemove(id)}
-                  type="approve"
-                  id={_id}
-                  // approveFunk={deletePetItem}
-                  onClose={closeModal}
-                  text="Do you want to delete the pet?"
-                />
-              )}
             </Box>
           );
         })}
+  
       </BoxScrollbar>
     </BoxPetsList>
   );

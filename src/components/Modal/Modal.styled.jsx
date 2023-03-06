@@ -18,6 +18,10 @@ export const Backdrop = styled.div`
   background: rgba(17, 17, 17, 0.6);
   backdrop-filter: blur(10px);
   z-index: 200;
+
+  ${device.tablet} {
+    padding: 100px 0;
+  }
 `;
 
 export const Content = styled.div`
@@ -32,11 +36,11 @@ export const Content = styled.div`
   box-shadow: 10px 10px 30px rgba(82, 85, 95, 0.4);
   border-radius: 30px;
   ${device.mobile} {
-   max-width: 480px;
+    max-width: 480px;
   }
   ${device.tablet} {
     background-color: ${colors.white};
-   max-width: 744px;
+    max-width: 744px;
   }
 `;
 export const CloseBtn = styled.button`
@@ -90,7 +94,7 @@ export const AddContent = styled.div`
 
   ${device.tablet} {
     position: relative;
-    top: 2vw;
+    top: 6vw;
     left: 0;
     max-width: 608px;
     transform: translate(0, 0);

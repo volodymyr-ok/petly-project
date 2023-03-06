@@ -1,6 +1,7 @@
 import { NavBox, NavList, NavItem } from "./NoticesCategoryNav.styled";
 import { Button } from "../../components/Button/Button";
 import { AddNotice } from "../AddNotice/AddNotice";
+import { useLocation } from "react-router-dom";
 
 export const notAuthorized = [
   {
@@ -44,6 +45,10 @@ export const NoticesCategoryNav = ({
   isLogined,
   onAddPet,
 }) => {
+  const location = useLocation();
+  const { pathname } = location;
+  // console.log("pathname", pathname === "/notices");
+
   return (
     <>
       <NavBox>
@@ -52,14 +57,31 @@ export const NoticesCategoryNav = ({
             ? authorized.map(({ href, text }) => {
                 return (
                   <NavItem to={`/notices/${href}`} key={href}>
-                    <Button id={href}>{text}</Button>
+                    <Button
+                      className={
+                        pathname === "/notices" && href === "sell"
+                          ? "active"
+                          : null
+                      }
+                      data-id={href}
+                    >
+                      {text}
+                    </Button>
                   </NavItem>
                 );
               })
             : notAuthorized.map(({ href, text }) => {
                 return (
                   <NavItem to={`/notices/${href}`} key={href}>
-                    <Button>{text}</Button>
+                    <Button
+                      className={
+                        pathname === "/notices" && href === "sell"
+                          ? "active"
+                          : null
+                      }
+                    >
+                      {text}
+                    </Button>
                   </NavItem>
                 );
               })}

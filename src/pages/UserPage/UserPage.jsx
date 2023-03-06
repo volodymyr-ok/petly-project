@@ -3,16 +3,15 @@ import { PetsData } from "../../components/PetsData/PetsData";
 import MyInformationCard from "../../components/MyInformationCard/MyInformationCard";
 import { BoxCards, ContainerUserPage, ErrorText } from "./UserPage.styled";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
-// import axios from "axios";
 import { PrivateApi } from "../../http/http";
-import { removePet } from "./services";
+import { removePet, editPet, editPetAvatar, addPets } from "./services";
 
 const UserPage = () => {
   const [user, setUser] = useState({});
   const [pets, setPets] = useState([]);
   const [isError, setIsError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [reload, setReload] = useState(false);
+  const [isLoadingPets, setIsLoadingPets] = useState(false);
 
   const FetchUserData = async () => {
     const data = await PrivateApi.get(
@@ -22,15 +21,16 @@ const UserPage = () => {
     return data;
   };
   const approveRemoveFunk =(id)=>{
-    setIsLoading(true)
+    setIsLoadingPets(true)
     removePet(id)
-    .then(()=>{
-      setReload(!reload)
-      setIsLoading(false)
+    .then(() => FetchUserData())
+    .then((data) => {
+      setPets(data.data?.pets);
+      setIsLoadingPets(false)
     })
     .catch((error)=>{
       setIsError(error);
-      setIsLoading(false);
+      setIsLoadingPets(false);
     })
   }
 
@@ -46,11 +46,37 @@ const UserPage = () => {
         setIsError(error);
         setIsLoading(false);
       });
-  }, [reload]);
+  }, []);
 
-  const handlerEditModal = (id) =>{
+    const handlerEditModal = (arrayOfData) => {
+        if(arrayOfData.length){
+          setIsLoadingPets(true);
+          editPet(arrayOfData)
+          .then(() => editPetAvatar(arrayOfData))
+          .then(() => FetchUserData())
+          .then((data) => {
+            setPets(data.data?.pets);
+            setIsLoadingPets(false);
+          })
+          .catch((error) => {
+            setIsError(error);
+            setIsLoadingPets(false);
+          });
+        }else{
+          setIsLoadingPets(true);
+          addPets(arrayOfData)
+            .then(() => FetchUserData())
+            .then((data) => {
+              setPets(data.data?.pets);
+              setIsLoadingPets(false);
+            })
+            .catch((error) => {
+              setIsError(error);
+              setIsLoadingPets(false);
+            });
+        }
+  };
 
-  }
 
   return (
     <>
@@ -58,7 +84,7 @@ const UserPage = () => {
         {!isLoading ? (
           <BoxCards>
             <MyInformationCard user={user} />
-            <PetsData pets={pets} onEdit={(id)=>handlerEditModal(id)} onRemove={(id)=>approveRemoveFunk(id)}/>
+           <PetsData isLoadingPets={isLoadingPets} pets={pets} onEdit={handlerEditModal} onRemove={(id)=>approveRemoveFunk(id)}/>
           </BoxCards>
         ) : (
           <PawsLoader />

@@ -15,33 +15,40 @@ import {
 } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
 import { selectFavorites } from "../../redux/auth/auth-selectors";
 import {
-  getNotice1,
-  getFavorite1,
-  getMyNorices1,
-  getNoticesBySearch1,
-  removeNotice,
+  getNoticesByCategory,
+  getFavoriteNotices,
+  getMyOwnNotices,
+  getNoticesBySearch,
+//  removeNotice,
 } from "./services";
 import { useLocation } from "react-router-dom";
+import usePrevious from "../../hooks/usePrevious";
 //import { Navigate } from 'react-router-dom';
-//getNoticeById1
 
 const NoticesPage = () => {
-  const isLogined = useSelector(selectIsAuth);
-  const user = useSelector(selectUser);
 
-  const favorites = useSelector(selectFavorites);
-
-  const [sortedValue, setSortedValue] = useState("");
+  const [page, setPage] = useState(1);
+  const [categoryName, setCategoryName] = useState("");
   const [isModalAddPet, setIsModalAddPet] = useState(false);
-  const [reload, setReload] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [isModalLogined, setIsModalLogined] = useState(false);
+ // const [reload, setReload] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [data, setData] = useState({ data: [] });
+  const [data, setData] = useState({});
+  const [search, setSearch] = useState("");
+  //const [modalRemove, setModalRemove] = useState(false);
 
   const location = useLocation();
 
-  const notices = data.data;
+  const user = useSelector(selectUser);
+  const favorites = useSelector(selectFavorites);
+  const isLogined = useSelector(selectIsAuth);
+
+  const prevSearch = usePrevious(search);
+  const prevCategoryName = usePrevious(categoryName);
+  const needToResetPage =
+    (prevSearch !== search && page > 1) ||
+    (prevCategoryName !== categoryName && page > 1);
 
   useEffect(() => {
     const { pathname } = location;
@@ -54,16 +61,18 @@ const NoticesPage = () => {
       notAuthorized.map(({ href }) => [href, true])
     );
 
-    const sortedValueToUpdate = getSortedValue(
+    const newCategoryName = getCategoryName(
       secName,
       isLogined,
       authorizedHrefs,
       notAuthorizedHrefs
     );
-    setSortedValue(sortedValueToUpdate);
-  }, [location, isLogined]);
+   if(newCategoryName !== categoryName){
+    setCategoryName(newCategoryName);
+   }
+  }, [location, isLogined, categoryName]);
 
-  function getSortedValue(
+  function getCategoryName(
     secName,
     isAuthenticated,
     authorizedHrefs,
@@ -74,85 +83,82 @@ const NoticesPage = () => {
   }
 
   useEffect(() => {
-    setIsLoading(true);
-
-    const fetchData = async () => {
-      try {
-        let data;
-
-        switch (sortedValue) {
-          case "own":
-            data = await getMyNorices1(sortedValue);
-            break;
-          case "favorite-ads":
-            data = await getFavorite1(sortedValue);
-            break;
-          default:
-            data = await getNotice1(sortedValue);
-            break;
-        }
-
-        setData(data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [sortedValue, reload]);
-
-  const onSubmit = (e) => {
-    if (e !== "") {
       setIsLoading(true);
-      getNoticesBySearch1(e)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
+      const searchParams = { search, page };
+      if (needToResetPage) setPage(1);
+  
+      if (search !== "") {
+        getNoticesBySearch(searchParams)
+          .then((data) => {
+            setData(data);
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            setError(error);
+            setIsLoading(false);
+          });
+  
+        return;
+      }
+  
+      const fetchData = async () => {
+        try {
+          let data;
+          switch (categoryName) {
+            case "own":
+              data = await getMyOwnNotices({ page }); // sortedValue
+              break;
+            case "favorite-ads":
+              data = await getFavoriteNotices({ page });
+              break;
+            case "sell" || "in-good-hands" || "lost-found":
+                data = await getNoticesByCategory(categoryName, { page });
+                break;
+            default:
+              return
+          }
+          if(data){
+            setData(data);
+            setIsLoading(false);
+          }
+        } catch (error) {
           setError(error);
           setIsLoading(false);
-        });
+        }
+      };
+  
+      fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryName, page, search]);
+
+
+  const onSubmit = (query) =>{
+    if(query!==""){
+      setSearch(query)
     }
   };
 
-  const handlerModalAddPet = (e) => {
+  const handlerModalAddPet = () => {
     if (!isLogined) {
-      console.log("pls login first");
+      setIsModalLogined(!isModalLogined)
     } else {
       setIsModalAddPet(!isModalAddPet);
     }
   };
 
   const onChooseCategory = (e) => {
-    // console.log(e.target)
-    const expr = e.target.id;
+    const expr = e.target.dataset.id;
     authorized.map(({ href }) => {
       if (href === expr) {
-        setSortedValue(expr);
+        setCategoryName(expr);
       } else {
         return null;
       }
       return null;
     });
   };
-  const handlerRemove = (e) => {
-    if (e.target.id && e.target.id !== "") {
-      console.log("ja tut");
-      setIsLoading(true);
-      removeNotice(e.target.id)
-        .then(() => {
-          setReload(!reload);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }
-  };
+
+
 
   return (
     <>
@@ -164,6 +170,7 @@ const NoticesPage = () => {
           isLogined={isLogined}
           onChooseCategory={onChooseCategory}
         />
+
         <div>
           {isLoading ? (
             <PawsLoader />
@@ -172,13 +179,14 @@ const NoticesPage = () => {
           ) : (
             <NoticesCategoryList
               isModalAddPet={isModalAddPet}
+              isModalLogined={isModalLogined}
               onAddPet={handlerModalAddPet}
-              notices={notices}
+              data={data}
               favorites={favorites}
               isLogined={isLogined}
-              onRemove={handlerRemove}
               user={user}
-              sortedValue={sortedValue}
+              categoryName={categoryName}
+              setPage={setPage}
             />
           )}
         </div>

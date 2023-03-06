@@ -23,11 +23,15 @@ import { ReactComponent as FemaleSvg } from "../../../assets/svg/female.svg";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { useState } from "react";
-import {ImageCropper} from '../../ImageCropper/ImageCropper'
+import { ImageCropper } from "../../ImageCropper/ImageCropper";
 //import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import { useDispatch } from "react-redux";
-import { addNotice, updateNotice, updateNoticeAvatar } from "../../../redux/notice/notice-operations";
-// import { ImageCropper } from "../../ImageCropper/ImageCropper";
+import {
+  addNotice,
+  updateNotice,
+  updateNoticeAvatar,
+} from "../../../redux/notice/notice-operations";
+
 
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
@@ -40,22 +44,21 @@ const validationSchema = yup.object({
     )
     .required("Address is required"),
   comments: yup.string().min(8).max(120).required("Comments are required"),
-  // price: yup.number().matches(/^[1-9]+$/, "price must be greater than 0"),
-
-  // price: yup.string().when("categoryName", {
-  //   is: "sell",
-  //   then: yup.string().required("Must enter email address"),
-  // }),
+  price: yup
+    .string()
+    .matches(/^[1-9]+$/, "price must be greater than 0")
+    .min(1)
+    .required("Price is required"),
 });
 
-export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
+export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
   const dispatch = useDispatch();
   // const [file, setFile] = useState(null);
 
   const [image, setImage] = useState(null);
-  const setCroppedImageFor =(file)=>{
-    setImage(file)
-  }
+  const setCroppedImageFor = (file) => {
+    setImage(file);
+  };
 
   const FormError = ({ name }) => {
     return (
@@ -65,12 +68,6 @@ export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
       />
     );
   };
-
-  //console.log("Temporary log (can be deleted) ===>", file);
-
-  // const handleChange = (event) => {
-  //   setFile(event.target.files[0]);
-  // };
 
   const handleSubmit = (data) => {
     const {
@@ -84,26 +81,9 @@ export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
       price,
       comments,
     } = data;
-    console.log("DATA", data);
-    // const comment = comments ? comments : "testtest";
-    // const formData = new FormData();
-    // // formData.append("avatar", file);
-    // formData.append("avatar", image);
-    // formData.append("title", title);
-    // formData.append("name", name);
-    // formData.append("birthday", birthday);
-    // formData.append("categoryName", categoryName);
-    // formData.append("sex", sex);
-    // formData.append("location", location);
-    // formData.append("breed", breed);
-    // formData.append("comments", comments);
-    // if (price !== "") {
-    //   formData.append("price", price);
-    // }
+   // console.log("DATA", data);
 
-    //console.log("handleSubm", formData, file);
-    if(id){
-      
+    if (id) {
       const newData = {
         title: data.title,
         name: data.name,
@@ -114,16 +94,17 @@ export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
         location: data.location,
         price: data.price,
         comments: data.comments,
-      }
+      };
 
       const formImage = new FormData();
-      formImage.append("avatar", image)
-      dispatch(updateNotice([newData, id]))
-      dispatch(updateNoticeAvatar([formImage, id]))
-    }else{
-      console.log("chomus tut")
+      formImage.append("avatar", image);
+      onClose([id, newData, formImage])
+      dispatch(updateNotice([newData, id]));
+      dispatch(updateNoticeAvatar([formImage, id]));
+    } else {
+    //  console.log("chomus tut");
       const formData = new FormData();
-    // formData.append("avatar", file);
+      // formData.append("avatar", file);
       formData.append("avatar", image);
       formData.append("title", title);
       formData.append("name", name);
@@ -150,7 +131,8 @@ export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
     >
       {({ values }) => (
         <FormCustom>
-          <Title>{id? "Edit pet" : "Add pet"}</Title>
+          <Title>{id ? "Edit pet" : "Add pet"}</Title>
+
           <RadioWrap>
             <LabelSex>
               The sex<span>*</span>:
@@ -191,18 +173,14 @@ export const StepTwo = ({ data, prev, onClose, avatar, id}) => {
               <FormError name="price" />
             </Label>
           )}
-          <Label>
+          <Label file>
             <LabelText>Load the pet&apos;s image</LabelText>
-            {/* <AddFile htmlFor="myPetsPhoto">
-              {file ? <p>file downloaded</p> : <AddPlusButton />}
-              <FieldPhoto
-                id="myPetsPhoto"
-                type="file"
-                name="myPetsPhoto"
-                onChange={handleChange}
-              />
-            </AddFile> */}
-              <ImageCropper avatar={avatar} setCroppedImageFor={setCroppedImageFor}></ImageCropper>
+
+            <ImageCropper
+              small
+              avatar={avatar}
+              setCroppedImageFor={setCroppedImageFor}
+            ></ImageCropper>
             <FormError name="myPetsPhoto" />
           </Label>
           <LabelBox>

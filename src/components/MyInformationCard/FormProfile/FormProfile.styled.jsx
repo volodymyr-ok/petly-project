@@ -1,6 +1,6 @@
-import styled, {createGlobalStyle} from "styled-components";
-import {colors} from "../../../utils/colors";
-import {device} from "../../../utils/mixin";
+import styled from "styled-components";
+import { colors } from "../../../utils/colors";
+import { device } from "../../../utils/mixin";
 
 export const Form = styled.form`
   display: flex;
@@ -20,6 +20,7 @@ export const Form = styled.form`
 export const BoxInput = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
 
   input {

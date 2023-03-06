@@ -51,6 +51,7 @@ export const StepTwo = (props) => {
             <TitleItemTwo>Add photo and some comments</TitleItemTwo>
             <ImageCropper
               setCroppedImageFor={setCroppedImageFor}
+              avatar = {props.avatar}
             ></ImageCropper>
             <LabelBoxModifaed>
               <StyledLabel htmlFor="comments">
