@@ -33,7 +33,6 @@ export const getMyOwnNotices = async (params) => {
 
 export const getNoticesBySearch = async (params) => {
   try {
-    console.log("tut")
     const res = await PublicNoticesApi.get(`/api/notices`, { params });
     return res.data;
   } catch (error) {
