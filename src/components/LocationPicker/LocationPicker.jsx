@@ -36,19 +36,21 @@ const LocationPicker = ({ disabled, onChange, value }) => {
         return { value: city.name, label: city.name };
       })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
-    // useEffect(() => {
-    //     stateData && setState(stateData[0]);
-    // }, [stateData]);
-    //
-    // useEffect(() => {
-    //     cityData && setCity(cityData[0]);
-    // }, [cityData]);
+  // useEffect(() => {
+  //     stateData && setState(stateData[0]);
+  // }, [stateData]);
+  //
+  // useEffect(() => {
+  //     cityData && setCity(cityData[0]);
+  // }, [cityData]);
 
-    useEffect(() => {
-        city !== undefined && onChange(`${city?.value}, ${state?.value}`)
-    }, [city]);
+  useEffect(() => {
+    city !== undefined && onChange(`${city?.value}, ${state?.value}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [city]);
 
   return (
     <LocationWrapper>
