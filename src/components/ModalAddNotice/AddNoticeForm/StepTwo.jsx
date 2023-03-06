@@ -47,6 +47,7 @@ const validationSchema = yup.object({
   price: yup
     .string()
     .matches(/^[1-9]+$/, "price must be greater than 0")
+    .min(1)
     .required("Price is required"),
 });
 
@@ -127,9 +128,10 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values }) => (
+      {({ values, isValid, dirty }) => (
         <FormCustom>
           <Title>{id ? "Edit pet" : "Add pet"}</Title>
+
           <RadioWrap>
             <LabelSex>
               The sex<span>*</span>:
@@ -195,7 +197,9 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
           </LabelBox>
 
           <ButtonBox>
-            <Button type="submit">Done</Button>
+            <Button type="submit" disabled={!isValid || !dirty}>
+              Done
+            </Button>
             <BackBtn type="button" onClick={() => prev(values)}>
               Back
             </BackBtn>

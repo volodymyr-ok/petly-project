@@ -36,13 +36,6 @@ const validationSchema = yup.object({
 export const StepOne = ({ onClose, next, data, id }) => {
   const [startDate, setStartDate] = useState(new Date());
 
-  const customStyle = {
-    // width: "100%",
-    // maxWidth: "100%",
-    // height: "47px",
-    // display
-  };
-
   useEffect(() => {
     if (data.birthday !== "") {
       const initData = data.birthday.split(".");
@@ -139,7 +132,7 @@ export const StepOne = ({ onClose, next, data, id }) => {
             <LabelText>Date of birth</LabelText>
             <DatePickerStyled
               startDate={startDate}
-              customStyle={customStyle}
+              customStyle={true}
               // disabled={disable}
               handleChange={handleChange}
             />

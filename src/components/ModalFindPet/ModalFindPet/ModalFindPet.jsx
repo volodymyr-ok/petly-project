@@ -1,4 +1,3 @@
-
 import { BtnAddTo } from "./BtnAddTo/BtnAddTo";
 import { BtnContct } from "./BtnContact/BtnContact";
 import {
@@ -17,13 +16,7 @@ import {
   ImgAndInfoBox,
 } from "./ModalFindPet.styled";
 
-export const ModalFindPet = ({
-  petInfo,
-  addFavorite,
-  favoritesList,
-  user
-}) => {
-
+export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
   const {
     avatar,
     birthday,
@@ -36,13 +29,15 @@ export const ModalFindPet = ({
     price,
     title,
     _id,
-    coments,
+    comments,
   } = petInfo;
 
-const isOwner = user._id === owner || owner?._id 
-const isFavorite = favoritesList?.includes(_id);
-const email = owner?.email
-const number = owner?.number
+  const isOwner = user._id === owner || owner?._id;
+  const isFavorite = favoritesList?.includes(_id);
+  const email = owner?.email;
+  const number = owner?.number;
+
+  // console.log("coments", petInfo, petInfo?.comments);
 
   return (
     <ModalCard>
@@ -79,11 +74,13 @@ const number = owner?.number
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              <ValueInfo>{email? {email} :"user@mail1111111.com"}</ValueInfo>
+              <ValueInfo>
+                {email ? { email } : "user@mail1111111.com"}
+              </ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
-              <ValueInfo>{number? {number}:"+380971234567"}</ValueInfo>
+              <ValueInfo>{number ? { number } : "+380971234567"}</ValueInfo>
             </ItemInfo>
             {categoryName === "sell" ? (
               <ItemInfo>
@@ -97,14 +94,17 @@ const number = owner?.number
       <BlokComments>
         <ComentsText>
           <span>Comments: </span>
-          {coments ? coments : "No Info"}
+          {comments ? comments : "No Info"}
         </ComentsText>
       </BlokComments>
       <BlokButton>
-       {!isOwner && <BtnContct />}
-       <BtnAddTo type="button" like={(e) => addFavorite(e, _id, owner, isFavorite)}>
-          {!isOwner ? (isFavorite ? "Remove from" : "Add to"): "Edit"}
-        </BtnAddTo> 
+        {!isOwner && <BtnContct />}
+        <BtnAddTo
+          type="button"
+          like={(e) => addFavorite(e, _id, owner, isFavorite)}
+        >
+          {!isOwner ? (isFavorite ? "Remove from" : "Add to") : "Edit"}
+        </BtnAddTo>
       </BlokButton>
     </ModalCard>
   );
