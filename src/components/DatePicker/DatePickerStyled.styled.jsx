@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { device } from "../../utils/mixin";
+import {device, transition} from "../../utils/mixin";
 import { colors } from "../../utils/colors";
 
 export const BirthBtn = styled.div`
@@ -75,6 +75,7 @@ export const DatePickerWrapperStyles = createGlobalStyle`
   }
 
   .react-datepicker__day {
+    transition: background-color ${transition}, color ${transition};
     &:hover {
       background-color: ${colors.accentOrange};
       color: ${colors.white};
@@ -85,6 +86,7 @@ export const DatePickerWrapperStyles = createGlobalStyle`
   .react-datepicker__day--selected {
     background-color: ${colors.accentOrange};
     border-radius: 50%;
+    transition: background-color ${transition} ;
 
     &:hover {
       background-color: ${colors.darkOrange};

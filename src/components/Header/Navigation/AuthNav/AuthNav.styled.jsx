@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { device } from "../../../../utils/mixin";
+import {device, transition} from "../../../../utils/mixin";
 import { NavLink } from "react-router-dom";
 import { colors } from "../../../../utils/colors";
 export const Nav = styled.nav`
@@ -30,6 +30,7 @@ export const NavAuthItem = styled(NavLink)`
   background: ${(props) => (props.color ? `${colors.accentOrange}` : ``)};
   border: 2px solid ${colors.accentOrange};
   margin-right: 12px;
+  transition: border ${transition}, background ${transition};
 
   ${device.tablet} {
     font-size: 20px;
@@ -52,6 +53,5 @@ export const NavAuthItem = styled(NavLink)`
   &.active {
     background: ${(props) => (props.color ? `${colors.darkOrange}` : ``)};
     border: 2px solid ${colors.darkOrange};
-    
   }
 `;

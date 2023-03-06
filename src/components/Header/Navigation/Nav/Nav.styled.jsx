@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { device } from "../../../../utils/mixin";
+import {device, transition} from "../../../../utils/mixin";
 import { colors } from "../../../../utils/colors";
 import logo from "../../../../assets/svg/accoun-logo.svg";
 
@@ -65,6 +65,7 @@ export const NavItem = styled(NavLink)`
   font-size: 32px;
   text-decoration: none;
   margin-right: 0;
+  transition: color ${transition};
 
   ${device.tablet} {
     font-size: 48px;
@@ -95,6 +96,7 @@ export const NavUserItem = styled(NavLink)`
   font-size: 16px;
   text-decoration: none;
   background: ${colors.accentOrange};
+  transition: background ${transition};
 
   ${device.tablet} {
     display: ${(props) => (props.type ? `flex` : "none")};
