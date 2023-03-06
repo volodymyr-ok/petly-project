@@ -47,12 +47,8 @@ export const Label = styled.label`
   }
 
   button {
-    max-width: 140px;
-    max-height: 140px;
-  }
-  div {
-    max-height: 140px;
-    margin-bottom: 0;
+    /* max-width: 140px; */
+    /* max-height: 140px; */
   }
 `;
 

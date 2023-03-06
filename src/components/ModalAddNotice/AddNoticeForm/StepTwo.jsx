@@ -170,10 +170,11 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
               <FormError name="price" />
             </Label>
           )}
-          <Label>
+          <Label file>
             <LabelText>Load the pet&apos;s image</LabelText>
 
             <ImageCropper
+              small
               avatar={avatar}
               setCroppedImageFor={setCroppedImageFor}
             ></ImageCropper>
