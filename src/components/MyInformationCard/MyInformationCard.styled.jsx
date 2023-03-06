@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
-import { device } from "../../utils/mixin";
+import {device, transition} from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
 import { HiArrowLeftCircle } from "react-icons/hi2";
 
@@ -63,7 +63,7 @@ export const ImgBox = styled.div`
   overflow: hidden;
   filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
   box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.11);
-  transition: transform 300ms linear;
+  transition: transform ${transition};;
 
   ${device.tablet} {
     order: 2;
@@ -113,6 +113,7 @@ export const PreviewBtn = styled(StyledButton)`
   fill: ${colors.darkOrange};
   padding-top: 6px;
   padding-bottom: 6px;
+  transition: background ${transition}, border-color ${transition};
 
   &:hover,
   &:focus {

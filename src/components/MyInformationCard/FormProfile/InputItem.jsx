@@ -7,41 +7,43 @@ import DatePickerStyled from "../../DatePicker/DatePickerStyled";
 import LocationPicker from "../../LocationPicker/LocationPicker";
 
 export const InputItem = ({
-  type,
-  value,
-  name,
-  title,
-  mask,
-  onChange,
-  onClickPencil,
-  disable,
-  dark,
-}) => {
-  const [val, setVal] = useState(value);
-  const [startDate, setStartDate] = useState(new Date());
+                              type,
+                              value,
+                              name,
+                              title,
+                              mask,
+                              onChange,
+                              onClickPencil,
+                              disable,
+                              dark,
+                          }) => {
 
-  useEffect(() => {
-    if (!value) return;
-    const initData = value.split(".");
-    if (name === "birthday") {
-      const month = initData[1] < 10 ? initData[1].slice(1) : initData[1];
-      const day = initData[0] < 10 ? initData[0].slice(1) : initData[0];
-      const year = initData[2];
-      setStartDate(new Date(year, month - 1, day));
-    }
-  }, [name, value]);
+    useEffect(() => {
+        if (!value) return;
+        const initData = value.split('.')
+        if (name === 'birthday') {
+            const month = initData[1] < 10 ? initData[1].slice(1) : initData[1]
+            const day = initData[0] < 10 ? initData[0].slice(1) : initData[0]
+            const year = initData[2]
+            setStartDate(new Date(year, month - 1, day))
+        }
+    }, [name, value])
 
-  const handleChange = (e) => {
-    setStartDate(e);
-    if (name === "birthday") {
-      onChange([name, e]);
-    } else if (name === "city") {
-      onChange([name, e]);
-    } else {
-      setVal(e.target.value);
-      onChange([name, e.target.value]);
-    }
-  };
+    const [val, setVal] = useState(value);
+    const [startDate, setStartDate] = useState(new Date());
+
+    const handleChange = (e) => {
+        setStartDate(e)
+        if (name === 'birthday') {
+            onChange([name, e]);
+        } else if (name === 'city') {
+            setVal(e)
+            onChange([name, e]);
+        } else {
+            setVal(e.target.value);
+            onChange([name, e.target.value]);
+        }
+    };
 
   return (
     <BoxInput>
