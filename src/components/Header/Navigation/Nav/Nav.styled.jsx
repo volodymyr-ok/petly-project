@@ -65,7 +65,7 @@ export const NavItem = styled(NavLink)`
   font-size: 32px;
   text-decoration: none;
   margin-right: 0;
-  transition: color ${transition};
+  transition: color ${transition}, text-decoration ${transition};
 
   ${device.tablet} {
     font-size: 48px;
