@@ -26,8 +26,6 @@ const DatePickerStyled = ({
   const getYear = (data) => data.getFullYear();
   const getMonth = (data) => data.getMonth();
 
-  console.log("customStyle", customStyle);
-
   const months = [
     "January",
     "February",
@@ -48,7 +46,7 @@ const DatePickerStyled = ({
       onClick={onClick}
       ref={ref}
       disabled={disabled}
-      style={customStyle}
+      customStyle={customStyle}
     >
       {value}
     </BirthBtn>

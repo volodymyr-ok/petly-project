@@ -5,9 +5,12 @@ import { colors } from "../../utils/colors";
 export const BirthBtn = styled.div`
   align-items: center;
   display: flex;
-  width: calc(100% - 75px);
+  /* width: calc(100% - 75px); */
+  width: ${(p) => (p.customStyle ? "100%" : `calc(100% - 75px)`)};
   min-width: 156px;
-  max-width: 270px;
+  /* max-width: 270px; */
+  max-width: ${(p) => (p.customStyle ? "100%" : `270px`)};
+  height: ${(p) => (p.customStyle ? "40px" : "34px")};
   padding: 4px 4px 4px 18px;
   font-size: 12px;
   line-height: 1.33;
@@ -18,10 +21,12 @@ export const BirthBtn = styled.div`
   outline: none;
 
   ${device.tablet} {
-    width: 216px;
+    /* width: 216px; */
+    width: ${(p) => (p.customStyle ? "100%" : `216px`)};
     font-size: 18px;
     line-height: 1.38;
     min-height: 30px;
+    height: ${(p) => (p.customStyle ? "47px" : "34px")};
   }
 `;
 
