@@ -41,9 +41,6 @@ export const updateNotice = createAsyncThunk(
   "notices/:id",
   async (data , thunkAPI) => {
     try {
-      console.log("updateNotice",data)
-      // let file = data[0]
-      // let id = data[1]
       const res = await PrivateApi.patch(`/api/notices/${data[1]}`, data[0]);
       return res.data;
     } catch (error) {
@@ -55,8 +52,6 @@ export const updateNoticeAvatar = createAsyncThunk(
   "notices/avtar/:id",
   async (data, thunkAPI) => {
     try {
-      console.log("updateNoticeAvatar",data)
-      // let file = data[0]
       const res = await PrivateApi.patch(`/api/notices/avatars/${data[1]}`, data[0]);
       return res.data;
     } catch (error) {

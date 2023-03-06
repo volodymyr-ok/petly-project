@@ -2,12 +2,12 @@ import { ListBox, List, BtnAddSticky } from "./NoticesCategoryLIst.styled";
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import { NoticeItem } from "../NoticeItem/NoticeItem";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addFavorites,
   removeFavorites,
 } from "../../redux/auth/auth-operations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../Modal/Modal";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
@@ -16,6 +16,8 @@ import { removeNotice } from "../../pages/NoticesPage/services";
 import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
+import { selectNotice, selectIsLoading } from "../../redux/notice/notice-selectors";
+import { getMyOwnNotices } from "../../pages/NoticesPage/services";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
@@ -36,12 +38,42 @@ export const NoticesCategoryList = ({
   const [petId, setPetId] = useState("");
   const [isModalEditPost, setIsModalEditPost] = useState(false);
   const [modalRemove, setModalRemove] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  console.log(error);
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [notices, setNotices] = useState(data.data)
 
-  const notices = data.data;
+  const addedPet = useSelector(selectNotice)
+  const isUploading = useSelector(selectIsLoading)
+
+  useEffect(()=>{
+    if(isUploading){
+      setIsLoading(true)
+    }else{
+      setIsLoading(false)
+    }
+  },[isUploading])
+
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(addedPet?._id && notices!==undefined){
+     const include = notices.find(el=>el._id === addedPet?._id)
+      if(include){
+        setIsLoading(true)
+        const result = notices.filter(
+          el => el._id !== include._id)
+          setNotices([addedPet, ...result])
+          setIsLoading(false)
+      }else if(!include && addedPet && addedPet!==undefined){
+        setIsLoading(true)
+         setNotices([addedPet,...notices])
+         setIsLoading(false)
+      }
+    } else if(notices === undefined && addedPet?._id){
+      setNotices([addedPet])
+    }
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[addedPet])
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) onAddPet();
@@ -54,23 +86,44 @@ export const NoticesCategoryList = ({
     }
   };
 
+
+const page = 1
+
+
   const handlerRemove = (e) => {
-    if (modalRemove && petId !== "") {
-      setModalRemove(!modalRemove);
+   const fetchData = async()=>{
+    if(modalRemove && petId!==""){
+      setModalRemove(!modalRemove)
+      const result = notices.filter(
+        el => el._id !== petId)
       setIsLoading(true);
-      removeNotice(petId)
+      if(result.length <= 1){
+        try {
+          const data = await getMyOwnNotices({page})
+          setNotices(data.data)
+          setIsLoading(false);
+        } catch (error) {
+          setError(error);
+          setIsLoading(false);
+        }
+      }else{
+        removeNotice(petId)
         .then(() => {
+         setNotices(result)
           setIsLoading(false);
         })
         .catch((error) => {
           setError(error);
           setIsLoading(false);
         });
+      }
     }
+   }
     if (e.target.id && e.target.id !== "") {
-      setPetId(e.target.id);
-      setModalRemove(!modalRemove);
-    }
+      setPetId(e.target.id)
+      setModalRemove(!modalRemove)
+      }
+      fetchData()
   };
 
   const readMoreModal = (e) => {
@@ -162,6 +215,9 @@ export const NoticesCategoryList = ({
           text="You need be authenticated first"
         />
       )}
+      {
+        error && <div>{error}</div>
+      }
     </>
   );
 };

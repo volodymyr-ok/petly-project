@@ -31,6 +31,7 @@ import {
   updateNotice,
   updateNoticeAvatar,
 } from "../../../redux/notice/notice-operations";
+import { useNavigate } from "react-router-dom";
 
 
 const validationSchema = yup.object({
@@ -54,6 +55,8 @@ const validationSchema = yup.object({
 
 export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
   const dispatch = useDispatch();
+
+  const navigate = useNavigate()
   // const [file, setFile] = useState(null);
 
   const [image, setImage] = useState(null);
@@ -102,6 +105,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       onClose([id, newData, formImage])
       dispatch(updateNotice([newData, id]));
       dispatch(updateNoticeAvatar([formImage, id]));
+      navigate(`/notices/own`)
     } else {
     //  console.log("chomus tut");
       const formData = new FormData();
@@ -119,6 +123,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
         formData.append("price", price);
       }
       dispatch(addNotice(formData));
+      navigate(`/notices/own`)
     }
 
     onClose();
