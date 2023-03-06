@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../utils/colors";
 import { device } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 
 export const Item = styled.li`
   position: relative;
@@ -115,7 +115,7 @@ export const InfoAction = styled.div`
     padding: 0;
   }
 `;
-export const BtnReadMore = styled(NavLink)`
+export const BtnReadMore = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
