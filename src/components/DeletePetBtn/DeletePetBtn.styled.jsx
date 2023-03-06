@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { HiTrash } from "react-icons/hi2";
-
-
+import { device, transition } from "../../utils/mixin";
 
 export const DeleteBtn = styled.button`
   position: absolute;
@@ -16,14 +15,14 @@ export const DeleteBtn = styled.button`
   background-color: #fdf7f2;
   cursor: pointer;
   border-radius: 50%;
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 32px;
     height: 32px;
   }
   :hover,
   :focus {
     transform: scale(1.1);
-    transition: transform 250ms linear;
+    transition: transform ${transition};
   }
 `;
 
@@ -31,7 +30,7 @@ export const DelIcon = styled(HiTrash)`
   width: 22px;
   height: 22px;
   fill: rgba(17, 17, 17, 0.6);
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 24px;
     height: 24px;
   }

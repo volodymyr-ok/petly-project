@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Form, Field } from "formik";
 import { colors } from "../../utils/colors";
-import { device } from "../../utils/mixin";
+import { device, transition } from "../../utils/mixin";
 
 import bgLoginDesc from "../../img/bgLoginDesc.png";
 import bgLoginTab from "../../img/bgLoginTab.png";
@@ -35,12 +35,12 @@ export const AuthSection = styled(SectionTag)`
   @media screen and (max-width: 767px) {
     height: 100vh;
   } */
-  @media screen and (min-width: 768px) {
+  ${device.tablet} {
     padding-top: 100px;
     background-image: url(${bgLoginTab});
     min-height: calc(100vh - 75px);
   }
-  @media screen and (min-width: 1280px) {
+  ${device.desktop} {
     padding-top: 80px;
     background-image: url(${bgLoginDesc});
   }
@@ -133,7 +133,7 @@ export const Label = styled.label`
       line-height: 19px;
       letter-spacing: 0.04em;
       color: rgba(17, 17, 17, 0.6);
-      @media screen and (min-width: 768px) {
+      ${device.tablet} {
         font-size: 18px;
         line-height: 25px;
       }
@@ -154,13 +154,13 @@ export const LoginGoogle = styled.a`
   border: 2px solid ${colors.accentOrange};
   margin: 0 auto;
   max-width: 300px;
-  transition: color 300ms linear, background-color 300ms linear;
+  transition: color ${transition}, background-color ${transition};
   :hover,
   :focus {
     background-color: ${colors.accentOrange};
     color: ${colors.white};
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     padding: 10px 48px;
   }
 
@@ -197,7 +197,7 @@ export const IconBox = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  @media screen and (min-width: 768px) {
+  ${device.tablet} {
     width: 608px;
     background: #ffffff;
     box-shadow: 7px 4px 14px rgba(0, 0, 0, 0.11);
@@ -206,7 +206,7 @@ export const Wrapper = styled.div`
     margin-right: auto;
     padding: 60px 80px 40px;
   }
-  @media screen and (min-width: 1280px) {
+  ${device.desktop} {
     width: 618px;
     padding: 60px 80px;
   }
@@ -220,7 +220,7 @@ export const TitleAuth = styled.h2`
   letter-spacing: 0.04em;
   color: #111111;
   margin-bottom: 40px;
-  @media screen and (min-width: 768px) {
+  ${device.tablet} {
     font-weight: 500;
     font-size: 36px;
     line-height: 49px;
@@ -251,7 +251,7 @@ export const Input = styled(Field)`
   outline: none;
   position: relative;
 
-  @media screen and (min-width: 768px) {
+  ${device.tablet} {
     font-size: 18px;
     line-height: 25px;
   }
@@ -264,7 +264,7 @@ export const Input = styled(Field)`
     line-height: 19px;
     letter-spacing: 0.04em;
     color: rgba(17, 17, 17, 0.6);
-    @media screen and (min-width: 768px) {
+    ${device.tablet} {
       font-size: 18px;
       line-height: 25px;
     }

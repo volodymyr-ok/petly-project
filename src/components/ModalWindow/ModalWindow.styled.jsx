@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device, transition } from "../../utils/mixin";
 
 export const BackDrop = styled.div`
   position: fixed;
@@ -38,7 +39,7 @@ export const Modal = styled.div`
     }
     return "60px 20px 40px";
   }};
-  @media (min-width: 768px) {
+  ${device.tablet} {
     padding: ${(p) => {
       if (p.modalType === "addPet") {
         return "40px 80px";
@@ -65,10 +66,11 @@ export const CloseBtn = styled.button`
   width: 34px;
   border-radius: 50%;
   backdrop-filter: blur(2px);
+  ${device.desktop}
   border: 2px solid #f59256;
   background-color: #f59256;
   color: #fdf7f2;
-  transition: background-color 300ms linear;
+  transition: background-color ${transition};
   :hover,
   :focus {
     background-color: #fdf7f2;

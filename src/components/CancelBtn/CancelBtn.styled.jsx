@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device, transition } from "../../utils/mixin";
 
 export const Button = styled.button`
   padding: 8px 0;
@@ -10,13 +11,13 @@ export const Button = styled.button`
   background-color: #f59256;
   border: 2px solid #f59256;
   border-radius: 40px;
-  transition: color 300ms linear, background-color 300ms linear;
+  transition: color ${transition}, background-color ${transition};
   :hover,
   :focus {
     color: #f59256;
     background-color: #fff;
   }
-  @media (min-width: 768px) {
+  ${device.tablet} {
     width: 180px;
   }
 `;
