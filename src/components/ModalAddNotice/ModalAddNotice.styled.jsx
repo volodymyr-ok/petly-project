@@ -272,6 +272,10 @@ export const Button = styled.button`
     margin: 0;
     /* padding: 10px 28px; */
   }
+
+  :disabled {
+    opacity: 0.8;
+  }
 `;
 
 export const BackBtn = styled(Button)`
