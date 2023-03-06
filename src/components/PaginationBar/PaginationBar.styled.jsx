@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
+import { transition } from "../../utils/mixin";
 
 export const BarWrapper = styled.div`
   display: flex;
@@ -25,8 +26,13 @@ const ArrowBtn = styled.button`
   background-color: transparent;
   border-color: transparent;
   border-radius: 50%;
+
   svg {
     stroke: ${colors.darkOrange};
+    fill: ${colors.white};
+
+    transition: fill ${transition};
+
     :hover,
     :focus {
       fill: ${colors.accentOrange};
@@ -59,26 +65,37 @@ export const NextBtn = styled(ArrowBtn)`
 `;
 
 export const NumBtn = styled.button`
-  cursor: pointer;
+  pointer-events: ${({ active }) => (active ? "none" : "default")};
+  cursor: ${({ active }) => (active ? "default" : "pointer")};
 
   width: 30px;
   height: 30px;
-
   padding: 5px;
-  border: 1px solid
-    ${({ active }) =>
-      active ? `${colors.darkOrange}` : `${colors.accentOrange}`};
+
+  font-size: 16px;
+  line-height: 1.37;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border-radius: 50%;
+  border: 2px solid ${colors.accentOrange};
+
   background-color: ${({ active }) =>
     active ? `${colors.accentOrange}` : "transparent"};
 
+  transition: transform ${transition}, border-color ${transition},
+    background-color ${transition};
+
   :hover,
   :focus {
+    transform: ${({ active }) => (active ? "scale(1)" : "scale(1.1)")};
+
     background-color: ${({ active }) =>
-      active ? `${colors.darkOrange}` : "transparent"};
+      active ? `${colors.accentOrange}` : `${colors.darkOrange}`};
 
     border: 2px solid
-      ${({ active }) =>
-        active ? `${colors.darkOrange}` : `${colors.darkOrange}`};
+      ${({ active }) => (active ? "transparent" : `${colors.darkOrange}`)};
   }
 `;

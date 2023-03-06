@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
-import { device } from "../../utils/mixin";
+import { device, transition } from "../../utils/mixin";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -25,6 +25,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Content = styled.div`
+  background-color: ${colors.white};
   position: relative;
   min-width: 280px;
   min-height: 194px;
@@ -50,15 +51,15 @@ export const CloseBtn = styled.button`
   height: 34px;
   border-radius: 50%;
   position: absolute;
-  right: 40px;
-  top: 40px;
+  right: 20px;
+  top: 20px;
   background-color: #fdf7f2;
   display: flex;
   align-items: center;
   justify-content: center;
   color: ${colors.black};
   z-index: 1;
-  /* transition: box-shadow 250ms ease-in, color 250ms ease-in; */
+  transition: box-shadow ${transition}, color ${transition};
 
   ${device.tablet} {
     right: 20px;

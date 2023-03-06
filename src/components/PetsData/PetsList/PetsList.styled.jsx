@@ -34,7 +34,7 @@ export const WrapperPicDiv = styled.div`
   margin-bottom: 20px;
   width: 240px;
   height: 240px;
-  border-radius: 20px;
+  border-radius: 40px;
   background-color: #e1e1e1;
   ${device.tablet} {
     margin-right: 32px;
@@ -135,8 +135,8 @@ export const Link = styled.a`
 export const EditPetBtn = styled(DeleteBtn)`
   right: 0;
   top: 30px;
-  fill: ${colors.accentOrange};
-  ${device.tablet}{
+  fill: #625656;
+  ${device.tablet} {
     top: 0;
     right: 40px;
   }

@@ -8,7 +8,7 @@ export const Item = styled.li`
   position: relative;
   background-color: ${colors.white};
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 30px 30px;
   width: 280px;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,7 @@ export const Item = styled.li`
 export const ItemCategory = styled.p`
   position: absolute;
   top: 20px;
+  text-align: center;
   font-weight: 500;
   font-size: 12px;
   line-height: 1.25;
@@ -54,21 +55,22 @@ export const BtnAdd = styled.button`
   stroke-linejoin: round;
   transition-duration: 500ms;
   svg {
-    fill: ${(p) => (p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`)};
-    stroke: ${(p) => (p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`)};
-    fill: ${(p) => (p.edit === "edit" && `transparent`)};
-    stroke: ${(p) => (p.edit === "edit" && `${colors.accentOrange}`)};
+    fill: ${(p) =>
+      p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`};
+    stroke: ${(p) =>
+      p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`};
+    fill: ${(p) => p.edit === "edit" && `transparent`};
+    stroke: ${(p) => p.edit === "edit" && `${colors.accentOrange}`};
     transition-duration: 500ms;
   }
   :hover {
-
     background-color: ${colors.accentOrange};
     stroke: ${colors.white};
   }
   :hover svg {
-    transform: ${(p) => (p.favorite === "favorite" && `scale(1.1)`)};
-    stroke: ${(p) => (p.edit === "edit" && `${colors.white}`)};
-    transform: ${(p) => (p.edit === "edit" && `scale(1.2)`)};
+    transform: ${(p) => p.favorite === "favorite" && `scale(1.1)`};
+    stroke: ${(p) => p.edit === "edit" && `${colors.white}`};
+    transform: ${(p) => p.edit === "edit" && `scale(1.2)`};
   }
 `;
 export const Image = styled.img`
@@ -114,11 +116,11 @@ export const InfoAction = styled.div`
   }
 `;
 export const BtnReadMore = styled(NavLink)`
- display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px 28px;
-  font-family: 'Manrope';
+  font-family: "Manrope";
   font-weight: 500;
   font-size: 16px;
   line-height: 1.37;
@@ -134,9 +136,8 @@ export const BtnReadMore = styled(NavLink)`
   }
 `;
 
-
 export const BtnRemove = styled(StyledButton)`
- font-size: 16px;
+  font-size: 16px;
   line-height: 1.37;
   align-items: center;
   color: ${colors.accentOrange};

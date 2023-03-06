@@ -1,12 +1,19 @@
 import PropTypes from "prop-types";
 import { DeletePetBtn } from "../../DeletePetBtn/DeletePetBtn";
-import { WrapperPicDiv, Box, Description, InfoPet, BoxPetsList, BoxScrollbar, EditPetBtn } from "./PetsList.styled";
+import {
+  WrapperPicDiv,
+  Box,
+  Description,
+  InfoPet,
+  BoxPetsList,
+  BoxScrollbar,
+  EditPetBtn,
+} from "./PetsList.styled";
 import defImage from "../../../img/defaultImg.jpeg";
 import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
 
 export const PetsList = ({ pets, onPostHandler, removeHandler }) => {
-
   return (
     <BoxPetsList>
       <BoxScrollbar>
@@ -19,8 +26,10 @@ export const PetsList = ({ pets, onPostHandler, removeHandler }) => {
                 <img src={avatarURL ? avatarURL : defImage} alt={name} />
               </WrapperPicDiv>
               <Description>
-                <DeletePetBtn  name={_id} onClick={removeHandler} />
-                <EditPetBtn name={_id} onClick={onPostHandler}><Edit width={30} height={30}/></EditPetBtn>
+                <DeletePetBtn name={_id} onClick={removeHandler} />
+                <EditPetBtn name={_id} onClick={onPostHandler}>
+                  <Edit width={30} height={30} />
+                </EditPetBtn>
                 <InfoPet>
                   <b> Name:</b> {name ? name : "No Info"}
                 </InfoPet>
@@ -37,7 +46,6 @@ export const PetsList = ({ pets, onPostHandler, removeHandler }) => {
             </Box>
           );
         })}
-  
       </BoxScrollbar>
     </BoxPetsList>
   );

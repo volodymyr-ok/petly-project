@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 import {colors} from "../../../../utils/colors";
-import {device} from "../../../../utils/mixin";
+import {device, transition} from "../../../../utils/mixin";
 import logo from "../../../../assets/svg/accoun-logo.svg";
 
 export const NavUserItem = styled(NavLink)`
@@ -12,7 +12,8 @@ export const NavUserItem = styled(NavLink)`
   font-size: 16px;
   text-decoration: none;
   background: ${colors.accentOrange};
-
+  transition: background ${transition}; 
+  
   ${device.tablet} {
     display: ${(props) => (props.type ? `flex` : "none")};
     margin-right: 14px;

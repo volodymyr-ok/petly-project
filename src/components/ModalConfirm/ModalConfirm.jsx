@@ -3,7 +3,13 @@ import sadCat from "../../assets/svg/sadCat.svg";
 import { Modal } from "../Modal/Modal";
 import { Btn, BtnBox, Img, Question } from "./ModalConfirm.styled";
 
-export const ModalConfirm = ({ text, onClose, action, actionText, cancelText }) => {
+export const ModalConfirm = ({
+  text,
+  onClose,
+  action,
+  actionText,
+  cancelText,
+}) => {
   return (
     <Modal onClose={onClose}>
       <Img src={sadCat} alt="sad cat" />

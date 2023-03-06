@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 export const notAuthorized = [
   {
     href: "lost-found",
-    text: "lost-found",
+    text: "lost/found",
   },
   {
     href: "in-good-hands",
@@ -20,7 +20,7 @@ export const notAuthorized = [
 export const authorized = [
   {
     href: "lost-found",
-    text: "lost-found",
+    text: "lost/found",
   },
   {
     href: "in-good-hands",

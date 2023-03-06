@@ -3,6 +3,7 @@ import { colors } from "../../../utils/colors";
 import { device } from "../../../utils/mixin";
 
 export const Btn = styled.button`
+  cursor: pointer;
   margin-top: 44px;
   margin-left: auto;
   padding: 0;

@@ -33,7 +33,11 @@ export const Wrap = styled.div`
   @media (min-width: 768px) {
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 

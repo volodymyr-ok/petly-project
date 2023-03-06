@@ -147,7 +147,7 @@ export const NoticesCategoryList = ({
           text={"Are you sure you want to remove pet?"}
           onClose={() => setModalRemove(!modalRemove)}
           question={"Are you shure?"}
-          actionText={"Delete"}
+          actionText={"Remove"}
           action={handlerRemove}
           cancelText={"Cancel"}
         />
@@ -159,7 +159,7 @@ export const NoticesCategoryList = ({
           id={petInfo}
           // approveFunk={deletePetItem}
           onClose={onAddPet}
-          text="To do any actions, pls, login or register first"
+          text="You need be authenticated first"
         />
       )}
     </>
