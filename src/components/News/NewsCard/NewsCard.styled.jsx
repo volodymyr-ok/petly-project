@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../../utils/colors";
-import { device } from "../../../utils/mixin";
+import { device, transition } from "../../../utils/mixin";
 import { PageTitle } from "../../Title/Title.styled";
 
 export const Item = styled.li`
@@ -12,6 +12,8 @@ export const Item = styled.li`
     background: linear-gradient(90deg, #ff634e 0%, #ffdf48 105.44%);
     border-radius: 40px;
     margin-bottom: 4px;
+
+    transition: box-shadow ${transition};
     ${device.tablet} {
       width: 280px;
       height: 8px;
