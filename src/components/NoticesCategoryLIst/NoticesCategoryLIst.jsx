@@ -29,22 +29,22 @@ export const NoticesCategoryList = ({
   categoryName,
   isModalAddPet,
   setPage,
-  isModalLogined
+  isModalLogined,
 }) => {
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const [petInfo, setPetInfo] = useState({});
-  const [petId, setPetId] = useState("")
+  const [petId, setPetId] = useState("");
   const [isModalEditPost, setIsModalEditPost] = useState(false);
   const [modalRemove, setModalRemove] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(false)
-  console.log(error)
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  console.log(error);
 
   const notices = data.data;
   const dispatch = useDispatch();
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
-    if (!isLogined) onAddPet()
+    if (!isLogined) onAddPet();
     if (user._id !== owner) {
       if (!favorites.includes(id)) dispatch(addFavorites(id));
       else if (isFavorite) dispatch(removeFavorites(id));
@@ -55,8 +55,8 @@ export const NoticesCategoryList = ({
   };
 
   const handlerRemove = (e) => {
-    if(modalRemove && petId!==""){
-      setModalRemove(!modalRemove)
+    if (modalRemove && petId !== "") {
+      setModalRemove(!modalRemove);
       setIsLoading(true);
       removeNotice(petId)
         .then(() => {
@@ -68,9 +68,9 @@ export const NoticesCategoryList = ({
         });
     }
     if (e.target.id && e.target.id !== "") {
-      setPetId(e.target.id)
-      setModalRemove(!modalRemove)
-      }
+      setPetId(e.target.id);
+      setModalRemove(!modalRemove);
+    }
   };
 
   const readMoreModal = (e) => {
@@ -91,8 +91,8 @@ export const NoticesCategoryList = ({
         </BtnAddSticky>
         {notices?.length > 0 ? (
           <List>
-          {!isLoading ? 
-          <NoticeItem
+            {!isLoading ? (
+              <NoticeItem
                 user={user}
                 notices={notices}
                 favoritesList={favorites}
@@ -102,8 +102,11 @@ export const NoticesCategoryList = ({
                 onRemove={handlerRemove}
                 onReadMore={readMoreModal}
                 categoryName={categoryName}
-            /> : <PawsLoader/>}
-          </List> 
+              />
+            ) : (
+              <PawsLoader />
+            )}
+          </List>
         ) : (
           <ResultNotFound />
         )}
@@ -112,7 +115,7 @@ export const NoticesCategoryList = ({
 
       {isModalAddPet && (
         <Modal type="addPet" onClose={onAddPet}>
-          <AddNoticeForm  onClose={onAddPet} />
+          <AddNoticeForm onClose={onAddPet} />
         </Modal>
       )}
       {isModalReadMore && (
@@ -139,24 +142,26 @@ export const NoticesCategoryList = ({
           />
         </Modal>
       )}
-         {modalRemove && (
-            <ModalConfirm
-              onClose={() => setModalRemove(!modalRemove)}
-              question={"Are you shure?"}
-              actionText ={"Delete"}
-              action = {handlerRemove}
-              cancelText = {"Cancel"}
-            />
+      {modalRemove && (
+        <ModalConfirm
+          text={"Are you sure you want to remove pet?"}
+          onClose={() => setModalRemove(!modalRemove)}
+          question={"Are you shure?"}
+          actionText={"Delete"}
+          action={handlerRemove}
+          cancelText={"Cancel"}
+        />
       )}
-      {
-        isModalLogined && <WarningMessage   
-                  // onRemove={(postId) => onRemove(postId)}
-                  type="auth"
-                  id={petInfo}
-                  // approveFunk={deletePetItem}
-                  onClose={onAddPet}
-                  text="To do any actions, pls, login or register first"/>
-      }
+      {isModalLogined && (
+        <WarningMessage
+          // onRemove={(postId) => onRemove(postId)}
+          type="auth"
+          id={petInfo}
+          // approveFunk={deletePetItem}
+          onClose={onAddPet}
+          text="To do any actions, pls, login or register first"
+        />
+      )}
     </>
   );
 };

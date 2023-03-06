@@ -11,3 +11,5 @@ export const device = {
   retina: `@media (min-device-pixel-ratio: 2),
   (min-resolution: 192dpi), (min-resolution: 2dpx)`,
 };
+
+export const transition = `250ms ease-in-out`;
