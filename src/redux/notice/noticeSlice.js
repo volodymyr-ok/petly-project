@@ -4,6 +4,8 @@ import {
   getNotice,
   getNoticeById,
   getNoticesBySearch,
+  updateNotice,
+  updateNoticeAvatar
 } from "./notice-operations";
 
 const handlePending = (state) => {
@@ -21,13 +23,13 @@ const handleFulfilled = (state, action) => {
 const handleRejected = (state, action) => {
   state.isLoading = false;
   state.error = action.payload;
-  state.items = [];
+  // state.items = [];
 };
 
 const noticeSlice = createSlice({
   name: "notice",
   initialState: {
-    items: [],
+    // items: [],
     isLoading: false,
     error: null,
   },
@@ -36,7 +38,7 @@ const noticeSlice = createSlice({
       .addCase(getNotice.pending, handlePending)
       .addCase(getNotice.rejected, handleRejected)
       .addCase(getNotice.fulfilled, (state, action) => {
-        state.items = action.payload;
+        // state.items = action.payload;
         state.error = null;
         state.isLoading = false;
       })
@@ -49,11 +51,19 @@ const noticeSlice = createSlice({
       .addCase(getNoticesBySearch.fulfilled, handleFulfilled)
       .addCase(getNoticesBySearch.rejected, handleRejected)
 
+      .addCase(updateNotice.pending, handlePending)
+      .addCase(updateNotice.fulfilled, handleFulfilled)
+      .addCase(updateNotice.rejected, handleRejected)
+
+      .addCase(updateNoticeAvatar.pending, handlePending)
+      .addCase(updateNoticeAvatar.fulfilled, handleFulfilled)
+      .addCase(updateNoticeAvatar.rejected, handleRejected)
+
       .addCase(addNotice.pending, handlePending)
       .addCase(addNotice.rejected, handleRejected)
       .addCase(addNotice.fulfilled, (state, action) => {
-        console.log("chds", state.items, action.payload);
-        state.items.push(action.payload);
+        // console.log("chds", state.items, action.payload);
+        // state.items.push(action.payload);
         state.error = null;
         state.isLoading = false;
       });

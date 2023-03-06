@@ -31,7 +31,7 @@ import {
   updateNotice,
   updateNoticeAvatar,
 } from "../../../redux/notice/notice-operations";
-// import { ImageCropper } from "../../ImageCropper/ImageCropper";
+
 
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
@@ -80,7 +80,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       price,
       comments,
     } = data;
-    console.log("DATA", data);
+   // console.log("DATA", data);
 
     if (id) {
       const newData = {
@@ -97,10 +97,11 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
 
       const formImage = new FormData();
       formImage.append("avatar", image);
+      onClose([id, newData, formImage])
       dispatch(updateNotice([newData, id]));
       dispatch(updateNoticeAvatar([formImage, id]));
     } else {
-      console.log("chomus tut");
+    //  console.log("chomus tut");
       const formData = new FormData();
       // formData.append("avatar", file);
       formData.append("avatar", image);

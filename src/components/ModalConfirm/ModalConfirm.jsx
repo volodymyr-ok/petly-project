@@ -9,7 +9,8 @@ export const ModalConfirm = ({ text, onClose, action, actionText, cancelText }) 
       <Question>{text}</Question>
       <BtnBox>
         <Btn onClick={action}>{actionText}</Btn>
-        <Btn onClick={onClose} color>
+        {/* <Btn onClick={onClose} color> */}
+        <Btn onClick={onClose}>
           {cancelText}
         </Btn>
       </BtnBox>

@@ -15,12 +15,15 @@ export const AddsPetForm = ({onClose,onEdit,post}) => {
 
   const handleNextStep = (newData, final = false, file = null) => {
     setData((prev) => ({ ...prev, ...newData }));
-    if (final) {
+    if (final && post?._id && file ) {
       const formData = new FormData();
       formData.append("avatar", file);
       onEdit([post._id, newData, formData])
+
     }else if(final && post?._id && !file){
+
       onEdit([post._id, newData, false])
+
     }
     else if(final && !post?._id){
       const formData = new FormData();
