@@ -31,7 +31,7 @@ import {
   updateNotice,
   updateNoticeAvatar,
 } from "../../../redux/notice/notice-operations";
-// import { ImageCropper } from "../../ImageCropper/ImageCropper";
+
 
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
@@ -82,7 +82,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       price,
       comments,
     } = data;
-    console.log("DATA", data);
+   // console.log("DATA", data);
 
     if (id) {
       const newData = {
@@ -99,10 +99,11 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
 
       const formImage = new FormData();
       formImage.append("avatar", image);
+      onClose([id, newData, formImage])
       dispatch(updateNotice([newData, id]));
       dispatch(updateNoticeAvatar([formImage, id]));
     } else {
-      console.log("chomus tut");
+    //  console.log("chomus tut");
       const formData = new FormData();
       // formData.append("avatar", file);
       formData.append("avatar", image);
@@ -129,7 +130,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      {({ values, isValid, dirty }) => (
+      {({ values }) => (
         <FormCustom>
           <Title>{id ? "Edit pet" : "Add pet"}</Title>
 
@@ -198,9 +199,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
           </LabelBox>
 
           <ButtonBox>
-            <Button type="submit" disabled={!isValid || !dirty}>
-              Done
-            </Button>
+            <Button type="submit">Done</Button>
             <BackBtn type="button" onClick={() => prev(values)}>
               Back
             </BackBtn>

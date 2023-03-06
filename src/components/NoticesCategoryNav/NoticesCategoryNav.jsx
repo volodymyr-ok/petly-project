@@ -47,7 +47,7 @@ export const NoticesCategoryNav = ({
 }) => {
   const location = useLocation();
   const { pathname } = location;
-  console.log("pathname", pathname === "/notices");
+  // console.log("pathname", pathname === "/notices");
 
   return (
     <>
@@ -73,7 +73,15 @@ export const NoticesCategoryNav = ({
             : notAuthorized.map(({ href, text }) => {
                 return (
                   <NavItem to={`/notices/${href}`} key={href}>
-                    <Button>{text}</Button>
+                    <Button
+                      className={
+                        pathname === "/notices" && href === "sell"
+                          ? "active"
+                          : null
+                      }
+                    >
+                      {text}
+                    </Button>
                   </NavItem>
                 );
               })}

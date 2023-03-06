@@ -33,6 +33,7 @@ export const getMyOwnNotices = async (params) => {
 
 export const getNoticesBySearch = async (params) => {
   try {
+    console.log("tut")
     const res = await PublicNoticesApi.get(`/api/notices`, { params });
     return res.data;
   } catch (error) {
@@ -48,6 +49,32 @@ export const getNoticesBySearch = async (params) => {
 //     return error.message;
 //   }
 // };
+
+
+export const addNotice = async (data) => {
+    try {
+      const res = await PrivateNoticesApi.post(`/api/notices`, data)
+      return res.data;
+    } catch (error) {
+      return (error.message)
+    }
+  };
+export const updateNotice = async (data) => {
+    try {
+      const res = await PrivateNoticesApi.patch(`/api/notices/${data[1]}`, data[0]);
+      return res.data;
+    } catch (error) {
+      return (error.message);
+    }
+  };
+export const updateNoticeAvatar = async (data) => {
+    try {
+      const res = await PrivateNoticesApi.patch(`/api/notices/avatars/${data[1]}`, data[0]);
+      return res.data;
+    } catch (error) {
+      return (error.message);
+    }
+  };
 
 // -----------------------------------------------------------
 // export const getNotice1 = async (value) => {
