@@ -16,7 +16,6 @@ import { removeNotice } from "../../pages/NoticesPage/services";
 import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
-import { colors } from "../../utils/colors";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
