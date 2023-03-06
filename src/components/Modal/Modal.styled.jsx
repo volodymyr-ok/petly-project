@@ -25,6 +25,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Content = styled.div`
+  background-color: ${colors.white};
   position: relative;
   min-width: 280px;
   min-height: 194px;
@@ -50,8 +51,8 @@ export const CloseBtn = styled.button`
   height: 34px;
   border-radius: 50%;
   position: absolute;
-  right: 40px;
-  top: 40px;
+  right: 20px;
+  top: 20px;
   background-color: #fdf7f2;
   display: flex;
   align-items: center;

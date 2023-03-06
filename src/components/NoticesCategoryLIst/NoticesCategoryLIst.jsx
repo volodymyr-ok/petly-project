@@ -16,6 +16,7 @@ import { removeNotice } from "../../pages/NoticesPage/services";
 import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
+import { colors } from "../../utils/colors";
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
@@ -147,7 +148,7 @@ export const NoticesCategoryList = ({
           text={"Are you sure you want to remove pet?"}
           onClose={() => setModalRemove(!modalRemove)}
           question={"Are you shure?"}
-          actionText={"Delete"}
+          actionText={"Remove"}
           action={handlerRemove}
           cancelText={"Cancel"}
         />
@@ -159,7 +160,7 @@ export const NoticesCategoryList = ({
           id={petInfo}
           // approveFunk={deletePetItem}
           onClose={onAddPet}
-          text="To do any actions, pls, login or register first"
+          text="You need be authenticated first"
         />
       )}
     </>

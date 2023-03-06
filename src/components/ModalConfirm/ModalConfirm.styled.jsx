@@ -23,7 +23,7 @@ export const Question = styled.h2`
 
 export const BtnBox = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 10px;
 
   ${device.tablet} {
@@ -32,6 +32,11 @@ export const BtnBox = styled.div`
 `;
 
 export const Btn = styled(StyledButton)`
-  padding: 5px 28px;
-  background-color: ${(prop) => (prop.color ? ` ${colors.accentOrange}` : `${colors.white}`)};
+  /* padding: 5px 28px; */
+  width: 100px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  background-color: ${(prop) =>
+    prop.color ? ` ${colors.accentOrange}` : `${colors.white}`};
 `;

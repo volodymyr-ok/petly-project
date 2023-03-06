@@ -56,6 +56,7 @@ export const Modal = styled.div`
 `;
 
 export const CloseBtn = styled.button`
+  cursor: pointer;
   position: absolute;
   top: 23px;
   right: 23px;
@@ -66,17 +67,22 @@ export const CloseBtn = styled.button`
   width: 34px;
   border-radius: 50%;
   backdrop-filter: blur(2px);
+  border: 2px solid transparent;
+
   ${device.desktop}
   border: 2px solid #f59256;
   background-color: #f59256;
   color: #fdf7f2;
-  transition: background-color ${transition};
+  transition: background-color ${transition}, border-color ${transition};
   :hover,
   :focus {
     background-color: #fdf7f2;
+    border-color: #f59256;
+
     color: #f59256;
   }
   svg {
+    transition: fill ${transition};
     width: 28px;
     height: 28px;
   }
