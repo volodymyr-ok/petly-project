@@ -42,6 +42,31 @@ const LocationPicker = ({disabled, onChange, value}) => {
             <LocationBtn disabled={disabled}>{value}</LocationBtn>
             {!disabled && <LocationSelectWrapper>
                 <StyledSelect
+                    styles={{
+                        // control: (baseStyles, state) => ({
+                        //     ...baseStyles,
+                        //     // borderColor: state.isFocused ? 'grey' : 'red',
+                        //     borderColor: `red`,
+                        //     paddingTop: '0',
+                        //     minHeight: '10px',
+                        //     borderRadius: '50px'
+                        // }),
+                        // menu: (baseStyles, state) => ({
+                        //     ...baseStyles,
+                        //     // borderColor: state.isFocused ? 'grey' : 'red',
+                        //     // borderColor: `${colors.darkOrange}`,
+                        //     borderRadius: '50px',
+                        //     // backgroundColor: 'orange'
+                        // }),
+                        // option: (baseStyles, state) => ({
+                        //     ...baseStyles,
+                        //     borderColor: `${colors.darkOrange}`,
+                        //     // borderColor: state.isFocused ? 'grey' : 'red',
+                        //     // borderColor: state.isFocused ? `${colors.darkOrange}` : `${colors.accentOrange}`,
+                        //     color: state.isFocused ? `${colors.white}` : `${colors.black}`,
+                        //     backgroundColor: state.isFocused ? `${colors.accentOrange}` : '#FDF7F2'
+                        // }),
+                    }}
                     defaultValue={country}
                     onChange={setCountry}
                     options={countryData}

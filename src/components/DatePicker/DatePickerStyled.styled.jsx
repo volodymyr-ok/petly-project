@@ -54,6 +54,7 @@ export const DatePickerWrapperStyles = createGlobalStyle`
 
   .react-datepicker, .react-datepicker__month {
     font-family: "Manrope", sans-serif;
+  
   }
 
   .react-datepicker__header {

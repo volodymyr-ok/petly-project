@@ -33,6 +33,9 @@ export const BoxInput = styled.div`
     border: 1px solid rgba(245, 146, 86, 0.5);
     border-radius: 40px;
     outline: none;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     ${device.tablet} {
       width: 216px;

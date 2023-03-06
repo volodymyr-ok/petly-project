@@ -51,6 +51,11 @@ export const LocationBtn = styled.div`
   background-color: ${(props) => (props.disabled ? "none" : `#fdf7f2`)};;
   border-radius: 40px;
   outline: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 
   ${device.tablet} {
     width: 216px;

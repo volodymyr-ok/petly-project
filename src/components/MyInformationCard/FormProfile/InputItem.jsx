@@ -36,6 +36,7 @@ export const InputItem = ({
         if (name === 'birthday') {
             onChange([name, e]);
         } else if (name === 'city') {
+            setVal(e)
             onChange([name, e]);
         } else {
             setVal(e.target.value);
