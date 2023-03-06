@@ -15,7 +15,6 @@ const handlePending = (state) => {
 };
 
 const handleFulfilled = (state, action) => {
-  console.log("getNoti", action.payload);
   state.items = action.payload;
   state.isLoading = false;
   state.error = null;
@@ -31,7 +30,7 @@ const handleRejected = (state, action) => {
 const noticeSlice = createSlice({
   name: "notice",
   initialState: {
-     items: [],
+     items: {},
     isLoading: false,
     error: null,
   },
@@ -64,7 +63,7 @@ const noticeSlice = createSlice({
       .addCase(addNotice.pending, handlePending)
       .addCase(addNotice.rejected, handleRejected)
       .addCase(addNotice.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+        state.items = action.payload;
         state.error = null;
         state.isLoading = false;
       });

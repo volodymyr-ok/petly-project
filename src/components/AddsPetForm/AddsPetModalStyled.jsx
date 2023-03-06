@@ -154,6 +154,7 @@ export const FieldTextarea = styled(Field)`
   padding: 14px 12px;
   width: 100%;
   height: 76px;
+  resize: none;
 
   background: ${colors.hzModalPet};
   border: 1px solid ${colors.accentOrange};
@@ -207,7 +208,12 @@ export const StyledLabel = styled.label`
   font-weight: 500;
   font-size: 18px;
   line-height: 1.47;
+<<<<<<< Updated upstream
   color: ${colors.primaryText};
+=======
+  
+  color:${colors.primaryText};
+>>>>>>> Stashed changes
   ${device.tablet} {
     font-size: 24px;
     line-height: 1.1;

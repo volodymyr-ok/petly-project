@@ -44,6 +44,9 @@ const NoticesPage = () => {
   const favorites = useSelector(selectFavorites);
   const isLogined = useSelector(selectIsAuth);
 
+
+
+ 
   const prevSearch = usePrevious(search);
   const prevCategoryName = usePrevious(categoryName);
   const needToResetPage =
@@ -60,27 +63,28 @@ const NoticesPage = () => {
     const notAuthorizedHrefs = Object.fromEntries(
       notAuthorized.map(({ href }) => [href, true])
     );
-
+    
+    const result =   JSON.parse(window.localStorage.getItem("persist:auth"))
+  
     const newCategoryName = getCategoryName(
       secName,
-      isLogined,
+      isLogined || result.token,
       authorizedHrefs,
       notAuthorizedHrefs
     );
-   if(newCategoryName !== categoryName){
-    setCategoryName(newCategoryName);
-   }
-  }, [location, isLogined, categoryName]);
 
+    setCategoryName(newCategoryName);
+  }, [location, isLogined, categoryName]);
   function getCategoryName(
     secName,
     isAuthenticated,
     authorizedHrefs,
     notAuthorizedHrefs
   ) {
-    const hrefs = isAuthenticated ? authorizedHrefs : notAuthorizedHrefs;
+    const hrefs = isAuthenticated !== "null" ? authorizedHrefs : notAuthorizedHrefs;
     return hrefs[secName] ? secName : "sell";
   }
+
 
   useEffect(() => {
       const searchParams = { search, page };

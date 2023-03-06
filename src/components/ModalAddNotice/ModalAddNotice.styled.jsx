@@ -337,6 +337,7 @@ export const FieldTextarea = styled(Field)`
   padding: 14px 12px;
   width: 100%;
   height: 76px;
+  resize: none;
 
   background: #fdf7f2;
   border: 1px solid rgba(245, 146, 86, 0.5);

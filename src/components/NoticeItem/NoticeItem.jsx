@@ -47,7 +47,7 @@ export const NoticeItem = ({
 
   return (
     <>
-      {notices.map((el) => {
+      { notices.map((el) => {
         const {
           avatar,
           birthday,

@@ -53,19 +53,18 @@ export const StepTwo = (props) => {
               setCroppedImageFor={setCroppedImageFor}
               avatar = {props.avatar}
             ></ImageCropper>
-            <LabelBoxModifaed>
-              <StyledLabel htmlFor="comments">
-                Comments
-                <FieldTextarea
-                  type="text"
-                  name="comments"
-                  placeholder="Type comments"
-                  component="textarea"
-                  rows="4"
-                />
-              </StyledLabel>
-              <FormError name="comments" />
-            </LabelBoxModifaed>
+          <LabelBoxModifaed>
+            <StyledLabel htmlFor="comments">
+              Comments
+              <FieldTextarea
+                type="text"
+                name="comments"
+                placeholder="Type comments"
+                component="textarea"
+                rows="4"
+              />
+            </StyledLabel>
+          </LabelBoxModifaed>
             <FormError name="comments" />
             <FlexBox>
               <NextBtn type="submit">Done</NextBtn>

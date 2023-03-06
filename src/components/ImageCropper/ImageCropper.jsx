@@ -69,10 +69,14 @@ export const ImageCropper = ({ setCroppedImageFor, avatar, small }) => {
       });
     }
   };
-  const onCancel = () => {
-    setImage(null);
+  const onCancel = (e) => {
+
+    if(e.target !== e.currentTarget ){
+         setImage(null);
     setPrevue(false);
-    // setPrevue(null)
+   // setPrevue(null)
+    }
+ 
   };
 
   return (
@@ -90,7 +94,7 @@ export const ImageCropper = ({ setCroppedImageFor, avatar, small }) => {
                 onZoomChange={setZoom}
                 onCropComplete={onCropComplete}
               />
-              <ButtonCancel type="button" onClick={onCancel}>
+              <ButtonCancel type="button"  onClick={onCancel} >
                 <HiArrowLeftCircle></HiArrowLeftCircle>
               </ButtonCancel>
             </CropContainer>
