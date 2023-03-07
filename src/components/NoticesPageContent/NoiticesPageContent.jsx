@@ -60,24 +60,22 @@ const NoticesPageContent = () => {
 
   return (
     <>
-      {isLoading ? (
-        <PawsLoader />
-      ) : (
+      {thereIsContent ? (
         <List>
-          {thereIsContent ? (
-            categoryList.map((el) => (
-              <NoticeCard
-                key={el._id}
-                cardData={el}
-                user={user}
-                favoritesList={favoritesList}
-              />
-            ))
-          ) : (
-            <ResultNotFound />
-          )}
+          {categoryList.map((el) => (
+            <NoticeCard
+              key={el._id}
+              cardData={el}
+              user={user}
+              favoritesList={favoritesList}
+            />
+          ))}
         </List>
+      ) : (
+        <ResultNotFound text="No results was found" />
       )}
+
+      {isLoading && <PawsLoader />}
     </>
   );
 };

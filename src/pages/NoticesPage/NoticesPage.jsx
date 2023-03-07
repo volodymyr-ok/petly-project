@@ -11,7 +11,6 @@ import { Outlet } from "react-router-dom";
 import { WarningMessage } from "../../components/WarningMessage/WarningMessage";
 import { Modal } from "../../components/Modal/Modal";
 import { AddNoticeForm } from "../../components/ModalAddNotice/AddNoticeForm/AddNoticeForm";
-// import { selectIsNoticesLoading } from "../../redux/notice/notice-selectors";
 import { useNoticesParams } from "../../hooks/useMyContext";
 import PaginationBar from "../../components/PaginationBar/PaginationBar";
 import {
@@ -26,54 +25,6 @@ const NoticesPage = () => {
   const pagesInfo = useSelector(selectPagesInfo);
   const isLoading = useSelector(selectIsNoticesLoading);
   const { search, setSearch, setPage } = useNoticesParams();
-
-  // useEffect(() => {
-  //   const searchParams = { search, page };
-  //   if (needToResetPage) setPage(1);
-  //   if (search !== "") {
-  //     // setIsLoading(true);
-  //     getNoticesBySearch(searchParams)
-  //       .then((data) => {
-  //         setData(data);
-  //         // setIsLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         setError(error);
-  //         // setIsLoading(false);
-  //       });
-  //     return;
-  //   }
-  //   const fetchData = async () => {
-  //     try {
-  //       let data;
-  //       if (categoryName !== "") {
-  //         switch (categoryName) {
-  //           case "own":
-  //             // setIsLoading(true);
-  //             data = await getMyOwnNotices({ page });
-  //             break;
-  //           case "favorite-ads":
-  //             // setIsLoading(true);
-  //             data = await getFavoriteNotices({ page });
-  //             break;
-  //           default:
-  //             // setIsLoading(true);
-  //             data = await getNoticesByCategory(categoryName, { page });
-  //             break;
-  //         }
-  //       }
-  //       if (data) {
-  //         setData(data);
-  //         // setIsLoading(false);
-  //       }
-  //     } catch (error) {
-  //       setError(error);
-  //       // setIsLoading(false);
-  //     }
-  //   };
-  //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [categoryName, page, search]);
 
   const onSubmit = (query) => {
     if (query !== search) setSearch(query);
@@ -111,23 +62,9 @@ const NoticesPage = () => {
               text="You need be authenticated first"
             />
           )}
-          {/* {isLoading ? (
-            <PawsLoader />
-          ) : error ? (
-            <ResultNotFound text="Result not found" />
-          ) : (
-            <NoticesCategoryList
-              isModalAddPet={isModalAddPet}
-              isModalLogined={isModalLogined}
-              onAddPet={handlerModalAddPet}
-              data={data}
-              favorites={favorites}
-              isLogined={isLogined}
-              user={user}
-              categoryName={categoryName}
-              setPage={setPage}
-            />
-          )} */}
+          {/* {isLoading ? (<PawsLoader />) 
+          : error ? (<ResultNotFound text="No results was found" />)
+          : (<NoticesCategoryList />)} */}
         </>
       </Container>
     </>
