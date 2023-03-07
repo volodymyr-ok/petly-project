@@ -117,16 +117,6 @@ export const ItemLink = styled.a`
   }
 `;
 
-
-export const ItemLink = styled.a`
-  text-decoration: none;
-  color: inherit;
-
-  &:hover {
-    color: ${colors.accentOrange};
-  }
-`;
-
 export const NameInfo = styled.span`
   width: 80px;
   font-weight: 600;
@@ -190,7 +180,7 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  ${device.tablet}{
+  ${device.tablet} {
     width: 568px;
     height: 158px;
     /* padding: 40px 80px; */
@@ -201,10 +191,9 @@ export const HidenTextBox = styled.div`
   &:hover > p {
     transform: scale(1);
   }
-
 `;
 export const HidenText = styled.p`
-position: absolute;
+  position: absolute;
   background-color: ${colors.darkOrange};
   color: ${colors.white};
   padding: 5px;
@@ -213,7 +202,7 @@ position: absolute;
   border-radius: 20px;
   transform: scale(0);
   z-index: 1;
-  top:-30px;
+  top: -30px;
   right: 0;
 `;
 
