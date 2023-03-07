@@ -60,12 +60,13 @@ export const addNotice = createAsyncThunk(
     }
   }
 );
+
 export const updateNotice = createAsyncThunk(
   "notices/:id",
   async (data, thunkAPI) => {
     try {
       const res = await PrivateApi.patch(`/api/notices/${data[1]}`, data[0]);
-      return res.data;
+      return res.data.message;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -114,6 +115,19 @@ export const getNoticesBySearch = createAsyncThunk(
     try {
       const res = await PublicApi.get(`/api/notices?search=${query}`);
       return res.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeNotice = createAsyncThunk(
+  "/notices/remove",
+  async (id, thunkAPI) => {
+    try {
+      const res = await PrivateApi.delete(`/api/notices/${id}`);
+      console.log("removeNotice >>", res.data);
+      return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

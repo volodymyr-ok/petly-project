@@ -23,6 +23,10 @@ import {
 } from "./services";
 import { Outlet, useLocation } from "react-router-dom";
 import usePrevious from "../../hooks/usePrevious";
+import { WarningMessage } from "../../components/WarningMessage/WarningMessage";
+import { Modal } from "../../components/Modal/Modal";
+import { AddNoticeForm } from "../../components/ModalAddNotice/AddNoticeForm/AddNoticeForm";
+import { selectIsNoticesLoading } from "../../redux/notice/notice-selectors";
 //import { Navigate } from 'react-router-dom';
 
 const NoticesPage = () => {
@@ -31,7 +35,8 @@ const NoticesPage = () => {
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [isModalLogined, setIsModalLogined] = useState(false);
   // const [reload, setReload] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+
+  // const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState({});
   const [search, setSearch] = useState("");
@@ -84,57 +89,53 @@ const NoticesPage = () => {
     return hrefs[secName] ? secName : "sell";
   }
 
-  useEffect(() => {
-    const searchParams = { search, page };
-    if (needToResetPage) setPage(1);
-
-    if (search !== "") {
-      setIsLoading(true);
-      getNoticesBySearch(searchParams)
-        .then((data) => {
-          setData(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-
-      return;
-    }
-
-    const fetchData = async () => {
-      try {
-        let data;
-        if (categoryName !== "") {
-          switch (categoryName) {
-            case "own":
-              setIsLoading(true);
-              data = await getMyOwnNotices({ page });
-              break;
-            case "favorite-ads":
-              setIsLoading(true);
-              data = await getFavoriteNotices({ page });
-              break;
-            default:
-              setIsLoading(true);
-              data = await getNoticesByCategory(categoryName, { page });
-              break;
-          }
-        }
-        if (data) {
-          setData(data);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryName, page, search]);
+  // useEffect(() => {
+  //   const searchParams = { search, page };
+  //   if (needToResetPage) setPage(1);
+  //   if (search !== "") {
+  //     // setIsLoading(true);
+  //     getNoticesBySearch(searchParams)
+  //       .then((data) => {
+  //         setData(data);
+  //         // setIsLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         setError(error);
+  //         // setIsLoading(false);
+  //       });
+  //     return;
+  //   }
+  //   const fetchData = async () => {
+  //     try {
+  //       let data;
+  //       if (categoryName !== "") {
+  //         switch (categoryName) {
+  //           case "own":
+  //             // setIsLoading(true);
+  //             data = await getMyOwnNotices({ page });
+  //             break;
+  //           case "favorite-ads":
+  //             // setIsLoading(true);
+  //             data = await getFavoriteNotices({ page });
+  //             break;
+  //           default:
+  //             // setIsLoading(true);
+  //             data = await getNoticesByCategory(categoryName, { page });
+  //             break;
+  //         }
+  //       }
+  //       if (data) {
+  //         setData(data);
+  //         // setIsLoading(false);
+  //       }
+  //     } catch (error) {
+  //       setError(error);
+  //       // setIsLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [categoryName, page, search]);
 
   const onSubmit = (query) => {
     if (query !== "") {
@@ -143,6 +144,8 @@ const NoticesPage = () => {
   };
 
   const handlerModalAddPet = () => {
+    console.log("click");
+    console.log("isLogined >>", isLogined);
     if (!isLogined) {
       setIsModalLogined(!isModalLogined);
     } else {
@@ -177,6 +180,20 @@ const NoticesPage = () => {
           <Suspense fallback={<div>Loading page...</div>}>
             <Outlet />
           </Suspense>
+
+          {isModalAddPet && (
+            <Modal type="addPet" onClose={() => setIsModalAddPet(false)}>
+              <AddNoticeForm onClose={() => setIsModalAddPet(false)} />
+            </Modal>
+          )}
+
+          {isModalLogined && (
+            <WarningMessage
+              type="auth"
+              onClose={() => setIsModalLogined(false)}
+              text="You need be authenticated first"
+            />
+          )}
           {/* {isLoading ? (
             <PawsLoader />
           ) : error ? (

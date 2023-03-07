@@ -7,6 +7,7 @@ import {
   getNoticesBySearch,
   getNoticesPrivate,
   getNoticesPublic,
+  removeNotice,
   updateNotice,
   updateNoticeAvatar,
 } from "./notice-operations";
@@ -17,7 +18,8 @@ const handlePending = (state) => {
 };
 
 const handleFulfilled = (state, action) => {
-  state.items = action.payload;
+  console.log(action.payload);
+  // state.items = action.payload;
   state.isLoading = false;
   state.error = null;
 };
@@ -69,19 +71,42 @@ const noticeSlice = createSlice({
       .addCase(getNoticesBySearch.rejected, handleRejected)
 
       .addCase(updateNotice.pending, handlePending)
-      .addCase(updateNotice.fulfilled, handleFulfilled)
       .addCase(updateNotice.rejected, handleRejected)
+      .addCase(updateNotice.fulfilled, (state, action) => {
+        const result = state.items.filter(
+          (el) => el._id !== action.payload._id
+        );
+        state.items = [action.payload, ...result];
+        state.isLoading = false;
+        state.error = null;
+      })
 
       .addCase(updateNoticeAvatar.pending, handlePending)
-      .addCase(updateNoticeAvatar.fulfilled, handleFulfilled)
       .addCase(updateNoticeAvatar.rejected, handleRejected)
+      .addCase(updateNoticeAvatar.fulfilled, (state, action) => {
+        const result = state.items.filter(
+          (el) => el._id !== action.payload._id
+        );
+        state.items = [action.payload, ...result];
+        state.isLoading = false;
+        state.error = null;
+      })
 
       .addCase(addNotice.pending, handlePending)
       .addCase(addNotice.rejected, handleRejected)
       .addCase(addNotice.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items.unshift(action.payload);
         state.error = null;
         state.isLoading = false;
+      })
+
+      .addCase(removeNotice.pending, handlePending)
+      .addCase(removeNotice.rejected, handleRejected)
+      .addCase(removeNotice.fulfilled, (state, action) => {
+        console.log("action.payload", action.payload);
+        state.error = null;
+        state.isLoading = false;
+        state.items = state.items.filter((el) => el._id !== action.payload);
       });
   },
 });
