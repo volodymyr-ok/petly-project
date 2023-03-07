@@ -4,53 +4,44 @@ import { device } from "../../../utils/mixin";
 
 export const ModalCard = styled.div`
   position: relative;
-  /* top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1); */
 
   padding: 60px 20px 40px 20px;
   min-width: 280px;
- // width: calc(100% - 40px);
-  /* min-height: 901px; */
   border-radius: 30px 30px 30px 30px;
   background-color: ${colors.white};
   overflow-y: auto;
-  overflow-x: hidden; */
-  ${device.mobile} {
-   max-width: 440px;
-  }
+  overflow-x: hidden;
   ${device.tablet} {
     width: 704px;
     padding: 32px 20px;
   }
 `;
 export const BtnClose = styled.button`
-position: absolute;
-right: 10px;
-top: 10px;
-border: 1px solid black;
- cursor: pointer;
- background-color: transparent;
- border-radius: 50%;
- width: 30px;
- height: 30px;
- display: flex;
- justify-content: center;
- align-items: center;
- stroke: ${colors.black};
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  stroke: ${colors.black};
   stroke-width: 1px;
   stroke-dasharray: 80;
   stroke-linejoin: round;
- & svg{
-  transform: rotate(45deg);
- }
- &:hover,
-  &:focus{
+  & svg {
+    transform: rotate(45deg);
+  }
+  &:hover,
+  &:focus {
     stroke: ${colors.darkOrange};
     border-color: ${colors.darkOrange};
   }
- `;
-
+`;
 
 export const ImgAndInfoBox = styled.div`
   ${device.tablet} {
@@ -65,11 +56,11 @@ export const ImgBox = styled.div`
     width: 288px;
     height: 328px;
   }
-  & img{
+  & img {
     object-fit: cover;
     border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px;
-    ${device.tablet}{
+    ${device.tablet} {
       height: 328px;
     }
   }
@@ -116,6 +107,14 @@ export const ListInfo = styled.ul`
 
 export const ItemInfo = styled.li`
   display: flex;
+`;
+export const ItemLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: ${colors.accentOrange};
+  }
 `;
 
 

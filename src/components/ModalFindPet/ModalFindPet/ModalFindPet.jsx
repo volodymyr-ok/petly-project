@@ -40,7 +40,7 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user, isLogi
     _id,
     comments,
     phone,
-    email
+    email,
   } = petInfo;
 
   const isOwner = user._id === owner;
@@ -48,8 +48,8 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user, isLogi
 
 const [isLoginedModal, setIsLoginedModal] = useState(false)
 const [isContactModal, setIsModalContact] = useState(false)
-  // console.log("coments", petInfo, petInfo?.comments);
-  console.log(isLoginedModal)
+
+
   const modalHandler = () =>{
     setIsLoginedModal(!isLoginedModal)
   }
