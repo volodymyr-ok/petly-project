@@ -143,7 +143,7 @@ const NoticesPage = () => {
 
 
   const onSubmit = (query) =>{
-    if(query!==""){
+    if(query !== search){
       setSearch(query)
     }
   };

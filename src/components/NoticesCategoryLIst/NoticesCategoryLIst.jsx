@@ -61,13 +61,13 @@ export const NoticesCategoryList = ({
   useEffect(()=>{
     if(addedPet?._id && notices!==undefined){
      const include = notices.find(el=>el._id === addedPet?._id)
-      if(include){
+      if(include && categoryName === "own"){
         setIsLoading(true)
         const result = notices.filter(
           el => el._id !== include._id)
           setNotices([addedPet, ...result])
           setIsLoading(false)
-      }else if(!include && addedPet && addedPet!==undefined){
+      }else if(!include && addedPet && addedPet!==undefined && categoryName === "own"){
         setIsLoading(true)
          setNotices([addedPet,...notices])
          setIsLoading(false)

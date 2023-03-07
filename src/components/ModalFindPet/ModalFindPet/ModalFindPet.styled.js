@@ -117,16 +117,6 @@ export const ItemLink = styled.a`
   }
 `;
 
-
-export const ItemLink = styled.a`
-  text-decoration: none;
-  color: inherit;
-
-  &:hover {
-    color: ${colors.accentOrange};
-  }
-`;
-
 export const NameInfo = styled.span`
   width: 80px;
   font-weight: 600;
