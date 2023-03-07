@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import {device, transition} from "../../../../utils/mixin";
+import { device, transition } from "../../../../utils/mixin";
 import { colors } from "../../../../utils/colors";
 import logo from "../../../../assets/svg/accoun-logo.svg";
 
@@ -24,6 +24,7 @@ export const NavUl = styled.ul`
   }
 
   ${device.desktop} {
+    gap: 80px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -72,7 +73,7 @@ export const NavItem = styled(NavLink)`
   }
 
   ${device.desktop} {
-    margin-right: 80px;
+    /* margin-right: 80px; */
     font-size: 20px;
   }
 
