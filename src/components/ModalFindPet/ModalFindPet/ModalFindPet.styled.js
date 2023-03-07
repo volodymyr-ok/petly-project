@@ -118,6 +118,16 @@ export const ItemInfo = styled.li`
   display: flex;
 `;
 
+
+export const ItemLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: ${colors.accentOrange};
+  }
+`;
+
 export const NameInfo = styled.span`
   width: 80px;
   font-weight: 600;
@@ -185,5 +195,47 @@ export const ModalContent = styled.div`
     width: 568px;
     height: 158px;
     /* padding: 40px 80px; */
+  }
+`;
+export const HidenTextBox = styled.div`
+  position: relative;
+  &:hover > p {
+    transform: scale(1);
+  }
+
+`;
+export const HidenText = styled.p`
+position: absolute;
+  background-color: ${colors.darkOrange};
+  color: ${colors.white};
+  padding: 5px;
+  font-size: 13px;
+  text-align: center;
+  border-radius: 20px;
+  transform: scale(0);
+  z-index: 1;
+  top:-30px;
+  right: 0;
+`;
+
+export const StyledLinkContact = styled(ItemLink)`
+  text-align: center;
+  padding: 8px 0;
+  width: 100%;
+  font-size: 16px;
+  line-height: calc(22 / 16);
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  background-color: #f59256;
+  border: 2px solid #f59256;
+  border-radius: 40px;
+  transition: color 300ms linear, background-color 300ms linear;
+  :hover,
+  :focus {
+    color: #f59256;
+    background-color: #fff;
+  }
+  @media (min-width: 768px) {
+    width: 180px;
   }
 `;
