@@ -10,10 +10,7 @@ import PhoneInput from "react-phone-number-input";
 // import { useState } from "react";
 // import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
-export const StepTwo = ({
-  setFieldValue,
-  values,
-}) => {
+export const StepTwo = ({ setFieldValue, values }) => {
   const NAME_INPUT_CITY = "city";
   return (
     <>
@@ -43,13 +40,13 @@ export const StepTwo = ({
       <Label>
         <PhoneInput
           placeholder="Mobile phone"
-          value={values['phone']}
-          onChange={e => setFieldValue('phone', e)}
+          value={values["phone"]}
+          onChange={(e) => setFieldValue("phone", e)}
           name="phone"
           defaultCountry="UA"
           type="tel"
           data-tel-input
-          maxLength="13"
+          maxLength="12"
         />
         {/*<Input*/}
         {/*  name="phone"*/}
