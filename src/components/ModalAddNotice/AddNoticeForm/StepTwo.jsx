@@ -33,7 +33,6 @@ import {
 } from "../../../redux/notice/notice-operations";
 import { useNavigate } from "react-router-dom";
 
-
 const validationSchema = yup.object({
   sex: yup.string().required("Choose category"),
   location: yup
@@ -47,7 +46,7 @@ const validationSchema = yup.object({
   comments: yup.string().min(8).max(120).required("Comments are required"),
   price: yup
     .string()
-    .matches(/^[1-9]+$/, "price must be greater than 0")
+    .matches(/^[1-9][0-9]*$/, "price must be greater than 0")
     .min(1)
     .max(9)
     .required("Price is required"),
@@ -56,7 +55,7 @@ const validationSchema = yup.object({
 export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
   const dispatch = useDispatch();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // const [file, setFile] = useState(null);
 
   const [image, setImage] = useState(null);
@@ -85,7 +84,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       price,
       comments,
     } = data;
-   // console.log("DATA", data);
+    // console.log("DATA", data);
 
     if (id) {
       const newData = {
@@ -102,12 +101,12 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
 
       const formImage = new FormData();
       formImage.append("avatar", image);
-      onClose([id, newData, formImage])
+      onClose([id, newData, formImage]);
       dispatch(updateNotice([newData, id]));
       dispatch(updateNoticeAvatar([formImage, id]));
-      navigate(`/notices/own`)
+      navigate(`/notices/own`);
     } else {
-    //  console.log("chomus tut");
+      //  console.log("chomus tut");
       const formData = new FormData();
       // formData.append("avatar", file);
       formData.append("avatar", image);
@@ -123,7 +122,7 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
         formData.append("price", price);
       }
       dispatch(addNotice(formData));
-      navigate(`/notices/own`)
+      navigate(`/notices/own`);
     }
 
     onClose();

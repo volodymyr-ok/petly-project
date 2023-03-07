@@ -16,7 +16,10 @@ import { removeNotice } from "../../pages/NoticesPage/services";
 import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
-import { selectNotice, selectIsLoading } from "../../redux/notice/notice-selectors";
+import {
+  selectNotice,
+  selectIsLoading,
+} from "../../redux/notice/notice-selectors";
 import { getMyOwnNotices } from "../../pages/NoticesPage/services";
 import { filterData } from "./utils";
 
@@ -41,20 +44,20 @@ export const NoticesCategoryList = ({
   const [petId, setPetId] = useState("");
   const [isModalEditPost, setIsModalEditPost] = useState(false);
   const [modalRemove, setModalRemove] = useState(false);
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const [notices, setNotices] = useState(data.data)
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [notices, setNotices] = useState(data.data);
 
-  const addedPet = useSelector(selectNotice)
-  const isUploading = useSelector(selectIsLoading)
+  const addedPet = useSelector(selectNotice);
+  const isUploading = useSelector(selectIsLoading);
 
-  useEffect(()=>{
-    if(isUploading){
-      setIsLoading(true)
-    }else{
-      setIsLoading(false)
+  useEffect(() => {
+    if (isUploading) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
     }
-  },[isUploading])
+  }, [isUploading]);
 
   const dispatch = useDispatch();
 
@@ -72,15 +75,15 @@ export const NoticesCategoryList = ({
          setNotices([addedPet,...notices])
          setIsLoading(false)
       }
-    } else if(notices === undefined && addedPet?._id){
-      setNotices([addedPet])
+    } else if (notices === undefined && addedPet?._id) {
+      setNotices([addedPet]);
     }
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[addedPet])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addedPet]);
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) onAddPet();
-    if(isLogined){
+    if (isLogined) {
       if (user._id !== owner) {
         if (!favorites.includes(id)) dispatch(addFavorites(id));
         else if (isFavorite) dispatch(removeFavorites(id));
@@ -91,45 +94,43 @@ export const NoticesCategoryList = ({
     }
   };
 
-
-const page = 1
-
+  const page = 1;
 
   const handlerRemove = (e) => {
-   const fetchData = async()=>{
-    if(modalRemove && petId!==""){
-      setModalRemove(!modalRemove)
-      const result = filterData(notices, petId)
-      setIsLoading(true);
-      if(result.length <= 1){
-        try {
-          const data = await getMyOwnNotices({page})
-          await removeNotice(petId)
-          const result = filterData(data.data, petId)
-          setNotices(result)
-          setIsLoading(false);
-        } catch (error) {
-          setError(error);
-          setIsLoading(false);
+    const fetchData = async () => {
+      if (modalRemove && petId !== "") {
+        setModalRemove(!modalRemove);
+        const result = filterData(notices, petId);
+        setIsLoading(true);
+        if (result.length <= 1) {
+          try {
+            const data = await getMyOwnNotices({ page });
+            await removeNotice(petId);
+            const result = filterData(data.data, petId);
+            setNotices(result);
+            setIsLoading(false);
+          } catch (error) {
+            setError(error);
+            setIsLoading(false);
+          }
+        } else {
+          removeNotice(petId)
+            .then(() => {
+              setNotices(result);
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              setError(error);
+              setIsLoading(false);
+            });
         }
-      }else{
-        removeNotice(petId)
-        .then(() => {
-         setNotices(result)
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
       }
-    }
-   }
+    };
     if (e.target.id && e.target.id !== "") {
-      setPetId(e.target.id)
-      setModalRemove(!modalRemove)
-      }
-      fetchData()
+      setPetId(e.target.id);
+      setModalRemove(!modalRemove);
+    }
+    fetchData();
   };
 
   const readMoreModal = (e) => {
@@ -141,8 +142,7 @@ const page = 1
     }
   };
 
-
-//console.log(!isModalReadMore&& isModalLogined && "da")
+  //console.log(!isModalReadMore&& isModalLogined && "da")
   return (
     <>
       <ListBox>
@@ -183,10 +183,11 @@ const page = 1
         <Modal
           // type="addPet"
           onClose={() => {
-            setIsModalReadMore(!isModalReadMore)}}
+            setIsModalReadMore(!isModalReadMore);
+          }}
         >
           <ModalFindPet
-            isLogined ={isLogined}
+            isLogined={isLogined}
             user={user}
             onClose={() => setIsModalReadMore(!isModalReadMore)}
             petInfo={petInfo}
@@ -215,7 +216,7 @@ const page = 1
           cancelText={"Cancel"}
         />
       )}
-      { isModalLogined && (
+      {isModalLogined && (
         <WarningMessage
           // onRemove={(postId) => onRemove(postId)}
           type="auth"
@@ -225,9 +226,7 @@ const page = 1
           text="You need be authenticated first"
         />
       )}
-      {
-        error && <div>{error}</div>
-      }
+      {error && <div>{error}</div>}
     </>
   );
 };
