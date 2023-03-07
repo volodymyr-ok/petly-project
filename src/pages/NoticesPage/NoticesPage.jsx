@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Title } from "../../components/Title/Title";
 import { Container } from "../../components/Container/Container";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
@@ -19,19 +19,18 @@ import {
   getFavoriteNotices,
   getMyOwnNotices,
   getNoticesBySearch,
-//  removeNotice,
+  //  removeNotice,
 } from "./services";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import usePrevious from "../../hooks/usePrevious";
 //import { Navigate } from 'react-router-dom';
 
 const NoticesPage = () => {
-
   const [page, setPage] = useState(1);
   const [categoryName, setCategoryName] = useState("");
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [isModalLogined, setIsModalLogined] = useState(false);
- // const [reload, setReload] = useState(false);
+  // const [reload, setReload] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [data, setData] = useState({});
@@ -44,9 +43,6 @@ const NoticesPage = () => {
   const favorites = useSelector(selectFavorites);
   const isLogined = useSelector(selectIsAuth);
 
-
-
- 
   const prevSearch = usePrevious(search);
   const prevCategoryName = usePrevious(categoryName);
   const needToResetPage =
@@ -64,9 +60,9 @@ const NoticesPage = () => {
     const notAuthorizedHrefs = Object.fromEntries(
       notAuthorized.map(({ href }) => [href, true])
     );
-    
-    const result =   JSON.parse(window.localStorage.getItem("persist:auth"))
-  
+
+    const result = JSON.parse(window.localStorage.getItem("persist:auth"));
+
     const newCategoryName = getCategoryName(
       secName,
       isLogined || result.token,
@@ -77,80 +73,78 @@ const NoticesPage = () => {
     setCategoryName(newCategoryName);
   }, [location, isLogined, categoryName]);
 
-
   function getCategoryName(
     secName,
     isAuthenticated,
     authorizedHrefs,
     notAuthorizedHrefs
   ) {
-    const hrefs = isAuthenticated !== "null" ? authorizedHrefs : notAuthorizedHrefs;
+    const hrefs =
+      isAuthenticated !== "null" ? authorizedHrefs : notAuthorizedHrefs;
     return hrefs[secName] ? secName : "sell";
   }
 
-
   useEffect(() => {
-      const searchParams = { search, page };
-      if (needToResetPage) setPage(1);
-  
-      if (search !== "") {
-        setIsLoading(true);
-        getNoticesBySearch(searchParams)
-          .then((data) => {
-            setData(data);
-            setIsLoading(false);
-          })
-          .catch((error) => {
-            setError(error);
-            setIsLoading(false);
-          });
-  
-        return;
-      }
-  
-      const fetchData = async () => {
-        try {
-          let data;
-          if(categoryName!==""){
-            switch (categoryName) {
-              case "own":
-                setIsLoading(true);
-                data = await getMyOwnNotices({ page }); // sortedValue
-                break;
-              case "favorite-ads":
-                setIsLoading(true);
-                data = await getFavoriteNotices({ page });
-                break;
-                default :
-                setIsLoading(true);
-                  data = await getNoticesByCategory(categoryName, { page });
-                  break;
-            }
-          }
-          if(data){
-            setData(data);
-            setIsLoading(false);
-          }
-        } catch (error) {
+    const searchParams = { search, page };
+    if (needToResetPage) setPage(1);
+
+    if (search !== "") {
+      setIsLoading(true);
+      getNoticesBySearch(searchParams)
+        .then((data) => {
+          setData(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
           setError(error);
           setIsLoading(false);
+        });
+
+      return;
+    }
+
+    const fetchData = async () => {
+      try {
+        let data;
+        if (categoryName !== "") {
+          switch (categoryName) {
+            case "own":
+              setIsLoading(true);
+              data = await getMyOwnNotices({ page }); // sortedValue
+              break;
+            case "favorite-ads":
+              setIsLoading(true);
+              data = await getFavoriteNotices({ page });
+              break;
+            default:
+              setIsLoading(true);
+              data = await getNoticesByCategory(categoryName, { page });
+              break;
+          }
         }
-      };
-  
-      fetchData();
+        if (data) {
+          setData(data);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        setError(error);
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName, page, search]);
 
-
-  const onSubmit = (query) =>{
-    if(query!==""){
-      setSearch(query)
+  const onSubmit = (query) => {
+    if (query !== "") {
+      setSearch(query);
     }
   };
 
   const handlerModalAddPet = () => {
     if (!isLogined) {
-      setIsModalLogined(!isModalLogined)
+      setIsModalLogined(!isModalLogined);
     } else {
       setIsModalAddPet(!isModalAddPet);
     }
@@ -180,7 +174,10 @@ const NoticesPage = () => {
         />
 
         <div>
-          {isLoading ? (
+          <Suspense fallback={<div>Loading page...</div>}>
+            <Outlet />
+          </Suspense>
+          {/* {isLoading ? (
             <PawsLoader />
           ) : error ? (
             <ResultNotFound text="Result not found" />
@@ -196,7 +193,7 @@ const NoticesPage = () => {
               categoryName={categoryName}
               setPage={setPage}
             />
-          )}
+          )} */}
         </div>
       </Container>
     </>
