@@ -61,23 +61,19 @@ export const NoticesCategoryList = ({
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (addedPet?._id && notices !== undefined) {
-      console.log(
-        "file: NoticesCategoryLIst.jsx:69 ~ addedPet._id >>",
-        addedPet._id
-      );
-
-      const include = notices.find((el) => el._id === addedPet?._id);
-      if (include) {
-        setIsLoading(true);
-        const result = notices.filter((el) => el._id !== include._id);
-        setNotices([addedPet, ...result]);
-        setIsLoading(false);
-      } else if (!include && addedPet && addedPet !== undefined) {
-        setIsLoading(true);
-        setNotices([addedPet, ...notices]);
-        setIsLoading(false);
+  useEffect(()=>{
+    if(addedPet?._id && notices!==undefined){
+     const include = notices.find(el=>el._id === addedPet?._id)
+      if(include && categoryName === "own"){
+        setIsLoading(true)
+        const result = notices.filter(
+          el => el._id !== include._id)
+          setNotices([addedPet, ...result])
+          setIsLoading(false)
+      }else if(!include && addedPet && addedPet!==undefined && categoryName === "own"){
+        setIsLoading(true)
+         setNotices([addedPet,...notices])
+         setIsLoading(false)
       }
     } else if (notices === undefined && addedPet?._id) {
       setNotices([addedPet]);
