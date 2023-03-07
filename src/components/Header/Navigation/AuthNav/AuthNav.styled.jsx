@@ -22,12 +22,13 @@ export const NavAuthUl = styled.ul`
 `;
 
 export const NavAuthItem = styled(NavLink)`
-  color: ${(props) => (props.color ? `${colors.white}` : `${colors.black}`)};
+  background: ${(props) => ((props.color === 'white' && props.init ) || (!props.init && props.color === 'orange')
+      ? (`${colors.white}`) : `${colors.accentOrange}`)};
+  color: ${(props) => ((props.color === 'white' && props.init ) || (!props.init && props.color === 'orange') ? `${colors.black}` : `${colors.white}`)};
   padding: 6px 28px;
   border-radius: 40px;
   font-size: 14px;
   text-decoration: none;
-  background: ${(props) => (props.color ? `${colors.accentOrange}` : ``)};
   border: 2px solid ${colors.accentOrange};
   margin-right: 12px;
   transition: border ${transition}, background ${transition};
@@ -44,14 +45,21 @@ export const NavAuthItem = styled(NavLink)`
     margin-right: 0;
   }
 
-  &:hover,
-  &:focus {
-    background: ${(props) => (props.color ? `${colors.darkOrange}` : ``)};
+  &:hover {
+    background: ${colors.darkOrange};
     border: 2px solid ${colors.darkOrange};
+    color: ${colors.white};
   }
 
   &.active {
-    background: ${(props) => (props.color ? `${colors.darkOrange}` : ``)};
-    border: 2px solid ${colors.darkOrange};
+    background: ${colors.accentOrange};
+    border: 2px solid ${colors.accentOrange};
+    color: ${colors.white};
+
+    &:hover {
+      background: ${colors.darkOrange};
+      border: 2px solid ${colors.darkOrange};
+      color: ${colors.white};
+    }
   }
 `;
