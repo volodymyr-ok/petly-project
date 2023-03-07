@@ -84,9 +84,8 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       price,
       comments,
     } = data;
-    // console.log("DATA", data);
 
-    if (id) {
+    if (id && image) {
       const newData = {
         title: data.title,
         name: data.name,
@@ -101,14 +100,29 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
 
       const formImage = new FormData();
       formImage.append("avatar", image);
-      onClose([id, newData, formImage]);
+      // onClose([id, newData, formImage]);
+
       dispatch(updateNotice([newData, id]));
       dispatch(updateNoticeAvatar([formImage, id]));
+
+      navigate(`/notices/own`);
+    } else if (id) {
+      const newData = {
+        title: data.title,
+        name: data.name,
+        birthday: data.birthday,
+        breed: data.breed,
+        categoryName: data.categoryName,
+        sex: data.sex,
+        location: data.location,
+        price: data.price,
+        comments: data.comments,
+      };
+
+      dispatch(updateNotice([newData, id]));
       navigate(`/notices/own`);
     } else {
-      //  console.log("chomus tut");
       const formData = new FormData();
-      // formData.append("avatar", file);
       formData.append("avatar", image);
       formData.append("title", title);
       formData.append("name", name);

@@ -10,8 +10,8 @@ import usePrevious from "../../../hooks/usePrevious";
 
 export const NewsList = () => {
   const [news, setNews] = useState({});
-  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const prevSearch = usePrevious(search);
 

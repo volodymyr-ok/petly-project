@@ -3,91 +3,29 @@ import { Title } from "../../components/Title/Title";
 import { Container } from "../../components/Container/Container";
 import { SearchInput } from "../../components/SearchInput/SearchInput";
 import { NoticesCategoryNav } from "../../components/NoticesCategoryNav/NoticesCategoryNav";
-import { NoticesCategoryList } from "../../components/NoticesCategoryLIst/NoticesCategoryLIst";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
-import { ResultNotFound } from "../../components/ResultNotFound/ResultNotFound";
-import { selectIsAuth, selectUser } from "../../redux/auth/auth-selectors";
-import {
-  authorized,
-  notAuthorized,
-} from "../../components/NoticesCategoryNav/NoticesCategoryNav";
-import { selectFavorites } from "../../redux/auth/auth-selectors";
-import {
-  getNoticesByCategory,
-  getFavoriteNotices,
-  getMyOwnNotices,
-  getNoticesBySearch,
-  //  removeNotice,
-} from "./services";
-import { Outlet, useLocation } from "react-router-dom";
-import usePrevious from "../../hooks/usePrevious";
+import { selectIsAuth } from "../../redux/auth/auth-selectors";
+import { Outlet } from "react-router-dom";
 import { WarningMessage } from "../../components/WarningMessage/WarningMessage";
 import { Modal } from "../../components/Modal/Modal";
 import { AddNoticeForm } from "../../components/ModalAddNotice/AddNoticeForm/AddNoticeForm";
-import { selectIsNoticesLoading } from "../../redux/notice/notice-selectors";
-//import { Navigate } from 'react-router-dom';
+// import { selectIsNoticesLoading } from "../../redux/notice/notice-selectors";
+import { useNoticesParams } from "../../hooks/useMyContext";
+import PaginationBar from "../../components/PaginationBar/PaginationBar";
+import {
+  selectIsNoticesLoading,
+  selectPagesInfo,
+} from "../../redux/notice/notice-selectors";
 
 const NoticesPage = () => {
-  const [page, setPage] = useState(1);
-  const [categoryName, setCategoryName] = useState("");
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [isModalLogined, setIsModalLogined] = useState(false);
-  // const [reload, setReload] = useState(false);
-
-  // const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState({});
-  const [search, setSearch] = useState("");
-  //const [modalRemove, setModalRemove] = useState(false);
-
-  const location = useLocation();
-
-  const user = useSelector(selectUser);
-  const favorites = useSelector(selectFavorites);
   const isLogined = useSelector(selectIsAuth);
-
-  const prevSearch = usePrevious(search);
-  const prevCategoryName = usePrevious(categoryName);
-  const needToResetPage =
-    (prevSearch !== search && page > 1) ||
-    (prevCategoryName !== categoryName && page > 1);
-
-  useEffect(() => {
-    const { pathname } = location;
-
-    const [, , secName] = pathname.split("/");
-
-    const authorizedHrefs = Object.fromEntries(
-      authorized.map(({ href }) => [href, true])
-    );
-    const notAuthorizedHrefs = Object.fromEntries(
-      notAuthorized.map(({ href }) => [href, true])
-    );
-
-    const result = JSON.parse(window.localStorage.getItem("persist:auth"));
-
-    const newCategoryName = getCategoryName(
-      secName,
-      isLogined || result.token,
-      authorizedHrefs,
-      notAuthorizedHrefs
-    );
-
-    setCategoryName(newCategoryName);
-  }, [location, isLogined, categoryName]);
-
-  function getCategoryName(
-    secName,
-    isAuthenticated,
-    authorizedHrefs,
-    notAuthorizedHrefs
-  ) {
-    const hrefs =
-      isAuthenticated !== "null" ? authorizedHrefs : notAuthorizedHrefs;
-    return hrefs[secName] ? secName : "sell";
-  }
+  const pagesInfo = useSelector(selectPagesInfo);
+  const isLoading = useSelector(selectIsNoticesLoading);
+  const { search, setSearch, setPage } = useNoticesParams();
 
   // useEffect(() => {
   //   const searchParams = { search, page };
@@ -138,31 +76,12 @@ const NoticesPage = () => {
   // }, [categoryName, page, search]);
 
   const onSubmit = (query) => {
-    if (query !== "") {
-      setSearch(query);
-    }
+    if (query !== search) setSearch(query);
   };
 
   const handlerModalAddPet = () => {
-    console.log("click");
-    console.log("isLogined >>", isLogined);
-    if (!isLogined) {
-      setIsModalLogined(!isModalLogined);
-    } else {
-      setIsModalAddPet(!isModalAddPet);
-    }
-  };
-
-  const onChooseCategory = (e) => {
-    const expr = e.target.dataset.id;
-    authorized.map(({ href }) => {
-      if (href === expr) {
-        setCategoryName(expr);
-      } else {
-        return null;
-      }
-      return null;
-    });
+    if (!isLogined) setIsModalLogined(!isModalLogined);
+    else setIsModalAddPet(!isModalAddPet);
   };
 
   return (
@@ -173,20 +92,18 @@ const NoticesPage = () => {
         <NoticesCategoryNav
           onAddPet={handlerModalAddPet}
           isLogined={isLogined}
-          onChooseCategory={onChooseCategory}
         />
 
         <>
-          <Suspense fallback={<div>Loading page...</div>}>
+          <Suspense fallback={<PawsLoader />}>
             <Outlet />
           </Suspense>
-
+          {!isLoading && <PaginationBar setPage={setPage} info={pagesInfo} />}
           {isModalAddPet && (
             <Modal type="addPet" onClose={() => setIsModalAddPet(false)}>
               <AddNoticeForm onClose={() => setIsModalAddPet(false)} />
             </Modal>
           )}
-
           {isModalLogined && (
             <WarningMessage
               type="auth"

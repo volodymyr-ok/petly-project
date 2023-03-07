@@ -40,11 +40,7 @@ export const authorized = [
   },
 ];
 
-export const NoticesCategoryNav = ({
-  onChooseCategory,
-  isLogined,
-  onAddPet,
-}) => {
+export const NoticesCategoryNav = ({ isLogined, onAddPet }) => {
   const location = useLocation();
   const { pathname } = location;
   // console.log("pathname", pathname === "/notices");
@@ -52,7 +48,7 @@ export const NoticesCategoryNav = ({
   return (
     <>
       <NavBox>
-        <NavList onClick={onChooseCategory}>
+        <NavList>
           {isLogined
             ? authorized.map(({ href, text }) => {
                 return (

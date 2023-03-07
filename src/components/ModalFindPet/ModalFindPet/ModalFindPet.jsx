@@ -18,14 +18,24 @@ import {
   ModalContent,
   HidenText,
   HidenTextBox,
-  StyledLinkContact
+  StyledLinkContact,
 } from "./ModalFindPet.styled";
 //import { WarningMessage } from "../../WarningMessage/WarningMessage";
 import { useState } from "react";
 import { Modal } from "../../Modal/Modal";
-import { Wrap, StyledLink, Text } from "../../WarningMessage/WarningMessage.styled";
+import {
+  Wrap,
+  StyledLink,
+  Text,
+} from "../../WarningMessage/WarningMessage.styled";
 
-export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user, isLogined }) => {
+export const ModalFindPet = ({
+  petInfo,
+  addFavorite,
+  favoritesList,
+  user,
+  isLogined,
+}) => {
   const {
     avatar,
     birthday,
@@ -46,16 +56,15 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user, isLogi
   const isOwner = user._id === owner;
   const isFavorite = favoritesList?.includes(_id);
 
-const [isLoginedModal, setIsLoginedModal] = useState(false)
-const [isContactModal, setIsModalContact] = useState(false)
+  const [isLoginedModal, setIsLoginedModal] = useState(false);
+  const [isContactModal, setIsModalContact] = useState(false);
 
-
-  const modalHandler = () =>{
-    setIsLoginedModal(!isLoginedModal)
-  }
-  const modalContactHandler = () =>{
-    setIsModalContact(!isContactModal)
-  }
+  const modalHandler = () => {
+    setIsLoginedModal(!isLoginedModal);
+  };
+  const modalContactHandler = () => {
+    setIsModalContact(!isContactModal);
+  };
 
   return (
     <ModalCard>
@@ -92,31 +101,34 @@ const [isContactModal, setIsModalContact] = useState(false)
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              {isLogined ? <ValueInfo>
-                <ItemLink href={`mailto:${email}`}>
-                  {email ? email : "user@mail1111111.com"}
-                </ItemLink>
-              </ValueInfo> :
-              <HidenTextBox>
-                 <HidenText>To see email pls login!</HidenText>
-                 <ValueInfo>**********@mail.com</ValueInfo>
-               </HidenTextBox>}
+              {isLogined ? (
+                <ValueInfo>
+                  <ItemLink href={`mailto:${email}`}>
+                    {email ? email : "user@mail1111111.com"}
+                  </ItemLink>
+                </ValueInfo>
+              ) : (
+                <HidenTextBox>
+                  <HidenText>To see email pls login!</HidenText>
+                  <ValueInfo>**********@mail.com</ValueInfo>
+                </HidenTextBox>
+              )}
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
 
-
-              {isLogined ? <ValueInfo>
-                <ItemLink href={`tel:${phone}`}>
-                  {phone ? phone : "+380971234567"}
-                </ItemLink>
-              </ValueInfo>:
-              <HidenTextBox>
+              {isLogined ? (
+                <ValueInfo>
+                  <ItemLink href={`tel:${phone}`}>
+                    {phone ? phone : "+380971234567"}
+                  </ItemLink>
+                </ValueInfo>
+              ) : (
+                <HidenTextBox>
                   <HidenText>To see phone pls login!</HidenText>
                   <ValueInfo>+ ** (***) ***-**-**</ValueInfo>
-               </HidenTextBox>}
-
-
+                </HidenTextBox>
+              )}
             </ItemInfo>
             {categoryName === "sell" ? (
               <ItemInfo>
@@ -134,38 +146,52 @@ const [isContactModal, setIsModalContact] = useState(false)
         </ComentsText>
       </BlokComments>
       <BlokButton>
-        {!isLogined && <BtnContct click={modalHandler}/>}
-        {!isOwner && isLogined && <BtnContct click={modalContactHandler}/>}
+        {!isLogined && <BtnContct click={modalHandler} />}
+        {!isOwner && isLogined && <BtnContct click={modalContactHandler} />}
 
-       {isLogined ? <BtnAddTo
-          type="button"
-          like={(e) => addFavorite(e, _id, owner, isFavorite)}
-        >
-          {!isOwner ? (isFavorite ? "Remove from" : "Add to") : "Edit"}
-        </BtnAddTo> :
-         <BtnAddTo  like={modalHandler}>Add to</BtnAddTo>}
-        { isLoginedModal && (
-       <Modal onClose={modalHandler}>
-          <ModalContent>
-              <Text>You need be authenticated first</Text>
-            <Wrap>
-              <StyledLink to="/login">Login</StyledLink>
-              <StyledLink to="/register">Register</StyledLink>
-            </Wrap>
-          </ModalContent>
-       </Modal>
-      )}
-      {
-        isContactModal && <Modal onClose={modalContactHandler}>
+        {isLogined ? (
+          <BtnAddTo
+            type="button"
+            like={(e) => addFavorite(e, _id, owner, isFavorite)}
+          >
+            {!isOwner ? (isFavorite ? "Remove from" : "Add to") : "Edit"}
+          </BtnAddTo>
+        ) : (
+          <BtnAddTo like={modalHandler}>Add to</BtnAddTo>
+        )}
+        {isLoginedModal && (
+          <Modal onClose={modalHandler}>
             <ModalContent>
-          <Text>Contact with</Text>
-            <Wrap>
-              <StyledLinkContact href={`tel:${phone}`}>Call</StyledLinkContact>
-              <StyledLinkContact href={`mailto:${email}`}>Write email</StyledLinkContact>
-            </Wrap>
+              <Text>You need be authenticated first</Text>
+              <Wrap>
+                <StyledLink to="/login">Login</StyledLink>
+                <StyledLink to="/register">Register</StyledLink>
+              </Wrap>
             </ModalContent>
-        </Modal>
-      }
+          </Modal>
+        )}
+        {isContactModal && (
+          <Modal onClose={modalContactHandler}>
+            <ModalContent>
+              <Text>Contact with</Text>
+              <Wrap>
+                <StyledLinkContact
+                  onClick={modalContactHandler}
+                  href={`tel:${phone}`}
+                >
+                  Call
+                </StyledLinkContact>
+                <StyledLinkContact
+                  onClick={modalContactHandler}
+                  target="_blank"
+                  href={`mailto:${email} `}
+                >
+                  Write email
+                </StyledLinkContact>
+              </Wrap>
+            </ModalContent>
+          </Modal>
+        )}
       </BlokButton>
     </ModalCard>
   );

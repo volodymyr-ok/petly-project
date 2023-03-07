@@ -16,7 +16,6 @@ import UserPage from "./pages/UserPage/UserPage";
 import { getUser } from "./redux/auth/auth-operations";
 import { selectIsLoading } from "./redux/auth/auth-selectors";
 import NotFound from "./components/NotFound/NotFound";
-import { NoticesCategoryList } from "./components/NoticesCategoryLIst/NoticesCategoryLIst";
 import NoticesPageContent from "./components/NoticesPageContent/NoiticesPageContent";
 
 const App = () => {

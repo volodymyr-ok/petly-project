@@ -3,10 +3,13 @@ import { PrivateApi, PublicApi } from "../../http/http";
 
 export const getNoticesPublic = createAsyncThunk(
   "notices/getNoticesPublic",
-  async (category, thunkAPI) => {
+  async ({ category, search = "", page = 1 }, thunkAPI) => {
     try {
-      const res = await PublicApi.get(`/api/notices/${category}`);
-      return res.data.data;
+      // /api/notices/${category}?search="query"&page="1"
+      const res = await PublicApi.get(
+        `/api/notices/${category}?search=${search}&page=${page}`
+      );
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -14,10 +17,12 @@ export const getNoticesPublic = createAsyncThunk(
 );
 export const getNoticesPrivate = createAsyncThunk(
   "notices/getNoticesPrivate",
-  async (category, thunkAPI) => {
+  async ({ category, search = "", page = 1 }, thunkAPI) => {
     try {
-      const res = await PrivateApi.get(`/api/notices/${category}`);
-      return res.data.data;
+      const res = await PrivateApi.get(
+        `/api/notices/${category}?search=${search}&page=${page}`
+      );
+      return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

@@ -117,7 +117,6 @@ const authSlice = createSlice({
           (el) => el === action.payload
         );
         state.user.favorites.splice(index, 1);
-        // state.user.favorites.push(action.payload);
       })
 
       .addCase(logoutUser.pending, handlePending)
