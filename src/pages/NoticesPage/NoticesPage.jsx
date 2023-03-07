@@ -110,7 +110,7 @@ const NoticesPage = () => {
           switch (categoryName) {
             case "own":
               setIsLoading(true);
-              data = await getMyOwnNotices({ page }); // sortedValue
+              data = await getMyOwnNotices({ page });
               break;
             case "favorite-ads":
               setIsLoading(true);
@@ -173,7 +173,7 @@ const NoticesPage = () => {
           onChooseCategory={onChooseCategory}
         />
 
-        <div>
+        <>
           <Suspense fallback={<div>Loading page...</div>}>
             <Outlet />
           </Suspense>
@@ -194,7 +194,7 @@ const NoticesPage = () => {
               setPage={setPage}
             />
           )} */}
-        </div>
+        </>
       </Container>
     </>
   );

@@ -5,8 +5,10 @@ import {
   getNotice,
   getNoticeById,
   getNoticesBySearch,
+  getNoticesPrivate,
+  getNoticesPublic,
   updateNotice,
-  updateNoticeAvatar
+  updateNoticeAvatar,
 } from "./notice-operations";
 
 const handlePending = (state) => {
@@ -30,7 +32,7 @@ const handleRejected = (state, action) => {
 const noticeSlice = createSlice({
   name: "notice",
   initialState: {
-     items: {},
+    items: [],
     isLoading: false,
     error: null,
   },
@@ -39,7 +41,21 @@ const noticeSlice = createSlice({
       .addCase(getNotice.pending, handlePending)
       .addCase(getNotice.rejected, handleRejected)
       .addCase(getNotice.fulfilled, (state, action) => {
-         state.items = action.payload;
+        state.items = action.payload;
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(getNoticesPublic.pending, handlePending)
+      .addCase(getNoticesPublic.rejected, handleRejected)
+      .addCase(getNoticesPublic.fulfilled, (state, action) => {
+        state.items = action.payload;
+        state.error = null;
+        state.isLoading = false;
+      })
+      .addCase(getNoticesPrivate.pending, handlePending)
+      .addCase(getNoticesPrivate.rejected, handleRejected)
+      .addCase(getNoticesPrivate.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.error = null;
         state.isLoading = false;
       })

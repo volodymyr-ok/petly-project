@@ -17,8 +17,8 @@ import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
 import {
-  selectNotice,
-  selectIsLoading,
+  selectNotices,
+  selectIsNoticesLoading,
 } from "../../redux/notice/notice-selectors";
 import { getMyOwnNotices } from "../../pages/NoticesPage/services";
 import { filterData } from "./utils";
@@ -48,8 +48,8 @@ export const NoticesCategoryList = ({
   const [error, setError] = useState(false);
   const [notices, setNotices] = useState(data.data);
 
-  const addedPet = useSelector(selectNotice);
-  const isUploading = useSelector(selectIsLoading);
+  const addedPet = useSelector(selectNotices);
+  const isUploading = useSelector(selectIsNoticesLoading);
 
   useEffect(() => {
     if (isUploading) {
@@ -87,12 +87,14 @@ export const NoticesCategoryList = ({
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) onAddPet();
+
     if (isLogined) {
       if (user._id !== owner) {
         if (!favorites.includes(id)) dispatch(addFavorites(id));
         else if (isFavorite) dispatch(removeFavorites(id));
       } else {
         setPetInfo(notices.find((el) => el._id === id));
+
         setIsModalEditPost(!isModalEditPost);
       }
     }

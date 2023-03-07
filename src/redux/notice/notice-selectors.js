@@ -1,3 +1,3 @@
-export const selectIsLoading = (state) => state.notice.isLoading;
+export const selectIsNoticesLoading = (state) => state.notice.isLoading;
 export const selectError = (state) => state.notice.error;
-export const selectNotice = (state) => state.notice.items;
+export const selectNotices = (state) => state.notice.items;
