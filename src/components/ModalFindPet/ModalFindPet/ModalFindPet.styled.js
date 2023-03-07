@@ -176,3 +176,14 @@ export const BlokButton = styled.div`
     justify-content: end;
   }
 `;
+export const ModalContent = styled.div`
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  ${device.tablet}{
+    width: 568px;
+    height: 158px;
+    /* padding: 40px 80px; */
+  }
+`;

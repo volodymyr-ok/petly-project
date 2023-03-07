@@ -14,9 +14,14 @@ import {
   ComentsText,
   BlokButton,
   ImgAndInfoBox,
+  ModalContent
 } from "./ModalFindPet.styled";
+//import { WarningMessage } from "../../WarningMessage/WarningMessage";
+import { useState } from "react";
+import { Modal } from "../../Modal/Modal";
+import { Wrap, StyledLink, Text } from "../../WarningMessage/WarningMessage.styled";
 
-export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
+export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user, isLogined }) => {
   const {
     avatar,
     birthday,
@@ -37,8 +42,12 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
   const isOwner = user._id === owner;
   const isFavorite = favoritesList?.includes(_id);
 
-
+const [isLoginedModal, setIsLoginedModal] = useState(false)
   // console.log("coments", petInfo, petInfo?.comments);
+  console.log(isLoginedModal)
+  const modalHandler = () =>{
+    setIsLoginedModal(!isLoginedModal)
+  }
 
   return (
     <ModalCard>
@@ -100,12 +109,31 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
       </BlokComments>
       <BlokButton>
         {!isOwner && <BtnContct />}
-        <BtnAddTo
+       {isLogined ? <BtnAddTo
           type="button"
           like={(e) => addFavorite(e, _id, owner, isFavorite)}
         >
           {!isOwner ? (isFavorite ? "Remove from" : "Add to") : "Edit"}
-        </BtnAddTo>
+        </BtnAddTo> :
+         <BtnAddTo  like={modalHandler}>Add to</BtnAddTo>}
+        { isLoginedModal && (
+       <Modal onClose={modalHandler}>
+          <ModalContent>
+              <Text>You need be authenticated first</Text>
+            <Wrap>
+              <StyledLink to="/login">Login</StyledLink>
+              <StyledLink to="/register">Register</StyledLink>
+            </Wrap>
+          </ModalContent>
+         {/* <WarningMessage
+          // onRemove={(postId) => onRemove(postId)}
+          type="auth"
+          // approveFunk={deletePetItem}
+          onClose={modalHandler}
+          text="You need be authenticated first"
+        /> */}
+       </Modal>
+      )}
       </BlokButton>
     </ModalCard>
   );
