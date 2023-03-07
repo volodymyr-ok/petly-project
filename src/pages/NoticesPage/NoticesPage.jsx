@@ -55,6 +55,7 @@ const NoticesPage = () => {
 
   useEffect(() => {
     const { pathname } = location;
+
     const [, , secName] = pathname.split("/");
 
     const authorizedHrefs = Object.fromEntries(
@@ -75,6 +76,8 @@ const NoticesPage = () => {
 
     setCategoryName(newCategoryName);
   }, [location, isLogined, categoryName]);
+
+
   function getCategoryName(
     secName,
     isAuthenticated,

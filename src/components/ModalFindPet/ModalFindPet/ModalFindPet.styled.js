@@ -15,7 +15,7 @@ export const ModalCard = styled.div`
   border-radius: 30px 30px 30px 30px;
   background-color: ${colors.white};
   overflow-y: auto;
-  overflow-x: hidden; */
+  overflow-x: hidden;
   ${device.mobile} {
    max-width: 440px;
   }
@@ -116,6 +116,14 @@ export const ListInfo = styled.ul`
 
 export const ItemInfo = styled.li`
   display: flex;
+`;
+export const ItemLink = styled.a`
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    color: ${colors.accentOrange};
+  }
 `;
 
 export const NameInfo = styled.span`

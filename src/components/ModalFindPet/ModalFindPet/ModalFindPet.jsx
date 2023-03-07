@@ -14,6 +14,7 @@ import {
   ComentsText,
   BlokButton,
   ImgAndInfoBox,
+  ItemLink,
 } from "./ModalFindPet.styled";
 
 export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
@@ -74,11 +75,19 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              <ValueInfo>{email ? email : "user@mail1111111.com"}</ValueInfo>
+              <ValueInfo>
+                <ItemLink href={`mailto:${email}`}>
+                  {email ? email : "user@mail1111111.com"}
+                </ItemLink>
+              </ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
-              <ValueInfo>{phone ? phone : "+380971234567"}</ValueInfo>
+              <ValueInfo>
+                <ItemLink href={`tel:${phone}`}>
+                  {phone ? phone : "+380971234567"}
+                </ItemLink>
+              </ValueInfo>
             </ItemInfo>
             {categoryName === "sell" ? (
               <ItemInfo>
