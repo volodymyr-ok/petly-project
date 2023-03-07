@@ -31,12 +31,11 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
     _id,
     comments,
     phone,
-    email
+    email,
   } = petInfo;
 
   const isOwner = user._id === owner;
   const isFavorite = favoritesList?.includes(_id);
-
 
   // console.log("coments", petInfo, petInfo?.comments);
 
@@ -75,13 +74,11 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              <ValueInfo>
-                {email ?  email : "user@mail1111111.com"}
-              </ValueInfo>
+              <ValueInfo>{email ? email : "user@mail1111111.com"}</ValueInfo>
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
-              <ValueInfo>{phone ?  phone : "+380971234567"}</ValueInfo>
+              <ValueInfo>{phone ? phone : "+380971234567"}</ValueInfo>
             </ItemInfo>
             {categoryName === "sell" ? (
               <ItemInfo>
