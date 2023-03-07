@@ -15,9 +15,17 @@ import {
   BlokButton,
   ImgAndInfoBox,
   ItemLink,
+  ModalContent,
+  HidenText,
+  HidenTextBox,
+  StyledLinkContact
 } from "./ModalFindPet.styled";
+//import { WarningMessage } from "../../WarningMessage/WarningMessage";
+import { useState } from "react";
+import { Modal } from "../../Modal/Modal";
+import { Wrap, StyledLink, Text } from "../../WarningMessage/WarningMessage.styled";
 
-export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
+export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user, isLogined }) => {
   const {
     avatar,
     birthday,
@@ -38,7 +46,16 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
   const isOwner = user._id === owner;
   const isFavorite = favoritesList?.includes(_id);
 
-  // console.log("coments", petInfo, petInfo?.comments);
+const [isLoginedModal, setIsLoginedModal] = useState(false)
+const [isContactModal, setIsModalContact] = useState(false)
+
+
+  const modalHandler = () =>{
+    setIsLoginedModal(!isLoginedModal)
+  }
+  const modalContactHandler = () =>{
+    setIsModalContact(!isContactModal)
+  }
 
   return (
     <ModalCard>
@@ -75,19 +92,31 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Email:</NameInfo>
-              <ValueInfo>
+              {isLogined ? <ValueInfo>
                 <ItemLink href={`mailto:${email}`}>
                   {email ? email : "user@mail1111111.com"}
                 </ItemLink>
-              </ValueInfo>
+              </ValueInfo> :
+              <HidenTextBox>
+                 <HidenText>To see email pls login!</HidenText>
+                 <ValueInfo>**********@mail.com</ValueInfo>
+               </HidenTextBox>}
             </ItemInfo>
             <ItemInfo>
               <NameInfo>Phone:</NameInfo>
-              <ValueInfo>
+
+
+              {isLogined ? <ValueInfo>
                 <ItemLink href={`tel:${phone}`}>
                   {phone ? phone : "+380971234567"}
                 </ItemLink>
-              </ValueInfo>
+              </ValueInfo>:
+              <HidenTextBox>
+                  <HidenText>To see phone pls login!</HidenText>
+                  <ValueInfo>+ ** (***) ***-**-**</ValueInfo>
+               </HidenTextBox>}
+
+
             </ItemInfo>
             {categoryName === "sell" ? (
               <ItemInfo>
@@ -105,13 +134,38 @@ export const ModalFindPet = ({ petInfo, addFavorite, favoritesList, user }) => {
         </ComentsText>
       </BlokComments>
       <BlokButton>
-        {!isOwner && <BtnContct />}
-        <BtnAddTo
+        {!isLogined && <BtnContct click={modalHandler}/>}
+        {!isOwner && isLogined && <BtnContct click={modalContactHandler}/>}
+
+       {isLogined ? <BtnAddTo
           type="button"
           like={(e) => addFavorite(e, _id, owner, isFavorite)}
         >
           {!isOwner ? (isFavorite ? "Remove from" : "Add to") : "Edit"}
-        </BtnAddTo>
+        </BtnAddTo> :
+         <BtnAddTo  like={modalHandler}>Add to</BtnAddTo>}
+        { isLoginedModal && (
+       <Modal onClose={modalHandler}>
+          <ModalContent>
+              <Text>You need be authenticated first</Text>
+            <Wrap>
+              <StyledLink to="/login">Login</StyledLink>
+              <StyledLink to="/register">Register</StyledLink>
+            </Wrap>
+          </ModalContent>
+       </Modal>
+      )}
+      {
+        isContactModal && <Modal onClose={modalContactHandler}>
+            <ModalContent>
+          <Text>Contact with</Text>
+            <Wrap>
+              <StyledLinkContact href={`tel:${phone}`}>Call</StyledLinkContact>
+              <StyledLinkContact href={`mailto:${email}`}>Write email</StyledLinkContact>
+            </Wrap>
+            </ModalContent>
+        </Modal>
+      }
       </BlokButton>
     </ModalCard>
   );

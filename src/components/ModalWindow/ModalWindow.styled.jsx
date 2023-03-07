@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { device, transition } from "../../utils/mixin";
 
 export const BackDrop = styled.div`
+  z-index: 10;
   position: fixed;
   top: 0;
   left: 0;

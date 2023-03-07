@@ -18,7 +18,10 @@ import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
 import { selectNotice, selectIsLoading } from "../../redux/notice/notice-selectors";
 import { getMyOwnNotices } from "../../pages/NoticesPage/services";
+import { filterData } from "./utils";
+
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
+
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
 
@@ -77,12 +80,14 @@ export const NoticesCategoryList = ({
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) onAddPet();
-    if (user._id !== owner) {
-      if (!favorites.includes(id)) dispatch(addFavorites(id));
-      else if (isFavorite) dispatch(removeFavorites(id));
-    } else {
-      setPetInfo(notices.find((el) => el._id === id));
-      setIsModalEditPost(!isModalEditPost);
+    if(isLogined){
+      if (user._id !== owner) {
+        if (!favorites.includes(id)) dispatch(addFavorites(id));
+        else if (isFavorite) dispatch(removeFavorites(id));
+      } else {
+        setPetInfo(notices.find((el) => el._id === id));
+        setIsModalEditPost(!isModalEditPost);
+      }
     }
   };
 
@@ -94,13 +99,14 @@ const page = 1
    const fetchData = async()=>{
     if(modalRemove && petId!==""){
       setModalRemove(!modalRemove)
-      const result = notices.filter(
-        el => el._id !== petId)
+      const result = filterData(notices, petId)
       setIsLoading(true);
       if(result.length <= 1){
         try {
           const data = await getMyOwnNotices({page})
-          setNotices(data.data)
+          await removeNotice(petId)
+          const result = filterData(data.data, petId)
+          setNotices(result)
           setIsLoading(false);
         } catch (error) {
           setError(error);
@@ -135,6 +141,8 @@ const page = 1
     }
   };
 
+
+//console.log(!isModalReadMore&& isModalLogined && "da")
   return (
     <>
       <ListBox>
@@ -174,9 +182,11 @@ const page = 1
       {isModalReadMore && (
         <Modal
           // type="addPet"
-          onClose={() => setIsModalReadMore(!isModalReadMore)}
+          onClose={() => {
+            setIsModalReadMore(!isModalReadMore)}}
         >
           <ModalFindPet
+            isLogined ={isLogined}
             user={user}
             onClose={() => setIsModalReadMore(!isModalReadMore)}
             petInfo={petInfo}
@@ -205,7 +215,7 @@ const page = 1
           cancelText={"Cancel"}
         />
       )}
-      {isModalLogined && (
+      { isModalLogined && (
         <WarningMessage
           // onRemove={(postId) => onRemove(postId)}
           type="auth"
