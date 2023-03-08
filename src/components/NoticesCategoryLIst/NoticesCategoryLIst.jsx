@@ -22,6 +22,7 @@ import {
 } from "../../redux/notice/notice-selectors";
 import { getMyOwnNotices } from "../../pages/NoticesPage/services";
 import { filterData } from "./utils";
+//import {ReactComponent as Add} from "../../assets/svg/Addpet.svg"
 
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
 
