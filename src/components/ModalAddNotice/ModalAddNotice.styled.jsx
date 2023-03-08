@@ -34,6 +34,7 @@ export const RadioWrap = styled.div`
 
 export const Label = styled.label`
   /* height: 54px; */
+
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -390,3 +391,16 @@ export const StyledLabel = styled.label`
     line-height: 1.1;
   }
 `;
+
+
+export const PositonAbsoluteCurrency = styled.p`
+  position: absolute;
+  top: 44px;
+  right: 10px;
+  font-size: 14px;
+  ${device.tablet}{
+    font-size: 16px;
+    top: 53px;
+    right: 15px;
+  }
+  `

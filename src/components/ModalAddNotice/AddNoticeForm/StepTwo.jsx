@@ -17,6 +17,7 @@ import {
   LabelBox,
   StyledLabel,
   RadioWrap,
+  PositonAbsoluteCurrency
 } from "../ModalAddNotice.styled";
 import { ReactComponent as MaleSvg } from "../../../assets/svg/male.svg";
 import { ReactComponent as FemaleSvg } from "../../../assets/svg/female.svg";
@@ -188,10 +189,12 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
               <LabelText>
                 Price<span>*</span>
               </LabelText>
-              <Input name="price" type="text" placeholder="Type price" />
+              <Input name="price" type="text" placeholder="Type price"/>
               <FormError name="price" />
+              <PositonAbsoluteCurrency>$</PositonAbsoluteCurrency>
             </Label>
           )}
+      
           <Label file>
             <LabelText>Load the pet&apos;s image</LabelText>
 
