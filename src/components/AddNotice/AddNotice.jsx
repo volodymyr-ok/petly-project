@@ -1,15 +1,13 @@
 import { NoticeBox, NoticeBtn, NoticeText } from "./AddNotice.styled";
+import {ReactComponent as Add} from "../../assets/svg/Addpet.svg"
 
-import { SvgMarkup } from "../SvgHandler/SvgHandler";
-
-const searchSvg = SvgMarkup(21.3, 21.3, "addTo");
 
 export const AddNotice = ({onAddPet}) => {
   return (
     <>
       <NoticeBox className="notice">
         <NoticeText className="notice">Add pet</NoticeText>
-        <NoticeBtn onClick={onAddPet} className="notice">{searchSvg}</NoticeBtn>
+        <NoticeBtn onClick={onAddPet} className="notice"><Add width={23.3} height={23.3}></Add></NoticeBtn>
       </NoticeBox>
     </>
   );

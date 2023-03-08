@@ -25,6 +25,7 @@ export const Backdrop = styled.div`
 `;
 
 export const Content = styled.div`
+margin: 20px;
   background-color: ${colors.white};
   position: relative;
   min-width: 280px;
