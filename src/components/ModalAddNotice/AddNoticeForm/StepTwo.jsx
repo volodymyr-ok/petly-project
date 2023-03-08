@@ -22,7 +22,7 @@ import { ReactComponent as MaleSvg } from "../../../assets/svg/male.svg";
 import { ReactComponent as FemaleSvg } from "../../../assets/svg/female.svg";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageCropper } from "../../ImageCropper/ImageCropper";
 //import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import { useDispatch } from "react-redux";
@@ -99,7 +99,8 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       };
 
       const formImage = new FormData();
-      formImage.append("avatar", image);
+      const avatar = image ? image : null;
+      formImage.append("avatar", avatar);
       // onClose([id, newData, formImage]);
 
       dispatch(updateNotice([newData, id]));
@@ -123,7 +124,8 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       navigate(`/notices/own`);
     } else {
       const formData = new FormData();
-      formData.append("avatar", image);
+      const avatar = image ? image : null;
+      formData.append("avatar", avatar);
       formData.append("title", title);
       formData.append("name", name);
       formData.append("birthday", birthday);

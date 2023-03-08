@@ -19,20 +19,7 @@ export const StepTwo = ({ setFieldValue, values }) => {
         <FormError name="name" />
       </Label>
       <Label>
-        {/* <RegionInput>
-                    <CountryDropdown
-                        blacklist={['RU']}
-                        value={country}
-                        defaultOptionLabel={'Country'}
-                        onChange={(val) => setCountry(val)}/>
-                    <RegionDropdown
-                        defaultOptionLabel={'Region'}
-                        blankOptionLabel="Select country first"
-                        disableWhenEmpty={true}
-                        country={country}
-                        value={region}
-                        onChange={(val) => setRegion(val)}/>
-                </RegionInput> */}
+        {/* <LocationPicker value={val} disabled={false} onChange={handleChange} /> */}
 
         <Input name="city" placeholder="City, region" />
         <FormError name={NAME_INPUT_CITY} />

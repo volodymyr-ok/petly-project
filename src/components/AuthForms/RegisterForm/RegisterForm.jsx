@@ -89,7 +89,7 @@ export const RegisterForm = () => {
               phone: Yup.string()
                 .matches(
                   phoneRegexp,
-                  "phone must match the following +380671234567"
+                  "phone must match the following 0671234567"
                 )
                 .required("Phone number is required"),
             }),
