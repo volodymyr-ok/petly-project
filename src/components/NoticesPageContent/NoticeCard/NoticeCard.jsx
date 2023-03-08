@@ -112,7 +112,7 @@ export const NoticeCard = ({
               {categoryName === "sell" ? (
                 <tr>
                   <InfoItem name={"name"}>Price:</InfoItem>
-                  <InfoItem>{price ? price : "No info"}</InfoItem>
+                  <InfoItem>{price ? `${price} $` : "No info"}</InfoItem>
                 </tr>
               ) : null}
             </tbody>

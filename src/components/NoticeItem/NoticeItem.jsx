@@ -59,7 +59,7 @@ export const NoticeItem = ({
           title,
           _id,
         } = el;
-
+        console.log(avatar)
         const textAge = numberToWord(birthday);
         const isFavorite = favoritesList?.includes(_id);
         return (
@@ -78,7 +78,7 @@ export const NoticeItem = ({
               )}
             </BtnAdd>
             <Image
-              loading="lazy"
+              // loading="lazy"
               src={avatar ? avatar : defImage}
               alt={categoryName}
               width="280"

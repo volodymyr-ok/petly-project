@@ -51,6 +51,9 @@ const NoticesPageContent = () => {
   }, [categoryParams]);
 
   useEffect(() => {
+    if (!categoryName) return;
+    console.log("categoryName", categoryName);
+
     if (needToResetPage) setPage(1);
     const publicCategories = ["lost-found", "in-good-hands", "sell"];
     const params = { search, page };
