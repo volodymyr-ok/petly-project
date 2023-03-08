@@ -45,6 +45,7 @@ export const NoticeCard = ({
     title,
     _id,
   } = cardData;
+  console.log(avatar)
   const [isEditModal, setIsEditModal] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const isAuth = useSelector(selectIsAuth);
