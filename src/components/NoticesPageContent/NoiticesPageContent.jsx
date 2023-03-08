@@ -22,7 +22,8 @@ const NoticesPageContent = () => {
   const { category: categoryParams } = useParams();
   const { search, page, setPage } = useNoticesParams();
 
-  const [categoryName, setCategoryName] = useState("sell");
+  const [categoryName, setCategoryName] = useState("");
+  const [dataList, setDataList] = useState([]);
   const isLoading = useSelector(selectIsNoticesLoading);
 
   const categoryList = useSelector(selectNotices);
@@ -38,8 +39,15 @@ const NoticesPageContent = () => {
     (prevCategoryName !== categoryName && page > 1);
 
   useEffect(() => {
-    if (categoryParams) setCategoryName(categoryParams);
-    else setCategoryName("sell");
+    setDataList(categoryList);
+  }, [categoryList]);
+
+  useEffect(() => {
+    if (categoryParams) {
+      setCategoryName(categoryParams);
+    } else {
+      setCategoryName("sell");
+    }
   }, [categoryParams]);
 
   useEffect(() => {
@@ -58,15 +66,21 @@ const NoticesPageContent = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryName, search, page]);
 
+  const onRemoveFavorites = (id) => {
+    let categoryList = dataList.filter((el) => el._id !== id);
+    setDataList(categoryList);
+  };
+
   return (
     <>
       {thereIsContent ? (
         <List>
-          {categoryList.map((el) => (
+          {dataList.map((el) => (
             <NoticeCard
               key={el._id}
               cardData={el}
               user={user}
+              onRemoveFavorites={(id) => onRemoveFavorites(id)}
               favoritesList={favoritesList}
             />
           ))}
