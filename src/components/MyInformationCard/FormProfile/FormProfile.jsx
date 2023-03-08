@@ -4,6 +4,10 @@ import { InputItem } from "./InputItem";
 import { PrivateApi } from "../../../http/http";
 import { Notify } from "notiflix";
 import moment from "moment";
+import {
+  emailRegexp,
+  phoneRegexp,
+} from "../../AuthForms/RegisterForm/RegisterForm";
 
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
@@ -25,7 +29,7 @@ export const FormProfile = ({ user }) => {
       value: user?.email,
       name: "email",
       type: "text",
-      mask: null,
+      mask: emailRegexp,
       title: "Email",
     },
     {
@@ -39,24 +43,7 @@ export const FormProfile = ({ user }) => {
       value: user?.phone,
       name: "phone",
       type: "text",
-      mask: [
-        "+",
-        /[3]/,
-        /[8]/,
-        /[0]/,
-        " ",
-        /\d/,
-        /\d/,
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        " ",
-        /\d/,
-        /\d/,
-        /\d/,
-        /\d/,
-      ],
+      mask: phoneRegexp,
       title: "Phone",
     },
 
