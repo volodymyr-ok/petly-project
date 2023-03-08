@@ -22,7 +22,7 @@ import { ReactComponent as MaleSvg } from "../../../assets/svg/male.svg";
 import { ReactComponent as FemaleSvg } from "../../../assets/svg/female.svg";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImageCropper } from "../../ImageCropper/ImageCropper";
 //import { ReactComponent as AddPlusButton } from "../../../assets/svg/Plus.svg";
 import { useDispatch } from "react-redux";

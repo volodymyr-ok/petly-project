@@ -30,9 +30,9 @@ import { removeNotice } from "../../../redux/notice/notice-operations";
 
 export const NoticeCard = ({
   cardData,
-
   user,
   favoritesList,
+  onRemoveFavorites,
 }) => {
   const {
     avatar,
@@ -61,7 +61,10 @@ export const NoticeCard = ({
       setIsEditModal(true);
     } else {
       if (!favoritesList.includes(_id)) dispatch(addFavorites(_id));
-      else if (isFavorite) dispatch(removeFavorites(_id));
+      else if (isFavorite) {
+        dispatch(removeFavorites(_id));
+        onRemoveFavorites(_id);
+      }
     }
   };
 
