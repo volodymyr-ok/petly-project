@@ -1,6 +1,34 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PrivateApi, PublicApi } from "../../http/http";
 
+export const getNoticesPublic = createAsyncThunk(
+  "notices/getNoticesPublic",
+  async ({ category, search = "", page = 1 }, thunkAPI) => {
+    try {
+      // /api/notices/${category}?search="query"&page="1"
+      const res = await PublicApi.get(
+        `/api/notices/${category}?search=${search}&page=${page}`
+      );
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const getNoticesPrivate = createAsyncThunk(
+  "notices/getNoticesPrivate",
+  async ({ category, search = "", page = 1 }, thunkAPI) => {
+    try {
+      const res = await PrivateApi.get(
+        `/api/notices/${category}?search=${search}&page=${page}`
+      );
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const getNotice = createAsyncThunk(
   "/notices",
   async (value, thunkAPI) => {
@@ -37,15 +65,13 @@ export const addNotice = createAsyncThunk(
     }
   }
 );
+
 export const updateNotice = createAsyncThunk(
   "notices/:id",
-  async (data , thunkAPI) => {
+  async (data, thunkAPI) => {
     try {
-      console.log("updateNotice",data)
-      // let file = data[0]
-      // let id = data[1]
       const res = await PrivateApi.patch(`/api/notices/${data[1]}`, data[0]);
-      return res.data;
+      return res.data.message;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -55,9 +81,10 @@ export const updateNoticeAvatar = createAsyncThunk(
   "notices/avtar/:id",
   async (data, thunkAPI) => {
     try {
-      console.log("updateNoticeAvatar",data)
-      // let file = data[0]
-      const res = await PrivateApi.patch(`/api/notices/avatars/${data[1]}`, data[0]);
+      const res = await PrivateApi.patch(
+        `/api/notices/avatars/${data[1]}`,
+        data[0]
+      );
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -93,6 +120,19 @@ export const getNoticesBySearch = createAsyncThunk(
     try {
       const res = await PublicApi.get(`/api/notices?search=${query}`);
       return res.data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const removeNotice = createAsyncThunk(
+  "/notices/remove",
+  async (id, thunkAPI) => {
+    try {
+      const res = await PrivateApi.delete(`/api/notices/${id}`);
+      console.log("removeNotice >>", res.data);
+      return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

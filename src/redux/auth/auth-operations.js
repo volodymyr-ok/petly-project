@@ -71,8 +71,7 @@ export const addFavorites = createAsyncThunk(
   "auth/addFavorites",
   async (id, thunkAPI) => {
     try {
-      const { data } = await PrivateApi.patch(`/api/notices/favorite/${id}`);
-      console.log("Temporary log (can be deleted) ===>", data);
+      await PrivateApi.patch(`/api/notices/favorite/${id}`);
       return id;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

@@ -47,7 +47,7 @@ export const NoticeItem = ({
 
   return (
     <>
-      {notices.map((el) => {
+      { notices.map((el) => {
         const {
           avatar,
           birthday,
@@ -110,7 +110,7 @@ export const NoticeItem = ({
               </InfoList>
               <InfoAction>
                 <BtnReadMore
-                  to={`/notices/${categoryName}/${_id}`}
+                  // to={`/notices/${categoryName}/${_id}`}
                   id={_id}
                   onClick={onReadMore}
                 >

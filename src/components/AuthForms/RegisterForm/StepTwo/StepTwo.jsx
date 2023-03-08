@@ -5,10 +5,13 @@ import {
 } from "../../Forms.styled";
 import { FormError } from "../../LoginForm/LoginForm";
 import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+// import { isValidPhoneNumber } from 'react-phone-number-input'
+// import { useState } from "react";
+// import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
-export const StepTwo = ({ values }) => {
+export const StepTwo = ({ setFieldValue, values }) => {
   const NAME_INPUT_CITY = "city";
-
   return (
     <>
       <Label>
@@ -22,22 +25,23 @@ export const StepTwo = ({ values }) => {
         <FormError name={NAME_INPUT_CITY} />
       </Label>
       <Label>
-        {/* <PhoneInput
+        <PhoneInput
           placeholder="Mobile phone"
-          value={phone}
-          onChange={(val) => setPhone(val)}
+          value={values["phone"]}
+          onChange={(e) => setFieldValue("phone", e)}
           name="phone"
+          defaultCountry="UA"
           type="tel"
           data-tel-input
-          maxLength="13"
-        /> */}
-        <Input
-          name="phone"
-          type="tel"
-          data-tel-input
-          placeholder="Mobile phone"
-          maxLength="13"
+          maxLength="12"
         />
+        {/*<Input*/}
+        {/*  name="phone"*/}
+        {/*  type="tel"*/}
+        {/*  data-tel-input*/}
+        {/*  placeholder="Mobile phone"*/}
+        {/*  maxLength="13"*/}
+        {/*/>*/}
         <FormError name="phone" />
       </Label>
     </>

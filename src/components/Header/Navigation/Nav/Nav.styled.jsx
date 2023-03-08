@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import {device, transition} from "../../../../utils/mixin";
+import { device, transition } from "../../../../utils/mixin";
 import { colors } from "../../../../utils/colors";
 import logo from "../../../../assets/svg/accoun-logo.svg";
 
@@ -24,6 +24,7 @@ export const NavUl = styled.ul`
   }
 
   ${device.desktop} {
+    gap: 80px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -65,26 +66,25 @@ export const NavItem = styled(NavLink)`
   font-size: 32px;
   text-decoration: none;
   margin-right: 0;
-  transition: color ${transition}, text-decoration ${transition};
+  transition: color ${transition}, text-decoration-line ${transition};
 
   ${device.tablet} {
     font-size: 48px;
   }
 
   ${device.desktop} {
-    margin-right: 80px;
     font-size: 20px;
   }
 
   &:hover,
   &:focus {
     color: ${colors.accentOrange};
-    text-decoration: underline;
+    text-decoration-line: underline;
   }
 
   &.active {
     color: ${colors.darkOrange};
-    text-decoration: underline;
+    text-decoration-line: underline;
   }
 `;
 
@@ -108,15 +108,15 @@ export const NavUserItem = styled(NavLink)`
     margin-right: 0;
   }
 
-  &::before {
+  ::before {
     content: ${(props) => (props.open ? `url(${logo})` : "")};
     margin-right: 15px;
     width: 23px;
     height: 23px;
   }
 
-  &:hover,
-  &:focus {
+  :hover,
+  :focus {
     background: ${colors.darkOrange};
   }
 
@@ -128,7 +128,6 @@ export const NavUserItem = styled(NavLink)`
 export const BurgerMenu = styled.div`
   display: ${(props) => (props.open ? "block" : "none")};
   padding: 20px;
-  /* position: absolute; */
   position: fixed;
   top: 0;
   right: 0;

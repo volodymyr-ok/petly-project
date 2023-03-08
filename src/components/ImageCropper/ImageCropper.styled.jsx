@@ -119,10 +119,11 @@ export const ButtonCancel = styled.button`
   align-items: center;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0px;
   border-radius: 50%;
   background-color: transparent;
   border: none;
+  z-index: 100;
   & svg {
     width: 30px;
     height: 30px;

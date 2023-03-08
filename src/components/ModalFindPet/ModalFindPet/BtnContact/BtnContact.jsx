@@ -1,9 +1,9 @@
 import { Btn } from "./BtnContact.styled";
 
-export const BtnContct = () => {
+export const BtnContct = ({click}) => {
   return (
     <>
-      <Btn>
+      <Btn onClick={click}>
         <span>Contact</span>
       </Btn>
     </>

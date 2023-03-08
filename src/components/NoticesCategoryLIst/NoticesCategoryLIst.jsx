@@ -2,12 +2,12 @@ import { ListBox, List, BtnAddSticky } from "./NoticesCategoryLIst.styled";
 import { SvgMarkup } from "../SvgHandler/SvgHandler";
 import { NoticeItem } from "../NoticeItem/NoticeItem";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addFavorites,
   removeFavorites,
 } from "../../redux/auth/auth-operations";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../Modal/Modal";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 import { ModalFindPet } from "../ModalFindPet/ModalFindPet/ModalFindPet";
@@ -16,7 +16,15 @@ import { removeNotice } from "../../pages/NoticesPage/services";
 import { ModalConfirm } from "../ModalConfirm/ModalConfirm";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
+import {
+  selectNotices,
+  selectIsNoticesLoading,
+} from "../../redux/notice/notice-selectors";
+import { getMyOwnNotices } from "../../pages/NoticesPage/services";
+import { filterData } from "./utils";
+
 const svgAdd = SvgMarkup(21.3, 21.3, "addTo");
+
 // import { ModalAddNotice } from "../../components/ModalAddNotice/ModalAddNotice";
 //import { useDispatch, useSelector } from "react-redux";
 
@@ -38,39 +46,93 @@ export const NoticesCategoryList = ({
   const [modalRemove, setModalRemove] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  console.log(error);
+  const [notices, setNotices] = useState(data.data);
 
-  const notices = data.data;
+  const addedPet = useSelector(selectNotices);
+  const isUploading = useSelector(selectIsNoticesLoading);
+
+  useEffect(() => {
+    if (isUploading) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [isUploading]);
+
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(addedPet?._id && notices!==undefined){
+     const include = notices.find(el=>el._id === addedPet?._id)
+      if(include && categoryName === "own"){
+        setIsLoading(true)
+        const result = notices.filter(
+          el => el._id !== include._id)
+          setNotices([addedPet, ...result])
+          setIsLoading(false)
+      }else if(!include && addedPet && addedPet!==undefined && categoryName === "own"){
+        setIsLoading(true)
+         setNotices([addedPet,...notices])
+         setIsLoading(false)
+      }
+    } else if (notices === undefined && addedPet?._id) {
+      setNotices([addedPet]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addedPet]);
 
   const handlerFavorite = (e, id, owner, isFavorite) => {
     if (!isLogined) onAddPet();
-    if (user._id !== owner) {
-      if (!favorites.includes(id)) dispatch(addFavorites(id));
-      else if (isFavorite) dispatch(removeFavorites(id));
-    } else {
-      setPetInfo(notices.find((el) => el._id === id));
-      setIsModalEditPost(!isModalEditPost);
+
+    if (isLogined) {
+      if (user._id !== owner) {
+        if (!favorites.includes(id)) dispatch(addFavorites(id));
+        else if (isFavorite) dispatch(removeFavorites(id));
+      } else {
+        setPetInfo(notices.find((el) => el._id === id));
+
+        setIsModalEditPost(!isModalEditPost);
+      }
     }
   };
 
+  const page = 1;
+
   const handlerRemove = (e) => {
-    if (modalRemove && petId !== "") {
-      setModalRemove(!modalRemove);
-      setIsLoading(true);
-      removeNotice(petId)
-        .then(() => {
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setError(error);
-          setIsLoading(false);
-        });
-    }
+    const fetchData = async () => {
+      if (modalRemove && petId !== "") {
+        setModalRemove(!modalRemove);
+        const result = filterData(notices, petId);
+        setIsLoading(true);
+        if (result.length <= 1) {
+          try {
+            const data = await getMyOwnNotices({ page });
+            await removeNotice(petId);
+            const result = filterData(data.data, petId);
+            setNotices(result);
+            setIsLoading(false);
+          } catch (error) {
+            setError(error);
+            setIsLoading(false);
+          }
+        } else {
+          removeNotice(petId)
+            .then(() => {
+              setNotices(result);
+              setIsLoading(false);
+            })
+            .catch((error) => {
+              setError(error);
+              setIsLoading(false);
+            });
+        }
+      }
+    };
     if (e.target.id && e.target.id !== "") {
       setPetId(e.target.id);
       setModalRemove(!modalRemove);
     }
+    fetchData();
   };
 
   const readMoreModal = (e) => {
@@ -82,6 +144,7 @@ export const NoticesCategoryList = ({
     }
   };
 
+  //console.log(!isModalReadMore&& isModalLogined && "da")
   return (
     <>
       <ListBox>
@@ -121,9 +184,12 @@ export const NoticesCategoryList = ({
       {isModalReadMore && (
         <Modal
           // type="addPet"
-          onClose={() => setIsModalReadMore(!isModalReadMore)}
+          onClose={() => {
+            setIsModalReadMore(!isModalReadMore);
+          }}
         >
           <ModalFindPet
+            isLogined={isLogined}
             user={user}
             onClose={() => setIsModalReadMore(!isModalReadMore)}
             petInfo={petInfo}
@@ -162,6 +228,7 @@ export const NoticesCategoryList = ({
           text="You need be authenticated first"
         />
       )}
+      {error && <div>{error}</div>}
     </>
   );
 };

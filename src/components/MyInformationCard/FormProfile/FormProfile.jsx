@@ -12,10 +12,6 @@ import {
 export const FormProfile = ({ user }) => {
   const [dataSend, setDataSend] = useState({});
   const [nameActivePencil, setNameActivePencil] = useState("");
-  const [isError, setIsError] = useState("");
-  console.log("file: FormProfile.jsx:12 ~ isError >>", isError);
-  const [isLoading, setIsLoading] = useState(true);
-  console.log("file: FormProfile.jsx:14 ~ isLoading >>", isLoading);
 
   const inputsList = [
     {
@@ -40,7 +36,7 @@ export const FormProfile = ({ user }) => {
       title: "Birthday",
     },
     {
-      value: user?.phone,
+      value: user?.phone.split("_")[0] === "null" ? "No phone" : user?.phone,
       name: "phone",
       type: "text",
       mask: phoneRegexp,
@@ -81,11 +77,9 @@ export const FormProfile = ({ user }) => {
       updateUserData(dataSend)
         .then(() => {
           Notify.success(`You have successfully updated your data`);
-          setIsLoading(false);
         })
         .catch((error) => {
-          setIsError(error);
-          setIsLoading(false);
+          console.log(error);
         });
       setNameActivePencil("");
     }

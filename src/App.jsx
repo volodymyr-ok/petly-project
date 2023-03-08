@@ -16,7 +16,7 @@ import UserPage from "./pages/UserPage/UserPage";
 import { getUser } from "./redux/auth/auth-operations";
 import { selectIsLoading } from "./redux/auth/auth-selectors";
 import NotFound from "./components/NotFound/NotFound";
-import { NoticesCategoryList } from "./components/NoticesCategoryLIst/NoticesCategoryLIst";
+import NoticesPageContent from "./components/NoticesPageContent/NoiticesPageContent";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,7 +62,8 @@ const App = () => {
           <Route path="/friends" element={<OurFriendsPage />} />
           <Route path="/user" element={<UserPage />} />
           <Route path="/notices" element={<NoticesPage />}>
-            <Route path=":category" element={<NoticesCategoryList />}>
+            <Route index element={<NoticesPageContent />} />
+            <Route path=":category" element={<NoticesPageContent />}>
               <Route path=":id" />
             </Route>
           </Route>

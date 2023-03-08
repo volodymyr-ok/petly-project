@@ -100,6 +100,11 @@ export const InfoItem = styled.td`
   font-size: 16px;
   line-height: 1.37;
   min-width: ${(p) => (p.name === "name" ? "90px" : "0")};
+
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 export const InfoAction = styled.div`
   display: flex;
