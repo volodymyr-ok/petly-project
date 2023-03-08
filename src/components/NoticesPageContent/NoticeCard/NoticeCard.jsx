@@ -1,15 +1,17 @@
 import {
-  Item,
-  ItemCategory,
-  BtnAdd,
+  Card,
+  CardLabel,
+  ToggleBtn,
   Image,
   Info,
   Title,
-  InfoList,
+  InfoWrapper,
   InfoItem,
   InfoAction,
   BtnReadMore,
   BtnRemove,
+  DetailsWrapper,
+  DetailsField,
 } from "../NoiticesPageContent.styled";
 import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
 import { ReactComponent as Remove } from "../../../assets/svg/remove.svg";
@@ -22,7 +24,11 @@ import {
   removeFavorites,
 } from "../../../redux/auth/auth-operations";
 import { ModalContent } from "../../ModalFindPet/ModalFindPet/ModalFindPet.styled";
-import { Text, Wrap, StyledLink } from "../../WarningMessage/WarningMessage.styled";
+import {
+  Text,
+  Wrap,
+  StyledLink,
+} from "../../WarningMessage/WarningMessage.styled";
 import { useState } from "react";
 import { Modal } from "../../Modal/Modal";
 import { AddNoticeForm } from "../../ModalAddNotice/AddNoticeForm/AddNoticeForm";
@@ -47,7 +53,7 @@ export const NoticeCard = ({
     title,
     _id,
   } = cardData;
-  
+
   const [isLoginedModal, setIsLoginedModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
@@ -60,9 +66,8 @@ export const NoticeCard = ({
 
   const textAge = numberToWord(birthday);
 
-
   const handleFavoriteClick = () => {
-    if(user.id !== ""){
+    if (user.id !== "") {
       if (isOwner) {
         setIsEditModal(true);
       } else {
@@ -72,8 +77,8 @@ export const NoticeCard = ({
           onRemoveFavorites(_id);
         }
       }
-    }else{
-      setIsLoginedModal(true)
+    } else {
+      setIsLoginedModal(true);
     }
   };
 
@@ -81,10 +86,11 @@ export const NoticeCard = ({
 
   return (
     <>
-      <Item>
-        <ItemCategory>{categoryName}</ItemCategory>
-        <BtnAdd
+      <Card>
+        <CardLabel>{categoryName}</CardLabel>
+        <ToggleBtn
           id={_id}
+          type="button"
           favorite={isFavorite ? "favorite" : "noFavorite"}
           edit={isOwner ? "edit" : "like"}
           onClick={handleFavoriteClick}
@@ -94,7 +100,7 @@ export const NoticeCard = ({
           ) : (
             <Like width={24} height={22} />
           )}
-        </BtnAdd>
+        </ToggleBtn>
         <Image
           loading="lazy"
           src={avatar ? avatar : defImage}
@@ -103,46 +109,49 @@ export const NoticeCard = ({
           height="288"
         />
         <Info>
-          <Title>{title ? title : "Сute dog looking for a home"}</Title>
-          <InfoList>
-            <tbody>
-              <tr>
+          <InfoWrapper>
+            <Title>{title ? title : "No info"}</Title>
+            <DetailsWrapper>
+              <DetailsField>
                 <InfoItem name={"name"}>Breed:</InfoItem>
                 <InfoItem>{breed ? breed : "No info"}</InfoItem>
-              </tr>
-              <tr>
+              </DetailsField>
+
+              <DetailsField>
                 <InfoItem name={"name"}>Place:</InfoItem>
                 <InfoItem>{location ? location : "No info"}</InfoItem>
-              </tr>
-              <tr>
+              </DetailsField>
+
+              <DetailsField>
                 <InfoItem name={"name"}>Age:</InfoItem>
                 <InfoItem>{textAge ? textAge : "No info"}</InfoItem>
-              </tr>
+              </DetailsField>
+
               {categoryName === "sell" ? (
-                <tr>
+                <DetailsField>
                   <InfoItem name={"name"}>Price:</InfoItem>
                   <InfoItem>{price ? `${price} $` : "No info"}</InfoItem>
-                </tr>
+                </DetailsField>
               ) : null}
-            </tbody>
-          </InfoList>
+            </DetailsWrapper>
+          </InfoWrapper>
           <InfoAction>
             <BtnReadMore
-              // to={`/notices/${categoryName}/${_id}`}
+              type="button"
               id={_id}
               onClick={() => setIsModalReadMore(true)}
             >
               Learn more
             </BtnReadMore>
             {isOwner ? (
-              <BtnRemove id={_id} onClick={handleNoticeRemove}>
+              <BtnRemove type="button" id={_id} onClick={handleNoticeRemove}>
                 Delete
                 <Remove width={16} height={17} />
               </BtnRemove>
             ) : null}
           </InfoAction>
         </Info>
-      </Item>
+      </Card>
 
       {isEditModal && (
         <Modal onClose={() => setIsEditModal(!isEditModal)}>
@@ -152,18 +161,17 @@ export const NoticeCard = ({
           />
         </Modal>
       )}
-            {isLoginedModal && (
-          <Modal onClose={()=>setIsLoginedModal(false)}>
-            <ModalContent>
-              <Text>You need be authenticated first</Text>
-              <Wrap>
-                <StyledLink to="/login">Login</StyledLink>
-                <StyledLink to="/register">Register</StyledLink>
-              </Wrap>
-            </ModalContent>
-          </Modal>
-        )}
-      
+      {isLoginedModal && (
+        <Modal onClose={() => setIsLoginedModal(false)}>
+          <ModalContent>
+            <Text>You need be authenticated first</Text>
+            <Wrap>
+              <StyledLink to="/login">Login</StyledLink>
+              <StyledLink to="/register">Register</StyledLink>
+            </Wrap>
+          </ModalContent>
+        </Modal>
+      )}
 
       {isModalReadMore && (
         <Modal

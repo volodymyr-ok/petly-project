@@ -65,8 +65,6 @@ export const FormProfile = ({ user }) => {
 
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
-
-    console.log("file: FormProfile.jsx:77 ~ dataSend >>", dataSend);
     if (nameActivePencil === "") {
       setNameActivePencil(nameBtn);
     }
