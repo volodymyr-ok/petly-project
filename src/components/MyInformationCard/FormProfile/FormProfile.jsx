@@ -24,7 +24,7 @@ export const FormProfile = ({ user }) => {
     {
       value: user?.email,
       name: "email",
-      type: "text",
+      type: "email",
       mask: emailRegexp,
       title: "Email",
     },
@@ -38,7 +38,7 @@ export const FormProfile = ({ user }) => {
     {
       value: user?.phone.split("_")[0] === "null" ? "No phone" : user?.phone,
       name: "phone",
-      type: "text",
+      type: "phone",
       mask: phoneRegexp,
       title: "Phone",
     },
@@ -51,6 +51,7 @@ export const FormProfile = ({ user }) => {
       title: "City",
     },
   ];
+  console.log("user", user);
 
   const updateUserData = async (dataSend) => {
     return await PrivateApi.patch("api/users", dataSend);
@@ -65,6 +66,7 @@ export const FormProfile = ({ user }) => {
   const handleInput = (e, nameBtn) => {
     e.preventDefault();
 
+    console.log("file: FormProfile.jsx:77 ~ dataSend >>", dataSend);
     if (nameActivePencil === "") {
       setNameActivePencil(nameBtn);
     }

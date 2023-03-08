@@ -59,6 +59,7 @@ const DatePickerStyled = ({
         selected={startDate}
         onChange={(date) => handleChange(date)}
         dateFormat="dd.MM.yyyy"
+        maxDate={new Date()}
         disabled={disabled}
         customInput={<ExampleCustomInput />}
         renderCustomHeader={({ date, changeYear, changeMonth }) => (
