@@ -21,6 +21,8 @@ import {
   addFavorites,
   removeFavorites,
 } from "../../../redux/auth/auth-operations";
+import { ModalContent } from "../../ModalFindPet/ModalFindPet/ModalFindPet.styled";
+import { Text, Wrap, StyledLink } from "../../WarningMessage/WarningMessage.styled";
 import { useState } from "react";
 import { Modal } from "../../Modal/Modal";
 import { AddNoticeForm } from "../../ModalAddNotice/AddNoticeForm/AddNoticeForm";
@@ -45,6 +47,8 @@ export const NoticeCard = ({
     title,
     _id,
   } = cardData;
+  
+  const [isLoginedModal, setIsLoginedModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const isAuth = useSelector(selectIsAuth);
@@ -56,15 +60,20 @@ export const NoticeCard = ({
 
   const textAge = numberToWord(birthday);
 
+
   const handleFavoriteClick = () => {
-    if (isOwner) {
-      setIsEditModal(true);
-    } else {
-      if (!favoritesList.includes(_id)) dispatch(addFavorites(_id));
-      else if (isFavorite) {
-        dispatch(removeFavorites(_id));
-        onRemoveFavorites(_id);
+    if(user.id !== ""){
+      if (isOwner) {
+        setIsEditModal(true);
+      } else {
+        if (!favoritesList.includes(_id)) dispatch(addFavorites(_id));
+        else if (isFavorite) {
+          dispatch(removeFavorites(_id));
+          onRemoveFavorites(_id);
+        }
       }
+    }else{
+      setIsLoginedModal(true)
     }
   };
 
@@ -143,6 +152,18 @@ export const NoticeCard = ({
           />
         </Modal>
       )}
+            {isLoginedModal && (
+          <Modal onClose={()=>setIsLoginedModal(false)}>
+            <ModalContent>
+              <Text>You need be authenticated first</Text>
+              <Wrap>
+                <StyledLink to="/login">Login</StyledLink>
+                <StyledLink to="/register">Register</StyledLink>
+              </Wrap>
+            </ModalContent>
+          </Modal>
+        )}
+      
 
       {isModalReadMore && (
         <Modal
