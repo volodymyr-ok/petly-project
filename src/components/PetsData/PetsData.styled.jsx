@@ -92,3 +92,15 @@ export const BoxImage = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const Box404 = styled.div`
+  width: 100%;
+  height: 100%;
+
+  div {
+    margin: auto;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: cener;
+`;

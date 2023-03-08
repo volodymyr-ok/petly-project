@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { colors } from "../../../utils/colors";
+import { transition } from "../../../utils/mixin";
 
 export const AddPetBtn = styled.button`
   width: 40px;
@@ -6,16 +8,19 @@ export const AddPetBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(245, 146, 86, 1);
-  border-radius: 40px;
-  border: none;
+  background-color: ${colors.accentOrange};
+  border-radius: 50%;
+  border: 3px solid ${colors.accentOrange};
   cursor: pointer;
+  transition: all ${transition};
 
+  svg {
+    stroke: ${colors.white};
+  }
   &:hover {
-    filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.11));
-    box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.11);
-    transition: transform 300ms linear;
-    transform: scale(1.05);
-    border: 2px solid #ffffff;
+    background-color: transparent;
+    svg {
+      stroke: ${colors.accentOrange};
+    }
   }
 `;

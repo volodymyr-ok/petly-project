@@ -1,12 +1,11 @@
 import PropTypes from "prop-types";
-
 import { PetsList } from "./PetsList/PetsList";
-
 import {
   BoxMessage,
   Message,
   ContainerPetsDate,
   SpanAddPet,
+  Box404,
 } from "./PetsData.styled";
 import { BtnAddPet } from "./BtnAddPet/BtnAddPet";
 import { useState } from "react";
@@ -14,17 +13,14 @@ import { Modal } from "../Modal/Modal";
 import { AddsPetForm } from "../AddsPetForm/AddsPetForm";
 import { WarningMessage } from "../WarningMessage/WarningMessage";
 import { PawsLoader } from "../Loader/PawsLoader/PawsLoader";
-//mport { PawsLoader } from "../../components/Loader/PawsLoader/PawsLoader";
+import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
 
 export const PetsData = ({ pets, onRemove, onEdit, isLoadingPets }) => {
   const [isModalEdit, setIsModalEdit] = useState(false);
   const [postId, setPostId] = useState(null);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const closeModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  const closeModal = () => setIsModalOpen(!isModalOpen);
 
   const removeHandler = (e) => {
     setIsModalOpen(!isModalOpen);
@@ -35,6 +31,7 @@ export const PetsData = ({ pets, onRemove, onEdit, isLoadingPets }) => {
     setIsModalEdit(!isModalEdit);
     setPostId(e.currentTarget.name);
   };
+
   return (
     <ContainerPetsDate>
       <BoxMessage>
@@ -43,7 +40,9 @@ export const PetsData = ({ pets, onRemove, onEdit, isLoadingPets }) => {
         <BtnAddPet onPostHandler={editHandler} />
       </BoxMessage>
 
-      {!isLoadingPets ? (
+      {isLoadingPets ? (
+        <PawsLoader />
+      ) : pets.length ? (
         <PetsList
           removeHandler={removeHandler}
           pets={pets}
@@ -51,8 +50,11 @@ export const PetsData = ({ pets, onRemove, onEdit, isLoadingPets }) => {
           onRemove={(id) => onRemove(id)}
         />
       ) : (
-        <PawsLoader />
+        <Box404>
+          <ResultNotFound text="You haven't added any pets yet" />
+        </Box404>
       )}
+
       {isModalEdit && (
         <Modal onClose={() => setIsModalEdit(!isModalEdit)}>
           <AddsPetForm
@@ -62,13 +64,14 @@ export const PetsData = ({ pets, onRemove, onEdit, isLoadingPets }) => {
           />
         </Modal>
       )}
+
       {isModalOpen && (
         <WarningMessage
           onRemove={(postId) => onRemove(postId)}
           type="approve"
           id={postId}
           onClose={closeModal}
-          text="Do you want to delete the pet?"
+          text="Do you wanna delete your pet?"
         />
       )}
     </ContainerPetsDate>

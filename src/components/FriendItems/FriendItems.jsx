@@ -111,7 +111,7 @@ export const FriendsItems = ({
               </div>
             )}
             {email && (
-              <InfoWrap href={"mailto:" + email}>
+              <InfoWrap target="_blank" href={"mailto:" + email}>
                 <p>Email:</p>
                 <Descr title={email}>{email}</Descr>
               </InfoWrap>

@@ -58,7 +58,6 @@ export const LoginForm = () => {
           validationSchema={validationSchema}
           onSubmit={(values, actions) => {
             const { email, password } = values;
-            console.log("login", values);
             const data = { email, password };
             dispatch(loginUser(data));
 
@@ -78,7 +77,6 @@ export const LoginForm = () => {
               <LoginBtn text={"Login"} />
               <Text> You can log in with your Google Account:</Text>
               <LoginGoogle
-                // target="_blank"
                 aria-label="goggle"
                 rel="noopener noreferrer nofollow"
                 href={`https://petly-2v85.onrender.com/api/users/google`}

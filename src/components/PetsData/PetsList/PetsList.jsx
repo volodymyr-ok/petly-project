@@ -10,14 +10,12 @@ import {
   EditPetBtn,
 } from "./PetsList.styled";
 import defImage from "../../../img/defaultImg.jpeg";
-import { ResultNotFound } from "../../ResultNotFound/ResultNotFound";
 import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
 
 export const PetsList = ({ pets, onPostHandler, removeHandler }) => {
   return (
     <BoxPetsList>
       <BoxScrollbar>
-        {pets.length === 0 && <ResultNotFound text="There is no pet here" />}
         {pets?.map((el) => {
           const { avatarURL, birthday, breed, comments, name, _id } = el;
           return (
