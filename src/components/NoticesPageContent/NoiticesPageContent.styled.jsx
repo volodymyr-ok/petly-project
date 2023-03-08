@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { colors } from "../../utils/colors";
-import { device } from "../../utils/mixin";
+import { device, transition } from "../../utils/mixin";
 import { StyledButton } from "../Button/Button.styled";
-//import { NavLink } from "react-router-dom";
 
-export const Item = styled.li`
+export const Card = styled.li`
   position: relative;
   background-color: ${colors.white};
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 0 0 30px 30px;
   width: 280px;
+  min-height: 606px;
   display: flex;
   flex-direction: column;
   ${device.tablet} {
@@ -19,7 +19,8 @@ export const Item = styled.li`
     width: 288px;
   }
 `;
-export const ItemCategory = styled.p`
+
+export const CardLabel = styled.p`
   position: absolute;
   top: 20px;
   text-align: center;
@@ -35,7 +36,10 @@ export const ItemCategory = styled.p`
   border-top-right-radius: 20px;
   backdrop-filter: blur(2px);
 `;
-export const BtnAdd = styled.button`
+
+export const ToggleBtn = styled.button`
+  cursor: pointer;
+
   padding: 0%;
   position: absolute;
   top: 12px;
@@ -53,7 +57,7 @@ export const BtnAdd = styled.button`
   stroke-width: 1px;
   stroke-dasharray: 80;
   stroke-linejoin: round;
-  transition-duration: 500ms;
+  transition-duration: 250ms;
   svg {
     fill: ${(p) =>
       p.favorite === "favorite" ? `${colors.accentOrange}` : `${colors.white}`};
@@ -61,7 +65,7 @@ export const BtnAdd = styled.button`
       p.favorite === "favorite" ? `${colors.white}` : `${colors.accentOrange}`};
     fill: ${(p) => p.edit === "edit" && `transparent`};
     stroke: ${(p) => p.edit === "edit" && `${colors.accentOrange}`};
-    transition-duration: 500ms;
+    transition-duration: 250ms;
   }
   :hover {
     background-color: ${colors.accentOrange};
@@ -73,11 +77,13 @@ export const BtnAdd = styled.button`
     transform: ${(p) => p.edit === "edit" && `scale(1.2)`};
   }
 `;
+
 export const Image = styled.img`
   object-fit: cover;
   ${device.tablet} {
   }
 `;
+
 export const Info = styled.div`
   padding: 20px 12px 16px 12px;
   flex-grow: 1;
@@ -85,6 +91,11 @@ export const Info = styled.div`
     padding: 20px 20px 12px 20px;
   }
 `;
+
+export const InfoWrapper = styled.div`
+  margin-bottom: 20px;
+`;
+
 export const Title = styled.h2`
   font-weight: 700;
   font-size: 28px;
@@ -92,16 +103,31 @@ export const Title = styled.h2`
   letter-spacing: -0.01em;
   margin: 0 0 20px 0;
 `;
-export const InfoList = styled.table`
-  margin-bottom: 20px;
+
+export const DetailsWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 240px;
+
+  ${device.tablet} {
+    width: 316px;
+  }
+  ${device.desktop} {
+    width: 248px;
+  }
+  gap: 10px;
+
+  overflow: hidden;
 `;
-export const InfoItem = styled.td`
+
+export const InfoItem = styled.span`
   font-weight: 500;
   font-size: 16px;
   line-height: 1.37;
   min-width: ${(p) => (p.name === "name" ? "90px" : "0")};
 
-  width: 100%;
+  /* width: 100%; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -121,6 +147,8 @@ export const InfoAction = styled.div`
   }
 `;
 export const BtnReadMore = styled.button`
+  cursor: pointer;
+  transition: color ${transition}, background-color ${transition};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,6 +162,7 @@ export const BtnReadMore = styled.button`
   border-radius: 40px;
   background-color: ${colors.white};
   text-decoration: none;
+
   :hover,
   :focus {
     color: ${colors.white};
