@@ -9,7 +9,6 @@ export const Card = styled.li`
   box-shadow: 7px 4px 14px rgba(49, 21, 4, 0.07);
   border-radius: 0 0 30px 30px;
   width: 280px;
-  min-height: 606px;
   display: flex;
   flex-direction: column;
   ${device.tablet} {
@@ -85,7 +84,10 @@ export const Image = styled.img`
 `;
 
 export const Info = styled.div`
-  padding: 20px 12px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 12px 0 12px;
   flex-grow: 1;
   ${device.tablet} {
     padding: 20px 20px 12px 20px;
@@ -105,9 +107,6 @@ export const Title = styled.h2`
 `;
 
 export const DetailsWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
   width: 240px;
 
   ${device.tablet} {
@@ -116,22 +115,28 @@ export const DetailsWrapper = styled.div`
   ${device.desktop} {
     width: 248px;
   }
-  gap: 10px;
 
   overflow: hidden;
 `;
 
-export const InfoItem = styled.span`
+export const DetailsField = styled.div`
+  display: flex;
+  :not(:last-child) {
+    margin-bottom: 8px;
+  }
+`;
+
+export const InfoItem = styled.p`
   font-weight: 500;
   font-size: 16px;
   line-height: 1.37;
   min-width: ${(p) => (p.name === "name" ? "90px" : "0")};
 
-  /* width: 100%; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
 export const InfoAction = styled.div`
   display: flex;
   flex-direction: column;
@@ -181,4 +186,14 @@ export const BtnRemove = styled(StyledButton)`
   border-color: ${colors.darkOrange};
   fill: ${colors.darkOrange};
   gap: 5px;
+
+  :hover,
+  :focus {
+    background-color: ${colors.darkOrange};
+
+    svg {
+      transition: all ${transition};
+      stroke: ${colors.white};
+    }
+  }
 `;

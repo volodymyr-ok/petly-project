@@ -11,6 +11,7 @@ import {
   BtnReadMore,
   BtnRemove,
   DetailsWrapper,
+  DetailsField,
 } from "../NoiticesPageContent.styled";
 import { ReactComponent as Edit } from "../../../assets/svg/penciNotices.svg";
 import { ReactComponent as Remove } from "../../../assets/svg/remove.svg";
@@ -111,17 +112,26 @@ export const NoticeCard = ({
           <InfoWrapper>
             <Title>{title ? title : "No info"}</Title>
             <DetailsWrapper>
-              <InfoItem name={"name"}>Breed:</InfoItem>
-              <InfoItem>{breed ? breed : "No info"}</InfoItem>
-              <InfoItem name={"name"}>Place:</InfoItem>
-              <InfoItem>{location ? location : "No info"}</InfoItem>
-              <InfoItem name={"name"}>Age:</InfoItem>
-              <InfoItem>{textAge ? textAge : "No info"}</InfoItem>
+              <DetailsField>
+                <InfoItem name={"name"}>Breed:</InfoItem>
+                <InfoItem>{breed ? breed : "No info"}</InfoItem>
+              </DetailsField>
+
+              <DetailsField>
+                <InfoItem name={"name"}>Place:</InfoItem>
+                <InfoItem>{location ? location : "No info"}</InfoItem>
+              </DetailsField>
+
+              <DetailsField>
+                <InfoItem name={"name"}>Age:</InfoItem>
+                <InfoItem>{textAge ? textAge : "No info"}</InfoItem>
+              </DetailsField>
+
               {categoryName === "sell" ? (
-                <>
+                <DetailsField>
                   <InfoItem name={"name"}>Price:</InfoItem>
                   <InfoItem>{price ? `${price} $` : "No info"}</InfoItem>
-                </>
+                </DetailsField>
               ) : null}
             </DetailsWrapper>
           </InfoWrapper>
