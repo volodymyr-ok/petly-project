@@ -12,7 +12,7 @@ export const AddNoticeForm = ({ onClose, petInfo }) => {
     name: petInfo?.name || "",
     birthday: petInfo?.birthday || "",
     breed: petInfo?.breed || "",
-    categoryName: "sell" || petInfo?.categoryName,
+    categoryName: petInfo?.categoryName || "sell" ,
     sex: petInfo?.sex || "",
     location: petInfo?.location || "",
     price: petInfo?.price || "",

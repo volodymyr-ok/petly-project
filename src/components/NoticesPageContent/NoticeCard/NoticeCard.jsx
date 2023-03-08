@@ -45,6 +45,7 @@ export const NoticeCard = ({
     title,
     _id,
   } = cardData;
+  console.log(avatar)
   const [isEditModal, setIsEditModal] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
   const isAuth = useSelector(selectIsAuth);
@@ -112,7 +113,7 @@ export const NoticeCard = ({
               {categoryName === "sell" ? (
                 <tr>
                   <InfoItem name={"name"}>Price:</InfoItem>
-                  <InfoItem>{price ? price : "No info"}</InfoItem>
+                  <InfoItem>{price ?`${price} $` : "No info"}</InfoItem>
                 </tr>
               ) : null}
             </tbody>
