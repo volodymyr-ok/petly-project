@@ -43,7 +43,6 @@ export const authorized = [
 export const NoticesCategoryNav = ({ isLogined, onAddPet }) => {
   const location = useLocation();
   const { pathname } = location;
-  // console.log("pathname", pathname === "/notices");
 
   return (
     <>
@@ -86,5 +85,4 @@ export const NoticesCategoryNav = ({ isLogined, onAddPet }) => {
       </NavBox>
     </>
   );
-  //   );
 };

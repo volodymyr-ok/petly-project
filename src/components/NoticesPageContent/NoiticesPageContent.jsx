@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNoticesParams } from "../../hooks/useMyContext";
 import usePrevious from "../../hooks/usePrevious";
-import { selectFavorites, selectUser } from "../../redux/auth/auth-selectors";
+import {
+  selectFavorites,
+  selectIsAuth,
+  selectUser,
+} from "../../redux/auth/auth-selectors";
 import {
   getNoticesPrivate,
   getNoticesPublic,
@@ -20,17 +24,20 @@ import { BtnAddSticky } from "../NoticesCategoryLIst/NoticesCategoryLIst.styled"
 import { ReactComponent as Add } from "../../assets/svg/Addpet.svg";
 import { Modal } from "../Modal/Modal";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
+import { WarningMessage } from "../WarningMessage/WarningMessage";
 
 const NoticesPageContent = () => {
   const dispatch = useDispatch();
   const { category: categoryParams } = useParams();
   const { search, page, setPage } = useNoticesParams();
 
+  const [isModalLogined, setIsModalLogined] = useState(false);
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [dataList, setDataList] = useState([]);
-  const isLoading = useSelector(selectIsNoticesLoading);
 
+  const isLogined = useSelector(selectIsAuth);
+  const isLoading = useSelector(selectIsNoticesLoading);
   const categoryList = useSelector(selectNotices);
   const favoritesList = useSelector(selectFavorites);
   const user = useSelector(selectUser);
@@ -78,12 +85,13 @@ const NoticesPageContent = () => {
     setDataList(categoryList);
   };
 
+  const handleAddPetModal = () => {
+    if (isLogined) setIsModalAddPet(true);
+    else setIsModalLogined(true);
+  };
+
   return (
     <>
-      <BtnAddSticky type="button" onClick={() => setIsModalAddPet(true)}>
-        <Add width={23.3} height={23.3}></Add>
-        Add pet
-      </BtnAddSticky>
       {thereIsContent ? (
         <List>
           {dataList.map((el) => (
@@ -101,10 +109,24 @@ const NoticesPageContent = () => {
       )}
 
       {isLoading && <PawsLoader />}
+
       {isModalAddPet && (
         <Modal onClose={() => setIsModalAddPet(false)}>
           <AddNoticeForm onClose={() => setIsModalAddPet(false)} />
         </Modal>
+      )}
+
+      <BtnAddSticky type="button" onClick={handleAddPetModal}>
+        <Add width={23.3} height={23.3} />
+        Add pet
+      </BtnAddSticky>
+
+      {isModalLogined && (
+        <WarningMessage
+          type="auth"
+          onClose={() => setIsModalLogined(false)}
+          text="You need be authenticated first"
+        />
       )}
     </>
   );
