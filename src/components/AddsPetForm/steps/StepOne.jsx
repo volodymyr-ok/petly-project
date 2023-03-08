@@ -11,6 +11,9 @@ import {
   NextBtn,
   LabelBox,
 } from "../../../components/AddsPetForm/AddsPetModalStyled";
+import moment from "moment";
+import DatePickerStyled from "../../DatePicker/DatePickerStyled";
+import { useState } from "react";
 import * as yup from "yup";
 const cyrillic = /[A-Za-z]/;
 const validationSchema = yup.object({
@@ -20,7 +23,7 @@ const validationSchema = yup.object({
     .max(16)
     .required()
     .matches(cyrillic, "only Latin letters"),
-  birthday: yup.string().required(),
+  birthday: yup.string(),
   breed: yup
     .string()
     .min(2)
@@ -38,8 +41,18 @@ export const StepOne = (props) => {
       />
     );
   };
+  const handleChange = (data) => {
+
+    setStartDate(data);
+  };
+
+  const [startDate, setStartDate] = useState(new Date());
 
   const handleSubmit = (data) => {
+    if (startDate !== "") {
+      const birthday = moment(startDate).format("DD.MM.YYYY");
+      data.birthday = birthday;
+    }
     props.next(data);
   };
 
@@ -65,7 +78,7 @@ export const StepOne = (props) => {
               </StyledLabel>
             </LabelBox>
             <FormError name="name" />
-            <LabelBox>
+            {/* <LabelBox>
               <StyledLabel htmlFor="birthday">
                 Date of birth
                 <FieldStyled
@@ -74,8 +87,20 @@ export const StepOne = (props) => {
                   placeholder="Type date of birth"
                 />
               </StyledLabel>
-            </LabelBox>
+            </LabelBox> */}
+               <LabelBox>
+            <StyledLabel  htmlFor="birthday">
+              Date of birth
+            <DatePickerStyled
+              startDate={startDate}
+              customStyle={true}
+              // disabled={disable}
+              handleChange={handleChange}
+            />
+            </StyledLabel>
             <FormError name="birthday" />
+          </LabelBox>
+ 
 
             <LabelBox>
               <StyledLabel htmlFor="breed">
