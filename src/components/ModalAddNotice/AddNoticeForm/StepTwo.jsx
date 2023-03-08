@@ -99,7 +99,8 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       };
 
       const formImage = new FormData();
-      formImage.append("avatar", image);
+      const avatar = image ? image : null;
+      formImage.append("avatar", avatar);
       // onClose([id, newData, formImage]);
 
       dispatch(updateNotice([newData, id]));
@@ -123,7 +124,8 @@ export const StepTwo = ({ data, prev, onClose, avatar, id }) => {
       navigate(`/notices/own`);
     } else {
       const formData = new FormData();
-      formData.append("avatar", image);
+      const avatar = image ? image : null;
+      formData.append("avatar", avatar);
       formData.append("title", title);
       formData.append("name", name);
       formData.append("birthday", birthday);
