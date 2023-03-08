@@ -22,7 +22,7 @@ const NoticesPageContent = () => {
   const { category: categoryParams } = useParams();
   const { search, page, setPage } = useNoticesParams();
 
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState("sell");
   const isLoading = useSelector(selectIsNoticesLoading);
 
   const categoryList = useSelector(selectNotices);
