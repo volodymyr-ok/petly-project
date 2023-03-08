@@ -22,6 +22,7 @@ export const BtnClose = styled(StyledButton)`
   background-color: ${colors.accentOrange};
   color: ${colors.white};
   ${device.tablet} {
+    padding: 0px 10px;
     width: 120px;
   }
 `;
