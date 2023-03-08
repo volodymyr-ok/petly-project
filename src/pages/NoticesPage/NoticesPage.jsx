@@ -17,6 +17,7 @@ import {
   selectIsNoticesLoading,
   selectPagesInfo,
 } from "../../redux/notice/notice-selectors";
+import { NoticesSection } from "./NoticesPage.styled";
 
 const NoticesPage = () => {
   const [isModalAddPet, setIsModalAddPet] = useState(false);
@@ -36,10 +37,12 @@ const NoticesPage = () => {
   };
 
   return (
-    <>
+    <NoticesSection>
       <Container>
         <Title>Find your favorite pet</Title>
+
         <SearchInput onSubmit={onSubmit} />
+
         <NoticesCategoryNav
           onAddPet={handlerModalAddPet}
           isLogined={isLogined}
@@ -49,12 +52,15 @@ const NoticesPage = () => {
           <Suspense fallback={<PawsLoader />}>
             <Outlet />
           </Suspense>
+
           {!isLoading && <PaginationBar setPage={setPage} info={pagesInfo} />}
+
           {isModalAddPet && (
             <Modal type="addPet" onClose={() => setIsModalAddPet(false)}>
               <AddNoticeForm onClose={() => setIsModalAddPet(false)} />
             </Modal>
           )}
+
           {isModalLogined && (
             <WarningMessage
               type="auth"
@@ -62,12 +68,9 @@ const NoticesPage = () => {
               text="You need be authenticated first"
             />
           )}
-          {/* {isLoading ? (<PawsLoader />) 
-          : error ? (<ResultNotFound text="No results was found" />)
-          : (<NoticesCategoryList />)} */}
         </>
       </Container>
-    </>
+    </NoticesSection>
   );
 };
 
