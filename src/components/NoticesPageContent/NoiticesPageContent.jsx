@@ -17,7 +17,7 @@ import { List } from "../NoticesCategoryLIst/NoticesCategoryLIst.styled";
 import { NoticeCard } from "./NoticeCard/NoticeCard";
 import { ResultNotFound } from "../ResultNotFound/ResultNotFound";
 import { BtnAddSticky } from "../NoticesCategoryLIst/NoticesCategoryLIst.styled";
-import {ReactComponent as Add} from "../../assets/svg/Addpet.svg"
+import { ReactComponent as Add } from "../../assets/svg/Addpet.svg";
 import { Modal } from "../Modal/Modal";
 import { AddNoticeForm } from "../ModalAddNotice/AddNoticeForm/AddNoticeForm";
 
@@ -25,7 +25,7 @@ const NoticesPageContent = () => {
   const dispatch = useDispatch();
   const { category: categoryParams } = useParams();
   const { search, page, setPage } = useNoticesParams();
-  
+
   const [isModalAddPet, setIsModalAddPet] = useState(false);
   const [categoryName, setCategoryName] = useState("");
   const [dataList, setDataList] = useState([]);
@@ -57,7 +57,6 @@ const NoticesPageContent = () => {
 
   useEffect(() => {
     if (!categoryName) return;
-    console.log("categoryName", categoryName);
 
     if (needToResetPage) setPage(1);
     const publicCategories = ["lost-found", "in-good-hands", "sell"];
@@ -81,12 +80,10 @@ const NoticesPageContent = () => {
 
   return (
     <>
-          <BtnAddSticky type="button"
-          onClick={() => setIsModalAddPet(true)}
-           >
-          <Add width={23.3} height={23.3}></Add>
-          Add pet
-        </BtnAddSticky>
+      <BtnAddSticky type="button" onClick={() => setIsModalAddPet(true)}>
+        <Add width={23.3} height={23.3}></Add>
+        Add pet
+      </BtnAddSticky>
       {thereIsContent ? (
         <List>
           {dataList.map((el) => (
@@ -105,10 +102,10 @@ const NoticesPageContent = () => {
 
       {isLoading && <PawsLoader />}
       {isModalAddPet && (
-            <Modal  onClose={() => setIsModalAddPet(false)}>
-              <AddNoticeForm onClose={() => setIsModalAddPet(false)} />
-            </Modal>
-          )}
+        <Modal onClose={() => setIsModalAddPet(false)}>
+          <AddNoticeForm onClose={() => setIsModalAddPet(false)} />
+        </Modal>
+      )}
     </>
   );
 };

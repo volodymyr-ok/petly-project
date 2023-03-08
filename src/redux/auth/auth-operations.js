@@ -38,7 +38,6 @@ export const logoutUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await PrivateApi.post("/api/users/logout");
-      console.log("ogoutUser OPER", res.data);
       token.unset();
       return res.data;
     } catch (error) {

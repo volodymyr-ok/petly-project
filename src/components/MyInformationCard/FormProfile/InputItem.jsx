@@ -17,8 +17,6 @@ export const InputItem = ({
   disable,
   dark,
 }) => {
-  console.log("value", value);
-
   useEffect(() => {
     if (!value) return;
     const initData = value.split(".");

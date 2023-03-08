@@ -51,7 +51,6 @@ export const FormProfile = ({ user }) => {
       title: "City",
     },
   ];
-  console.log("user", user);
 
   const updateUserData = async (dataSend) => {
     return await PrivateApi.patch("api/users", dataSend);
@@ -79,7 +78,7 @@ export const FormProfile = ({ user }) => {
           Notify.success(`You have successfully updated your data`);
         })
         .catch((error) => {
-          console.log(error);
+          Notify.error(error.message);
         });
       setNameActivePencil("");
     }
