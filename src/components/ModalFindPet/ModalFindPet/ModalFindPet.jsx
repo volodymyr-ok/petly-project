@@ -133,7 +133,7 @@ export const ModalFindPet = ({
             {categoryName === "sell" ? (
               <ItemInfo>
                 <NameInfo>Price:</NameInfo>
-                <ValueInfo>{price ? price : "No Info"}</ValueInfo>
+                <ValueInfo>{price ? `${price}$` : "No Info"}</ValueInfo>
               </ItemInfo>
             ) : null}
           </ListInfo>
