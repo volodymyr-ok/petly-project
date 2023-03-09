@@ -35,6 +35,7 @@ import { AddNoticeForm } from "../../ModalAddNotice/AddNoticeForm/AddNoticeForm"
 import { ModalFindPet } from "../../ModalFindPet/ModalFindPet/ModalFindPet";
 import { selectIsAuth } from "../../../redux/auth/auth-selectors";
 import { removeNotice } from "../../../redux/notice/notice-operations";
+import { WarningMessage } from "../../WarningMessage/WarningMessage";
 
 export const NoticeCard = ({
   cardData,
@@ -57,6 +58,7 @@ export const NoticeCard = ({
   const [isLoginedModal, setIsLoginedModal] = useState(false);
   const [isEditModal, setIsEditModal] = useState(false);
   const [isModalReadMore, setIsModalReadMore] = useState(false);
+  const [isWaringModalOpened, setIsWaringModalOpened] = useState(false);
   const isAuth = useSelector(selectIsAuth);
   const dispatch = useDispatch();
 
@@ -144,7 +146,11 @@ export const NoticeCard = ({
               Learn more
             </BtnReadMore>
             {isOwner ? (
-              <BtnRemove type="button" id={_id} onClick={handleNoticeRemove}>
+              <BtnRemove
+                type="button"
+                id={_id}
+                onClick={() => setIsWaringModalOpened(true)}
+              >
                 Delete
                 <Remove width={16} height={17} />
               </BtnRemove>
@@ -188,6 +194,15 @@ export const NoticeCard = ({
             addFavorite={handleFavoriteClick}
           />
         </Modal>
+      )}
+
+      {isWaringModalOpened && (
+        <WarningMessage
+          onRemove={handleNoticeRemove}
+          type="approve"
+          onClose={() => setIsWaringModalOpened(false)}
+          text="Do you wanna delete your pet?"
+        />
       )}
     </>
   );
