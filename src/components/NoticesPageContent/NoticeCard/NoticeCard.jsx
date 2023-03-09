@@ -201,7 +201,7 @@ export const NoticeCard = ({
           onRemove={handleNoticeRemove}
           type="approve"
           onClose={() => setIsWaringModalOpened(false)}
-          text="Do you wanna delete your pet?"
+          text="R u sure u wanna delete this notice?"
         />
       )}
     </>

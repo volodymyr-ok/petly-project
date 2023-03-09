@@ -14,7 +14,7 @@ const NotFound = () => {
       <NotFoundTitle>SORRY</NotFoundTitle>
       <NotFoundDesc>We couldn't find this page.</NotFoundDesc>
       <NotFoundText>
-        To return to the <NavLink to="/">homepage</NavLink>
+        Return to the <NavLink to="/">homepage</NavLink>
       </NotFoundText>
       <ImgBox>{/* <img src={DogImg} alt="dog" /> */}</ImgBox>
     </NotFoundWrapper>
